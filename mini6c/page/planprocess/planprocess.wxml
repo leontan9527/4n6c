@@ -1,0 +1,39 @@
+<wxs module="nf">
+  var toFixed = function (value) {
+    if (value){
+      return value.toFixed(2);
+    } else {
+      return null;
+    }
+    
+  }
+  module.exports = {
+    toFixed :toFixed
+  }
+</wxs>
+
+<view class="page__bd">
+
+  <view class="weui-panel" wx:for="{{planList}}" wx:for-item="plan">
+    <view class="weui-panel__hd">{{plan.title}}</view>
+    <view class="weui-panel__bd" wx:for-items="{{plan.process}}">
+        <view class="weui-media-box weui-media-box_text">   
+            <view class="weui-media-box__title weui-media-box__title_in-text" wx:if="{{item.title}}" >{{item.title}}</view>         
+            <view class="weui-media-box__desc">{{item.content}}</view>
+            <view class="weui-media-box__info">
+                <view class="weui-media-box__info__meta">{{item.progressUser}}</view>
+                <view class="weui-media-box__info__meta">{{item.createDate}}</view>                
+            </view>
+        </view>
+    </view>    
+
+    <view class="weui-panel__bd" data-id="{{plan.id}}" bindtap="toPlanDetail">
+        <view class="weui-media-box weui-media-box_text">            
+            <view class="weui-media-box__title link_plan">查看计划>></view>   
+        </view>
+    </view>
+
+
+  </view>
+
+</view>

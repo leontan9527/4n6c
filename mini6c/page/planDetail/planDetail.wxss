@@ -1,0 +1,13 @@
+@import '../common/weui.wxss';
+
+.page__bd {
+  padding-bottom: 40px;
+}
+.weui-media-box__title{font-weight:400;font-size:15px;color:rgba(0,0,0,.9);}
+.weui-media-box__info{color:#949191;}
+.plan_action{font-weight:400;font-size:16px;color:rgba(0,0,0,.9);}
+.plan_status{color: darkgreen;}
+.button-sp-area{
+  margin: 0 auto;
+  width: 60%;
+}

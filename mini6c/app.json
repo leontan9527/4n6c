@@ -1,0 +1,72 @@
+{
+  "pages": [
+    "page/home/home",
+    "page/plan/plan",
+    "page/user/login/login",
+    "page/user/navigator/navigator",
+    "page/user/clipboard-data/clipboard-data",
+    "page/user/scan-code/scan-code",
+    "page/ke/web-view/web-view",
+    "page/planprocess/planprocess",
+    "page/planDetail/planDetail",
+    "page/planAddAction/planAddAction",
+    "page/user/suser/suser"
+  ],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "6C绩效",
+    "navigationBarBackgroundColor": "#6196e6",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "page/home/home",
+        "iconPath": "image/icon_component.png",
+        "selectedIconPath": "image/icon_component_HL.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "page/plan/plan",
+        "iconPath": "image/icon_component.png",
+        "selectedIconPath": "image/icon_component_HL.png",
+        "text": "计划"
+      },
+      {
+        "pagePath": "page/user/clipboard-data/clipboard-data",
+        "iconPath": "image/icon_API.png",
+        "selectedIconPath": "image/icon_API_HL.png",
+        "text": "数据"
+      },
+      {
+        "pagePath": "page/ke/web-view/web-view",
+        "iconPath": "image/icon_API.png",
+        "selectedIconPath": "image/icon_API_HL.png",
+        "text": "课程"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  },
+  "navigateToMiniProgramAppIdList": [
+    "wx48adf79ca5de7fd9"
+  ],
+  "workers": "workers",
+  "debug": false,
+  "style": "v2",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的信息将用于展示"
+    }
+  },
+  "cloud": true,
+  "sitemapLocation": "sitemap.json"
+}

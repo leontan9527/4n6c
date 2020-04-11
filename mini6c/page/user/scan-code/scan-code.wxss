@@ -1,0 +1,16 @@
+@import "../../common/lib/weui.wxss";
+
+.weui-cell__bd{
+  min-height: 48rpx;
+  word-break: break-all;
+}
+
+.image-scan{
+   width:128rpx;
+   height: 128rpx;
+}
+.icon-success{
+   display: flex;
+   align-items: center;
+   justify-content: center;  
+}

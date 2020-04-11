@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "6C绩效",
+  "usingComponents": {
+    "mp-cells": "../common/cells/cells",
+    "mp-cell": "../common/cell/cell",
+    "mp-badge": "../common/badge/badge"
+  }
+}
+

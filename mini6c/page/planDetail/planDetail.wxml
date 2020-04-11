@@ -1,0 +1,40 @@
+<wxs src="../../util/dateutil.wxs" module="df" />
+
+<view class="page__bd">
+  <view class="weui-panel weui-panel_access" wx:if="{{plan.kpiDetails.length > 0}}">
+    <view class="weui-panel__hd">核心KPI</view>
+    <view class="weui-panel__bd">
+      <view class="weui-media-box weui-media-box_text" wx:for-items="{{plan.kpiDetails}}" wx:key="id" >                    
+        <view class="weui-media-box__desc">{{item.name}}</view>
+        <view class="weui-media-box__info">
+          <view class="weui-media-box__info__meta">{{item.statusName}}</view>
+          <view class="weui-media-box__info__meta">{{item.inspectorName}}</view>                
+        </view>
+      </view>        
+    </view>            
+  </view>
+
+  <view class="weui-panel weui-panel_access" wx:if="{{plan.actionDetails.length > 0}}">
+    <view class="weui-panel__hd">行动计划（{{plan.actionDetails.length}}）</view>
+    <view class="weui-panel__bd">
+      <view class="weui-media-box weui-media-box_text" wx:for-items="{{plan.actionDetails}}" wx:key="id" >                    
+        <view class="weui-media-box__desc plan_action">{{item.action}}</view>
+        <view class="weui-media-box__desc">成果要求：{{item.outcome}}</view>
+        <view class="weui-media-box__info">
+          <view class="weui-media-box__info__meta">完成时间：{{df.formatDate(item.commitDate)}}</view>
+          <view class="weui-media-box__info__meta">检查人：{{item.inspectorName}}</view> 
+        </view>  
+        <view class="weui-media-box__info"> 
+          <view class="weui-media-box__info__meta plan_status">{{item.statusName}}</view>
+        </view>
+
+      </view>        
+    </view>            
+  </view>
+
+  <view class="button-sp-area">
+        <button type="primary" bindtap="addAction" data-id="{{plan.id}}">添加</button>
+  </view>
+
+
+</view>

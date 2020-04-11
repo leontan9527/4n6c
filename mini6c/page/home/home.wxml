@@ -1,0 +1,129 @@
+
+<view class="header-container">
+    <image class='header-bg' src = '{{image_hd}}'></image>
+    <view class='userContent' wx:if="{{hasUserInfo === true}}">
+         <view class='newinfo'>最新信息</view>
+         <image bindtap='changePhotoImg' class="header-avatar" src="{{userInfo.avatarUrl}}" ></image>
+         <text class="nickname">{{userInfo.nickName}}</text> 
+         <view class="user-setting">     
+            <navigator url="../user/scan-code/scan-code" class="navigator">
+                  <view class="navigator-text">认证</view>          
+            </navigator>
+         </view>
+    </view>
+        
+</view>
+
+   
+<view class="page-body-info" wx:if="{{hasUserInfo === false}}">
+    <block>   
+        <text class="page-body-text">6C绩效需要使用微信查询，点击微信登录</text>
+        <view class="btn-area">
+            <button type="primary" open-type="getUserInfo" bindgetuserinfo="getUserInfo">微信登录</button>
+            
+            <button bindtap="clear2">清空</button>
+        </view>        
+
+    </block>
+</view> 
+
+<view class="page__bd" wx:if="{{hasUserInfo === true}}">
+        <mp-cells title="" bindtap="toPlanprocess">
+            <mp-cell>
+              <view slot="title" style="position: relative;margin-right: 10px;">
+                  <image src="{{icon_pro}}" style="width: 50px; height: 50px; display: block"/>
+                  <mp-badge content="{{planDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
+              </view>
+              <view>计划</view>
+              
+              <view wx:for-items="{{planDb.items}}" wx:key="itemValue" class="msgItem">
+                {{item.itemTitle}}
+              </view>                            
+            </mp-cell>              
+        </mp-cells>
+
+        <mp-cells title=" ">
+            <mp-cell>
+                <view slot="title" style="position: relative;margin-right: 10px;">
+                    <image src="{{icon_ggao}}" style="width: 50px; height: 50px; display: block"/>
+                    <mp-badge content="{{docDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
+                </view>
+                <view>公文</view>
+                <view wx:for-items="{{docDb.items}}" wx:key="itemValue" class="msgItem">
+                  {{item.itemTitle}}
+                </view>
+            </mp-cell>              
+        </mp-cells>
+
+
+        <mp-cells title="">
+            <mp-cell>
+                <view slot="title" style="position: relative;margin-right: 10px;">
+                    <image src="{{icon_meeting}}" style="width: 50px; height: 50px; display: block"/>
+                    <mp-badge content="{{meetingDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
+                </view>
+                <view>会议</view>
+                <view wx:for-items="{{meetingDb.items}}" wx:key="itemValue" class="msgItem">
+                  {{item.itemTitle}}
+                </view>
+            </mp-cell>              
+        </mp-cells>
+
+        <mp-cells title="">
+            <mp-cell>
+                <view slot="title" style="position: relative;margin-right: 10px;">
+                    <image src="{{icon_check}}" style="width: 50px; height: 50px; display: block"/>
+                    <mp-badge content="{{adviserDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
+                </view>
+                <view>顾问信息</view>
+                <view wx:for-items="{{adviserDb.items}}" wx:key="itemValue" class="msgItem">
+                  {{item.itemTitle}}
+                </view>
+            </mp-cell>              
+        </mp-cells>
+
+
+        <!--view class="weui-panel weui-panel_access">           
+            <view class="weui-panel__bd">
+
+              <block wx:for-items="{{message}}" wx:key="id">
+                <navigator url="../user/clipboard-data/clipboard-data" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                      <image class="weui-media-box__thumb" src="resources/pic/icon_{{item.messageType}}.png" />
+                    </view>
+                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                      <view class="weui-media-box__title">{{item.messTitle}}</view>
+                      <view class="weui-media-box__desc">{{item.message}}，请查阅该信息并及时处理回复</view>
+                    </view>
+                </navigator>
+              </block> 
+
+                <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                        <image class="weui-media-box__thumb" src="{{icon_check}}" />
+                    </view>
+                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                        <view class="weui-media-box__title">检查工作</view>
+                        <view class="weui-media-box__desc">请及时检查刘成城、李凯等人的工作结果。</view>
+                    </view>
+                </navigator>
+
+                <navigator url="../user/clipboard-data/clipboard-data" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                        <image class="weui-media-box__thumb" src="{{icon_pro}}" />
+                    </view>
+                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                        <view class="weui-media-box__title">进程信息</view>
+                        <view class="weui-media-box__desc">工作项：完成销售金额26万，李丽修改了实际值：25.6万元。</view>
+                    </view>
+                </navigator>
+
+            </view>
+            <view class="weui-panel__ft">
+                <view class="weui-cell weui-cell_access weui-cell_link">
+                    <view class="weui-cell__bd">查看更多</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                </view>
+            </view>
+        </view -->    
+</view>
