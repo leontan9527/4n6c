@@ -6,7 +6,7 @@ App({
 
     if (!wx.cloud) {
       console.error('App 请使用 2.2.3 或以上的基础库以使用云能力')
-      console.error('ADD:测试，这个Leon的东西。。。2222333')
+      console.error('ADD:测试，这个Leon的东西。。。22223331111')
     } else {
       wx.cloud.init({
         env: config.envId,
