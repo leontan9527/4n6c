@@ -1,3 +1,4 @@
+const config = require('../../../config')
 const app = getApp()
 Page({
   onLoad: function () { 
@@ -50,7 +51,7 @@ Page({
 
 
       wx.request({
-         url: 'http://192.168.0.168:8080/eqtit/userController/wxBinding',
+        url: config.domain +'/userController/wxBinding',
          data: {
           openid: app.globalData.openid,
           qa: this.data.qa            
@@ -61,7 +62,7 @@ Page({
               
           //使用openid登陆，获取后台session
           wx.request({
-            url: 'http://192.168.0.168:8080/eqtit/userController/wxLogin',
+            url: config.domain +'/userController/wxLogin',
             data: {
               openid: getApp().globalData.openid
             },

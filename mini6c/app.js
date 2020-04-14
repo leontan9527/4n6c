@@ -76,7 +76,7 @@ App({
     if (this.globalData.openid){
       
       wx.request({
-        url: 'http://192.168.0.168:8080/eqtit/userController/wxLogin',
+        url: config.domain +'/userController/wxLogin',
         data: {
           openid: this.globalData.openid
         },
