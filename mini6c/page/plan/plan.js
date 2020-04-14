@@ -122,5 +122,10 @@ Page({
       list
     })
     wx.reportAnalytics('click_view_programmatically', {})
+  },
+
+  toPlanDetail: function (e) {
+    var id = e.currentTarget.dataset.id
+    wx.navigateTo({ url: '../planDetail/planDetail?id=' + id })
   }
 })

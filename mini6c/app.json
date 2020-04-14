@@ -40,7 +40,7 @@
         "pagePath": "page/user/clipboard-data/clipboard-data",
         "iconPath": "image/icon_API.png",
         "selectedIconPath": "image/icon_API_HL.png",
-        "text": "数据"
+        "text": "数据1"
       },
       {
         "pagePath": "page/ke/web-view/web-view",

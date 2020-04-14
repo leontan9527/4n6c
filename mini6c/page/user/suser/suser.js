@@ -5,7 +5,12 @@ Page({
 
   onLoad: function () {
 
-    //检查用户表时间撮，如果相同，从本地获取用户表    
+    //检查用户表时间撮，如果相同，从本地获取用户表 
+    var lastModifyUserTime = wx.getStorageSync('GLB_LastModifyUserTime')
+
+    if (!lastModifyUserTime){
+      lastModifyUserTime = 0
+    }
 
     //获取最新用户数据
     const self = this
@@ -15,7 +20,7 @@ Page({
       wx.request({
         url: config.domain + '/userCr/findAllUser',
         data: {
-          api: "findAllUser"
+          lastModifyUserTime: lastModifyUserTime
         },
         method: 'POST',
         header: {
@@ -23,19 +28,33 @@ Page({
           'Cookie': 'JSESSIONID=' + sessionId
         },
         success(result) {
-          
-          var users = result.data.data
+          var lasModifyUserTimeDB = result.data.obj
           var us =[]
-          for (let i = 0; i < users.length; i++){
-            var item = { value: users[i].id, name: users[i].name }
-            us.push(item)
-          }
 
-          console.log('【userCr/items=】', us)
+          if (lasModifyUserTimeDB){
+            //后台定义的规则：有值，说明有最新的时间戳，需要更细通讯录
+            wx.setStorageSync('GLB_LastModifyUserTime', lasModifyUserTimeDB)
+            var users = result.data.data
+            for (let i = 0; i < users.length; i++){
+              var item = { value: users[i].id, name: users[i].name }
+              us.push(item)
+            }
+            //本地存储
+            wx.setStorageSync('GLB_ORGUsers', us) 
+            console.log('【从数据库中读取最新的userCr/items=】', us)
+
+          } else {
+            //获取本地存储的数据            
+            us = wx.getStorageSync('GLB_ORGUsers')
+
+            console.log('【从本地缓存中读取最新的userCr/items=】', us)
+
+          }
 
           self.setData({
             items: us
           })
+          
         },
 
         fail({ errMsg }) {
@@ -48,14 +67,7 @@ Page({
 
   
   data: {
-    items: [
-      { value: 'USA', name: '张三' },
-      { value: 'CHN', name: '赵国明', checked: 'true' },
-      { value: 'BRA', name: '王明月' },
-      { value: 'JPN', name: '李哲凯' },
-      { value: 'ENG', name: '张大明' },
-      { value: 'FRA', name: '钱大妈' },
-    ]
+    items: []
   },
 
   radioChange(e) {

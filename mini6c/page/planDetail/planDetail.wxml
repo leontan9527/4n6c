@@ -2,14 +2,26 @@
 
 <view class="page__bd">
   <view class="weui-panel weui-panel_access" wx:if="{{plan.kpiDetails.length > 0}}">
-    <view class="weui-panel__hd">核心KPI</view>
+    <view class="weui-panel__hd">核心KPI（{{plan.kpiDetails.length}}）</view>
     <view class="weui-panel__bd">
       <view class="weui-media-box weui-media-box_text" wx:for-items="{{plan.kpiDetails}}" wx:key="id" >                    
-        <view class="weui-media-box__desc">{{item.name}}</view>
+        <view class="weui-media-box__desc plan_action">{{item.name}}（{{item.unit}}）</view>
         <view class="weui-media-box__info">
-          <view class="weui-media-box__info__meta">{{item.statusName}}</view>
-          <view class="weui-media-box__info__meta">{{item.inspectorName}}</view>                
+          <view class="weui-media-box__info__meta">保底：{{item.baseValue}}</view>                
+          <view class="weui-media-box__info__meta">合理：{{item.reasonableValue}}</view>
+          <view class="weui-media-box__info__meta" wx:if="{{item.actualValue}}">实际值：{{item.actualValue}}</view>
         </view>
+
+        <view class="weui-media-box__info">
+          <view class="weui-media-box__info__meta">要求时间：{{df.formatDate(item.commitDate)}}</view>                
+          <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">权重：{{item.weight}}%</view>
+        </view>
+
+        <view class="weui-media-box__info">
+          <view class="weui-media-box__info__meta">检查人：{{item.checkUserName}}</view>
+          <view class="weui-media-box__info__meta weui-media-box__info__meta_extra" wx:if="{{item.score}}">绩效：{{item.score}}</view>                
+        </view>
+
       </view>        
     </view>            
   </view>
@@ -32,9 +44,12 @@
     </view>            
   </view>
 
-  <view class="button-sp-area">
-        <button type="primary" bindtap="addAction" data-id="{{plan.id}}">添加</button>
+  <view class="weui-panel__bd" data-id="{{plan.id}}" bindtap="addAction">
+    <view class="weui-media-box weui-media-box_text">            
+        <view class="weui-media-box__title link_plan">+行动计划</view>   
+    </view>
   </view>
+
 
 
 </view>

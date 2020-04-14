@@ -74,6 +74,10 @@ Page({
               //获取新的sessionId,并保存下来
               getApp().globalData.sessionId = result.data.data
               wx.setStorageSync('sessionId', result.data.data)
+              
+              wx.setStorageSync('GLB_ORGUsers', null) 
+              wx.setStorageSync('GLB_LastModifyUserTime', null)
+
             },
 
             fail({ errMsg }) {

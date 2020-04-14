@@ -35,8 +35,9 @@
     
 </mp-form>
 
-
-<view slot="button">
-    <button class="weui-btn" type="primary" bindtap="submitForm">确定</button>
-</view>
+<view class="add-panel">
+  <view slot="button">
+      <button class="weui-btn" type="primary" bindtap="submitForm">确定</button>
+  </view>
+</view>  
 </view>
