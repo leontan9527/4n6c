@@ -69,7 +69,7 @@
                 </navigator-->
 
                 <block wx:for-items="{{planList}}" wx:key="id">
-                  <navigator data-id="{{item.id}}" bindtap="toPlanDetail" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+                  <view data-id="{{item.id}}" bindtap="toPlanDetail" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
                       <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
                           <image class="weui-media-box__thumb" src="pic/icon_{{item.planCycle}}.png" />
                       </view>
@@ -85,7 +85,7 @@
                               <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">查看详情</view>
                           </view>
                       </view>
-                  </navigator>
+                  </view>
                 </block>
 
 
