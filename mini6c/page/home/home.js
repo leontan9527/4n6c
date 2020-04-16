@@ -132,7 +132,7 @@ Page({
   },
 
   toPlanprocess() {
-    wx.navigateTo({ url: '../planprocess/planprocess' })
+    wx.navigateTo({ url: '../plan/planprocess/planprocess' })
   }
   
 })

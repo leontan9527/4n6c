@@ -1,5 +1,5 @@
-const config = require('../../config')
-var util = require("../../util/dateutil.js");
+const config = require('../../../config')
+var util = require("../../../util/dateutil.js");
 
 
 const app = getApp()
@@ -73,7 +73,7 @@ Page({
   },
   addAction: function (e) {
     var id = e.currentTarget.dataset.id
-    //console.log('【planAddAction/planAddAction】id=', id)
+    console.log('【planAddAction/planAddAction】id=', id)
     wx.navigateTo({ url: '../planAddAction/planAddAction?id=' + id })
   }
 })

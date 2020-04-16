@@ -1,0 +1,37 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<view class="container">
+  <template is="head" data="{{title: 'radio'}}"/>
+
+  <view class="page-body">
+    <view class="page-section">
+      <view class="page-section-title">创建周计划</view>
+      <view class="weui-cells weui-cells_after-title">
+        <radio-group bindchange="radioChange">
+          <label class="weui-cell weui-check__label" wx:for="{{planList}}" wx:key="{{item.seq}}" wx:for-index="idx">
+
+            <view wx:if="{{idx==0}}" class="weui-cell__hd">
+              <radio value="{{item.seq}}" checked="true"/>
+            </view>
+            <view wx:elif="{{idx>0}}" class="weui-cell__hd">
+              <radio value="{{item.seq}}"/>
+            </view>
+            <view class="weui-cell__bd">{{item.name}}</view>
+          </label>
+        </radio-group>
+      </view>
+    </view>
+  </view>
+  <template is="foot" />
+
+  <view class="button">
+    <view class="btn-area" id="buttonContainer">
+      <view class="button-sp-area">
+        <button class="mini-btn" type="primary" size="mini" bindtap="createdWeekPlan">确定</button>
+        <button class="mini-btn" type="default" size="mini" bindtap="navigateBack">取消</button> 
+      </view>
+    </view>
+  </view>
+  
+</view>

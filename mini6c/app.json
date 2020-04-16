@@ -1,15 +1,16 @@
 {
   "pages": [
     "page/home/home",
-    "page/plan/plan",
     "page/user/login/login",
     "page/user/navigator/navigator",
     "page/user/clipboard-data/clipboard-data",
     "page/user/scan-code/scan-code",
     "page/ke/web-view/web-view",
-    "page/planprocess/planprocess",
-    "page/planDetail/planDetail",
-    "page/planAddAction/planAddAction",
+    "page/plan/planlist/planlist",
+    "page/plan/planprocess/planprocess",
+    "page/plan/planDetail/planDetail",
+    "page/plan/planAddAction/planAddAction",
+    "page/plan/planStWeek/planStWeek",
     "page/user/suser/suser"
   ],
   "window": {
@@ -31,7 +32,7 @@
         "text": "首页"
       },
       {
-        "pagePath": "page/plan/plan",
+        "pagePath": "page/plan/planlist/planlist",
         "iconPath": "image/icon_component.png",
         "selectedIconPath": "image/icon_component_HL.png",
         "text": "计划"

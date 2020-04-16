@@ -23,7 +23,7 @@
                     <view class="kind-list__item-bd {{item.open ? 'kind-list__item-bd_show' : ''}}">
                         <view class="weui-cells {{item.open ? 'weui-cells_show' : ''}}">
                             <block wx:for="{{item.pages}}" wx:for-item="page" wx:key="*this">
-                                <view class="weui-cell weui-cell_access" bindtap="actionSheetTap">
+                                <view class="weui-cell weui-cell_access" bindtap="actionSheetTap" data-name="{{page}}">
                                     <view class="weui-cell__bd"></view>
                                     <view class="weui-cell__ft">{{page}}</view>
                                 </view>
