@@ -1,4 +1,4 @@
-const config = require('../../config')
+const config = require('../../../config')
 const app = getApp()
 
 Page({
@@ -10,7 +10,7 @@ Page({
       icon_year: 'pic/icon_2.png',
       icon_month: 'pic/icon_1.png',
       icon_week: 'pic/icon_0.png',
-      icon_add: '../images/add.png'
+      icon_add: '../../images/add.png'
     })
 
     //获取最新消息数据

@@ -1,4 +1,4 @@
-const config = require('../../config')
+const config = require('../../../config')
 const app = getApp()
 
 Page({
@@ -46,6 +46,34 @@ Page({
   onShow() { 
     console.info('2. onShow')     
     wx.reportAnalytics('enter_home_programmatically', {})
+
+    const self = this
+    var sessionId = app.globalData.sessionId
+
+    console.info('1. onLoad 开始登陆,使用Cookie=')
+    if (sessionId) {
+      wx.request({
+        url: config.domain + '/planCr/list',
+        data: {
+          api: "list"
+        },
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          'Cookie': 'JSESSIONID=' + sessionId
+        },
+        success(result) {
+          console.log('【plan/list=】', result.data.data)
+          self.setData({
+            planList: result.data.data
+          })
+        },
+
+        fail({ errMsg }) {
+          console.log('【plan/list fail】', errMsg)
+        }
+      })
+    }
   },
   onShareAppMessage() {
     console.info('3. onShareAppMessage')     
@@ -54,34 +82,10 @@ Page({
       path: 'page/home/home'
     }
   },
-  actionSheetTap() {
-    var that = this;
-    wx.showActionSheet({
-      itemList: ['10周（3.2至3.8日)', '11周（3.2至3.8日)', '12周（3.2至3.8日)', '13周（3.2至3.8日)'],
-      success(e) {
-        console.log("用户选择了：" + e.tapIndex)
-        
-        wx.showToast({
-          title: '创建计划成功' + e.tapIndex,
-          duration: 3000
-        })
-
-        wx.redirectTo({
-          url: 'page/home/home',
-          success: function(res){
-           // success
-          },
-          fail: function() {
-           // fail
-          },
-          complete: function() {
-           // complete
-          }
-         }) 
-
-
-      }
-    })
+  actionSheetTap:function(e){
+   
+    console.log('创建成功:'+ e.currentTarget.dataset.name);
+    wx.navigateTo({ url: '../planStWeek/planStWeek'})
   },
   getUserInfo(info) {
     const userInfo = info.detail.userInfo

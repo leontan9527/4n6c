@@ -1,4 +1,4 @@
-<wxs src="../../util/dateutil.wxs" module="df" />
+<wxs src="../../../util/dateutil.wxs" module="df" />
 
 <view class="page__bd">
   <view class="weui-panel weui-panel_access" wx:if="{{plan.kpiDetails.length > 0}}">

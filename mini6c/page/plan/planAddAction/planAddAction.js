@@ -1,4 +1,4 @@
-const config = require('../../config')
+const config = require('../../../config')
 const app = getApp()
 /*
 Page({
@@ -56,7 +56,7 @@ Page({
       },  
 
   selectOneUser: function (e) {      
-      wx.navigateTo({ url: '../user/suser/suser'})
+      wx.navigateTo({ url: '../../user/suser/suser'})
     },      
               
       submitForm() {
