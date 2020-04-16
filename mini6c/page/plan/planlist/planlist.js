@@ -85,7 +85,7 @@ Page({
   actionSheetTap:function(e){
    
     console.log('创建成功:'+ e.currentTarget.dataset.name);
-    wx.navigateTo({ url: '../planStWeek/planStWeek'})
+    wx.navigateTo({ url: '../planCrWeek/planCrWeek'})
   },
   getUserInfo(info) {
     const userInfo = info.detail.userInfo
