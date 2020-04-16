@@ -11,7 +11,8 @@ Page({
   onLoad: function (options) {
     console.info("ComponentplanId=" + options.id);
     this.setData({
-      planId: options.id
+      planId: options.id,
+      planCyle: options.planCyle
     })
 
   },
@@ -20,7 +21,7 @@ Page({
     date: "请选择",  
     userId:'',
     userName:'请选择', 
-    dateStart: '2020-08-01', 
+    dateStart: '2020-04-01', 
     dateEnd: '2020-10-01', 
 
     formData: {      
@@ -82,6 +83,7 @@ Page({
     saveNewAction: function (formData) {
       
       console.info("form data planId= " + this.data.planId) 
+      console.info("form data planCyle= " + this.data.planCyle) 
       console.info("form data action= " + formData.action)  
       console.info("form data name= " + formData.name)  
       console.info("form data date = " + formData.date)  
@@ -118,15 +120,28 @@ Page({
             //var id = e.currentTarget.dataset.id
             //var name = e.currentTarget.dataset.name
 
-            let pages = getCurrentPages();
-            let prevPage = pages[pages.length - 2]
-            prevPage.setData({
+            //let pages = getCurrentPages();
+            //let prevPage = pages[pages.length - 2]
+           // prevPage.setData({
               //inspectorId: id,
               //inspectorName: name,
-            })
-            wx.navigateBack({
-              delta: 1
-            })
+          //  })
+           // wx.navigateBack({
+            //  delta: 1
+            //})
+
+            var planCyle=self.data.planCyle
+            console.log('planCyle:'+ planCyle);
+            var planId=self.data.planId
+            console.log('planId:'+ planId);
+            if(planCyle==0){
+              wx.redirectTo({ url: '../planDetailWeek/planDetailWeek?id=' + planId })
+            }else if(planCyle==1){
+              wx.redirectTo({ url: '../planDetailMonth/planDetailMonth?id=' + planId })
+            }else{
+              wx.redirectTo({ url: '../planDetailYear/planDetailYear?id=' + planId })
+            }
+
           },
 
           fail({ errMsg }) {
