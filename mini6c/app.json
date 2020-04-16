@@ -10,7 +10,9 @@
     "page/plan/planprocess/planprocess",
     "page/plan/planDetail/planDetail",
     "page/plan/planAddAction/planAddAction",
-    "page/plan/planStWeek/planStWeek",
+    "page/plan/planCrWeek/planCrWeek",
+    "page/plan/planCrMonth/planStMonth",
+    "page/plan/planCrYear/planStYear",
     "page/user/suser/suser"
   ],
   "window": {
