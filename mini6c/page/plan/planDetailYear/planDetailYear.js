@@ -1,4 +1,4 @@
-// page/plan/planCrMonth/planStMonth.js
+// page/plan/planDetailYear/planDetailYear.js
 Page({
 
   /**

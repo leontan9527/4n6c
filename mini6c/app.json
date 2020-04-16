@@ -9,10 +9,13 @@
     "page/plan/planlist/planlist",
     "page/plan/planprocess/planprocess",
     "page/plan/planDetail/planDetail",
+    "page/plan/planDetailWeek/planDetailWeek",
+    "page/plan/planDetailMonth/planDetailMonth",
+    "page/plan/planDetailYear/planDetailYear",
     "page/plan/planAddAction/planAddAction",
     "page/plan/planCrWeek/planCrWeek",
-    "page/plan/planCrMonth/planStMonth",
-    "page/plan/planCrYear/planStYear",
+    "page/plan/planCrMonth/planCrMonth",
+    "page/plan/planCrYear/planCrYear",
     "page/user/suser/suser"
   ],
   "window": {
@@ -60,7 +63,7 @@
     "downloadFile": 10000
   },
   "navigateToMiniProgramAppIdList": [
-    "wx48adf79ca5de7fd9"
+    "wx31ab952b30232ac7"
   ],
   "workers": "workers",
   "debug": false,
