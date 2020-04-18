@@ -59,15 +59,24 @@ Page({
   },
 
   //创建月计划方法
-  createMonth: function(year,seq){   
+  createdMonthPlan: function(){   
     
+    const items = this.data.planList
+    let set = [];
+    for (let i = 0; i < items.length; i ++ ){
+      console.log('selected='+items[i].selected)
+      if ( items[i].selected == true){	
+        set	= items[i];
+      } 
+    }
+      
     var sessionId = app.globalData.sessionId;
     if (sessionId) {
       wx.request({
         url: config.domain + '/planCr/createMonth',
         data : {
-          year: year,
-          seq: seq
+          year: set.year,
+          seq: set.seq
         },
         method: 'POST',
         header: {
@@ -75,13 +84,26 @@ Page({
           'Cookie': 'JSESSIONID=' + sessionId
         },
         success(result) {
-            //创建成功自动返回上级页面
-            console.log('创建成功:'+result.data.success)
-            if(result.data.success==true){
+ 
+            if(result.data.success){
               //创建成功，跳转到计划列表页面
-              wx.switchTab({ url: '../plan/planlist/planlist'})
+              var id = result.data.data
+              wx.navigateTo({ url: '../planDetailMonth/planDetailMonth?id=' + id})
             }else{ 
-
+              //创建失败，提示错误信息
+              var errorArray=result.data.data
+              var errormsg=errorArray.join(' ');
+              //console.log('errormsg-----------', errormsg)
+   
+              wx.showModal({  
+                title: '提示',  
+                content: errormsg,  
+                showCancel:false,
+                confirmText:'关闭',
+                success: function(res) {  
+                    
+                }  
+              }) 
             }
         },
         fail({ errMsg }) {

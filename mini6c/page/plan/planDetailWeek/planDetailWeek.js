@@ -74,6 +74,14 @@ Page({
   addAction: function (e) {
     var id = e.currentTarget.dataset.id
     console.log('【planAddAction/planAddAction】id=', id)
-    wx.redirectTo({ url: '../planAddAction/planAddAction?id=' + id +'&planCyle=0'})
+    wx.navigateTo({ url: '../planAddAction/planAddAction?id=' + id})
+  },
+
+  editAction: function (e) {
+
+    var planId = e.currentTarget.dataset.id
+    var detailId = e.currentTarget.dataset.act
+    console.log('planEditAction/planEditAction】planId=', planId)
+    wx.navigateTo({ url: '../planEditAction/planEditAction?planId=' + planId +'&detailId='+detailId})
   }
 })
