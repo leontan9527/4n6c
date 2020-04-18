@@ -25,7 +25,7 @@
         <mp-cell prop="date" title="计划完成" ext-class="">
             <picker data-field="date" mode="date" start="{{dateStart}}" end="{{dateEnd}}" bindchange="bindDateChange" >
                 <view class="weui-input">
-                    {{df.formatDate(formData.commitDate)}}
+                    {{formData.date}}
                 </view>
             </picker>
         </mp-cell>  

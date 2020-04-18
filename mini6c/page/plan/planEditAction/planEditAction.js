@@ -34,7 +34,7 @@ Page({
         success(result) {
           //console.log('【plan/planList=】', result.data.data)
           var actiondetail = result.data.data
-          //console.log('dsfddsdsdssdsddsd   '+util.formatDateTime(actiondetail.commitDate, false))
+          var date=util.timestampToTime(actiondetail.commitDate, false)
           let setformDataValue = {      
             action: actiondetail.action,
             name: actiondetail.name,
@@ -42,7 +42,7 @@ Page({
             unFinishRemark: actiondetail.unFinishRemark,
             userId: actiondetail.inspectorId,
             inspectorName:actiondetail.inspectorName,
-            date:actiondetail.commitDate
+            date:date
           }
          
           self.setData({
