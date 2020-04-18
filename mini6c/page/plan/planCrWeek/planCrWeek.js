@@ -140,8 +140,8 @@ Page({
                 console.log('创建成功:'+result.data.success)
                 if(result.data.success==true){
                   console.log('跳转页面:')
-                  //wx.switchTab({ url: '../planlist/planlist'})
-                  wx.navigateTo({ url: '../planDetailWeek/planDetailWeek'})
+                  var id = result.data.data
+                  wx.navigateTo({ url: '../planDetailWeek/planDetailWeek?id=' + id})
                 }else{ 
 
                 }

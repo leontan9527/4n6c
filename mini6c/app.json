@@ -13,6 +13,7 @@
     "page/plan/planDetailMonth/planDetailMonth",
     "page/plan/planDetailYear/planDetailYear",
     "page/plan/planAddAction/planAddAction",
+    "page/plan/planEditAction/planEditAction",
     "page/plan/planCrWeek/planCrWeek",
     "page/plan/planCrMonth/planCrMonth",
     "page/plan/planCrYear/planCrYear",

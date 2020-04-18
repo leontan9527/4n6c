@@ -8,6 +8,7 @@ Page({
 })*/
 
 Page({
+
   onLoad: function (options) {
     console.info("ComponentplanId=" + options.id);
     this.setData({
@@ -15,6 +16,7 @@ Page({
       planCyle: options.planCyle
     })
 
+    
   },
   data: {
     showTopTips: false,
@@ -117,31 +119,38 @@ Page({
             'Cookie': 'JSESSIONID=' + sessionId
           },
           success(result) {
-            //var id = e.currentTarget.dataset.id
-            //var name = e.currentTarget.dataset.name
 
-            //let pages = getCurrentPages();
-            //let prevPage = pages[pages.length - 2]
-           // prevPage.setData({
-              //inspectorId: id,
-              //inspectorName: name,
-          //  })
-           // wx.navigateBack({
-            //  delta: 1
-            //})
+            let pages = getCurrentPages();
+            let prevPage = pages[pages.length - 2]
+            var plan = prevPage.data.plan;
+            var planDetail = {
+              id:result.data.data,
+              planId: self.data.planId,
+              action: formData.action,
+              outcome: formData.outcome,
+              unFinishRemark: formData.unFinishRemark,
+              commitDate: formData.date,
+              inspectorId: self.data.userId
+            };
+            plan.actionDetails.push(planDetail);
 
+            prevPage.setData({
+              plan:plan
+            })
+            wx.navigateBack({
+              delta: 1
+            })
+            /*
             var planCyle=self.data.planCyle
-            console.log('planCyle:'+ planCyle);
             var planId=self.data.planId
-            console.log('planId:'+ planId);
             if(planCyle==0){
-              wx.redirectTo({ url: '../planDetailWeek/planDetailWeek?id=' + planId })
+              wx.navigateTo({ url: '../planDetailWeek/planDetailWeek?id=' + planId })
             }else if(planCyle==1){
-              wx.redirectTo({ url: '../planDetailMonth/planDetailMonth?id=' + planId })
+              wx.navigateTo({ url: '../planDetailMonth/planDetailMonth?id=' + planId })
             }else{
-              wx.redirectTo({ url: '../planDetailYear/planDetailYear?id=' + planId })
+              wx.navigateTo({ url: '../planDetailYear/planDetailYear?id=' + planId })
             }
-
+            */
           },
 
           fail({ errMsg }) {
@@ -152,6 +161,16 @@ Page({
 
       console.log('【2.End wx.request】')
 
-    }
+    },
   
+    onUnload:function(){
+      /*
+      const self = this
+      var planId=self.data.planId
+      wx.switchTab({
+        url: '../planDetailWeek/planDetailWeek?id=' + planId
+      })
+      */
+    },
+
 });

@@ -1,0 +1,3 @@
+@import '../../common.wxss';
+.add-panel{padding-top: 20px;}
+

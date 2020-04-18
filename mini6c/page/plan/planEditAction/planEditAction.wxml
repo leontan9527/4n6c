@@ -1,10 +1,12 @@
+<wxs src="../../../util/dateutil.wxs" module="df" />
+
 <view class="page__bd">
 <mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
 
 <mp-form id="form" rules="{{rules}}" models="{{formData}}">
     <mp-cells title="工作事项">
         <mp-cell has-header="{{false}}" has-footer="{{false}}" prop="action" title="" ext-class="">
-            <textarea bindinput="formInputChange" class="weui-textarea" data-field="action" placeholder="请输入工作事项内容" style="height: 3.3em">
+            <textarea bindinput="formInputChange" class="weui-textarea" data-field="action"  style="height: 3.3em" value="{{formData.action}}">               
             </textarea>
             <view class="weui-textarea-counter">0/200</view>
         </mp-cell>
@@ -12,23 +14,25 @@
 
     <mp-cells title="成果要求">
         <mp-cell title="" ext-class="">
-            <input bindinput="formInputChange" data-field="outcome" class="weui-input" placeholder="请输入成果要求" />
+            <input bindinput="formInputChange" data-field="outcome"  class="weui-input" value="{{formData.outcome}}"/>
         </mp-cell>
     </mp-cells>
 
     <mp-cells title="未完成承诺">
         <mp-cell title="" ext-class="">
-            <input bindinput="formInputChange" data-field="unFinishRemark"  class="weui-input" placeholder="请输入未完成承诺" />
+            <input bindinput="formInputChange" data-field="unFinishRemark" value="{{formData.unFinishRemark}}" class="weui-input" />
         </mp-cell>
         <mp-cell prop="date" title="计划完成" ext-class="">
             <picker data-field="date" mode="date" start="{{dateStart}}" end="{{dateEnd}}" bindchange="bindDateChange" >
-                <view class="weui-input">{{date}}</view>
+                <view class="weui-input">
+                    {{df.formatDate(formData.commitDate)}}
+                </view>
             </picker>
         </mp-cell>  
 
         <mp-cell ext-class="weui-cell_select weui-cell_select-after" bindtap="selectOneUser">
             <view slot="title" class="weui-label">检查人</view>            
-            <view class="weui-select"></view>            
+            <view class="weui-select">{{formData.inspectorName}}</view>         
         </mp-cell>
 
 

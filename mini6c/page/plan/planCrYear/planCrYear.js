@@ -1,66 +1,122 @@
-// page/plan/planCrYear/planCrYear.js
+const config = require('../../../config')
+const app = getApp()
+
 Page({
+  
+  onLoad: function(){   
+    
+    this.setData({     
+        hasUserInfo: false,   
+        planList: ''
+    })
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
+    //获取最新消息数据
+    const self = this
+    var sessionId = app.globalData.sessionId
 
-  },
+    console.info('1. onLoad 开始登陆,使用Cookie=')
+    if (sessionId) {
+      wx.request({
+        url: config.domain + '/planCr/createYearPaln',
+        data: {
+          api: "list"
+        },
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          'Cookie': 'JSESSIONID=' + sessionId
+        },
+        success(result) {
+          console.log('【plan/planList=】', result.data.data)
+          self.setData({
+            planList: result.data.data
+          })
+        },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
+        fail({ errMsg }) {
+          console.log('【plan/planList fail】', errMsg)
+        }
+      })
+    }
 
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
+  radioChange(e) {
+    console.log('radio发生change事件，携带value值为：', e.detail.value)
 
+    const items = this.data.planList
+    for (let i = 0, len = items.length; i < len; ++i) {
+   
+      if(items[i].seq==e.detail.value){
+        items[i].selected=true
+      }else{
+        items[i].selected=false
+      }
+    }
+    this.setData({
+      planList:items
+    })
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
+  //创建月计划方法
+  createYearPaln: function(){   
+    
+    const items = this.data.planList
+    let set = [];
+    for (let i = 0; i < items.length; i ++ ){
+      console.log('selected='+items[i].selected)
+      if ( items[i].selected == true){	
+        set	= items[i];
+      } 
+    }
+      
+    var sessionId = app.globalData.sessionId;
+    if (sessionId) {
+      wx.request({
+        url: config.domain + '/planCr/createYear',
+        data : {
+          year: set.year
+        },
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          'Cookie': 'JSESSIONID=' + sessionId
+        },
+        success(result) {
+ 
+            if(result.data.success){
+              //创建成功，跳转到计划列表页面
+              var id = result.data.data
+              wx.navigateTo({ url: '../planDetailYear/planDetailYear?id=' + id})
+            }else{ 
+              //创建失败，提示错误信息
+              var errorArray=result.data.data
+              console.log('errormsg-----------', errormsg)
+              if(errorArray!=undefined){
+                var errormsg=errorArray.join(' ');
+                //console.log('errormsg-----------', errormsg)
+                wx.showModal({  
+                  title: '提示',  
+                  content: errormsg,  
+                  showCancel:false,
+                  confirmText:'关闭',
+                  success: function(res) {  
+                      
+                  }  
+                }) 
+              }
+            
+            }
+        },
+        fail({ errMsg }) {
+          //创建失败提示错误信息代码开始
+        }
+      })
+    }
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
+  navigateBack() {
+    wx.navigateBack()
+  },
 
-  }
 })

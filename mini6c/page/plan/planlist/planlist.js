@@ -96,7 +96,7 @@ Page({
     console.log('创建成功:'+ e.currentTarget.dataset.name);
     if(e.currentTarget.dataset.name=='创建周计划'){
       wx.navigateTo({ url: '../planCrWeek/planCrWeek'})
-    }else if(e.currentTarget.dataset.name='创建月计划'){
+    }else if(e.currentTarget.dataset.name=='创建月计划'){
       wx.navigateTo({ url: '../planCrMonth/planCrMonth'})
     }else{
       wx.navigateTo({ url: '../planCrYear/planCrYear'})
