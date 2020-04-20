@@ -10,7 +10,8 @@ Page({
     this.setData({
       pid: options.id,
       array: ['待提交结果', '完成', '未完成'],
-      index: 0
+      index: 0,
+      unCommit:0
     })
 
     //获取最新消息数据

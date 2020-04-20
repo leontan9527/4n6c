@@ -134,23 +134,17 @@ Page({
             };
             plan.actionDetails.push(planDetail);
 
+            //添加一条数据后，反应页面剩余项数加1
+            let unCommit = prevPage.data.unCommit+1
+            
             prevPage.setData({
-              plan:plan
+              plan:plan,
+              unCommit:unCommit
             })
             wx.navigateBack({
               delta: 1
             })
-            /*
-            var planCyle=self.data.planCyle
-            var planId=self.data.planId
-            if(planCyle==0){
-              wx.navigateTo({ url: '../planDetailWeek/planDetailWeek?id=' + planId })
-            }else if(planCyle==1){
-              wx.navigateTo({ url: '../planDetailMonth/planDetailMonth?id=' + planId })
-            }else{
-              wx.navigateTo({ url: '../planDetailYear/planDetailYear?id=' + planId })
-            }
-            */
+            
           },
 
           fail({ errMsg }) {
