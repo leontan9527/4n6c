@@ -13,3 +13,8 @@
 }
 
 .link_plan{color:cadetblue}
+
+.message-top{
+  margin-left:20rpx;
+  margin-top: 0rpx;
+}

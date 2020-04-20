@@ -146,13 +146,18 @@ Page({
   toPlanDetail: function (e) {
 
     var id = e.currentTarget.dataset.id
-    var planCycle = e.currentTarget.dataset.act
-    if(planCycle==0){
-      wx.navigateTo({ url: '../planDetailWeek/planDetailWeek?id=' + id })
-    }else if(planCycle==1){
-      wx.navigateTo({ url: '../planDetailMonth/planDetailMonth?id=' + id })
+    var planCycle = e.currentTarget.dataset.plancycle
+    var status = e.currentTarget.dataset.status
+    if(status>0){
+      wx.navigateTo({ url: '../planDetail/planDetail?id=' + id })
     }else{
-      wx.navigateTo({ url: '../planDetailYear/planDetailYear?id=' + id })
+      if(planCycle==0){
+        wx.navigateTo({ url: '../planDetailWeek/planDetailWeek?id=' + id })
+      }else if(planCycle==1){
+        wx.navigateTo({ url: '../planDetailMonth/planDetailMonth?id=' + id })
+      }else{
+        wx.navigateTo({ url: '../planDetailYear/planDetailYear?id=' + id })
+      }
     }
     
   }

@@ -44,12 +44,4 @@
     </view>            
   </view>
 
-  <view class="weui-panel__bd" data-id="{{plan.id}}" bindtap="addAction">
-    <view class="weui-media-box weui-media-box_text">            
-        <view class="weui-media-box__title link_plan">+行动计划</view>   
-    </view>
-  </view>
-
-
-
 </view>
