@@ -13,17 +13,31 @@
 
           <view class="weui-media-box__desc plan_action" data-planid="{{plan.id}}" data-actailid="{{item.id}}" data-iseditplan="{{item.isEditPlan}}" bindtap="editAction">{{item.action}}</view>
           <view class="weui-media-box__desc" data-planid="{{plan.id}}" data-actailid="{{item.id}}" data-iseditplan="{{item.isEditPlan}}" bindtap="editAction">成果要求：{{item.outcome}}</view>
-          <view class="weui-media-box__info" data-planid="{{plan.id}}" data-actailid="{{item.id}}" data-iseditplan="{{item.isEditPlan}}" bindtap="editAction">
-            <view class="weui-media-box__info__meta">完成时间：{{df.formatDate(item.commitDate)}}</view>
-            <view class="weui-media-box__info__meta">检查人：{{item.inspectorName}}</view> 
+
+          <view class="weui-media-box__info">
+            <view wx:if="{{item.isBringInto == true && item.commitDate==null}}" class="weui-media-box__info__meta" >
+              <view class="weui-cell__bd">
+                <picker data-planid="{{plan.id}}" data-actailid="{{item.id}}" value="{{item.commitDate}}" data-field="date" mode="date" start="{{item.dateStart}}" end="{{item.dateEnd}}" bindchange="bindDateChange" >
+                  <view class="weui-input">完成时间(点击填写)：{{df.formatDate(item.commitDate)}}</view>
+                </picker>
+              </view>
+            </view>
+            <view wx:if="{{item.isBringInto != true || (item.isBringInto == true && item.commitDate!=null)}}" class="weui-media-box__info__meta" data-planid="{{plan.id}}" data-actailid="{{item.id}}" data-iseditplan="{{item.isEditPlan}}" bindtap="editAction">
+              完成时间：{{df.formatDate  (item.commitDate)}}
+            </view>
+
+            <view class="weui-media-box__info__meta" data-planid="{{plan.id}}" data-actailid="{{item.id}}" data-iseditplan="{{item.isEditPlan}}" bindtap="editAction">
+             检查人：{{item.inspectorName}}
+            </view> 
           </view>  
+
           <view class="weui-media-box__info"> 
           
             <view class="weui-cell-picker">
 
               <view class="weui-cell__bd">
                 <picker bindchange="bindPickerChange" data-planid="{{plan.id}}" data-actailid="{{item.id}}" value="{{item.status}}" range="{{array}}">
-                  <view class="weui-input">完成情况(请选择):{{array[item.status]}}</view>
+                  <view class="weui-input">完成情况(点击修改):{{array[item.status]}}</view>
                 </picker>
               </view>
             </view>
@@ -39,31 +53,40 @@
   </view>
 
   <view class="weui-panel__bd" >
-    <view class="weui-media-box weui-media-box_text">            
-        <view class="weui-media-box__title link_plan" data-id="{{plan.id}}"  bindtap="addAction">+行动计划</view>  
-
-        <view wx:if="{{plan.status == -1 || plan.status == -2 && actionsLength>0}}" class="weui-media-box__title">
-          <button style="margin-left:3px;" class="mini-btn" type="primary" size="mini" data-planid="{{plan.id}}" data-status="0" bindtap="commitPlan">
-            提交计划
-          </button>
+    <view class="weui-media-box weui-media-box_text">  
+      
+        <view class="page-section-spacing">
+          <view class="flex-wrp" style="flex-direction:row;">
+            <view class="flex-item-left weui-media-box__title link_plan" data-id="{{plan.id}}"  bindtap="addAction">  
+              +行动计划   
+            </view>
+            <view class="flex-item-right">
+              <button wx:if="{{plan.status == -1 || plan.status == -2 && actionsLength>0}}"  type="primary"  size="mini" data-planid="{{plan.id}}" data-status="0" bindtap="commitPlan">
+                提交计划
+              </button>
+            </view>
+          </view>
         </view>
 
-        <view wx:if="{{plan.status == 0}}" class="weui-media-box__desc ">
-          提示：行动举措每项提交结果后，点击提交结果； 提交结果后，不可修改
-        </view> 
+        <view class="message-top">
 
-        <view wx:if="{{plan.status == 0  && unCommit>0}}" class="button-sp-area">
-          <button style="margin-left:3px;" class="mini-btn" type="primary" size="mini">
-            余{{unCommit}}项，待提交结果
-          </button>
-        </view>
+          <view wx:if="{{plan.status == 0}}" class="weui-media-box__desc">
+            提示：行动举措每项提交结果后，点击提交结果； 提交结果后，不可修改
+          </view> 
 
-        <view class="button-sp-area" wx:if="{{plan.status == 0 && plan.isCommitPlanResult==true && unCommit==0}}">
-          <button style="margin-left:3px;" class="mini-btn" type="primary" size="mini" data-id="{{plan.id}}" data-status="1" bindtap="commitPlan">
-            提交结果
-          </button>
-        </view>
+          <view wx:if="{{plan.status == 0  && unCommit>0}}" class="button-sp-area">
+            <button style="margin-left:3px;" class="mini-btn" type="primary" size="mini">
+              余{{unCommit}}项，待提交结果
+            </button>
+          </view>
 
+          <view class="button-sp-area" wx:if="{{plan.status == 0 && plan.isCommitPlanResult==true && unCommit==0}}">
+            <button style="margin-left:3px;" class="mini-btn" type="primary" size="mini" data-planid="{{plan.id}}" data-status="1" bindtap="commitPlan">
+              提交结果
+            </button>
+          </view>
+      </view>
+      
     </view>
   </view>
 

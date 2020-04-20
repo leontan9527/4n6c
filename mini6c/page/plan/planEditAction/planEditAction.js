@@ -14,9 +14,8 @@ Page({
     this.setData({
       planId: options.planId,
       id: detailId,
-      actionDetail:''
+      actionDetail:'',
     })
-
     //获取最新消息数据
     const self = this
     var sessionId = app.globalData.sessionId
@@ -44,9 +43,14 @@ Page({
             inspectorName:actiondetail.inspectorName,
             date:date
           }
-         
+
+          var dateStart=util.timestampToTime(actiondetail.dateStart, false)
+          var dateEnd=util.timestampToTime(actiondetail.dateEnd, false)
+       
           self.setData({
-            formData: setformDataValue            
+            formData: setformDataValue,
+            dateStart: dateStart, 
+            dateEnd: dateEnd
           })
 
         },
@@ -63,8 +67,6 @@ Page({
     date: "请选择",  
     userId:'',
     userName:'请选择', 
-    dateStart: '2020-04-01', 
-    dateEnd: '2020-10-01', 
     formData: '',
     rules: [{
         name: 'action',
@@ -75,10 +77,12 @@ Page({
       }, {
         name: 'userId',
           rules: {required: true, message: '请选择检查人'},
-    }]
+    }],
   },
-     
+    
   bindDateChange: function (e) {
+
+      console.log('【e.detail.value】=' +e.detail.value)
       this.setData({
           date: e.detail.value,
           [`formData.date`]: e.detail.value
@@ -120,20 +124,18 @@ Page({
     const self = this
     var sessionId = app.globalData.sessionId
     
-    console.log('【1.begin wx.request】:' + sessionId)
-
     if (sessionId) {
 
       wx.request({
         url: config.domain + '/planCr/saveNewAction',
         data: {
-          id:this.data.id,
-          planId: this.data.planId,
+          id:self.data.id,
+          planId: self.data.planId,
           action: formData.action,
           outcome: formData.outcome,
           unFinishRemark: formData.unFinishRemark,
           commitDate: formData.date,
-          inspectorId: this.data.userId
+          inspectorId: formData.userId
         },
         method: 'POST',
         dataType: 'json',

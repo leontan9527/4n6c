@@ -17,3 +17,29 @@
 
 .weui-cell-picker{margin-left:1px;}
 
+.flex-wrp{
+  display:flex;
+}
+
+.flex-item-left{
+  position: absolute; /* 要约束所在位置的子元素的位置要设置成绝对 */
+  left: 0;/* 调节靠左 */
+  width: 500rpx;
+  height: 70rpx;
+  margin-left: 20rpx;
+  margin-top: 28rpx;
+  font-size: 26rpx;
+}
+
+.flex-item-right{
+  position: absolute; /* 要约束所在位置的子元素的位置要设置成绝对 */
+  right: 0; /* 靠右调节 */
+  margin-top:0rpx;
+  width: 500rpx;
+  height: 300rpx;
+  font-size: 26rpx;
+}
+
+.message-top{
+  margin-top: 80rpx;
+}

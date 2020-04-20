@@ -23,7 +23,7 @@
             <input bindinput="formInputChange" data-field="unFinishRemark" value="{{formData.unFinishRemark}}" class="weui-input" />
         </mp-cell>
         <mp-cell prop="date" title="计划完成" ext-class="">
-            <picker data-field="date" mode="date" start="{{dateStart}}" end="{{dateEnd}}" bindchange="bindDateChange" >
+            <picker data-field="date" mode="date" value="{{formData.date}}" start="{{dateStart}}" end="{{dateEnd}}" bindchange="bindDateChange" >
                 <view class="weui-input">
                     {{formData.date}}
                 </view>

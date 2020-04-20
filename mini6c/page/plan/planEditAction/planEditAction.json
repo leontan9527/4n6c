@@ -9,7 +9,7 @@
     "mp-form": "../../components/form/form"
   },
   "navigationBarTextStyle": "black",
-  "navigationBarTitleText": "添加行动计划",
+  "navigationBarTitleText": "编辑行动计划",
   "navigationBarBackgroundColor": "#F8F8F8",
   "backgroundColor": "#F8F8F8"
 }
