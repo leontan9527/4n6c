@@ -9,18 +9,48 @@
         <view class="weui-media-box__info">
           <view class="weui-media-box__info__meta">保底：{{item.baseValue}}</view>                
           <view class="weui-media-box__info__meta">合理：{{item.reasonableValue}}</view>
-          <view class="weui-media-box__info__meta" wx:if="{{item.actualValue}}">实际值：{{item.actualValue}}</view>
         </view>
 
         <view class="weui-media-box__info">
           <view class="weui-media-box__info__meta">要求时间：{{df.formatDate(item.commitDate)}}</view>                
-          <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">权重：{{item.weight}}%</view>
+          <view class="weui-media-box__info__meta weui-media-box__info__meta_extra" wx:if="{{item.weight != null}}">权重：{{item.weight}}%</view>
+          <view class="weui-media-box__info__meta weui-media-box__info__meta_extra" wx:else>权重：</view>
         </view>
 
         <view class="weui-media-box__info">
-          <view class="weui-media-box__info__meta">检查人：{{item.checkUserName}}</view>
-          <view class="weui-media-box__info__meta weui-media-box__info__meta_extra" wx:if="{{item.score}}">绩效：{{item.score}}</view>                
+          <view class="weui-media-box__info__meta">检查人：{{item.checkUserName}}</view>      
+          <view class="weui-media-box__info__meta">绩效分数：{{item.score}}</view>         
         </view>
+
+        <view class="weui-media-box__info">
+            <!-- 非电网类指标 -->
+            <view wx:if="{{item.isNoVote == false}}" class="weui-media-box__info__meta">
+              <text class="actual-text">系统计算实际值：{{item.accumulateActualValue}}</text>
+            </view>
+            <!-- 电网类指标 -->
+            <view wx:if="{{item.isNoVote == true}}" class="weui-media-box__info__meta">
+              <text class="actual-text">系统计算实际值：{{item.yearActualValueString}}</text>
+            </view>
+        </view>
+
+        <!-- 输入实际值  开始 -->
+        <view class="weui-media-box__info">
+          <view class="weui-media-box__info__meta">
+
+            <!-- 非电网类指标接输入实际值(年度计划，INTA和INTB类直接输入实际值，和月度计划不一样 -->
+            <view wx:if="{{plan.isPassWeigth == true && item.isNoVote == false}}" class="flex-Container">
+              <text class="actual-text">实际值:</text>
+              <input bindinput="writeKpiValue" data-kpiid="{{item.id}}" data-targetindexid="{{item.targetIndexId}}" data-weight="{{item.weight}}" data-isperformancecptrule="{{item.isPerformanceCptRule}}"  data-field="actualValue" value="{{item.actualValue}}" class="actual-input" placeholder="请输入实际值"/>
+            </view>
+
+            <!-- 电网类指标弹出页面选择电网指标 -->
+            <view wx:if="{{plan.isPassWeigth == true && item.isNoVote == true}}" data-kpiid="{{item.id}}" data-kpiname="{{item.name}}" data-targetindexid="{{item.targetIndexId}}" bindtap="toPlanNoVoteValue" class="weui-media-box__info__meta">
+              实际值：{{item.actualValueString}}
+            </view>
+
+          </view>                
+        </view>
+        <!-- 输入实际值  结束 -->
 
       </view>        
     </view>            

@@ -10,6 +10,7 @@ Page({
         id: options.id,  
         kpiName: options.kpiName, 
         targetIndexId: options.targetIndexId, 
+        isMonthRules:options.isMonthRules,
         noVotes:[]
     })
 
@@ -22,7 +23,8 @@ Page({
       wx.request({
         url: config.domain + '/planCr/getNoVoteValue',
         data: {
-          id: self.data.id
+          id: self.data.id,
+          isMonthRules:self.data.isMonthRules
         },
         method: 'POST',
         header: {
@@ -131,7 +133,8 @@ Page({
     const self = this
     var kpiId= self.data.id
     var targetIndexId= self.data.targetIndexId
-    var isCheckValue=true;           
+    var isMonthRules=self.isMonthRules 
+    var isCheckValue=true;          
     const noVotes = self.data.noVotes
     var j=0;
     const selectNoVotes = []   //只将页面勾选的电网项传递给后台
@@ -192,7 +195,7 @@ Page({
           let actualValueString = "";
           let score = 0;
           let flag=0;
-          //console.log("noVotes ...= "+ JSON.stringify(noVotes));
+
           for (let i = 0; i < selectNoVotes.length; i ++ ){	
 
             console.log('selectNoVotes[i]===='+selectNoVotes[i].value)
@@ -223,7 +226,7 @@ Page({
             data : {
               id:kpiId,
               isNoVote: true,
-              isMonthRules: true,
+              isMonthRules: self.data.isMonthRules,
               actualValueString: actualValueString,
               actualValueJson:JSON.stringify(noVotes),
               score:score
@@ -236,7 +239,7 @@ Page({
             success(result) {
                 //填写成功自动返回上级页面
                 if(result.data.success==true){
-                  console.log('find:'+result.data.data[0])
+
                   var scoreValue = result.data.data[0].toFixed(2);
                   var status = result.data.data[2];                               
                   //更新DATE								
@@ -244,11 +247,14 @@ Page({
                   let prevPage = pages[pages.length - 2]
                   var plan = prevPage.data.plan
 
-                  let unCommit = prevPage.data.unCommit-1
+                  let unCommit = prevPage.data.unCommit
      
                   for (let i = 0; i < plan.kpiDetails.length; i++ ){
    
                       if (kpiId == plan.kpiDetails[i].id){	
+                        if(typeof(plan.kpiDetails[i].actualValueString) == 'undefined' || !plan.kpiDetails[i].actualValueString ){	
+                          unCommit ++;
+                        } 
                         plan.kpiDetails[i].actualValueString = actualValueString;
                         plan.kpiDetails[i].actualValueJson = JSON.stringify(noVotes);
                         plan.kpiDetails[i].score = score;

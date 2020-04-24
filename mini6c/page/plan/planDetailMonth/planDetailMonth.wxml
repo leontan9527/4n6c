@@ -17,6 +17,11 @@
           <view class="weui-media-box__info__meta weui-media-box__info__meta_extra" wx:else>权重：</view>
         </view>
 
+        <view class="weui-media-box__info">
+          <view class="weui-media-box__info__meta">检查人：{{item.checkUserName}}</view>      
+          <view class="weui-media-box__info__meta">绩效分数：{{item.score}}</view>         
+        </view>
+
         <!-- 输入实际值  开始 -->
         <view class="weui-media-box__info">
           <view class="weui-media-box__info__meta">
@@ -61,11 +66,6 @@
           </view>                
         </view>
         <!-- 输入实际值  结束 -->
-
-        <view class="weui-media-box__info">
-          <view class="weui-media-box__info__meta">检查人：{{item.checkUserName}}</view>      
-          <view class="weui-media-box__info__meta">绩效分数：{{item.score}}</view>         
-        </view>
 
       </view>        
     </view>            
