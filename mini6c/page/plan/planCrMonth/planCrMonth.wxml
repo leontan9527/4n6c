@@ -25,13 +25,9 @@
   </view>
   <template is="foot" />
 
-  <view class="button">
-    <view class="btn-area" id="buttonContainer">
-      <view class="button-sp-area">
-        <button class="mini-btn" type="primary" size="mini" bindtap="createdMonthPlan">确定</button>
-        <button class="mini-btn" type="default" size="mini" bindtap="navigateBack">取消</button> 
-      </view>
-    </view>
+  <view class="button-sp-area">
+    <button formType="submit" class="mini-btn" type="primary" size="mini">确定</button>
+    <button class="mini-btn" type="default" size="mini" bindtap="navigateBack">取消</button> 
   </view>
   
 </view>

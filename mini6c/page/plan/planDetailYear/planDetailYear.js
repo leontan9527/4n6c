@@ -55,8 +55,8 @@ Page({
             kpis[i].weight=util.formatDouble(kpis[i].weight)
             kpis[i].accumulateActualValue=util.formatDouble(kpis[i].accumulateActualValue)
             kpis[i].actualValue=util.formatDouble(kpis[i].actualValue)
-            kpis[i].yearActualValueString=util.formatDouble(kpis[i].yearActualValueString)
-            kpis[i].actualValueString=util.formatDouble(kpis[i].actualValueString)
+            kpis[i].yearActualValueString=util.formatNull(kpis[i].yearActualValueString)
+            kpis[i].actualValueString=util.formatNull(kpis[i].actualValueString)
           }
           
           //行动计划为添加结果的条数
