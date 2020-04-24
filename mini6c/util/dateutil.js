@@ -20,7 +20,14 @@ function timestampToTime(timestamp, withTime) {
   }
 }
 
+function formatNull(numberValue) {
+  if (numberValue == null) {
+    return ''
+  }
+  return numberValue
+}
 
 module.exports = {
-  timestampToTime: timestampToTime
+  timestampToTime: timestampToTime,
+  formatNull:formatNull
 };
