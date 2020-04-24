@@ -49,10 +49,11 @@ Page({
 								unCommit ++;
 							}  							
             }
-            kpis[i].score=util.formatNull(kpis[i].score)
-            kpis[i].baseValue=util.formatNull(kpis[i].baseValue)
-            kpis[i].reasonableValue=util.formatNull(kpis[i].reasonableValue)
-            kpis[i].weight=util.formatNull(kpis[i].weight)
+            kpis[i].score=util.formatDouble(kpis[i].score)
+            kpis[i].baseValue=util.formatDouble(kpis[i].baseValue)
+            kpis[i].reasonableValue=util.formatDouble(kpis[i].reasonableValue)
+            kpis[i].weight=util.formatDouble(kpis[i].weight)
+            kpis[i].actualValue=util.formatDouble(kpis[i].actualValue)
           }
           
           //行动计划为添加结果的条数
@@ -296,7 +297,7 @@ Page({
     var kpiName = e.currentTarget.dataset.kpiname
     var targetIndexId = e.currentTarget.dataset.targetindexid
 
-    wx.navigateTo({ url: '../planNoVoteValue/planNoVoteValue?id=' + id +'&kpiName='+kpiName+ '&targetIndexId='+targetIndexId})
+    wx.navigateTo({ url: '../planNoVoteValue/planNoVoteValue?id=' + id +'&kpiName='+kpiName+ '&targetIndexId='+targetIndexId+'&isMonthRules=true'})
   }
 
 })

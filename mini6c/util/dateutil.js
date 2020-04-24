@@ -20,14 +20,28 @@ function timestampToTime(timestamp, withTime) {
   }
 }
 
-function formatNull(numberValue) {
-  if (numberValue == null) {
+function formatNull(strValue) {
+  if (strValue == null) {
     return ''
   }
-  return numberValue
+  return strValue
+}
+
+/*
+  对传递过来的double类型数据进行处理，如果传递过来是null，则返回''给前台页面
+  如果传递过来的是多位小数点，则只保留2位小数点
+*/
+function formatDouble(numberValue) {
+  if (numberValue == null) {
+    return ''
+  }else{
+    numberValue=numberValue.toFixed(2)
+    return numberValue
+  }
 }
 
 module.exports = {
   timestampToTime: timestampToTime,
-  formatNull:formatNull
+  formatNull:formatNull,
+  formatDouble:formatDouble
 };

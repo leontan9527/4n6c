@@ -167,9 +167,12 @@ computeINTAValue(e) {
                   let pages = getCurrentPages()
                   let prevPage = pages[pages.length - 2]
                   var plan = prevPage.data.plan
-                  let unCommit = prevPage.data.unCommit-1
+                  let unCommit = prevPage.data.unCommit
                   for (let i = 0; i < plan.kpiDetails.length; i++ ){						
                       if (kpiId == plan.kpiDetails[i].id){	
+                        if(plan.kpiDetails[i].actualValue==null ){							
+                          unCommit ++;
+                        } 
                         plan.kpiDetails[i].actualValue = actualValue
                         plan.kpiDetails[i].storeCode=storeCode
                         plan.kpiDetails[i].storeValue1=storeValue1
