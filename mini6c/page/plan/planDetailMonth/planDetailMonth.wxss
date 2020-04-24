@@ -18,3 +18,23 @@
   margin-left:20rpx;
   margin-top: 0rpx;
 }
+
+.flex-Container{
+  height:100%;
+  width: 100%;
+  display:flex;
+  flex-direction:row;
+  justify-content:flex-start;
+  align-items:flex-start;
+  box-sizing:border-box;
+}
+
+.actual-text{
+  width:50px;
+  margin-top:3px;
+}
+
+.actual-input{
+  width:100px;
+  padding-top: 0px;
+}

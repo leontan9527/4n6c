@@ -1,0 +1,58 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+
+<form bindsubmit="computeNoVoteValue">
+<view class="container">
+  <template is="head" data="{{title: 'checkbox'}}"/>
+
+  <view class="page-body">
+
+    <view class="page-section">
+      <view class="page-section-title">实际结果</view>
+      <view class="weui-cells weui-cells_after-title">
+
+          <view class="flex-Container weui-cell" wx:for="{{noVotes}}" wx:key="{{item.seq}}"  >
+
+            <view class="containerItem" data-seq="{{item.seq}}" data-single="{{item.single}}"   bindtap="selectNoNotes">
+              <view class="firstSelect">
+                <view wx:if="{{item.selected==true}}">
+                  <view class="icon-small-wrp">
+                    <icon class="icon-small" type="success_no_circle" size="23"></icon>
+                  </view>
+                  <view class="icon-box-ctn">
+                  </view>
+                </view>
+              </view>
+            </view>
+
+            <view class="containerItem" >
+              <text class="noNotesName" data-seq="{{item.seq}}" data-single="{{item.single}}"   bindtap="selectNoNotes">{{item.name}}</text>
+            </view>
+
+            <view class="containerItem" wx:if="{{item.seq>1 && item.selected==true}}">
+                <text class="noNotesFs">发生:</text>
+            </view>
+
+            <view class="containerItem" wx:if="{{item.seq>1 && item.selected==true}}">
+                <input bindblur="getBlurInputValue" class="noNotesinput" placeholder="" data-seq='{{item.seq}}'  name="ddd" value="{{item.value}}"/>
+            </view>
+
+            <view class="containerItem" wx:if="{{item.seq>1 && item.selected==true}}">
+                <text class="noNotesCs">次</text>
+            </view>
+
+          </view>
+
+      </view>
+    </view>
+  </view>
+
+  <template is="foot" />
+
+  <view class="button-sp-area">
+    <button formType="submit" class="mini-btn" type="primary" size="mini">确定</button>
+    <button class="mini-btn" type="default" size="mini" bindtap="navigateBack">取消</button> 
+  </view>
+
+</view>
+</form>

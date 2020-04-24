@@ -9,17 +9,62 @@
         <view class="weui-media-box__info">
           <view class="weui-media-box__info__meta">保底：{{item.baseValue}}</view>                
           <view class="weui-media-box__info__meta">合理：{{item.reasonableValue}}</view>
-          <view class="weui-media-box__info__meta" wx:if="{{item.actualValue}}">实际值：{{item.actualValue}}</view>
         </view>
 
         <view class="weui-media-box__info">
           <view class="weui-media-box__info__meta">要求时间：{{df.formatDate(item.commitDate)}}</view>                
-          <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">权重：{{item.weight}}%</view>
+          <view class="weui-media-box__info__meta weui-media-box__info__meta_extra" wx:if="{{item.weight != null}}">权重：{{item.weight}}%</view>
+          <view class="weui-media-box__info__meta weui-media-box__info__meta_extra" wx:else>权重：</view>
         </view>
 
+        <!-- 输入实际值  开始 -->
         <view class="weui-media-box__info">
-          <view class="weui-media-box__info__meta">检查人：{{item.checkUserName}}</view>
-          <view class="weui-media-box__info__meta weui-media-box__info__meta_extra" wx:if="{{item.score}}">绩效：{{item.score}}</view>                
+          <view class="weui-media-box__info__meta">
+
+            <!-- 常规类指标直接输入实际值 -->
+            <view wx:if="{{item.isNoVote == false  && item.computationRules != 6 && item.computationRules != 7}}" class="flex-Container">
+              <text class="actual-text">实际值:</text>
+              <input bindinput="writeKpiValue" data-kpiid="{{item.id}}" data-targetindexid="{{item.targetIndexId}}" data-weight="{{item.weight}}" data-field="actualValue" value="{{item.actualValue}}" class="actual-input" placeholder="请输入实际值"/>
+            </view>
+
+            <!-- 电网类指标弹出页面选择电网指标 -->
+            <view wx:if="{{item.isNoVote == true}}" data-kpiid="{{item.id}}" data-kpiname="{{item.name}}" data-targetindexid="{{item.targetIndexId}}" bindtap="toPlanNoVoteValue" class="weui-media-box__info__meta">
+              实际值：{{item.actualValueString}}
+            </view>
+
+	          <!-- IntA("完成率项次扣分类",6) 类指标弹出页面选择 -->                            	
+            <view class="noVoteValue"  wx:if="{{item.computationRules == 6}}"
+              data-kpiid="{{item.id}}" data-kpiname="{{item.name}}" data-targetindexid="{{item.targetIndexId}}" data-unit="{{item.unit}}" data-reasonablevalue="{{item.reasonableValue}}" data-weight="{{item.weight}}"  bindtap="toPlanIntAValue" >
+              <view wx:if="{{item.storeCode == 'unfinishBuckleScore' }}">实际值: 未完成项次数：{{item.storeValue1}}，总项数：{{item.storeValue2}}</view>
+              <view wx:elif="{{item.storeCode == 'unexpandedScore' }}">实际值: 当期无计划</view>
+              <view wx:elif="{{item.storeCode == 'finishMultiple' }}">实际值: 100%完成</view>
+              <view wx:else>实际值:</view>
+            </view>
+
+            <!-- IntB("直接加减分(月度无权重)类",7)类指标弹出页面选择 -->
+            <view class="noVoteValue" wx:if="{{item.computationRules == 7}}"
+              data-kpiid="{{item.id}}" data-kpiname="{{item.name}}" data-targetindexid="{{item.targetIndexId}}" data-unit="{{item.unit}}" data-reasonablevalue="{{item.reasonableValue}}" bindtap="toPlanIntBValue" >
+              
+              <view wx:if="{{item.storeCode == 'finishAddBuckleScore' }}">实际值: {{item.actualValue}}</view>
+              <view wx:elif="{{item.storeCode == 'unPlanScore' }}">实际值: 当期无计划</view>
+              <view wx:else>实际值:</view>
+            </view>
+
+            <!-- 页面提示信息-->
+            <view class="accumulateValueInfo" wx:if="{{(item.targetSourceType == 1 || item.targetSourceType == 2) && item.isAccumulate == true}}" >
+              <view wx:if="{{item.accumulateValue != null }}">提示：部门累计完成{{item.accumulateValue}}{{item.unit}}</view>
+              <view wx:if="{{item.accumulateValue == null && item.unCommitUsers == null }}">当前还未有人提交结果</view>
+              <view wx:if="{{item.unCommitUsers > 0}}">, 有{{item.unCommitUsers}}人还未提交结果</view>
+              <!--a class="fa fa-refresh" onclick="location.reload();"></a-->
+            </view>
+
+          </view>                
+        </view>
+        <!-- 输入实际值  结束 -->
+
+        <view class="weui-media-box__info">
+          <view class="weui-media-box__info__meta">检查人：{{item.checkUserName}}</view>      
+          <view class="weui-media-box__info__meta">绩效分数：{{item.score}}</view>         
         </view>
 
       </view>        
