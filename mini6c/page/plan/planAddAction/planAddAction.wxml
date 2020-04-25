@@ -28,7 +28,7 @@
 
         <mp-cell ext-class="weui-cell_select weui-cell_select-after" bindtap="selectOneUser">
             <view slot="title" class="weui-label">检查人</view>            
-            <view class="weui-select"></view>            
+            <view class="weui-select">{{userName}}</view>            
         </mp-cell>
 
 

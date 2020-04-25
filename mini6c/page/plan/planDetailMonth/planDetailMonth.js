@@ -220,9 +220,17 @@ Page({
                   //创建成功自动返回上级页面
       
                   if(result.data.success==true){
-                    console.log('find:'+result.data.data[0])
-                    var scoreValue = result.data.data[0].toFixed(2);
-                    var status = result.data[2];                               
+
+                    var scoreValue
+                    if(result.data.data[0]!=null){
+                      var scoreValue = result.data.data[0].toFixed(2);
+                    }
+
+                    var status
+                    if(result.data.data[2]!=null){
+                      var status = result.data.data[2];  
+                    }  
+                                                
                     //更新DATE								
                     var plan=self.data.plan;	 																	
                     for (let i = 0; i < plan.kpiDetails.length; i++ ){						
@@ -232,11 +240,11 @@ Page({
                           plan.kpiDetails[i].status = status;
                           break;
                         }  
-                      }	
+                    }	
   
-                      self.setData({
-                        plan: plan
-                      })
+                    self.setData({
+                      plan: plan
+                    })
                   }
               },
               fail({ errMsg }) {

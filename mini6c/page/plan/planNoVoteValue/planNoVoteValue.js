@@ -53,8 +53,6 @@ Page({
     var single=e.currentTarget.dataset.single
     
     const noVotes = this.data.noVotes
-    console.log('seq===：',seq)
-    console.log('single===：',single)
 
     let index;
     for (let i = 0; i < noVotes.length; i ++ ){				
@@ -91,22 +89,6 @@ Page({
       noVotes:noVotes
     })
 
-  },
-
-  getFocusInputValue: function(e) {
-
-    var seq = e.currentTarget.dataset.seq
-    const noVotes = this.data.noVotes
-    for (let i = 0; i < noVotes.length; i ++ ){				
-      if(seq==noVotes[i].seq){
-        noVotes[i].selected = true;
-        break
-      }
-    }
-
-    this.setData({
-      noVotes:noVotes
-    })
   },
 
   getBlurInputValue: function(e) {

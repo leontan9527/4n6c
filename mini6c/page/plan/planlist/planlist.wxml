@@ -35,38 +35,6 @@
         </view>
         <view class="weui-panel weui-panel_access">           
             <view class="weui-panel__bd">
-                <!--navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
-                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                        <image class="weui-media-box__thumb" src="{{icon_year}}" />
-                    </view>
-                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                        <view class="weui-media-box__title">2019年计划</view>
-                        <view class="weui-media-box__desc">请及时提交结果，统计数据并上报财务。（刘红霞3.24）</view>
-                    </view>
-                </navigator>
-                <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
-                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                        <image class="weui-media-box__thumb" src="{{icon_month}}" />
-                    </view>
-                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                        <view class="weui-media-box__title">2020年1月计划</view>
-                        <view class="weui-media-box__desc">计划执行行率85%，请及时提交剩余结果</view>
-                    </view>
-                </navigator>
-
-                <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
-                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                        <image class="weui-media-box__thumb" src="{{icon_week}}" />
-                    </view>
-                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                        <view class="weui-media-box__title">2010年第4周计划</view>
-                        <view class="weui-media-box__desc">计划执行率90%，请及时提交剩余结果</view>
-                        <view class="weui-media-box__info">
-                            <view class="weui-media-box__info__meta">待提交结果</view> 
-                            <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">查看详情</view>
-                        </view>
-                    </view>
-                </navigator-->
 
                 <block wx:for-items="{{planList}}" wx:key="id">
                   <view data-id="{{item.id}}" data-plancycle="{{item.planCycle}}" data-status="{{item.status}}" bindtap="toPlanDetail" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
@@ -81,20 +49,14 @@
                           <view class="weui-media-box__desc" wx:if="{{item.status >= 1}}" >计划执行率{{item.actioncompleted > 0 ? item.actioncompleted:0 }}% </view>
                           <view class="weui-media-box__info">
                               <view class="weui-media-box__info__meta">{{item.statusName}}</view>
-                              <view class="weui-media-box__info__meta" wx:if="{{item.status >= 1}}" >绩效:{{nf.toFixed(item.score)}}</view>                            
+                              <view class="weui-media-box__info__meta" wx:if="{{item.status >= 1 && item.planCycle!=0}}" >绩效:{{nf.toFixed(item.score)}}</view>                            
                               <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">查看详情</view>
                           </view>
                       </view>
                   </view>
                 </block>
 
-
             </view>
-            <!--view class="weui-panel__ft">
-                <view class="weui-cell weui-cell_access weui-cell_link">
-                    <view class="weui-cell__bd">查看更多</view>
-                    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-                </view>
-            </view-->
+
         </view>    
 </view>

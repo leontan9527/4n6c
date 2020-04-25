@@ -58,7 +58,7 @@ Page({
     })
   },
 
-  //创建月计划方法
+  //创建年计划方法
   createYearPaln: function(){   
     
     const items = this.data.planList
@@ -87,14 +87,14 @@ Page({
             if(result.data.success){
               //创建成功，跳转到计划列表页面
               var id = result.data.data
-              wx.navigateTo({ url: '../planDetailYear/planDetailYear?id=' + id})
+              wx.redirectTo({ url: '../planDetailYear/planDetailYear?id=' + id})
             }else{ 
               //创建失败，提示错误信息
               var errorArray=result.data.data
               console.log('errormsg-----------', errormsg)
               if(errorArray!=undefined){
                 var errormsg=errorArray.join(' ');
-                //console.log('errormsg-----------', errormsg)
+
                 wx.showModal({  
                   title: '提示',  
                   content: errormsg,  

@@ -26,7 +26,7 @@
   <template is="foot" />
 
   <view class="button-sp-area">
-    <button formType="submit" class="mini-btn" type="primary" size="mini">确定</button>
+    <button class="mini-btn" type="primary" size="mini" bindtap="createdWeekPlan">确定</button> 
     <button class="mini-btn" type="default" size="mini" bindtap="navigateBack">取消</button> 
   </view>
   
