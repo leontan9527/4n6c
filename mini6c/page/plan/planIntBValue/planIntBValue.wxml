@@ -31,7 +31,7 @@
                   <text class="conItem1">完成项数:</text>
               </view>
               <view class="containerItem">
-                  <input class="conItem2" placeholder="请输入完成项数" name="storevalue1" value="{{planKpiDetail.storeValue1}}"/>
+                  <input class="conItem2" type="number" placeholder="请输入完成项数" name="storevalue1" value="{{planKpiDetail.storeValue1}}"/>
               </view>  
             </view>
 

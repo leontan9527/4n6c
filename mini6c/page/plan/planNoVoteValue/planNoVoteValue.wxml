@@ -34,7 +34,7 @@
             </view>
 
             <view class="containerItem" wx:if="{{item.seq>1 && item.selected==true}}">
-                <input bindblur="getBlurInputValue" class="noNotesinput" placeholder="" data-seq='{{item.seq}}'  name="ddd" value="{{item.value}}"/>
+                <input bindblur="getBlurInputValue" type="number" class="noNotesinput" placeholder="" data-seq='{{item.seq}}'  name="ddd" value="{{item.value}}"/>
             </view>
 
             <view class="containerItem" wx:if="{{item.seq>1 && item.selected==true}}">

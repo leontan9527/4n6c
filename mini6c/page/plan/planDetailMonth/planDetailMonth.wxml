@@ -29,7 +29,7 @@
             <!-- 常规类指标直接输入实际值 -->
             <view wx:if="{{item.isNoVote == false  && item.computationRules != 6 && item.computationRules != 7}}" class="flex-Container">
               <text class="actual-text">实际值:</text>
-              <input bindinput="writeKpiValue" data-kpiid="{{item.id}}" data-targetindexid="{{item.targetIndexId}}" data-weight="{{item.weight}}" data-field="actualValue" value="{{item.actualValue}}" class="actual-input" placeholder="请输入实际值"/>
+              <input bindinput="writeKpiValue" type="digit" data-kpiid="{{item.id}}" data-targetindexid="{{item.targetIndexId}}" data-weight="{{item.weight}}" data-field="actualValue" value="{{item.actualValue}}" class="actual-input" placeholder="请输入实际值"/>
             </view>
 
             <!-- 电网类指标弹出页面选择电网指标 -->
