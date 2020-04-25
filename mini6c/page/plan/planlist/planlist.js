@@ -147,10 +147,8 @@ Page({
 
     var id = e.currentTarget.dataset.id
     var planCycle = e.currentTarget.dataset.plancycle
-    var status = e.currentTarget.dataset.status
-    if(status>0){
-      wx.navigateTo({ url: '../planDetail/planDetail?id=' + id })
-    }else{
+    var isToEditPage = e.currentTarget.dataset.istoeditpage
+    if(isToEditPage){
       if(planCycle==0){
         wx.navigateTo({ url: '../planDetailWeek/planDetailWeek?id=' + id })
       }else if(planCycle==1){
@@ -158,7 +156,9 @@ Page({
       }else{
         wx.navigateTo({ url: '../planDetailYear/planDetailYear?id=' + id })
       }
+    }else{  
+      wx.navigateTo({ url: '../planDetailShow/planDetailShow?id=' + id + '&planCycle='+planCycle })
     }
-    
   }
+
 })

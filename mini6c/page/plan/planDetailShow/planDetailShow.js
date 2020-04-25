@@ -1,7 +1,6 @@
 const config = require('../../../config')
 var util = require("../../../util/dateutil.js");
 
-
 const app = getApp()
 
 Page({
@@ -9,29 +8,27 @@ Page({
   onLoad: function (options) {
     console.info("打开：" + options.id);
 
-    //var arr = '1585843200000';//测试
-    //var date = new Date(arr);
-    //var clientDate = new Date() // 客户端时间
-    //console.info("clientDate=" + clientDate);
-
-    //console.log(util.formatDateTime(this.data.clientDate, true))
-
-
-
     this.setData({
-      pid: options.id
+      pid: options.id,
+      planCycle: options.planCycle
     })
-
-    
 
     //获取最新消息数据
     const self = this
     var sessionId = app.globalData.sessionId
 
-    //console.info('1. onLoad this.pid' + this.data.pid)
+    var detailUrl
+    if(self.data.planCycle==0){
+      detailUrl='/planCr/detailWeek'
+    }else if(self.data.planCycle==1){
+      detailUrl='/planCr/detailMonth'
+    }else{
+      detailUrl='/planCr/detailYear'
+    }
+
     if (sessionId) {
       wx.request({
-        url: config.domain + '/planCr/detailMonth',
+        url: config.domain + detailUrl,
         data: {
           id: this.data.pid
         },
@@ -41,15 +38,22 @@ Page({
           'Cookie': 'JSESSIONID=' + sessionId
         },
         success(result) {
-          //console.log('【plan/detailMonth=】', result.data.data)
-          self.setData({
-            plan: result.data.data
-          })
 
-          //var temp = result.data.data.actionDetails[0].commitDate
-          
-          //console.log('【temp=】', util.timestampToTime(temp, true))
-          //console.log('【temp=】', util.timestampToTime(temp,false))
+          var plan=result.data.data
+          let kpis = plan.kpiDetails;
+          if(kpis!=null){
+            for (let i = 0; i < kpis.length; i++ ){	
+              kpis[i].score=util.formatDouble(kpis[i].score)
+              kpis[i].baseValue=util.formatDouble(kpis[i].baseValue)
+              kpis[i].reasonableValue=util.formatDouble(kpis[i].reasonableValue)
+              kpis[i].weight=util.formatDouble(kpis[i].weight)
+              kpis[i].actualValue=util.formatDouble(kpis[i].actualValue)
+            }
+          }
+
+          self.setData({
+            plan: plan
+          })
 
           var title = result.data.data.title
 
@@ -60,8 +64,6 @@ Page({
             fail(err) {              
             }
           })
-
-
         },
 
         fail({ errMsg }) {
