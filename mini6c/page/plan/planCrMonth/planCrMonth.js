@@ -88,12 +88,11 @@ Page({
             if(result.data.success){
               //创建成功，跳转到计划列表页面
               var id = result.data.data
-              wx.navigateTo({ url: '../planDetailMonth/planDetailMonth?id=' + id})
+              wx.redirectTo({ url: '../planDetailMonth/planDetailMonth?id=' + id})
             }else{ 
               //创建失败，提示错误信息
               var errorArray=result.data.data
               var errormsg=errorArray.join(' ');
-              //console.log('errormsg-----------', errormsg)
    
               wx.showModal({  
                 title: '提示',  

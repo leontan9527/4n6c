@@ -141,7 +141,7 @@ Page({
                 if(result.data.success==true){
                   console.log('跳转页面:')
                   var id = result.data.data
-                  wx.navigateTo({ url: '../planDetailWeek/planDetailWeek?id=' + id})
+                  wx.redirectTo({ url: '../planDetailWeek/planDetailWeek?id=' + id})
                 }else{ 
 
                 }

@@ -61,7 +61,7 @@
               +行动计划   
             </view>
             <view class="flex-item-right">
-              <button wx:if="{{plan.status == -1 || plan.status == -2 && actionsLength>0}}"  type="primary"  size="mini" data-planid="{{plan.id}}" data-status="0" bindtap="commitPlan">
+              <button wx:if="{{(plan.status == -1 || plan.status == -2) && actionsLength>0}}"  type="primary"  size="mini" data-planid="{{plan.id}}" data-status="0" bindtap="commitPlan">
                 提交计划
               </button>
             </view>
