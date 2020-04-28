@@ -28,6 +28,9 @@
       <button type="primary" bindtap="copy">复制</button>
       <button bindtap="paste">粘贴</button>
       <button bindtap="askServer">通过Session请求服务器</button>
+
+      <button open-type="getPhoneNumber" bindtap="getPhoneNumber">获取手机号码</button>
+
     </view>
   </view>
 

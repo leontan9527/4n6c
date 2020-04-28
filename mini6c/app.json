@@ -13,11 +13,18 @@
     "page/plan/planDetailMonth/planDetailMonth",
     "page/plan/planDetailYear/planDetailYear",
     "page/plan/planAddAction/planAddAction",
+<<<<<<< Updated upstream
     "page/plan/planEditAction/planEditAction",
     "page/plan/planCrWeek/planCrWeek",
     "page/plan/planCrMonth/planCrMonth",
     "page/plan/planCrYear/planCrYear",
     "page/user/suser/suser"
+=======
+    "page/plan/planStWeek/planStWeek",
+    "page/user/suser/suser",
+    "page/target/person/person",
+    "page/target/dashboard/dashboard"
+>>>>>>> Stashed changes
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -44,7 +51,7 @@
         "text": "计划"
       },
       {
-        "pagePath": "page/user/clipboard-data/clipboard-data",
+        "pagePath": "page/target/dashboard/dashboard",
         "iconPath": "image/icon_API.png",
         "selectedIconPath": "image/icon_API_HL.png",
         "text": "目标"
