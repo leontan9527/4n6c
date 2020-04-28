@@ -144,7 +144,7 @@ Page({
   },
 
   toPlanDetail: function (e) {
-
+    
     var id = e.currentTarget.dataset.id
     var planCycle = e.currentTarget.dataset.plancycle
     var isToEditPage = e.currentTarget.dataset.istoeditpage
@@ -160,5 +160,10 @@ Page({
       wx.navigateTo({ url: '../planDetailShow/planDetailShow?id=' + id + '&planCycle='+planCycle })
     }
   }
+  /*
+  toPlanDetail: function (e) {
+    
+    wx.navigateTo({ url: '../planvocie/planvocie'})
+  }*/
 
 })
