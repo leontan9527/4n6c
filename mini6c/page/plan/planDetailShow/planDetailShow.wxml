@@ -51,8 +51,14 @@
 
 
   <!--进程消息列表  开始-->
-
-
+  <view class="weui-panel weui-panel_access" wx:if="{{planProgressList.length > 0}}">
+    <view class="weui-panel__hd">计划进程（{{planProgressList.length}}）</view>
+    <view class="weui-panel__bd">
+      <view class="weui-media-box weui-media-box_text" wx:for-items="{{planProgressList}}" wx:key="id" >                    
+        <view class="weui-media-box__desc plan_action">{{item.updateUser}}</view>
+      </view>        
+    </view>            
+  </view>
   <!--进程消息列表  结束-->
 
   <!--点击发送语音消息喇叭，弹出发送消息框  开始-->

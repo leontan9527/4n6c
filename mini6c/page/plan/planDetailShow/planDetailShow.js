@@ -19,6 +19,12 @@ Page({
     })
 
     //获取最新消息数据
+    this.getNewPlanData()
+
+  },
+
+  getNewPlanData: function () {
+    
     const self = this
     var sessionId = app.globalData.sessionId
 
@@ -44,7 +50,9 @@ Page({
         },
         success(result) {
 
-          var plan=result.data.data
+          console.log(result.data.success)
+          var planProgressList=result.data.planProgressList
+          var plan=result.data.plan
           let kpis = plan.kpiDetails;
           if(kpis!=null){
             for (let i = 0; i < kpis.length; i++ ){	
@@ -57,10 +65,11 @@ Page({
           }
 
           self.setData({
-            plan: plan
+            plan: plan,
+            planProgressList:planProgressList
           })
 
-          var title = result.data.data.title
+          var title = plan.title
 
           wx.setNavigationBarTitle({
             title: title,
@@ -76,8 +85,8 @@ Page({
         }
       })
     }
-
   },
+
   addAction: function (e) {
     var id = e.currentTarget.dataset.id
     console.log('【planAddAction/planAddAction】id=', id)
@@ -98,6 +107,7 @@ Page({
     
   },
 
+  //按住录音按钮，开始录音方法
   startRecording:function (e) {
 
     console.log('开始录音');
@@ -118,7 +128,7 @@ Page({
     })
   },
 
-  // 结束录音
+  //手指松开录音按钮，停止录音
   stopRecording: function (e) {
 
     var that = this;
@@ -167,7 +177,7 @@ Page({
           })
           that.stopVoiceRecordAnimation();
 
-          //手标挪开，暂停录音后，向后台传送录音文件 开始
+          //手指挪开，暂停录音后，向后台传送录音文件 开始
           console.log('tempFilePath=====',tempFilePath)
           var sessionId = app.globalData.sessionId
           console.log('sessionId==='+sessionId)
@@ -188,10 +198,39 @@ Page({
               },
               success:function(result){
 
-                var resultData = JSON.parse(result.data.replace(/\n/g,"\\n").replace(/\r/g,"\\r"));		
+                var resultData = JSON.parse(result.data.replace(/\n/g,"\\n").replace(/\r/g,"\\r"))
                 console.log('result.data.uuid====='+resultData.uuid);
+                //语音文件上传成功后
                 if(resultData.success){
 
+                  wx.request({
+                    url: config.domain + '/planCr/addVoiceProcess',
+                    data : {
+                      planId: that.data.planId,
+                      detailId:'',
+                      uuid:resultData.uuid,
+                      timeLength:that.data.recordLength,
+                      idType: 0,
+                      isSendAdviser:false
+                    },
+                    method: 'POST',
+                    header: {
+                      'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+                      'Cookie': 'JSESSIONID=' + sessionId
+                    },
+                    success(result) {
+             
+                        if(result.data.success){
+                          //创建成功，获取最新消息数据
+                          this.getNewPlanData()
+                        }else{ 
+                          //创建失败，提示错误信息
+                        }
+                    },
+                    fail({ errMsg }) {
+                      //创建失败提示错误信息代码开始
+                    }
+                  })
                 }
       
               },

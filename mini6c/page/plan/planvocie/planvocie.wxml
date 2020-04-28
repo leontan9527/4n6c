@@ -1,0 +1,31 @@
+<!--view class='voice-mask' wx:if="{{showVoiceMask}}" bindtap='hideVoiceMask'></view>
+<view class='voice-enter-note' wx:if = "{{showVoiceMask && !startRecording}}"></view>
+<image class='voice-enter-note-image' src='/image/voice/voice.png' wx:if = "{{showVoiceMask && !startRecording}}"></image>
+<view class='voice-mask' bindtap='hideVoiceMask'></view-->
+
+<view wx:if="{{showVoiceMask}}" bindtap='hideVoiceMask'>
+  <view class='voice-enter-note'></view>
+  <image class='voice-enter-note-image' src='/page/images/vocie/bof2.png' ></image>
+
+  <!--image src='/image/voice/record.png' class='voice-button' wx:if="{{showVoiceMask}}" bindtouchstart="startRecording" bindtouchend="stopRecording" bindtouchmove="moveToCancle"></image-->
+
+  <image src='/image/record.png' class='voice-button' bindtouchstart="startRecording" bindtouchend="stopRecording" bindtouchmove="moveToCancle"></image>
+
+  <!--view class='voice-note' wx:if="{{showVoiceMask && startRecording}}"-->
+  <view class='voice-note'>
+      <text wx:if="{{startRecording==false}}" style="margin-left:14px;">长按下方按钮录音</text>
+      <text wx:if="{{startRecording==true}}" style="margin-left:14px;">手指上滑取消发送</text>
+  </view>
+
+  <view class='record-voice-animations' wx:if="{{showVoiceMask && startRecording && !cancleRecording}}">
+      <image src='/page/images/vocie/dyvms1.png' wx:if="{{recordAnimationNum===1}}"></image>
+      <image src='/page/images/vocie/dyvms2.png' wx:if="{{recordAnimationNum===2}}"></image>
+      <image src='/page/images/vocie/dyvms3.png' wx:if="{{recordAnimationNum===3}}"></image>
+      <image src='/page/images/vocie/dyvms4.png' wx:if="{{recordAnimationNum===4}}"></image>
+      <image src='/page/images/vocie/dyvms5.png' wx:if="{{recordAnimationNum===0}}"></image>
+  </view>
+
+  <view class='cancle-record-voice' wx:if="{{showVoiceMask && startRecording && cancleRecording}}">
+      <image src='/page/images/vocie/cancel.png'></image>
+  </view>
+</view>
