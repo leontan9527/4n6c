@@ -32,13 +32,15 @@ Page({
           'Cookie': 'JSESSIONID=' + sessionId
         },
         success(result) {
-          console.log('【targetCr/domain=】', result.data.data.target)
+          //console.log('【targetCr/domain=】', result.data.data.target)
+
           var canReadCompany = result.data.data.canReadCompany
           var targets = result.data.data.target
           var planScore = result.data.data.planScore
           var excuteWeek = result.data.data.excuteWeek
           var excuteMonth = result.data.data.excuteMonth
           var excuteRate = result.data.data.excuteRate
+          var isOpened = false
 
           if (excuteRate){
             excuteRate = (100.0 * excuteRate).toFixed(1)            
