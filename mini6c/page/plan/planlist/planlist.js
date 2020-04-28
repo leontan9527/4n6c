@@ -160,10 +160,5 @@ Page({
       wx.navigateTo({ url: '../planDetailShow/planDetailShow?id=' + id + '&planCycle='+planCycle })
     }
   }
-  /*
-  toPlanDetail: function (e) {
-    
-    wx.navigateTo({ url: '../planvocie/planvocie'})
-  }*/
 
 })
