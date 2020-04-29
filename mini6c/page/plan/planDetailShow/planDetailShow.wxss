@@ -14,6 +14,7 @@
 
 .link_plan{color:cadetblue}
 
+/*最底部发送计划进程消息css */
 .flex-Container{
   height:45px;
   width: 100%;
@@ -48,6 +49,64 @@
   margin-left: 5px;
 }
 
+/*计划进程消息列表显示css */
+.planProgressList-flex-C{
+  height:45px;
+  width: 100%;
+  display:flex;
+  flex-direction:row;
+  justify-content:flex-start;
+}
+
+.planProgressfirstPic{
+  width:35px;
+  height:35px;
+  margin-left: 0px;
+  margin-top:1px;
+}
+
+.planProgressUserName{
+  margin-top:9px;
+  height: 15px;
+  margin-left: 5px;
+  color: rgb(104, 113, 121);
+}
+
+.planProgressDeptName{
+  margin-top:9px;
+  height: 15px;
+  margin-left: 5px;
+  color: rgb(104, 113, 121);
+}
+
+.planProgressContent{
+  margin-top:9px;
+  height: 15px;
+  margin-left: 38px;
+  color: rgb(104, 113, 121);
+}
+
+.output-audio{ 
+  width: 150rpx; 
+  margin: 30rpx; 
+}
+.output-audio .audio{ 
+  padding: 20rpx; border-radius: 10rpx;
+  background-color: #fff;
+  border: 1px solid #f0f0f0; 
+  overflow: hidden; 
+}
+.output-audio .audio .ico{ 
+  width: 26rpx; 
+  height: 30rpx; 
+  float: left;
+}
+.output-audio .audio .time{ 
+  float: right; 
+  font-size: 24rpx;
+}
+
+/*发送语音消息列表css */
 .voice-mask {
   position: flex;
   top: 0rpx;  

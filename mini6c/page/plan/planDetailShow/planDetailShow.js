@@ -1,6 +1,7 @@
 const config = require('../../../config')
 var util = require("../../../util/dateutil.js");
 var tempFilePath
+const myaudio = wx.createInnerAudioContext()
 const app = getApp()
 
 Page({
@@ -9,13 +10,14 @@ Page({
     console.info("打开：" + options.id);
 
     this.setData({
-      pid: options.id,
+      planId: options.id,
       planCycle: options.planCycle,
       showVoiceMask: false,
       startRecording: false,
       cancleRecording:false,
       recordAnimationNum:0,
-      lastVoiceYPostion:0
+      lastVoiceYPostion:0,
+      audKey:'',  //当前选中的音频key
     })
 
     //获取最新消息数据
@@ -41,7 +43,7 @@ Page({
       wx.request({
         url: config.domain + detailUrl,
         data: {
-          id: this.data.pid
+          id: this.data.planId
         },
         method: 'POST',
         header: {
@@ -107,6 +109,7 @@ Page({
     
   },
 
+  //语音上传   开始
   //按住录音按钮，开始录音方法
   startRecording:function (e) {
 
@@ -120,7 +123,12 @@ Page({
     var that = this;
     const recorderManager = wx.getRecorderManager();
     recorderManager.start({
-      format: 'mp3',
+        duration: 60000, //指定录音的时长，单位 ms，最大为10分钟（600000），默认为1分钟（60000）
+        sampleRate: 16000, //采样率
+        numberOfChannels: 1, //录音通道数
+        encodeBitRate: 96000, //编码码率
+        format: 'mp3', //音频格式，有效值 aac/mp3
+        frameSize: 50, //指定帧大小，单位 KB
     });
 
     recorderManager.onStart(() => {
@@ -209,7 +217,7 @@ Page({
                       planId: that.data.planId,
                       detailId:'',
                       uuid:resultData.uuid,
-                      timeLength:that.data.recordLength,
+                      timeLength:that.data.recordingLength,
                       idType: 0,
                       isSendAdviser:false
                     },
@@ -222,7 +230,7 @@ Page({
              
                         if(result.data.success){
                           //创建成功，获取最新消息数据
-                          this.getNewPlanData()
+                          that.getNewPlanData()
                         }else{ 
                           //创建失败，提示错误信息
                         }
@@ -292,5 +300,87 @@ Page({
   stopVoiceRecordAnimation:function () {
     var that = this;
     clearInterval(that.data.recordAnimationSetInter);
-  }
+  },
+  //语音上传   结束
+
+
+  //音频播放   开始
+ audioPlay: function (e) {
+
+    var that = this
+    var id = e.currentTarget.dataset.id
+    var key = e.currentTarget.dataset.key
+    var audioArr = that.data.planProgressList
+    
+    //设置状态
+    audioArr.forEach((v, i, array) => {
+      v.isRead = false;
+      if (i == key) {
+        v.isRead = true;
+      }
+    })
+
+    that.setData({
+      audioArr: audioArr,
+      audKey: key,
+    })
+  
+    myaudio.autoplay = true
+    var audKey = that.data.audKey
+    var vidSrc = config.domain + audioArr[audKey].content
+    myaudio.src = vidSrc
+    //audioArr[audKey].isRead = true
+
+    myaudio.play();
+    console.log('vidSrc======'+vidSrc)
+    //开始监听
+    myaudio.onPlay(() => {
+      console.log('onPlay======开始播放')
+    })
+    
+    //结束监听
+    myaudio.onEnded(() => {
+
+      console.log('onEnded======自动播放完毕');
+      audioArr[key].isRead = false;
+      that.setData({
+        audioArr: audioArr,
+      })
+      return
+    })
+
+    //错误回调
+    myaudio.onError((err) => {
+      console.log(err); 
+      audioArr[key].isRead = false;
+      that.setData({
+        audioArr: audioArr,
+      })
+      return
+    })
+  },
+  
+  // 音频停止
+  // 音频停止
+  audioStop(e){
+    var that = this
+    var key = e.currentTarget.dataset.key
+    var audioArr = that.data.audioArr
+    //设置状态
+    audioArr.forEach((v, i, array) => {
+      v.isRead = false;
+    })
+    that.setData({
+      audioArr: audioArr
+    })
+
+    myaudio.stop();
+
+    //停止监听
+    myaudio.onStop(() => {
+      console.log('停止播放');
+    })
+
+  },
+
 })

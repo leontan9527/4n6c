@@ -2,13 +2,17 @@
 
 <view class="page__bd">
 
-   <!--计划详情信息  开始-->
+  <!--计划详情信息  开始-->
   <view wx:if="{{showVoiceMask==false}}">
+
+    <!--kpiDetails信息  开始-->
     <view class="weui-panel weui-panel_access" wx:if="{{plan.kpiDetails.length > 0}}">
       <view class="weui-panel__hd">核心KPI（{{plan.kpiDetails.length}}）</view>
+
       <view class="weui-panel__bd">
         <view class="weui-media-box weui-media-box_text" wx:for-items="{{plan.kpiDetails}}" wx:key="id" >                    
           <view class="weui-media-box__desc plan_action">{{item.name}}（{{item.unit}}）</view>
+
           <view class="weui-media-box__info">
             <view class="weui-media-box__info__meta">保底：{{item.baseValue}}</view>                
             <view class="weui-media-box__info__meta">合理：{{item.reasonableValue}}</view>
@@ -22,44 +26,81 @@
 
           <view class="weui-media-box__info">
             <view class="weui-media-box__info__meta">检查人：{{item.checkUserName}}</view>
-            <view class="weui-media-box__info__meta weui-media-box__info__meta_extra" wx:if="{{item.score}}">绩效：{{item.score}}</view>                
+            <view class="weui-media-box__info__meta weui-media-box__info__meta_extra" wx:if="{{item.score}}">绩效：{{item.score}}</view>              
           </view>
 
         </view>        
       </view>            
     </view>
+    <!--kpiDetails信息  结束-->
 
+    <!--actionDetails信息  开始-->
     <view class="weui-panel weui-panel_access" wx:if="{{plan.actionDetails.length > 0}}">
       <view class="weui-panel__hd">行动计划（{{plan.actionDetails.length}}）</view>
+
+        <view class="weui-panel__bd">
+          <view class="weui-media-box weui-media-box_text" wx:for-items="{{plan.actionDetails}}" wx:key="id" >                    
+            <view class="weui-media-box__desc plan_action">{{item.action}}</view>
+            <view class="weui-media-box__desc">成果要求：{{item.outcome}}</view>
+            <view class="weui-media-box__info">
+              <view class="weui-media-box__info__meta">完成时间：{{df.formatDate(item.commitDate)}}</view>
+              <view class="weui-media-box__info__meta">检查人：{{item.inspectorName}}</view> 
+            </view>  
+            <view class="weui-media-box__info"> 
+              <view class="weui-media-box__info__meta plan_status">{{item.statusName}}</view>
+            </view>
+          </view>
+      </view>            
+    </view>
+    <!--actionDetails信息  结束-->
+
+    <!--进程消息列表  开始-->
+    <view class="weui-panel weui-panel_access" wx:if="{{planProgressList.length > 0}}">
+      <view class="weui-panel__hd">计划进程(最新{{planProgressList.length}}条)</view>
       <view class="weui-panel__bd">
-        <view class="weui-media-box weui-media-box_text" wx:for-items="{{plan.actionDetails}}" wx:key="id" >                    
-          <view class="weui-media-box__desc plan_action">{{item.action}}</view>
-          <view class="weui-media-box__desc">成果要求：{{item.outcome}}</view>
-          <view class="weui-media-box__info">
-            <view class="weui-media-box__info__meta">完成时间：{{df.formatDate(item.commitDate)}}</view>
-            <view class="weui-media-box__info__meta">检查人：{{item.inspectorName}}</view> 
-          </view>  
-          <view class="weui-media-box__info"> 
-            <view class="weui-media-box__info__meta plan_status">{{item.statusName}}</view>
+
+        <view class="weui-media-box weui-media-box_text" wx:for-items="{{planProgressList}}" wx:key="id" wx:for-index="key">  
+
+          <view class="planProgressList-flex-C">
+            <view class="containerItem">
+              <image class='planProgressfirstPic' src='/page/images/vocie/toux.png' ></image>   
+            </view>
+            <view class="containerItem">
+              <view class="planProgressUserName">{{item.updateUser}}</view>
+            </view>
+            <view class="containerItem">
+              <view class="planProgressDeptName">{{item.deptName}} {{df.formatDate(item.createTime)}}</view>
+            </view>
+          </view>
+
+          <view class="planProgressList-flex-C">
+            <view class="containerItem">
+              <view wx:if="{{item.type==0}}" class="planProgressContent">{{item.content}}</view>
+              <view wx:if="{{item.type==1}}" class="planProgressContent">
+                <view class='output-audio'>
+                  <!-- 默认状态 -->
+                  <view class='audio' wx:if="{{item.isRead==false}}" bindtap='audioPlay' data-key="{{key}}" data-id="{{item.id}}" data-isRead="{{item.isRead}}">
+                  <image class='ico' src='/page/images/vocie/yuying1.png' />
+                  <label class='time'>{{item.timeLength}}</label>
+                  </view>
+                  
+                  <!-- 当前正在播放状态 -->
+                  <view class='audio' wx:if="{{item.isRead==true}}" bindtap='audioStop' data-key="{{key}}" data-id="{{item.id}}" data-bl="{{item.isRead}}">
+                  <image class='ico' src='/page/images/vocie/bof1' />
+                  <label class='time'>{{item.timeLength}}</label>
+                </view>
+                
+                </view>
+              </view>
+            </view>
           </view>
 
         </view>        
       </view>            
     </view>
+    <!--进程消息列表  结束-->
   </view>
   <!--计划详情信息  结束-->
-
-
-  <!--进程消息列表  开始-->
-  <view class="weui-panel weui-panel_access" wx:if="{{planProgressList.length > 0}}">
-    <view class="weui-panel__hd">计划进程（{{planProgressList.length}}）</view>
-    <view class="weui-panel__bd">
-      <view class="weui-media-box weui-media-box_text" wx:for-items="{{planProgressList}}" wx:key="id" >                    
-        <view class="weui-media-box__desc plan_action">{{item.updateUser}}</view>
-      </view>        
-    </view>            
-  </view>
-  <!--进程消息列表  结束-->
 
   <!--点击发送语音消息喇叭，弹出发送消息框  开始-->
   <view class='voice-mask' wx:if="{{showVoiceMask}}">
@@ -73,11 +114,11 @@
         <text wx:if="{{startRecording==true}}" style="margin-left:14px;">手指上滑取消发送</text>
     </view>
 
-    <view class='voice-isSendAdviser'>
+    <!--view class='voice-isSendAdviser'>
         <text  style="margin-left:14px;margin-top:15px;">
               <checkbox value="cb" checked="true"/>是否发送顾问老师
         </text>
-    </view>
+    </view-->
 
     <view class='record-voice-animations' wx:if="{{showVoiceMask && startRecording && !cancleRecording}}">
         <image src='/page/images/vocie/voice1.png' wx:if="{{recordAnimationNum===1}}"></image>
