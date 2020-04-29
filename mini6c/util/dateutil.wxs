@@ -11,13 +11,17 @@ var fms = {
     var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
     var D = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate());//modify by wuhuawu 空格不能在这个地方加，否则传递参数是false时候，显示年月日的后面带有空格，页面解析回有问题
     var h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
-    var m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
+    var m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes());
     var s = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds());
 
     
-    if (withTime){
-      return Y + M + D + ' ' + h + m + s; //modify by wuhuawu空格移动到这个地方加
-    } else {
+    if (withTime==0){
+      return Y + M + D+ ' ' + h + m  + ':'+ s;//modify by wuhuawu空格移动到这个地方加
+    }else if(withTime==1) {
+      return M + D+ ' ' + h + m  + ':' + s;//modify by wuhuawu空格移动到这个地方加
+    }else if(withTime==2){
+      return M + D+ ' ' + h + m ;//modify by wuhuawu空格移动到这个地方加
+    }else {
       return Y + M + D;
     }
     
