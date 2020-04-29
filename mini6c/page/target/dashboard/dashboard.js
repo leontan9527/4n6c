@@ -54,9 +54,12 @@ Page({
             var listTarget = {
               id: 'TAR',
               name: '目标',
-              open: true,
+              open: (isOpened == false && targets.length > 0),
               pages: []              
             }
+
+            isOpened = listTarget.open
+
             var pagesTarget = []
             for (let i = 0, len = targets.length; i < len; ++i) {
               var page = {
@@ -78,9 +81,11 @@ Page({
             var listSoc = {
               id: 'SOC',
               name: '绩效',
-              open: false,
+              open: (isOpened == false && planScore.length > 0),
               pages: []
             }
+
+            isOpened = listSoc.open
 
             var pagesScore = []
             for (let i = 0, len = planScore.length; i < len; ++i) {
@@ -107,9 +112,11 @@ Page({
           var listActionWeek = {
             id: 'ACTW',
             name: '执行率 （ 周 ）',
-            open: false,
+            open: (isOpened == false && excuteWeek.length > 0),
             pages: []
           }
+
+          isOpened = listActionWeek.open
 
           var pagesWeek = []
           for (let i = excuteWeek.length - 1, len = 0; i >= len; i--) {
@@ -131,9 +138,11 @@ Page({
           var listActionMonth = {
             id: 'ACTM',
             name: '执行率 （ 月 ）',
-            open: false,
+            open: (isOpened == false && excuteMonth.length > 0),
             pages: []
           }
+
+          isOpened = listActionMonth.open
 
           var pagesMonth = []
           for (let i = excuteMonth.length - 1, len = 0; i >= len; i--) {
