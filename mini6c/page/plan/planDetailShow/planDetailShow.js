@@ -173,6 +173,7 @@ Page({
             recordLength = (res.duration / 1000) / 60 * 440;
           }
           var recordTime = (res.duration / 1000).toFixed(0);
+          console.log('recordTime======' + recordTime);
           console.log('recordLength======' + recordLength);
 
           that.setData({
@@ -217,7 +218,7 @@ Page({
                       planId: that.data.planId,
                       detailId:'',
                       uuid:resultData.uuid,
-                      timeLength:that.data.recordingLength,
+                      timeLength:that.data.recordingTime,
                       idType: 0,
                       isSendAdviser:false
                     },
@@ -262,6 +263,7 @@ Page({
 
     })
   },
+
   //向上滑动取消录音
   moveToCancle: function (event) {
 
@@ -280,11 +282,10 @@ Page({
     })
   },
 
-  //麦克风帧动画 
+  //计数器，用于点击录音时候，动态图片显示 
   startVoiceRecordAnimation:function () {
 
     var that = this;
-    //话筒帧动画 
     var i = 1;
     that.data.recordAnimationSetInter = setInterval(function () {
       i++;
@@ -296,7 +297,7 @@ Page({
     }, 600);
   },
 
-  // 停止麦克风动画计时器
+  // 停止计时器
   stopVoiceRecordAnimation:function () {
     var that = this;
     clearInterval(that.data.recordAnimationSetInter);
@@ -314,14 +315,14 @@ Page({
     
     //设置状态
     audioArr.forEach((v, i, array) => {
-      v.isRead = false;
+      v.isBof = false;
       if (i == key) {
-        v.isRead = true;
+        v.isBof = true;
       }
     })
 
     that.setData({
-      audioArr: audioArr,
+      planProgressList: audioArr,
       audKey: key,
     })
   
@@ -329,7 +330,6 @@ Page({
     var audKey = that.data.audKey
     var vidSrc = config.domain + audioArr[audKey].content
     myaudio.src = vidSrc
-    //audioArr[audKey].isRead = true
 
     myaudio.play();
     console.log('vidSrc======'+vidSrc)
@@ -342,9 +342,9 @@ Page({
     myaudio.onEnded(() => {
 
       console.log('onEnded======自动播放完毕');
-      audioArr[key].isRead = false;
+      audioArr[key].isBof = false;
       that.setData({
-        audioArr: audioArr,
+        planProgressList: audioArr,
       })
       return
     })
@@ -352,26 +352,25 @@ Page({
     //错误回调
     myaudio.onError((err) => {
       console.log(err); 
-      audioArr[key].isRead = false;
+      audioArr[key].isBof = false;
       that.setData({
-        audioArr: audioArr,
+        planProgressList: audioArr,
       })
       return
     })
   },
   
-  // 音频停止
-  // 音频停止
+  // 再次点击播放按钮， 停止播放
   audioStop(e){
     var that = this
     var key = e.currentTarget.dataset.key
-    var audioArr = that.data.audioArr
+    var audioArr = that.data.planProgressList
     //设置状态
     audioArr.forEach((v, i, array) => {
-      v.isRead = false;
+      v.isBof = false;
     })
     that.setData({
-      audioArr: audioArr
+      planProgressList: audioArr
     })
 
     myaudio.stop();
