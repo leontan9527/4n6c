@@ -69,7 +69,7 @@
               <view class="planProgressUserName">{{item.updateUser}}</view>
             </view>
             <view class="containerItem">
-              <view class="planProgressDeptName">{{item.deptName}} {{df.formatDate(item.createTime)}}</view>
+              <view class="planProgressDeptName">{{item.deptName}} {{df.formatDate(item.createTime,2)}}</view>
             </view>
           </view>
 
@@ -79,16 +79,16 @@
               <view wx:if="{{item.type==1}}" class="planProgressContent">
                 <view class='output-audio'>
                   <!-- 默认状态 -->
-                  <view class='audio' wx:if="{{item.isRead==false}}" bindtap='audioPlay' data-key="{{key}}" data-id="{{item.id}}" data-isRead="{{item.isRead}}">
-                  <image class='ico' src='/page/images/vocie/yuying1.png' />
-                  <label class='time'>{{item.timeLength}}</label>
+                  <view class='audio' wx:if="{{item.isBof==false}}" bindtap='audioPlay' data-key="{{key}}" data-id="{{item.id}}" data-isBof="{{item.isBof}}">
+                    <image class='ico' src='/page/images/vocie/yuying1.png' />
+                    <label class='time'>{{item.timeLength}}</label>
                   </view>
                   
                   <!-- 当前正在播放状态 -->
-                  <view class='audio' wx:if="{{item.isRead==true}}" bindtap='audioStop' data-key="{{key}}" data-id="{{item.id}}" data-bl="{{item.isRead}}">
-                  <image class='ico' src='/page/images/vocie/bof1' />
-                  <label class='time'>{{item.timeLength}}</label>
-                </view>
+                  <view class='audio' wx:if="{{item.isBof==true}}" bindtap='audioStop' data-key="{{key}}" data-id="{{item.id}}" data-isBof="{{item.isBof}}">
+                    <image class='ico' src='/page/images/vocie/bof1.png' />
+                    <label class='time'>{{item.timeLength}}</label>
+                  </view>
                 
                 </view>
               </view>
