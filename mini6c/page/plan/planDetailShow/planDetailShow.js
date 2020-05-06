@@ -18,6 +18,7 @@ Page({
       recordAnimationNum:0,
       lastVoiceYPostion:0,
       audKey:'',  //当前选中的音频key
+      isSendAdviser:false
     })
 
     //获取最新消息数据
@@ -95,21 +96,86 @@ Page({
     wx.navigateTo({ url: '../planAddAction/planAddAction?id=' + id })
   },
 
+  //发送计划进程消息代码                    开始
+  getBlurInputValue: function(e) {
+    console.log('【 e.value=', e.detail)
+    console.log('【 e.detail.value===',e.detail.value)
+    var value = e.detail.value
+
+    this.setData({
+      content:value
+    })
+  },
+
+  //添加文字消息
+  addCommentFun:function(e){
+
+    var that = this;
+    var sessionId = app.globalData.sessionId
+    wx.request({
+      url: config.domain + '/planCr/addComment',
+      data : {
+        planId: that.data.planId,
+        detailId:'',
+        content:that.data.content,
+        idType: 0,
+        isSendAdviser:that.data.isSendAdviser
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        'Cookie': 'JSESSIONID=' + sessionId
+      },
+      success(result) {
+
+          if(result.data.success){
+            //创建成功，获取最新消息数据
+            that.setData({
+              content:''
+            })
+            that.getNewPlanData()
+          }else{ 
+            //创建失败，提示错误信息
+          }
+      },
+      fail({ errMsg }) {
+        //创建失败提示错误信息代码开始
+      }
+    })
+     
+  },
+
+  //选中发送顾问老师
+  checkboxChange:function(e){
+
+    if (e.detail.value =='') {
+      this.setData({
+        isSendAdviser:false
+      })
+    }else {
+      this.setData({
+        isSendAdviser:true
+      })
+    }  
+  },
+
   showVoiceDialog:function(e){
     
     if(this.data.showVoiceMask){
       this.setData({
-         showVoiceMask:false
+         showVoiceMask:false,
+         isSendAdviser:false
       })
     }else{
       this.setData({
-         showVoiceMask:true
+         showVoiceMask:true,
+         isSendAdviser:false
       })
     }
     
   },
 
-  //语音上传   开始
+  //语音上传                                        开始
   //按住录音按钮，开始录音方法
   startRecording:function (e) {
 
@@ -142,7 +208,6 @@ Page({
     var that = this;
     const recorderManager = wx.getRecorderManager();
     recorderManager.stop();
-    console.log('结束录音');
     recorderManager.onStop((res) => {
      
       console.log('recorder stop', res)
@@ -173,8 +238,6 @@ Page({
             recordLength = (res.duration / 1000) / 60 * 440;
           }
           var recordTime = (res.duration / 1000).toFixed(0);
-          console.log('recordTime======' + recordTime);
-          console.log('recordLength======' + recordLength);
 
           that.setData({
             recordingLength: recordLength,
@@ -189,7 +252,6 @@ Page({
           //手指挪开，暂停录音后，向后台传送录音文件 开始
           console.log('tempFilePath=====',tempFilePath)
           var sessionId = app.globalData.sessionId
-          console.log('sessionId==='+sessionId)
           wx.uploadFile({
               url: config.domain + '/fileController/weiXingUploadImFile',
               filePath: tempFilePath,
@@ -220,7 +282,7 @@ Page({
                       uuid:resultData.uuid,
                       timeLength:that.data.recordingTime,
                       idType: 0,
-                      isSendAdviser:false
+                      isSendAdviser:that.data.isSendAdviser
                     },
                     method: 'POST',
                     header: {
@@ -257,7 +319,7 @@ Page({
           startRecording: false,
           cancleRecording:false
         })
-        console.log('recorderManager.onStop被调用showVoiceMask========='+this.data.showVoiceMask+'   startRecording============='+this.data.startRecording);
+        //console.log('recorderManager.onStop被调用showVoiceMask========='+this.data.showVoiceMask+'   startRecording============='+this.data.startRecording);
         that.stopVoiceRecordAnimation();
       }
 
@@ -274,7 +336,7 @@ Page({
           cancleRecording:true
         })
       }
-      console.log('moveToCancle被调用======'+this.data.cancleRecording);
+      //console.log('moveToCancle被调用======'+this.data.cancleRecording);
     }
 
     this.setData({
@@ -293,7 +355,7 @@ Page({
       that.setData({
         recordAnimationNum: i
       })
-      console.log('recordAnimationSetInter被调用======'+that.data.recordAnimationNum);
+      //console.log('recordAnimationSetInter被调用======'+that.data.recordAnimationNum);
     }, 600);
   },
 
@@ -332,16 +394,15 @@ Page({
     myaudio.src = vidSrc
 
     myaudio.play();
-    console.log('vidSrc======'+vidSrc)
     //开始监听
     myaudio.onPlay(() => {
-      console.log('onPlay======开始播放')
+      //console.log('onPlay======开始播放')
     })
     
     //结束监听
     myaudio.onEnded(() => {
 
-      console.log('onEnded======自动播放完毕');
+      //console.log('onEnded======自动播放完毕');
       audioArr[key].isBof = false;
       that.setData({
         planProgressList: audioArr,
@@ -377,9 +438,10 @@ Page({
 
     //停止监听
     myaudio.onStop(() => {
-      console.log('停止播放');
+      //console.log('停止播放');
     })
 
   },
+  //发送计划进程消息代码                    结束
 
 })

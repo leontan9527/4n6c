@@ -1,126 +1,234 @@
 <wxs src="../../../util/dateutil.wxs" module="df" />
 
 <view class="page__bd">
-  <view class="weui-panel weui-panel_access" wx:if="{{plan.kpiDetails.length > 0}}">
-    <view class="weui-panel__hd">核心KPI（{{plan.kpiDetails.length}}）</view>
-    <view class="weui-panel__bd">
-      <view class="weui-media-box weui-media-box_text" wx:for-items="{{plan.kpiDetails}}" wx:key="id" >                    
-        <view class="weui-media-box__desc plan_action">{{item.name}}（{{item.unit}}）</view>
-        <view class="weui-media-box__info">
-          <view class="weui-media-box__info__meta">保底：{{item.baseValue}}</view>                
-          <view class="weui-media-box__info__meta">合理：{{item.reasonableValue}}</view>
+  <!--计划详情信息  开始-->
+  <view wx:if="{{showVoiceMask==false}}">
+    <view class="weui-panel weui-panel_access" wx:if="{{plan.kpiDetails.length > 0}}">
+      <view class="weui-panel__hd">核心KPI（{{plan.kpiDetails.length}}）</view>
+      <view class="weui-panel__bd">
+        <view class="weui-media-box weui-media-box_text" wx:for-items="{{plan.kpiDetails}}" wx:key="id" >                    
+          <view class="weui-media-box__desc plan_action">{{item.name}}（{{item.unit}}）</view>
+          <view class="weui-media-box__info">
+            <view class="weui-media-box__info__meta">保底：{{item.baseValue}}</view>                
+            <view class="weui-media-box__info__meta">合理：{{item.reasonableValue}}</view>
+          </view>
+
+          <view class="weui-media-box__info">
+            <view class="weui-media-box__info__meta">要求时间：{{df.formatDate(item.commitDate)}}</view>                
+            <view class="weui-media-box__info__meta weui-media-box__info__meta_extra" wx:if="{{item.weight != null}}">权重：{{item.weight}}%</view>
+            <view class="weui-media-box__info__meta weui-media-box__info__meta_extra" wx:else>权重：</view>
+          </view>
+
+          <view class="weui-media-box__info">
+            <view class="weui-media-box__info__meta">检查人：{{item.checkUserName}}</view>      
+            <view class="weui-media-box__info__meta">绩效分数：{{item.score}}</view>         
+          </view>
+
+          <!-- 输入实际值  开始 -->
+          <view class="weui-media-box__info">
+            <view class="weui-media-box__info__meta">
+
+              <!-- 常规类指标直接输入实际值 -->
+              <view wx:if="{{item.isNoVote == false  && item.computationRules != 6 && item.computationRules != 7}}" class="flex-Container">
+                <text class="actual-text">实际值:</text>
+                <input bindinput="writeKpiValue" type="digit" data-kpiid="{{item.id}}" data-targetindexid="{{item.targetIndexId}}" data-weight="{{item.weight}}" data-field="actualValue" value="{{item.actualValue}}" class="actual-input" placeholder="请输入实际值"/>
+              </view>
+
+              <!-- 电网类指标弹出页面选择电网指标 -->
+              <view wx:if="{{item.isNoVote == true}}" data-kpiid="{{item.id}}" data-kpiname="{{item.name}}" data-targetindexid="{{item.targetIndexId}}" bindtap="toPlanNoVoteValue" class="weui-media-box__info__meta">
+                实际值：{{item.actualValueString}}
+              </view>
+
+              <!-- IntA("完成率项次扣分类",6) 类指标弹出页面选择 -->                            	
+              <view class="noVoteValue"  wx:if="{{item.computationRules == 6}}"
+                data-kpiid="{{item.id}}" data-kpiname="{{item.name}}" data-targetindexid="{{item.targetIndexId}}" data-unit="{{item.unit}}" data-reasonablevalue="{{item.reasonableValue}}" data-weight="{{item.weight}}"  bindtap="toPlanIntAValue" >
+                <view wx:if="{{item.storeCode == 'unfinishBuckleScore' }}">实际值: 未完成项次数：{{item.storeValue1}}，总项数：{{item.storeValue2}}</view>
+                <view wx:elif="{{item.storeCode == 'unexpandedScore' }}">实际值: 当期无计划</view>
+                <view wx:elif="{{item.storeCode == 'finishMultiple' }}">实际值: 100%完成</view>
+                <view wx:else>实际值:</view>
+              </view>
+
+              <!-- IntB("直接加减分(月度无权重)类",7)类指标弹出页面选择 -->
+              <view class="noVoteValue" wx:if="{{item.computationRules == 7}}"
+                data-kpiid="{{item.id}}" data-kpiname="{{item.name}}" data-targetindexid="{{item.targetIndexId}}" data-unit="{{item.unit}}" data-reasonablevalue="{{item.reasonableValue}}" bindtap="toPlanIntBValue" >
+                
+                <view wx:if="{{item.storeCode == 'finishAddBuckleScore' }}">实际值: {{item.actualValue}}</view>
+                <view wx:elif="{{item.storeCode == 'unPlanScore' }}">实际值: 当期无计划</view>
+                <view wx:else>实际值:</view>
+              </view>
+
+              <!-- 页面提示信息-->
+              <view class="accumulateValueInfo" wx:if="{{(item.targetSourceType == 1 || item.targetSourceType == 2) && item.isAccumulate == true}}" >
+                <view wx:if="{{item.accumulateValue != null }}">提示：部门累计完成{{item.accumulateValue}}{{item.unit}}</view>
+                <view wx:if="{{item.accumulateValue == null && item.unCommitUsers == null }}">当前还未有人提交结果</view>
+                <view wx:if="{{item.unCommitUsers > 0}}">, 有{{item.unCommitUsers}}人还未提交结果</view>
+                <!--a class="fa fa-refresh" onclick="location.reload();"></a-->
+              </view>
+
+            </view>                
+          </view>
+          <!-- 输入实际值  结束 -->
+
+        </view>        
+      </view>            
+    </view>
+
+    <view class="weui-panel weui-panel_access" wx:if="{{plan.actionDetails.length > 0}}">
+      <view class="weui-panel__hd">行动计划（{{plan.actionDetails.length}}）</view>
+      <view class="weui-panel__bd">
+        <view class="weui-media-box weui-media-box_text" wx:for-items="{{plan.actionDetails}}" wx:key="id" >                    
+          <view class="weui-media-box__desc plan_action">{{item.action}}</view>
+          <view class="weui-media-box__desc">成果要求：{{item.outcome}}</view>
+          <view class="weui-media-box__info">
+            <view class="weui-media-box__info__meta">完成时间：{{df.formatDate(item.commitDate)}}</view>
+            <view class="weui-media-box__info__meta">检查人：{{item.inspectorName}}</view> 
+          </view>  
+
+
+          <view class="weui-media-box__info"> 
+            <view class="weui-cell-picker">
+
+                <view class="weui-cell__bd">
+                  <picker bindchange="bindPickerChange" data-planid="{{plan.id}}" data-actailid="{{item.id}}" value="{{item.status}}" range="{{array}}">
+                    <view class="weui-input">完成情况(点击修改):{{array[item.status]}}</view>
+                  </picker>
+                </view>
+              </view>
+          </view>
+
+        </view>        
+      </view>            
+    </view>
+
+    <view class="weui-panel__bd" data-id="{{plan.id}}" bindtap="addAction">
+      <view class="weui-media-box weui-media-box_text">            
+          <view class="weui-media-box__title link_plan">+行动计划</view>   
+      </view>
+    </view>
+
+    <view class="message-top">
+
+        <view wx:if="{{plan.status == 0}}" class="weui-media-box__desc">
+          提示：行动举措每项提交结果后，点击提交结果； 提交结果后，不可修改
+        </view> 
+
+        <view wx:if="{{plan.status == 0  && unCommit>0}}" class="button-sp-area">
+          <button style="margin-left:3px;" class="mini-btn" type="primary" size="mini">
+            余{{unCommit}}项，待提交结果
+          </button>
         </view>
 
-        <view class="weui-media-box__info">
-          <view class="weui-media-box__info__meta">要求时间：{{df.formatDate(item.commitDate)}}</view>                
-          <view class="weui-media-box__info__meta weui-media-box__info__meta_extra" wx:if="{{item.weight != null}}">权重：{{item.weight}}%</view>
-          <view class="weui-media-box__info__meta weui-media-box__info__meta_extra" wx:else>权重：</view>
+        <view class="button-sp-area" wx:if="{{plan.status == 0 && plan.isCommitPlanResult==true && unCommit==0}}">
+          <button style="margin-left:3px;" class="mini-btn" type="primary" size="mini" data-planid="{{plan.id}}" data-status="1" bindtap="commitPlan">
+            提交结果
+          </button>
         </view>
+    </view>
+    
+    <!--进程消息列表  开始-->
+    <view class="weui-panel weui-panel_access" wx:if="{{planProgressList.length > 0}}">
+      <view class="weui-panel__hd">计划进程(最新{{planProgressList.length}}条)</view>
+      <view class="weui-panel__bd">
 
-        <view class="weui-media-box__info">
-          <view class="weui-media-box__info__meta">检查人：{{item.checkUserName}}</view>      
-          <view class="weui-media-box__info__meta">绩效分数：{{item.score}}</view>         
-        </view>
+        <view class="weui-media-box weui-media-box_text" wx:for-items="{{planProgressList}}" wx:key="id" wx:for-index="key">  
 
-        <!-- 输入实际值  开始 -->
-        <view class="weui-media-box__info">
-          <view class="weui-media-box__info__meta">
-
-            <!-- 常规类指标直接输入实际值 -->
-            <view wx:if="{{item.isNoVote == false  && item.computationRules != 6 && item.computationRules != 7}}" class="flex-Container">
-              <text class="actual-text">实际值:</text>
-              <input bindinput="writeKpiValue" type="digit" data-kpiid="{{item.id}}" data-targetindexid="{{item.targetIndexId}}" data-weight="{{item.weight}}" data-field="actualValue" value="{{item.actualValue}}" class="actual-input" placeholder="请输入实际值"/>
+          <view class="planProgressList-flex-C">
+            <view class="containerItem">
+              <image class='planProgressfirstPic' src='/page/images/vocie/toux.png' ></image>   
             </view>
-
-            <!-- 电网类指标弹出页面选择电网指标 -->
-            <view wx:if="{{item.isNoVote == true}}" data-kpiid="{{item.id}}" data-kpiname="{{item.name}}" data-targetindexid="{{item.targetIndexId}}" bindtap="toPlanNoVoteValue" class="weui-media-box__info__meta">
-              实际值：{{item.actualValueString}}
+            <view class="containerItem">
+              <view class="planProgressUserName">{{item.updateUser}}</view>
             </view>
-
-	          <!-- IntA("完成率项次扣分类",6) 类指标弹出页面选择 -->                            	
-            <view class="noVoteValue"  wx:if="{{item.computationRules == 6}}"
-              data-kpiid="{{item.id}}" data-kpiname="{{item.name}}" data-targetindexid="{{item.targetIndexId}}" data-unit="{{item.unit}}" data-reasonablevalue="{{item.reasonableValue}}" data-weight="{{item.weight}}"  bindtap="toPlanIntAValue" >
-              <view wx:if="{{item.storeCode == 'unfinishBuckleScore' }}">实际值: 未完成项次数：{{item.storeValue1}}，总项数：{{item.storeValue2}}</view>
-              <view wx:elif="{{item.storeCode == 'unexpandedScore' }}">实际值: 当期无计划</view>
-              <view wx:elif="{{item.storeCode == 'finishMultiple' }}">实际值: 100%完成</view>
-              <view wx:else>实际值:</view>
+            <view class="containerItem">
+              <view class="planProgressDeptName">{{item.deptName}} {{df.formatDate(item.createTime,2)}}</view>
             </view>
+          </view>
 
-            <!-- IntB("直接加减分(月度无权重)类",7)类指标弹出页面选择 -->
-            <view class="noVoteValue" wx:if="{{item.computationRules == 7}}"
-              data-kpiid="{{item.id}}" data-kpiname="{{item.name}}" data-targetindexid="{{item.targetIndexId}}" data-unit="{{item.unit}}" data-reasonablevalue="{{item.reasonableValue}}" bindtap="toPlanIntBValue" >
-              
-              <view wx:if="{{item.storeCode == 'finishAddBuckleScore' }}">实际值: {{item.actualValue}}</view>
-              <view wx:elif="{{item.storeCode == 'unPlanScore' }}">实际值: 当期无计划</view>
-              <view wx:else>实际值:</view>
-            </view>
-
-            <!-- 页面提示信息-->
-            <view class="accumulateValueInfo" wx:if="{{(item.targetSourceType == 1 || item.targetSourceType == 2) && item.isAccumulate == true}}" >
-              <view wx:if="{{item.accumulateValue != null }}">提示：部门累计完成{{item.accumulateValue}}{{item.unit}}</view>
-              <view wx:if="{{item.accumulateValue == null && item.unCommitUsers == null }}">当前还未有人提交结果</view>
-              <view wx:if="{{item.unCommitUsers > 0}}">, 有{{item.unCommitUsers}}人还未提交结果</view>
-              <!--a class="fa fa-refresh" onclick="location.reload();"></a-->
-            </view>
-
-          </view>                
-        </view>
-        <!-- 输入实际值  结束 -->
-
-      </view>        
-    </view>            
-  </view>
-
-  <view class="weui-panel weui-panel_access" wx:if="{{plan.actionDetails.length > 0}}">
-    <view class="weui-panel__hd">行动计划（{{plan.actionDetails.length}}）</view>
-    <view class="weui-panel__bd">
-      <view class="weui-media-box weui-media-box_text" wx:for-items="{{plan.actionDetails}}" wx:key="id" >                    
-        <view class="weui-media-box__desc plan_action">{{item.action}}</view>
-        <view class="weui-media-box__desc">成果要求：{{item.outcome}}</view>
-        <view class="weui-media-box__info">
-          <view class="weui-media-box__info__meta">完成时间：{{df.formatDate(item.commitDate)}}</view>
-          <view class="weui-media-box__info__meta">检查人：{{item.inspectorName}}</view> 
-        </view>  
-
-
-        <view class="weui-media-box__info"> 
-          <view class="weui-cell-picker">
-
-              <view class="weui-cell__bd">
-                <picker bindchange="bindPickerChange" data-planid="{{plan.id}}" data-actailid="{{item.id}}" value="{{item.status}}" range="{{array}}">
-                  <view class="weui-input">完成情况(点击修改):{{array[item.status]}}</view>
-                </picker>
+          <view class="planProgressList-flex-C">
+            <view class="containerItem">
+              <view wx:if="{{item.type==0}}" class="planProgressContent">{{item.content}}</view>
+              <view wx:if="{{item.type==1}}" class="planProgressContent">
+                <view class='output-audio'>
+                  <!-- 默认状态 -->
+                  <view class='audio' wx:if="{{item.isBof==false}}" bindtap='audioPlay' data-key="{{key}}" data-id="{{item.id}}" data-isBof="{{item.isBof}}">
+                    <image class='ico' src='/page/images/vocie/yuying1.png' />
+                    <label class='time'>{{item.timeLength}}</label>
+                  </view>
+                  
+                  <!-- 当前正在播放状态 -->
+                  <view class='audio' wx:if="{{item.isBof==true}}" bindtap='audioStop' data-key="{{key}}" data-id="{{item.id}}" data-isBof="{{item.isBof}}">
+                    <image class='ico' src='/page/images/vocie/bof1.png' />
+                    <label class='time'>{{item.timeLength}}</label>
+                  </view>
+                
+                </view>
               </view>
             </view>
-        </view>
+          </view>
 
-      </view>        
-    </view>            
+        </view>        
+      </view>            
+    </view>
+    <!--进程消息列表  结束-->
   </view>
+  <!--计划详情信息  结束-->
 
-  <view class="weui-panel__bd" data-id="{{plan.id}}" bindtap="addAction">
-    <view class="weui-media-box weui-media-box_text">            
-        <view class="weui-media-box__title link_plan">+行动计划</view>   
+  <!--点击发送语音消息喇叭，弹出发送消息框  开始-->
+  <view class='voice-mask' wx:if="{{showVoiceMask}}">
+    <!--显示发送顾问老师checkbox  开始-->
+    <view class="flex-Container-SendAdviser">
+      <view class="sendAdviser">
+        <view calss="checkboxCss">
+          <checkbox-group bindchange="checkboxChange">
+            <checkbox style="margin-left:97px;margin-top:7px;" value="1"/>
+          </checkbox-group>
+        </view>
+      </view>
+      <view class="sendAdviser">
+        <view class="comtextCss">是否发送顾问老师</view>
+      </view>
+    </view>
+    <!--显示发送顾问老师checkbox  结束-->
+
+    <view class='voice-enter-note'></view>
+    <image class='voice-enter-note-image' src='/page/images/vocie/bof2.png' ></image>
+    <image src='/image/record.png' class='voice-button' bindtouchstart="startRecording" bindtouchend="stopRecording" bindtouchmove="moveToCancle"></image>
+
+    <view class='voice-note'>
+        <text wx:if="{{startRecording==false}}" style="margin-left:14px;">长按下方按钮录音</text>
+        <text wx:if="{{startRecording==true}}" style="margin-left:14px;">手指上滑取消发送</text>
+    </view>
+
+    <view class='record-voice-animations' wx:if="{{showVoiceMask && startRecording && !cancleRecording}}">
+        <image src='/page/images/vocie/voice1.png' wx:if="{{recordAnimationNum===1}}"></image>
+        <image src='/page/images/vocie/voice2.png' wx:if="{{recordAnimationNum===2}}"></image>
+        <image src='/page/images/vocie/voice3.png' wx:if="{{recordAnimationNum===3}}"></image>
+        <image src='/page/images/vocie/voice4.png' wx:if="{{recordAnimationNum===4}}"></image>
+        <image src='/page/images/vocie/voice5.png' wx:if="{{recordAnimationNum===0}}"></image>
+    </view>
+
+    <view class='cancle-record-voice' wx:if="{{showVoiceMask && startRecording && cancleRecording}}">
+        <image src='/page/images/vocie/cancel.png'></image>
     </view>
   </view>
+  <!--点击发送语音消息喇叭，弹出发送消息框  结束-->
 
-  <view class="message-top">
-
-      <view wx:if="{{plan.status == 0}}" class="weui-media-box__desc">
-        提示：行动举措每项提交结果后，点击提交结果； 提交结果后，不可修改
-      </view> 
-
-      <view wx:if="{{plan.status == 0  && unCommit>0}}" class="button-sp-area">
-        <button style="margin-left:3px;" class="mini-btn" type="primary" size="mini">
-          余{{unCommit}}项，待提交结果
-        </button>
-      </view>
-
-      <view class="button-sp-area" wx:if="{{plan.status == 0 && plan.isCommitPlanResult==true && unCommit==0}}">
-        <button style="margin-left:3px;" class="mini-btn" type="primary" size="mini" data-planid="{{plan.id}}" data-status="1" bindtap="commitPlan">
-          提交结果
-        </button>
-      </view>
+  <!--固定在最下方的发送进程消息按钮  开始-->
+  <view style="position:fixed;bottom:0;width:100%">
+  
+    <view class="flex-Container-bottom">
+        <view class="containerItem-bottom" bindtap="showVoiceDialog">
+          <image class="firstPic" src="/image/record.png"></image>
+        </view>
+        <view class="containerItem-bottom" bindtap="startRecord">
+          <input class="comtextValue" name="content" placeholder="" value="{{content}}"
+          bindinput='getBlurInputValue'/>
+        </view>
+        <view class="containerItem-bottom">
+            <button class="buttonclsss mini-btn" type="primary" size="mini" bindtap="addCommentFun">确定</button> 
+        </view>
+    </view>
   </view>
+  <!--固定在最下方的发送进程消息按钮  结束-->
 
 </view>

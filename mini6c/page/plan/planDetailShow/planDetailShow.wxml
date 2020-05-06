@@ -104,6 +104,20 @@
 
   <!--点击发送语音消息喇叭，弹出发送消息框  开始-->
   <view class='voice-mask' wx:if="{{showVoiceMask}}">
+    <!--显示发送顾问老师checkbox  开始-->
+    <view class="flex-Container-SendAdviser">
+      <view class="sendAdviser">
+        <view calss="checkboxCss">
+          <checkbox-group bindchange="checkboxChange">
+            <checkbox style="margin-left:97px;margin-top:7px;" value="1"/>
+          </checkbox-group>
+        </view>
+      </view>
+      <view class="sendAdviser">
+        <view class="comtextCss">是否发送顾问老师</view>
+      </view>
+    </view>
+    <!--显示发送顾问老师checkbox  结束-->
 
     <view class='voice-enter-note'></view>
     <image class='voice-enter-note-image' src='/page/images/vocie/bof2.png' ></image>
@@ -113,12 +127,6 @@
         <text wx:if="{{startRecording==false}}" style="margin-left:14px;">长按下方按钮录音</text>
         <text wx:if="{{startRecording==true}}" style="margin-left:14px;">手指上滑取消发送</text>
     </view>
-
-    <!--view class='voice-isSendAdviser'>
-        <text  style="margin-left:14px;margin-top:15px;">
-              <checkbox value="cb" checked="true"/>是否发送顾问老师
-        </text>
-    </view-->
 
     <view class='record-voice-animations' wx:if="{{showVoiceMask && startRecording && !cancleRecording}}">
         <image src='/page/images/vocie/voice1.png' wx:if="{{recordAnimationNum===1}}"></image>
@@ -143,11 +151,11 @@
           <image class="firstPic" src="/image/record.png"></image>
         </view>
         <view class="containerItem" bindtap="startRecord">
-          <input class="comtextValue" name="userName" placeholder="" 
-          bindinput="userNameInput"/>
+          <input class="comtextValue" name="content" placeholder="" value="{{content}}"
+          bindinput='getBlurInputValue'/>
         </view>
         <view class="containerItem">
-            <button class="buttonclsss mini-btn" type="primary" size="mini" bindtap="createdMonthPlan">确定</button> 
+            <button class="buttonclsss mini-btn" type="primary" size="mini" bindtap="addCommentFun">确定</button> 
         </view>
     </view>
   </view>

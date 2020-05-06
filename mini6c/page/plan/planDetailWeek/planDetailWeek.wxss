@@ -43,3 +43,222 @@
 .message-top{
   margin-top: 80rpx;
 }
+
+/*计划进程消息css              开始 */
+/*最底部发送计划进程消息css */
+.flex-Container{
+  height:45px;
+  width: 100%;
+  display:flex;
+  flex-direction:row;
+  justify-content:space-evenly;
+  background-color: #949191;
+}
+
+.containerItem {
+  height:100%;
+}
+
+.firstPic{
+  width:35px;
+  height:35px;
+  margin-left: 5px;
+  margin-top:5px;
+}
+
+.comtextValue{
+  margin-top:8px;
+  width:170px;
+  height: 30px;
+  margin-left: 8px;
+  background-color: aliceblue;
+}
+
+.buttonclsss{
+  width:80px;
+  margin-top:8px;
+  margin-left: 5px;
+}
+
+/*计划进程消息列表显示css */
+.planProgressList-flex-C{
+  height:45px;
+  width: 100%;
+  display:flex;
+  flex-direction:row;
+  justify-content:flex-start;
+}
+
+.planProgressfirstPic{
+  width:35px;
+  height:35px;
+  margin-left: 0px;
+  margin-top:1px;
+}
+
+.planProgressUserName{
+  margin-top:9px;
+  height: 15px;
+  margin-left: 5px;
+  color: rgb(104, 113, 121);
+}
+
+.planProgressDeptName{
+  margin-top:9px;
+  height: 15px;
+  margin-left: 5px;
+  color: rgb(104, 113, 121);
+}
+
+.planProgressContent{
+  margin-top:9px;
+  height: 15px;
+  margin-left: 38px;
+  color: rgb(104, 113, 121);
+}
+
+.output-audio{ 
+  width: 150rpx; 
+  margin: 30rpx; 
+}
+.output-audio .audio{ 
+  padding: 20rpx; border-radius: 10rpx;
+  background-color: #fff;
+  border: 1px solid #f0f0f0; 
+  overflow: hidden; 
+}
+.output-audio .audio .ico{ 
+  width: 26rpx; 
+  height: 30rpx; 
+  float: left;
+}
+.output-audio .audio .time{ 
+  float: right; 
+  font-size: 24rpx;
+}
+
+/*发送语音消息列表css */
+.voice-mask {
+  position: flex;
+  top: 0rpx;  
+  left: 0rpx;
+  width: 750rpx;
+  height: 1350rpx;
+  background-color: #000000;
+  opacity: 0.6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+}
+  
+.voice-enter-note {
+  position: absolute; 
+  width: 320rpx;
+  height: 320rpx;
+  left: 215rpx;
+  top: 380rpx;
+  z-index: 30;
+  background-color: #000000;
+  opacity: 0.5; 
+  border-radius: 15rpx;
+}
+  
+.voice-enter-note-image {
+  position: absolute;
+  width: 292rpx; 
+  height: 207rpx;
+  left: 229rpx;
+  top: 436.5rpx;
+  z-index: 40;
+}
+  
+.voice-button {
+  position: absolute;
+  width: 160rpx;   
+  height: 160rpx;
+  bottom: 110rpx;
+  left: 295rpx;
+  z-index: 20;
+}
+  
+.voice-note {
+  position: absolute;
+  width: 320rpx;
+  height: 50rpx;
+  left: 215rpx; 
+  top: 650rpx;
+  z-index: 30;
+  background-color: #faf5f5;
+  opacity: 0.5;
+  border-radius: 15rpx;
+}
+
+.voice-isSendAdviser {
+  position: absolute;
+  width: 320rpx;
+  height: 50rpx;
+  left: 215rpx; 
+  top: 750rpx;
+  z-index: 30;
+  background-color: #aaa1a1;
+  opacity: 1;
+  border-radius: 15rpx;
+}
+
+.record-voice-animations {
+  position: absolute;
+  width: 292rpx;
+  height: 207rpx;
+  left: 229rpx;
+  top: 436.5rpx;
+  z-index: 40;
+}
+  
+.record-voice-animations image {
+  width: 292rpx;
+  height: 207rpx;
+}
+  
+.cancle-record-voice {
+  position: absolute;
+  width: 292rpx;
+  height: 207rpx;
+  left: 229rpx;
+  top: 436.5rpx;
+  z-index: 40;
+}
+  
+.cancle-record-voice image {
+  width: 292rpx;
+  height: 207rpx;
+}
+
+/*最底部发送计划进程消息css */
+.flex-Container-SendAdviser{
+  height:30px;
+  width: 100%;
+  display:flex;
+  flex-direction:row;
+  justify-content:flex-start;
+  background-color: #000000;
+}
+
+.sendAdviser {
+  height:100%;
+}
+
+.checkboxCss{
+  width:35px;
+  height:15px;
+  margin-top:10px;
+}
+
+.comtextCss{
+  margin-top:9px;
+  width:122px;
+  height: 22px;
+  margin-left: 0px;
+  background-color: aliceblue;
+}
+/*计划进程消息css              结束 */
