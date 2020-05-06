@@ -14,6 +14,8 @@
 
 .link_plan{color:cadetblue}
 
+/*计划进程消息css              开始 */
+
 /*最底部发送计划进程消息css */
 .flex-Container{
   height:45px;
@@ -170,8 +172,8 @@
   left: 215rpx; 
   top: 750rpx;
   z-index: 30;
-  background-color: #faf5f5;
-  opacity: 0.5;
+  background-color: #aaa1a1;
+  opacity: 1;
   border-radius: 15rpx;
 }
 
@@ -203,3 +205,31 @@
   height: 207rpx;
 }
 
+/*最底部发送计划进程消息css */
+.flex-Container-SendAdviser{
+  height:30px;
+  width: 100%;
+  display:flex;
+  flex-direction:row;
+  justify-content:flex-start;
+  background-color: #000000;
+}
+
+.sendAdviser {
+  height:100%;
+}
+
+.checkboxCss{
+  width:35px;
+  height:15px;
+  margin-top:10px;
+}
+
+.comtextCss{
+  margin-top:9px;
+  width:122px;
+  height: 22px;
+  margin-left: 0px;
+  background-color: aliceblue;
+}
+/*计划进程消息css              结束 */
