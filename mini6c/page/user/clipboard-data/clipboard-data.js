@@ -87,6 +87,31 @@ Page({
       //登陆END
     }
 
+  },
+  getPhoneNumber: function (e) {
+    var sessionId = app.globalData.sessionId
+    
+    console.log(e.detail.errMsg);
+    console.log(e.detail.errMsg == "getPhoneNumber:ok");
+    
+      wx.request({
+        url: config.domain +'/userCr/decodePhone',
+        data: {
+          encryptedData: e.detail.encryptedData,
+          iv: e.detail.iv,
+          sessionKey: sessionId,
+          uid: "",
+        },
+        method: "post",
+        header: {
+          'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          'Cookie': 'JSESSIONID=' + sessionId
+        },
+        success: function (res) {
+          console.log(res);
+        }
+      })
+    
   }
   
 })

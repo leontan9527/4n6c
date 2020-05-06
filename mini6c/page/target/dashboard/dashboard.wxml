@@ -1,0 +1,51 @@
+
+<view class="page">
+    <view class="page__hd">
+        <view class="page__title">
+          <view class="yuan">{{excuteRate}}%</view>
+        </view>
+        <view class="page__desc" wx:if="{{type == 0}}">个人执行率</view>
+        <view class="page__desc" wx:if="{{type == 1}}">部门执行率</view>
+        <view class="page__desc" wx:if="{{type == 2}}">公司执行率</view>
+    </view>    
+</view>
+
+<view class="page__bd">
+  <view class="weui-flex">
+    <view class="weui-flex__item" data-type="0" bindtap="switchType"><view class="{{type == 0 ? 'selected':'unSelect'}}">个人</view></view>
+    <view class="weui-flex__item" data-type="1" bindtap="switchType"><view class="{{type == 1 ? 'selected':'unSelect'}}">部门</view></view>
+    <view wx:if="{{canReadCompany}}" class="weui-flex__item" data-type="2" bindtap="switchType"><view class="{{type == 2 ? 'selected':'unSelect'}}">公司</view></view>
+  </view>
+</view>
+
+<view class="index">
+  
+  <view class="index-bd">
+    <view class="kind-list">
+      <block wx:for-items="{{list}}" wx:key="{{item.id}}">
+        <view class="kind-list-item">
+          <view id="{{item.id}}" class="kind-list-item-hd {{item.open ? 'kind-list-item-hd-show' : ''}}" bindtap="kindToggle">
+            <view class="kind-list-text">{{item.name}}</view>
+            <image class="kind-list-img" src="{{icon_target}}"></image>
+          </view>
+          <view class="kind-list-item-bd {{item.open ? 'kind-list-item-bd-show' : ''}}">
+            <view class="navigator-box {{item.open ? 'navigator-box-show' : ''}}">
+              <block wx:for-items="{{item.pages}}" wx:for-item="page" wx:key="*item">
+                <navigator url="pages/{{page.url}}" class="navigator" wx:if="{{page.url !== '@set-tab-bar'}}">
+                  <view class="navigator-text nav-name">{{page.zh}}</view> 
+                  <view class="navigator-text nav-textRight">{{page.value}}</view>                  
+                  <view class="navigator-arrow"></view>
+                </navigator>
+                <view wx:else class="navigator" bindtap="enterSetTabBarPage">
+                  <view class="navigator-text">{{page.zh}}</view>
+                  <view class="navigator-arrow"></view>
+                </view>
+              </block>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+    
+</view>
