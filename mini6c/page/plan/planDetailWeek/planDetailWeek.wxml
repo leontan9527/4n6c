@@ -179,6 +179,33 @@
   </view>
   <!--点击发送语音消息喇叭，弹出发送消息框  结束-->
 
+  <!--点击发送文字消息  开始-->
+  <view class='write-mask' wx:if="{{showWriteMask}}">
+
+    <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showWriteMask}}"></view>
+    <view class = "modal-dialog" wx:if = "{{showWriteMask}}" >
+      <view class = "modal-title">填写进程内容</view>
+      <view class="modal-content">
+        <view class="modal-input">
+          <textarea bindinput="formInputChange" placeholder-class="place-holder" data-field="action" 
+           style="height: 5em" bindinput='getBlurInputValue'></textarea>
+        </view>
+        <view class="modal-checkbox">
+          <checkbox-group bindchange="checkboxChange">
+            <checkbox style="margin-left:0px;" value="1"/>
+          </checkbox-group>
+          是否发送顾问老师
+        </view> 
+      </view> 
+      <view class = "modal-footer"> 
+        <view class = "btn-cancel" bindtap="onCancel" data-status="cancel" >取消</view>
+        <view class="btn-confirm" bindtap="addCommentFun" data-status="confirm">确定</view> 
+      </view>
+    </view> 
+
+  </view>
+  <!--点击发送文字消息  结束-->
+
   <!--固定在最下方的发送进程消息按钮  开始-->
   <view style="position:fixed;bottom:0;width:100%">
   
@@ -186,14 +213,14 @@
         <view class="containerItem" bindtap="showVoiceDialog">
           <image class="firstPic" src="/image/record.png"></image>
         </view>
-        <view class="containerItem" bindtap="startRecord">
-          <input class="comtextValue" name="content" placeholder="" value="{{content}}"
-          bindinput='getBlurInputValue'/>
-        </view>
         <view class="containerItem">
-            <button class="buttonclsss mini-btn" type="primary" size="mini" bindtap="addCommentFun">确定</button> 
+            <view class="flex-Container-view" bindtap="showWriteDialog">
+              <image class="secondPic" src="/page/images/write.png"></image>
+              <label class="writeclsss">写文字消息...</label>
+            </view>
         </view>
     </view>
   </view>
   <!--固定在最下方的发送进程消息按钮  结束-->
+  
 </view>

@@ -4,98 +4,17 @@
   padding-bottom: 40px;
 }
 
-.weui-media-box__title{font-weight:400;font-size:15px;color:rgba(0,0,0,.9);}
-.weui-media-box__info{color:#949191;}
-.plan_action{font-weight:400;font-size:16px;color:rgba(0,0,0,.9);}
-.plan_status{color: darkgreen;}
-.button-sp-area{
-  margin: 0 auto;
-  width: 60%;
+.kind-list__item:first-child{margin-top:0}
+.kind-list__img{width:30px;height:20px}
+.kind-list__item-hd{
+  padding:6px;
+  -webkit-transition:opacity .3s;
+  transition:opacity .3s
 }
 
 .link_plan{color:cadetblue}
 
-.weui-cell-picker{margin-left:1px;}
-
-.flex-wrp{
-  display:flex;
-}
-
-.flex-item-left{
-  position: absolute; /* 要约束所在位置的子元素的位置要设置成绝对 */
-  left: 0;/* 调节靠左 */
-  width: 500rpx;
-  height: 70rpx;
-  margin-left: 20rpx;
-  margin-top: 28rpx;
-  font-size: 26rpx;
-}
-
-.flex-item-right{
-  position: absolute; /* 要约束所在位置的子元素的位置要设置成绝对 */
-  right: 0; /* 靠右调节 */
-  margin-top:0rpx;
-  width: 500rpx;
-  height: 300rpx;
-  font-size: 26rpx;
-}
-
-.message-top{
-  margin-top: 80rpx;
-}
-
-/*计划进程消息css                 开始 */
-
-/*最底部发送计划进程消息css   开始*/
-.flex-Container{
-  height:45px;
-  width: 100%;
-  display:flex;
-  flex-direction:row;
-  justify-content:center;
-  background-color: #949191;
-}
-
-.containerItem {
-  height:100%;
-}
-
-.firstPic{
-  width:35px;
-  height:35px;
-  margin-left: 0px;
-  margin-top:5px;
-}
-
-.flex-Container-view{
-  height:30px;
-  width: 100%;
-  display:flex;
-  flex-direction:row;
-  justify-content:flex-start;
-  background-color:#ddd;
-  margin-top:7px;
-  margin-left:8px;
-  border-radius:20px;
-}
-
-.secondPic{
-  width:25px;
-  height:25px;
-  margin-left: 5px;
-  margin-top:2px;
-}
-
-.writeclsss{
-  width:90px;
-  margin-top:4px;
-  margin-left: 3px;
-  color: #666;
-  font-size:30rpx;
-}
-/*最底部发送计划进程消息css   结束*/
-
-/*计划进程消息列表显示css  开始 */
+/*计划进程消息列表显示css */
 .planProgressList-flex-C{
   height:45px;
   width: 100%;
@@ -151,7 +70,75 @@
   float: right; 
   font-size: 24rpx;
 }
-/*计划进程消息列表显示css  结束 */
+
+.loading{  
+     padding: 10rpx;  
+     text-align: center;  
+}  
+
+.loading:before{  
+  display: inline-block;  
+  margin-right: 5rpx;  
+  vertical-align: middle;  
+  content: '';  
+  width: 40rpx;  
+  height: 40rpx;   
+  background-size: contain;  
+  animation: rotate 1s linear infinite;  
+}  
+
+.loading.complete:before{  
+  display: none;  
+}  
+
+/*最底部发送计划进程消息css   开始*/
+.flex-Container{
+  height:45px;
+  width: 100%;
+  display:flex;
+  flex-direction:row;
+  justify-content:center;
+  background-color: #949191;
+}
+
+.containerItem {
+  height:100%;
+}
+
+.firstPic{
+  width:35px;
+  height:35px;
+  margin-left: 0px;
+  margin-top:5px;
+}
+
+.flex-Container-view{
+  height:30px;
+  width: 100%;
+  display:flex;
+  flex-direction:row;
+  justify-content:flex-start;
+  background-color:#ddd;
+  margin-top:7px;
+  margin-left:8px;
+  border-radius:20px;
+}
+
+.secondPic{
+  width:25px;
+  height:25px;
+  margin-left: 5px;
+  margin-top:2px;
+}
+
+.writeclsss{
+  width:90px;
+  margin-top:4px;
+  margin-left: 3px;
+  color: #666;
+  font-size:30rpx;
+}
+/*最底部发送计划进程消息css   结束*/
 
 /*点击喇叭按钮 显示发送语音消息列表css  开始*/
 .voice-mask {
@@ -355,5 +342,3 @@
   background-color: aliceblue;
 }
 /*发送顾问消息css 结束 */
-
-/*计划进程消息css              结束 */
