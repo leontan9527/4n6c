@@ -249,7 +249,7 @@
         </view>
         <view class="containerItem-bottom">
             <view class="flex-Container-view" bindtap="showWriteDialog">
-              <image class="secondPic" src="/page/images/write2.png"></image>
+              <image class="secondPic" src="/page/images/write.png"></image>
               <label class="writeclsss">写文字消息...</label>
             </view>
         </view>
