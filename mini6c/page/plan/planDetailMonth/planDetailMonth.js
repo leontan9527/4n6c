@@ -354,6 +354,7 @@ Page({
       success(result) {
 
           if(result.data.success){
+            that.hideModal()
             //创建成功，获取最新消息数据
             that.setData({
               content:''
@@ -665,7 +666,40 @@ Page({
     myaudio.onStop(() => {
       //console.log('停止播放');
     })
+  },
 
+  //显示发送文字消息   开始
+  showWriteDialog:function(e){
+    
+    console.log('showWriteDialog  方法被调用')
+    if(this.data.showWriteMask){
+      this.setData({
+        showWriteMask:false,
+         isSendAdviser:false
+      })
+    }else{
+      this.setData({
+         showWriteMask:true,
+         isSendAdviser:false
+      })
+    }
+  },
+
+  //弹出框蒙层截断touchmove事件
+  preventTouchMove: function() {
+    
+  },
+
+  //隐藏模态对话框
+  hideModal: function() {
+    this.setData({
+      showWriteMask: false
+    });
+  },
+
+  //对话框取消按钮点击事件
+  onCancel: function() {
+    this.hideModal()
   },
   //发送计划进程消息代码                    结束
 

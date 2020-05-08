@@ -133,6 +133,10 @@ Page({
 
   toPlanprocess() {
     wx.navigateTo({ url: '../plan/planprocess/planprocess' })
+  },
+
+  toAdviserMessage() {
+    wx.navigateTo({ url: '../adviser/adviserList/adviserList' })
   }
   
 })

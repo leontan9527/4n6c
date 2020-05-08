@@ -1,0 +1,22 @@
+<button class = "show-btn" bindtap = "showDialogBtn" >弹窗</button> 
+<!--弹窗-->
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class = "modal-dialog" wx:if = "{{showModal}}" > 
+  <view class = "modal-title">填写进程内容</view>
+  <view class="modal-content">
+    <view class="modal-input">
+      <textarea bindinput="formInputChange" placeholder-class="input-holder" data-field="action" 
+      placeholder="请输入消息内容" style="height: 3.3em"></textarea>
+    </view>
+    <view class="modal-checkbox">
+      <checkbox-group bindchange="checkboxChange">
+        <checkbox style="margin-left:5px;" value="1"/>
+      </checkbox-group>
+      是否发送顾问老师
+    </view> 
+  </view> 
+  <view class = "modal-footer"> 
+    <view class = "btn-cancel" bindtap="onCancel" data-status="cancel" >取消</view>
+    <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view> 
+  </view>
+</view> 

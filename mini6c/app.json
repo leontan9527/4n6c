@@ -22,7 +22,9 @@
     "page/plan/planNoVoteValue/planNoVoteValue",
     "page/user/suser/suser",
     "page/target/person/person",
-    "page/target/dashboard/dashboard"
+    "page/target/dashboard/dashboard",
+    "page/adviser/adviserList/adviserList",
+    "page/adviser/sendAdviserInfo/sendAdviserInfo"
 
   ],
   "window": {
