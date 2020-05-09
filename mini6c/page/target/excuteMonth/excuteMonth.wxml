@@ -1,0 +1,39 @@
+<!--index.wxml-->
+<wxs module="nf">
+  var toFixed = function (value) {
+    if (value){
+      return value.toFixed(1);
+    } else {
+      return null;
+    }
+    
+  }
+  module.exports = {
+    toFixed :toFixed
+  }
+</wxs>
+
+<view class="container">
+  <ec-canvas id="mychart-dom-line" canvas-id="mychart-line" ec="{{ ec }}"></ec-canvas>
+</view>
+
+<view class="table-title">{{title}}</view>
+<view class="table">
+  <view class="table-tr">
+    <view class="table-th">月</view>
+    <view class="table-th">计划项</view>   
+    <view class="table-th">完成项</view>
+    <view class="table-th">计划执行率</view>
+    <view class="table-th">累计执行率</view> 
+  </view>
+
+  <view class="table-tr" wx:for="{{excuteBullet}}">
+    <view class="table-td">{{item.month}}月</view>
+    <view class="table-td">{{item.planItemNumber ? item.planItemNumber : ""}}</view>
+    <view class="table-td">{{item.finishItemNumber ? item.finishItemNumber : ""}}</view>
+    <view class="table-td">{{item.planExcuteEfficiency ? nf.toFixed(item.planExcuteEfficiency * 100) + "%" : ""}}</view>    
+    <view class="table-td">{{item.cumulativeExcuteEEfficiency ? nf.toFixed(item.cumulativeExcuteEEfficiency* 100)  + "%": ""}}</view>
+  </view>
+ 
+</view>
+

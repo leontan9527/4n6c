@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "ec-canvas": "../../components/ec-canvas/ec-canvas"
+  },
+  "navigationBarTitleText": "执行看板"
+}

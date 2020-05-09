@@ -58,14 +58,14 @@ Page({
               pages: []              
             }
 
-            isOpened = listTarget.open
+            isOpened = isOpened || listTarget.open
 
             var pagesTarget = []
             for (let i = 0, len = targets.length; i < len; ++i) {
               var page = {
                 zh: targets[i].targetName,
                 value: targets[i].totalReasonableValue + targets[i].unit,
-                url: targets[i].decomposeDetailId
+                pid: targets[i].decomposeDetailId
               }
 
               pagesTarget.push(page)
@@ -85,7 +85,7 @@ Page({
               pages: []
             }
 
-            isOpened = listSoc.open
+            isOpened = isOpened || listSoc.open
 
             var pagesScore = []
             for (let i = 0, len = planScore.length; i < len; ++i) {
@@ -98,7 +98,7 @@ Page({
               var page = {
                 zh: planScore[i].title,
                 value: vt,              
-                url: planScore[i].id
+                pid: planScore[i].id
             }
             pagesScore.push(page)
           }
@@ -116,7 +116,7 @@ Page({
             pages: []
           }
 
-          isOpened = listActionWeek.open
+          isOpened = isOpened || listActionWeek.open 
 
           var pagesWeek = []
           for (let i = excuteWeek.length - 1, len = 0; i >= len; i--) {
@@ -124,7 +124,7 @@ Page({
               var page = {
                 zh: excuteWeek[i].month + "周",
                 value: (100.0 * excuteWeek[i].planExcuteEfficiency).toFixed(1)  + "%",
-                url: excuteWeek[i].year
+                pid: excuteWeek[i].year
               }
               pagesWeek.push(page)
 
@@ -142,7 +142,7 @@ Page({
             pages: []
           }
 
-          isOpened = listActionMonth.open
+          isOpened = isOpened || listActionMonth.open 
 
           var pagesMonth = []
           for (let i = excuteMonth.length - 1, len = 0; i >= len; i--) {
@@ -150,7 +150,7 @@ Page({
               var page = {
                 zh: excuteMonth[i].month + "月",
                 value: (100.0 * excuteMonth[i].planExcuteEfficiency).toFixed(1) + "%",
-                url: excuteMonth[i].year
+                pid: excuteMonth[i].year
               }
 
               pagesMonth.push(page)
@@ -196,9 +196,9 @@ Page({
   switchType: function (e) {
     var sType = e.currentTarget.dataset.type
     if (this.data.type == sType){
-      console.info("没有切换" + sType)
+      //console.info("没有切换" + sType)
     } else{
-      console.info("准备切换" + sType)
+      //console.info("准备切换" + sType)
       this.setData({
         type: sType       
       })
@@ -206,5 +206,40 @@ Page({
       this.onLoad()
 
     }  
+  },
+  open: function (e) {
+    var sType = e.currentTarget.dataset.type
+    var pid = e.currentTarget.dataset.pid
+
+    console.info("数据ID=" + pid)
+    if (sType == 'TAR') {
+      wx.navigateTo({
+        url: '../targetBar/targetBar?type=' + this.data.type + '&pid=' + pid
+      });
+    }
+
+    if (sType == 'SOC' && this.data.type == 1) {
+      //部门绩效列表 
+      wx.navigateTo({
+        url: '../deptUserSoc/deptUserSoc?type=' + this.data.type
+      });
+    }
+
+    if (sType == 'ACTW') {
+      wx.navigateTo({
+        url: '../excuteWeek/excuteWeek?type=' + this.data.type
+      });
+    }
+
+    if (sType == 'ACTM') {
+      wx.navigateTo({
+        url: '../excuteMonth/excuteMonth?type=' + this.data.type
+      });
+    }
+
+
+
+
   }
+
 })

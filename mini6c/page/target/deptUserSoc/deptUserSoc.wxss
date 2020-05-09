@@ -1,0 +1,41 @@
+.table-title{  
+  margin: 15px;
+}
+
+.table-foot{  
+  margin: 15px;  
+}
+
+.table {
+  display: table;
+  margin: 8px;
+  width: 96%;
+  border-collapse: collapse; 
+}
+
+.table-tr {
+  display: table-row; 
+  height: 36px; 
+}
+
+.table-th {
+  display: table-cell;  
+  border: 1rpx solid gray;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table-td {
+  display: table-cell;
+  border: 1rpx solid gray;
+  text-align: center;
+  vertical-align: middle;
+  color: #666;
+}
+
+
+.loading{  
+  padding: 10rpx;  
+  text-align: center;  
+  color: #999;
+}

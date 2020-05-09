@@ -1,0 +1,46 @@
+<!--index.wxml-->
+<wxs module="nf">
+  var toFixed = function (value) {
+    if (value){
+      return value.toFixed(2);
+    } else {
+      return null;
+    }
+    
+  }
+  module.exports = {
+    toFixed :toFixed
+  }
+</wxs>
+
+<view class="container">
+  <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
+</view>
+
+<view class="table-title">数据（单位: {{target.unit}}）</view>
+<view class="table">
+  <view class="table-tr">
+    <view class="table-th">月</view>
+    <view class="table-th">保底</view>   
+    <view class="table-th">合理</view>
+    <view class="table-th">实际</view>
+    <view class="table-th">偏差</view>
+  </view>
+
+  <view class="table-tr" wx:for="{{[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]}}" wx:for-item="i">
+    <view class="table-td">{{i + 1}}月</view>
+    <view class="table-td">{{target.targetDetalDataList[0].targetMonthDataList[i].targeValue ? target.targetDetalDataList[0].targetMonthDataList[i].targeValue : ""}}</view>
+    <view class="table-td">{{target.targetDetalDataList[1].targetMonthDataList[i].targeValue ? target.targetDetalDataList[1].targetMonthDataList[i].targeValue : ""}}</view>
+    <view class="table-td">{{target.targetDetalDataList[2].targetMonthDataList[i].targeValue ? target.targetDetalDataList[2].targetMonthDataList[i].targeValue : ""}}</view>
+    <view class="table-td">{{target.targetDetalDataList[3].targetMonthDataList[i].targeValue ? nf.toFixed(target.targetDetalDataList[3].targetMonthDataList[i].targeValue) : ""}}</view>
+  </view>
+
+  <view class="table-tr">
+    <view class="table-td">年度</view>
+    <view class="table-td">{{nf.toFixed(target.targetDetalDataList[0].yearValue)}}</view>
+    <view class="table-td">{{nf.toFixed(target.targetDetalDataList[1].yearValue)}}</view>
+    <view class="table-td">{{nf.toFixed(target.targetDetalDataList[2].yearValue)}}</view>
+    <view class="table-td">{{nf.toFixed(target.targetDetalDataList[3].yearValue)}}</view>
+  </view>  
+</view>
+<view class="table-foot">累计达成率：{{nf.toFixed(target.totalConversionRate * 100)}}%</view>

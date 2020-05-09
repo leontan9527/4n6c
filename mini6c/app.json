@@ -21,11 +21,14 @@
     "page/plan/planIntBValue/planIntBValue",
     "page/plan/planNoVoteValue/planNoVoteValue",
     "page/user/suser/suser",
-    "page/target/person/person",
-    "page/target/dashboard/dashboard",
     "page/adviser/adviserList/adviserList",
-    "page/adviser/sendAdviserInfo/sendAdviserInfo"
-
+    "page/adviser/sendAdviserInfo/sendAdviserInfo",
+    "page/target/dashboard/dashboard",
+    "page/target/targetBar/targetBar",
+    "page/target/deptUserSoc/deptUserSoc",
+    "page/target/excuteWeek/excuteWeek",
+    "page/target/dashboard/excuteMonth/excuteMonth",
+    "page/target/excuteMonth/excuteMonth"
   ],
   "window": {
     "navigationBarTextStyle": "white",

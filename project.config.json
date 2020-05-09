@@ -25,7 +25,7 @@
 		}
 	},
 	"compileType": "mini6c",
-	"libVersion": "2.7.0",
+	"libVersion": "2.10.0",
 	"appid": "wx48adf79ca5de7fd9",
 	"projectname": "mini6c",
 	"isGameTourist": false,
