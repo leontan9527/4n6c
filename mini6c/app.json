@@ -24,7 +24,10 @@
     "page/target/person/person",
     "page/target/dashboard/dashboard",
     "page/adviser/adviserList/adviserList",
-    "page/adviser/sendAdviserInfo/sendAdviserInfo"
+    "page/adviser/sendAdviserInfo/sendAdviserInfo",
+    "page/document/documentList/documentList",
+    "page/document/documentDetail/documentDetail"
+
 
   ],
   "window": {

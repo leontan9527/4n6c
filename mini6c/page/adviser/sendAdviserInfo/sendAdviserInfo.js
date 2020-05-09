@@ -1,6 +1,17 @@
 const config = require('../../../config')
 var tempFilePath
 const myaudio = wx.createInnerAudioContext()
+//苹果手机，静银模式 也能播放录音
+if (wx.setInnerAudioOption) {
+  wx.setInnerAudioOption({
+    obeyMuteSwitch: false,
+    autoplay: true
+  })
+}else {
+  myaudio.obeyMuteSwitch = false;
+  myaudio.autoplay = true;
+}
+
 const app = getApp()
 
 Page({

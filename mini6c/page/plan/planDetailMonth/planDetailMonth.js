@@ -2,6 +2,16 @@ const config = require('../../../config')
 var util = require("../../../util/dateutil.js")
 var tempFilePath
 const myaudio = wx.createInnerAudioContext()
+//苹果手机，静银模式 也能播放录音
+if (wx.setInnerAudioOption) {
+  wx.setInnerAudioOption({
+    obeyMuteSwitch: false,
+    autoplay: true
+  })
+}else {
+  myaudio.obeyMuteSwitch = false;
+  myaudio.autoplay = true;
+}
 
 const app = getApp()
 
@@ -592,7 +602,7 @@ Page({
   },
   //语音上传   结束
 
-
+  
   //音频播放   开始
  audioPlay: function (e) {
 
@@ -617,6 +627,7 @@ Page({
     myaudio.autoplay = true
     var audKey = that.data.audKey
     var vidSrc = config.domain + audioArr[audKey].content
+    console.log('vidSrc===='+vidSrc)
     myaudio.src = vidSrc
 
     myaudio.play();
