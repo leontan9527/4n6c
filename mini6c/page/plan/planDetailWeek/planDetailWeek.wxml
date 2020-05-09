@@ -1,93 +1,226 @@
 <wxs src="../../../util/dateutil.wxs" module="df" />
 
 <view class="page__bd">
+  <!--计划详情信息  开始-->
+  <view wx:if="{{showVoiceMask==false}}">
+    <view class="weui-panel weui-panel_access" wx:if="{{plan.actionDetails.length > 0}}">
+      <view class="weui-panel__hd">行动计划（{{plan.actionDetails.length}}）</view>
 
-  <view class="weui-panel weui-panel_access" wx:if="{{plan.actionDetails.length > 0}}">
-    <view class="weui-panel__hd">行动计划（{{plan.actionDetails.length}}）</view>
+      <view class="weui-panel__bd">
 
-    <view class="weui-panel__bd">
+        <view class="weui-media-box weui-media-box_text" wx:for-items="{{plan.actionDetails}}" wx:key="id" > 
 
-      <view class="weui-media-box weui-media-box_text" wx:for-items="{{plan.actionDetails}}" wx:key="id" > 
+          <view>   
 
-        <view>   
+            <view class="weui-media-box__desc plan_action" data-planid="{{plan.id}}" data-actailid="{{item.id}}" data-iseditplan="{{item.isEditPlan}}" bindtap="editAction">{{item.action}}</view>
+            <view class="weui-media-box__desc" data-planid="{{plan.id}}" data-actailid="{{item.id}}" data-iseditplan="{{item.isEditPlan}}" bindtap="editAction">成果要求：{{item.outcome}}</view>
 
-          <view class="weui-media-box__desc plan_action" data-planid="{{plan.id}}" data-actailid="{{item.id}}" data-iseditplan="{{item.isEditPlan}}" bindtap="editAction">{{item.action}}</view>
-          <view class="weui-media-box__desc" data-planid="{{plan.id}}" data-actailid="{{item.id}}" data-iseditplan="{{item.isEditPlan}}" bindtap="editAction">成果要求：{{item.outcome}}</view>
-
-          <view class="weui-media-box__info">
-            <view wx:if="{{item.isBringInto == true && item.commitDate==null}}" class="weui-media-box__info__meta" >
-              <view class="weui-cell__bd">
-                <picker data-planid="{{plan.id}}" data-actailid="{{item.id}}" value="{{item.commitDate}}" data-field="date" mode="date" start="{{item.dateStart}}" end="{{item.dateEnd}}" bindchange="bindDateChange" >
-                  <view class="weui-input">完成时间(点击填写)：{{df.formatDate(item.commitDate)}}</view>
-                </picker>
+            <view class="weui-media-box__info">
+              <view wx:if="{{item.isBringInto == true && item.commitDate==null}}" class="weui-media-box__info__meta" >
+                <view class="weui-cell__bd">
+                  <picker data-planid="{{plan.id}}" data-actailid="{{item.id}}" value="{{item.commitDate}}" data-field="date" mode="date" start="{{item.dateStart}}" end="{{item.dateEnd}}" bindchange="bindDateChange" >
+                    <view class="weui-input">完成时间(点击填写)：{{df.formatDate(item.commitDate)}}</view>
+                  </picker>
+                </view>
               </view>
-            </view>
-            <view wx:if="{{item.isBringInto != true || (item.isBringInto == true && item.commitDate!=null)}}" class="weui-media-box__info__meta" data-planid="{{plan.id}}" data-actailid="{{item.id}}" data-iseditplan="{{item.isEditPlan}}" bindtap="editAction">
-              完成时间：{{df.formatDate  (item.commitDate)}}
-            </view>
-
-            <view class="weui-media-box__info__meta" data-planid="{{plan.id}}" data-actailid="{{item.id}}" data-iseditplan="{{item.isEditPlan}}" bindtap="editAction">
-             检查人：{{item.inspectorName}}
-            </view> 
-          </view>  
-
-          <view class="weui-media-box__info"> 
-          
-            <view class="weui-cell-picker">
-
-              <view class="weui-cell__bd">
-                <picker bindchange="bindPickerChange" data-planid="{{plan.id}}" data-actailid="{{item.id}}" value="{{item.status}}" range="{{array}}">
-                  <view class="weui-input">完成情况(点击修改):{{array[item.status]}}</view>
-                </picker>
+              <view wx:if="{{item.isBringInto != true || (item.isBringInto == true && item.commitDate!=null)}}" class="weui-media-box__info__meta" data-planid="{{plan.id}}" data-actailid="{{item.id}}" data-iseditplan="{{item.isEditPlan}}" bindtap="editAction">
+                完成时间：{{df.formatDate  (item.commitDate)}}
               </view>
+
+              <view class="weui-media-box__info__meta" data-planid="{{plan.id}}" data-actailid="{{item.id}}" data-iseditplan="{{item.isEditPlan}}" bindtap="editAction">
+              检查人：{{item.inspectorName}}
+              </view> 
+            </view>  
+
+            <view class="weui-media-box__info"> 
+            
+              <view class="weui-cell-picker">
+
+                <view class="weui-cell__bd">
+                  <picker bindchange="bindPickerChange" data-planid="{{plan.id}}" data-actailid="{{item.id}}" value="{{item.status}}" range="{{array}}">
+                    <view class="weui-input">完成情况(点击修改):{{array[item.status]}}</view>
+                  </picker>
+                </view>
+              </view>
+            
             </view>
-          
+
           </view>
 
-        </view>
+        </view> 
+            
+      </view>     
 
-      </view> 
-           
-    </view>     
+    </view>
 
-  </view>
-
-  <view class="weui-panel__bd" >
-    <view class="weui-media-box weui-media-box_text">  
-      
-        <view class="page-section-spacing">
-          <view class="flex-wrp" style="flex-direction:row;">
-            <view class="flex-item-left weui-media-box__title link_plan" data-id="{{plan.id}}"  bindtap="addAction">  
-              +行动计划   
+    <view class="weui-panel__bd" >
+      <view class="weui-media-box weui-media-box_text">  
+        
+          <view class="page-section-spacing">
+            <view class="flex-wrp" style="flex-direction:row;">
+              <view class="flex-item-left weui-media-box__title link_plan" data-id="{{plan.id}}"  bindtap="addAction">  
+                +行动计划   
+              </view>
+              <view class="flex-item-right">
+                <button wx:if="{{(plan.status == -1 || plan.status == -2) && actionsLength>0}}"  type="primary"  size="mini" data-planid="{{plan.id}}" data-status="0" bindtap="commitPlan">
+                  提交计划
+                </button>
+              </view>
             </view>
-            <view class="flex-item-right">
-              <button wx:if="{{(plan.status == -1 || plan.status == -2) && actionsLength>0}}"  type="primary"  size="mini" data-planid="{{plan.id}}" data-status="0" bindtap="commitPlan">
-                提交计划
+          </view>
+
+          <view class="message-top">
+
+            <view wx:if="{{plan.status == 0}}" class="weui-media-box__desc">
+              提示：行动举措每项提交结果后，点击提交结果； 提交结果后，不可修改
+            </view> 
+
+            <view wx:if="{{plan.status == 0  && unCommit>0}}" class="button-sp-area">
+              <button style="margin-left:3px;" class="mini-btn" type="primary" size="mini">
+                余{{unCommit}}项，待提交结果
               </button>
             </view>
-          </view>
-        </view>
 
-        <view class="message-top">
-
-          <view wx:if="{{plan.status == 0}}" class="weui-media-box__desc">
-            提示：行动举措每项提交结果后，点击提交结果； 提交结果后，不可修改
-          </view> 
-
-          <view wx:if="{{plan.status == 0  && unCommit>0}}" class="button-sp-area">
-            <button style="margin-left:3px;" class="mini-btn" type="primary" size="mini">
-              余{{unCommit}}项，待提交结果
-            </button>
-          </view>
-
-          <view class="button-sp-area" wx:if="{{plan.status == 0 && plan.isCommitPlanResult==true && unCommit==0}}">
-            <button style="margin-left:3px;" class="mini-btn" type="primary" size="mini" data-planid="{{plan.id}}" data-status="1" bindtap="commitPlan">
-              提交结果
-            </button>
-          </view>
+            <view class="button-sp-area" wx:if="{{plan.status == 0 && plan.isCommitPlanResult==true && unCommit==0}}">
+              <button style="margin-left:3px;" class="mini-btn" type="primary" size="mini" data-planid="{{plan.id}}" data-status="1" bindtap="commitPlan">
+                提交结果
+              </button>
+            </view>
+        </view> 
       </view>
-      
+    </view>
+
+    <!--进程消息列表  开始-->
+    <view class="weui-panel weui-panel_access" wx:if="{{planProgressList.length > 0}}">
+      <view class="weui-panel__hd">计划进程(最新{{planProgressList.length}}条)</view>
+      <view class="weui-panel__bd">
+
+        <view class="weui-media-box weui-media-box_text" wx:for-items="{{planProgressList}}" wx:key="id" wx:for-index="key">  
+
+          <view class="planProgressList-flex-C">
+            <view class="containerItem">
+              <image class='planProgressfirstPic' src='/page/images/vocie/toux.png' ></image>   
+            </view>
+            <view class="containerItem">
+              <view class="planProgressUserName">{{item.updateUser}}</view>
+            </view>
+            <view class="containerItem">
+              <view class="planProgressDeptName">{{item.deptName}} {{df.formatDate(item.createTime,2)}}</view>
+            </view>
+          </view>
+
+          <view class="planProgressList-flex-C">
+            <view class="containerItem">
+              <view wx:if="{{item.type==0}}" class="planProgressContent">{{item.content}}</view>
+              <view wx:if="{{item.type==1}}" class="planProgressContent">
+                <view class='output-audio'>
+                  <!-- 默认状态 -->
+                  <view class='audio' wx:if="{{item.isBof==false}}" bindtap='audioPlay' data-key="{{key}}" data-id="{{item.id}}" data-isBof="{{item.isBof}}">
+                    <image class='ico' src='/page/images/vocie/yuying1.png' />
+                    <label class='time'>{{item.timeLength}}</label>
+                  </view>
+                  
+                  <!-- 当前正在播放状态 -->
+                  <view class='audio' wx:if="{{item.isBof==true}}" bindtap='audioStop' data-key="{{key}}" data-id="{{item.id}}" data-isBof="{{item.isBof}}">
+                    <image class='ico' src='/page/images/vocie/bof1.png' />
+                    <label class='time'>{{item.timeLength}}</label>
+                  </view>
+                
+                </view>
+              </view>
+            </view>
+          </view>
+
+        </view>        
+      </view>            
+    </view>
+    <!--进程消息列表  结束-->
+    
+  </view>
+  <!--计划详情信息  结束-->
+
+  <!--点击发送语音消息喇叭，弹出发送消息框  开始-->
+  <view class='voice-mask' wx:if="{{showVoiceMask}}">
+    <!--显示发送顾问老师checkbox  开始-->
+    <view class="flex-Container-SendAdviser">
+      <view class="sendAdviser">
+        <view calss="checkboxCss">
+          <checkbox-group bindchange="checkboxChange">
+            <checkbox style="margin-left:97px;margin-top:7px;" value="1"/>
+          </checkbox-group>
+        </view>
+      </view>
+      <view class="sendAdviser">
+        <view class="comtextCss">是否发送顾问老师</view>
+      </view>
+    </view>
+    <!--显示发送顾问老师checkbox  结束-->
+
+    <view class='voice-enter-note'></view>
+    <image class='voice-enter-note-image' src='/page/images/vocie/bof2.png' ></image>
+    <image src='/image/record.png' class='voice-button' bindtouchstart="startRecording" bindtouchend="stopRecording" bindtouchmove="moveToCancle"></image>
+
+    <view class='voice-note'>
+        <text wx:if="{{startRecording==false}}" style="margin-left:14px;">长按下方按钮录音</text>
+        <text wx:if="{{startRecording==true}}" style="margin-left:14px;">手指上滑取消发送</text>
+    </view>
+
+    <view class='record-voice-animations' wx:if="{{showVoiceMask && startRecording && !cancleRecording}}">
+        <image src='/page/images/vocie/voice1.png' wx:if="{{recordAnimationNum===1}}"></image>
+        <image src='/page/images/vocie/voice2.png' wx:if="{{recordAnimationNum===2}}"></image>
+        <image src='/page/images/vocie/voice3.png' wx:if="{{recordAnimationNum===3}}"></image>
+        <image src='/page/images/vocie/voice4.png' wx:if="{{recordAnimationNum===4}}"></image>
+        <image src='/page/images/vocie/voice5.png' wx:if="{{recordAnimationNum===0}}"></image>
+    </view>
+
+    <view class='cancle-record-voice' wx:if="{{showVoiceMask && startRecording && cancleRecording}}">
+        <image src='/page/images/vocie/cancel.png'></image>
     </view>
   </view>
+  <!--点击发送语音消息喇叭，弹出发送消息框  结束-->
 
+  <!--点击发送文字消息  开始-->
+  <view class='write-mask' wx:if="{{showWriteMask}}">
+
+    <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showWriteMask}}"></view>
+    <view class = "modal-dialog" wx:if = "{{showWriteMask}}" >
+      <view class = "modal-title">填写进程内容</view>
+      <view class="modal-content">
+        <view class="modal-input">
+          <textarea bindinput="formInputChange" placeholder-class="place-holder" data-field="action" 
+           style="height: 5em" bindinput='getBlurInputValue'></textarea>
+        </view>
+        <view class="modal-checkbox">
+          <checkbox-group bindchange="checkboxChange">
+            <checkbox style="margin-left:0px;" value="1"/>
+          </checkbox-group>
+          是否发送顾问老师
+        </view> 
+      </view> 
+      <view class = "modal-footer"> 
+        <view class = "btn-cancel" bindtap="onCancel" data-status="cancel" >取消</view>
+        <view class="btn-confirm" bindtap="addCommentFun" data-status="confirm">确定</view> 
+      </view>
+    </view> 
+
+  </view>
+  <!--点击发送文字消息  结束-->
+
+  <!--固定在最下方的发送进程消息按钮  开始-->
+  <view style="position:fixed;bottom:0;width:100%">
+  
+    <view class="flex-Container">
+        <view class="containerItem" bindtap="showVoiceDialog">
+          <image class="firstPic" src="/image/record.png"></image>
+        </view>
+        <view class="containerItem">
+            <view class="flex-Container-view" bindtap="showWriteDialog">
+              <image class="secondPic" src="/page/images/write.png"></image>
+              <label class="writeclsss">写文字消息...</label>
+            </view>
+        </view>
+    </view>
+  </view>
+  <!--固定在最下方的发送进程消息按钮  结束-->
+  
 </view>

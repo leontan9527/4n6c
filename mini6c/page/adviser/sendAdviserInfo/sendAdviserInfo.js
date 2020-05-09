@@ -1,19 +1,15 @@
 const config = require('../../../config')
-var util = require("../../../util/dateutil.js");
 var tempFilePath
 const myaudio = wx.createInnerAudioContext()
-
 const app = getApp()
 
 Page({
-
-  onLoad: function (options) {
-
-    this.setData({
-      pid: options.id,
-      array: ['待提交结果', '完成', '未完成'],
-      index: 0,
-      unCommit:0,
+  
+  onLoad: function(options){   
+    
+    this.setData({  
+      adviserMessageId: options.id,   
+      icon_add: '../../images/write.png',
       showVoiceMask: false,
       startRecording: false,
       cancleRecording:false,
@@ -24,20 +20,19 @@ Page({
     })
 
     //获取最新消息数据
-    this.getNewPlanData()
-
+    this.allReplyAdviserMessageList()
   },
 
-  getNewPlanData: function () {
+  allReplyAdviserMessageList: function (e) {
 
     const self = this
     var sessionId = app.globalData.sessionId
-
+    console.log('pageNumber=='+self.data.pageNumber)
     if (sessionId) {
       wx.request({
-        url: config.domain + '/planCr/detailWeek',
+        url: config.domain + '/adviserMessageCr/allReplyAdviserMessageList',
         data: {
-          id: self.data.pid
+          id: self.data.adviserMessageId,
         },
         method: 'POST',
         header: {
@@ -45,256 +40,24 @@ Page({
           'Cookie': 'JSESSIONID=' + sessionId
         },
         success(result) {
-          //console.log('【plan/detailMonth=】', result.data.data)
-
-          var planProgressList=result.data.planProgressList
-          var plan=result.data.plan
-          let kpis = plan.kpiDetails;
-          let unCommit = 0
-          let actions = plan.actionDetails	
-          let actionsLength = actions.length;
-
-					for (let i = 0; i < actions.length; i++ ){
-            //处理页面计划完成时间只能选择本周内的时间
-            actions[i].dateStart=util.timestampToTime(actions[i].dateStart, false)
-            actions[i].dateEnd=util.timestampToTime(actions[i].dateEnd, false)
-            //当改变状态时，页面未完成项数改变
-						if (actions[i].status == 0){	
-							unCommit ++
-            }  
-            //因为页面选择状态的组件按照序号来的，而我们代码理的状态不一致，所以9时候改成2
-            if (actions[i].status == 9){	
-							actions[i].status=2
-						} 
-          }	
-          
-          self.setData({
-            plan: plan,
-            unCommit:unCommit,
-            actionsLength:actionsLength,
-            planProgressList:planProgressList
-          })
-
-          //console.log('【temp=】', util.timestampToTime(temp,false))
-          var title = plan.title
-
-          wx.setNavigationBarTitle({
-            title: title,
-            success() {              
-            },
-            fail(err) {              
-            }
-          })
+  
+          if(result.data.success){
+            
+            var adviserMessageExchangeList=result.data.adviserMessageExchangeList
+            var adviserMessage=result.data.adviserMessage
+ 
+            self.setData({
+              adviserMessageExchangeList: adviserMessageExchangeList,
+              adviserMessage:adviserMessage
+            })
+          }
         },
-
+  
         fail({ errMsg }) {
-          console.log('【plan/detailMonth fail】', errMsg)
+          console.log('【plan/list fail】', errMsg)
         }
       })
     }
-  },
-
-  bindDateChange: function (e) {
-
-    var planId = e.currentTarget.dataset.planid
-    var detailId = e.currentTarget.dataset.actailid
-    var commitDate=e.detail.value
-
-    const self = this
-    var sessionId = app.globalData.sessionId
-    wx.request({
-      url: config.domain + '/planCr/saveActionCommitDate',
-      data : {
-        id: detailId,
-        commitDate: commitDate
-      },
-      method: 'POST',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
-        'Cookie': 'JSESSIONID=' + sessionId
-      },
-      success(result) {
-          if(result.data.success==true){
-           
-            var plan=self.data.plan;
-            for (let i = 0; i < plan.actionDetails.length; i++ ){						
-              if ( plan.actionDetails[i].id == detailId){	
-                plan.actionDetails[i].commitDate=commitDate
-              } 
-            }	
-        
-            self.setData({
-              plan: plan
-            })
-          }else{ 
-
-          }
-      },
-      fail({ errMsg }) {
-        //创建失败提示错误信息代码开始
-      }
-    })
-
-},
-
-bindPickerChange(e) {
-
-    var planId = e.currentTarget.dataset.planid
-    var detailId = e.currentTarget.dataset.actailid
-    var value=e.detail.value
-    var status=value
-    if(value==2){
-      status=9;
-    }
-    const self = this
-    var sessionId = app.globalData.sessionId
-    wx.request({
-      url: config.domain + '/planCr/saveActionStatus',
-      data : {
-        id: detailId,
-        status: status
-      },
-      method: 'POST',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
-        'Cookie': 'JSESSIONID=' + sessionId
-      },
-      success(result) {
-          if(result.data.success==true){
-           
-            var plan=self.data.plan;
-            let unCommit = 0
-            for (let i = 0; i < plan.actionDetails.length; i++ ){
-              
-              if ( plan.actionDetails[i].id == detailId){	
-                plan.actionDetails[i].status=value
-              } 
-              if (plan.actionDetails[i].status == 0){	
-                unCommit ++
-              } 
-            }	
-        
-            self.setData({
-              plan: plan,
-              unCommit:unCommit
-            })
-          }else{ 
-
-          }
-      },
-      fail({ errMsg }) {
-        //创建失败提示错误信息代码开始
-      }
-    })
-
-  },
-
-addAction: function (e) {
-    var id = e.currentTarget.dataset.id
-    console.log('【planAddAction/planAddAction】id=', id)
-    wx.navigateTo({ url: '../planAddAction/planAddAction?id=' + id})
-},
-
-editAction: function (e) {
-    var isEditPlan=e.currentTarget.dataset.iseditplan
-    console.log('planEditAction/planEditAction】isEditPlan=', isEditPlan)
-    if(isEditPlan==true){
-      var planId = e.currentTarget.dataset.planid
-      var detailId = e.currentTarget.dataset.actailid
-      wx.navigateTo({ url: '../planEditAction/planEditAction?planId=' + planId +'&detailId='+detailId})
-    }
-},
-
-commitPlan:function(e){  
-
-    var isTrueCommitPlan=true
-    const self = this
-    var plan=self.data.plan;
-    for (let i = 0; i < plan.actionDetails.length; i++ ){						
-      if ( plan.actionDetails[i].commitDate == null){	
-        isTrueCommitPlan=false
-        break
-      } 
-    }
-    console.log('isTrueCommitPlan=】', isTrueCommitPlan)
-    //上周未完成带入本周的计划，由于计划完成时间情况了，所以在本周提交计划的时候要校验计划完成时间必须填写
-    if(isTrueCommitPlan==false){
-      
-      var errormsg='有计划完成时间没有填写，请检查并填写完成后，才能提交计划!';
-      wx.showModal({  
-        title: '提示',  
-        content: errormsg,  
-        showCancel:false,
-        confirmText:'关闭',
-        success: function(res) {  
-            
-        }  
-      })  
-    }else{
-
-      var planId = e.currentTarget.dataset.planid
-      var status = e.currentTarget.dataset.status
-      var layerMsg="确认要提交计划吗?";
-      if(status==1){
-        layerMsg="确认要提交结果吗?";
-      }
-      wx.showModal({  
-        title: '提示',  
-        content: layerMsg,  
-        cancelText:'取消',
-        confirmText:'确认',
-        success: function(res) {  
-              if (res.confirm) {  
-                //用户点击确认按钮执行创建周计划代码
-                console.log('点击确认按钮后，准备调用：checkOrCreatePlanWeek方法')
-                self.commitWeekPlan(planId,status);
-                
-              } else if (res.cancel) { 
-                //用户点击取消按钮执行如下代码
-              }  
-          }  
-      }) 
-    }
-
-  } , 
-
-  //提交周计划方法
-  commitWeekPlan: function(planId,status){   
-
-    const self = this
-    var sessionId = app.globalData.sessionId
-    wx.request({
-      url: config.domain + '/planCr/commitWeekPlan',
-      data : {
-        id: planId,
-        status: status
-      },
-      method: 'POST',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
-        'Cookie': 'JSESSIONID=' + sessionId
-      },
-      success(result) {
-          //创建成功自动返回上级页面
-          if(result.data.success==true){
-            if(status==1){
-              
-              wx.redirectTo({ url: '../planDetail/planDetail?id=' + planId })
-            }else{
-              var plan=self.data.plan
-              plan.status=status;
-              self.setData({
-                plan: plan
-              })
-            }
-          }else{ 
-
-          }
-      },
-      fail({ errMsg }) {
-        //创建失败提示错误信息代码开始
-      }
-    })
   },
 
   //发送计划进程消息代码                    开始
@@ -312,13 +75,14 @@ commitPlan:function(e){
     var that = this;
     var sessionId = app.globalData.sessionId
     wx.request({
-      url: config.domain + '/planCr/addComment',
+      url: config.domain + '/adviserMessageCr/addAdviserMessageExchagne',
       data : {
-        planId: that.data.pid,
-        detailId:'',
+        cusOrgId: '',
+        adviserMessageId:that.data.adviserMessageId,
         content:that.data.content,
-        idType: 0,
-        isSendAdviser:that.data.isSendAdviser
+        isAdviserMessage:false,
+        receiveUserId:that.data.receiveUserId,
+        mainType:2,
       },
       method: 'POST',
       header: {
@@ -333,7 +97,7 @@ commitPlan:function(e){
             that.setData({
               content:''
             })
-            that.getNewPlanData()
+            that.allReplyAdviserMessageList()//获取最新数据
           }else{ 
             //创建失败，提示错误信息
           }
@@ -361,15 +125,19 @@ commitPlan:function(e){
 
   showVoiceDialog:function(e){
     
+    var receiveUserId = e.currentTarget.dataset.receiveuserid
+
     if(this.data.showVoiceMask){
       this.setData({
          showVoiceMask:false,
-         isSendAdviser:false
+         isSendAdviser:false,
+         receiveUserId:''
       })
     }else{
       this.setData({
          showVoiceMask:true,
-         isSendAdviser:false
+         isSendAdviser:false,
+         receiveUserId:receiveUserId
       })
     }
     
@@ -462,7 +230,7 @@ commitPlan:function(e){
               },
               //参数绑定,可以向后台传递多个参数
               formData:{
-                upFileType:16,
+                upFileType:25,
                 //recordingtime: recordTime,//发送语音的时间
                 //facId: 11211,//业务id
                 //userId:1,//用户id
@@ -470,19 +238,19 @@ commitPlan:function(e){
               success:function(result){
 
                 var resultData = JSON.parse(result.data.replace(/\n/g,"\\n").replace(/\r/g,"\\r"))
-                console.log('result.data.uuid====='+resultData.uuid);
                 //语音文件上传成功后
                 if(resultData.success){
 
                   wx.request({
-                    url: config.domain + '/planCr/addVoiceProcess',
+                    url: config.domain + '/adviserMessageCr/addVoiceProcessExchagne',
                     data : {
-                      planId: that.data.pid,
-                      detailId:'',
+                      cusOrgId:'',
+                      adviserMessageId:that.data.adviserMessageId,
+                      mainType:2,
+                      isAdviserMessage:false,
+                      receiveUserId:that.data.receiveUserId,
                       uuid:resultData.uuid,
                       timeLength:that.data.recordingTime,
-                      idType: 0,
-                      isSendAdviser:that.data.isSendAdviser
                     },
                     method: 'POST',
                     header: {
@@ -493,7 +261,7 @@ commitPlan:function(e){
              
                         if(result.data.success){
                           //创建成功，获取最新消息数据
-                          that.getNewPlanData()
+                          that.allReplyAdviserMessageList()
                         }else{ 
                           //创建失败，提示错误信息
                         }
@@ -573,7 +341,7 @@ commitPlan:function(e){
     var that = this
     var id = e.currentTarget.dataset.id
     var key = e.currentTarget.dataset.key
-    var audioArr = that.data.planProgressList
+    var audioArr = that.data.contentlist
     
     //设置状态
     audioArr.forEach((v, i, array) => {
@@ -584,13 +352,13 @@ commitPlan:function(e){
     })
 
     that.setData({
-      planProgressList: audioArr,
+      contentlist: audioArr,
       audKey: key,
     })
   
     myaudio.autoplay = true
     var audKey = that.data.audKey
-    var vidSrc = config.domain + audioArr[audKey].content
+    var vidSrc = config.domain + audioArr[audKey].message
     myaudio.src = vidSrc
 
     myaudio.play();
@@ -605,7 +373,7 @@ commitPlan:function(e){
       //console.log('onEnded======自动播放完毕');
       audioArr[key].isBof = false;
       that.setData({
-        planProgressList: audioArr,
+        contentlist: audioArr,
       })
       return
     })
@@ -615,7 +383,7 @@ commitPlan:function(e){
       console.log(err); 
       audioArr[key].isBof = false;
       that.setData({
-        planProgressList: audioArr,
+        contentlist: audioArr,
       })
       return
     })
@@ -625,13 +393,13 @@ commitPlan:function(e){
   audioStop(e){
     var that = this
     var key = e.currentTarget.dataset.key
-    var audioArr = that.data.planProgressList
+    var audioArr = that.data.contentlist
     //设置状态
     audioArr.forEach((v, i, array) => {
       v.isBof = false;
     })
     that.setData({
-      planProgressList: audioArr
+      contentlist: audioArr
     })
 
     myaudio.stop();
@@ -645,16 +413,19 @@ commitPlan:function(e){
   //显示发送文字消息   开始
   showWriteDialog:function(e){
     
-    console.log('showWriteDialog  方法被调用')
+    var receiveUserId = e.currentTarget.dataset.receiveuserid
+
     if(this.data.showWriteMask){
       this.setData({
         showWriteMask:false,
-         isSendAdviser:false
+        isSendAdviser:false,
+        receiveUserId:''
       })
     }else{
       this.setData({
          showWriteMask:true,
-         isSendAdviser:false
+         isSendAdviser:false,
+         receiveUserId:receiveUserId
       })
     }
   },
@@ -667,7 +438,8 @@ commitPlan:function(e){
   //隐藏模态对话框
   hideModal: function() {
     this.setData({
-      showWriteMask: false
+      showWriteMask: false,
+      receiveUserId:''
     });
   },
 

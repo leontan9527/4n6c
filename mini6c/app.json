@@ -13,7 +13,6 @@
     "page/plan/planDetailMonth/planDetailMonth",
     "page/plan/planDetailYear/planDetailYear",
     "page/plan/planAddAction/planAddAction",
-<<<<<<< Updated upstream
     "page/plan/planEditAction/planEditAction",
     "page/plan/planCrWeek/planCrWeek",
     "page/plan/planCrMonth/planCrMonth",
@@ -21,14 +20,12 @@
     "page/plan/planIntAValue/planIntAValue",
     "page/plan/planIntBValue/planIntBValue",
     "page/plan/planNoVoteValue/planNoVoteValue",
-    "page/plan/planvocie/planvocie",
-    "page/user/suser/suser"
-=======
-    "page/plan/planStWeek/planStWeek",
     "page/user/suser/suser",
     "page/target/person/person",
-    "page/target/dashboard/dashboard"
->>>>>>> Stashed changes
+    "page/target/dashboard/dashboard",
+    "page/adviser/adviserList/adviserList",
+    "page/adviser/sendAdviserInfo/sendAdviserInfo"
+
   ],
   "window": {
     "navigationBarTextStyle": "white",

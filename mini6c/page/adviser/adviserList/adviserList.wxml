@@ -1,81 +1,39 @@
 <wxs src="../../../util/dateutil.wxs" module="df" />
-
 <view class="page__bd">
-
-  <!--计划详情信息  开始-->
+  <!--进程列表        开始-->
   <view wx:if="{{showVoiceMask==false}}">
-
-    <!--kpiDetails信息  开始-->
-    <view class="weui-panel weui-panel_access" wx:if="{{plan.kpiDetails.length > 0}}">
-      <view class="weui-panel__hd">核心KPI（{{plan.kpiDetails.length}}）</view>
-
-      <view class="weui-panel__bd">
-        <view class="weui-media-box weui-media-box_text" wx:for-items="{{plan.kpiDetails}}" wx:key="id" >                    
-          <view class="weui-media-box__desc plan_action">{{item.name}}（{{item.unit}}）</view>
-
-          <view class="weui-media-box__info">
-            <view class="weui-media-box__info__meta">保底：{{item.baseValue}}</view>                
-            <view class="weui-media-box__info__meta">合理：{{item.reasonableValue}}</view>
-            <view class="weui-media-box__info__meta" wx:if="{{item.actualValue}}">实际值：{{item.actualValue}}</view>
-          </view>
-
-          <view class="weui-media-box__info">
-            <view class="weui-media-box__info__meta">要求时间：{{df.formatDate(item.commitDate)}}</view>                
-            <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">权重：{{item.weight}}%</view>
-          </view>
-
-          <view class="weui-media-box__info">
-            <view class="weui-media-box__info__meta">检查人：{{item.checkUserName}}</view>
-            <view class="weui-media-box__info__meta weui-media-box__info__meta_extra" wx:if="{{item.score}}">绩效：{{item.score}}</view>              
-          </view>
-
-        </view>        
-      </view>            
-    </view>
-    <!--kpiDetails信息  结束-->
-
-    <!--actionDetails信息  开始-->
-    <view class="weui-panel weui-panel_access" wx:if="{{plan.actionDetails.length > 0}}">
-      <view class="weui-panel__hd">行动计划（{{plan.actionDetails.length}}）</view>
-
-        <view class="weui-panel__bd">
-          <view class="weui-media-box weui-media-box_text" wx:for-items="{{plan.actionDetails}}" wx:key="id" >                    
-            <view class="weui-media-box__desc plan_action">{{item.action}}</view>
-            <view class="weui-media-box__desc">成果要求：{{item.outcome}}</view>
-            <view class="weui-media-box__info">
-              <view class="weui-media-box__info__meta">完成时间：{{df.formatDate(item.commitDate)}}</view>
-              <view class="weui-media-box__info__meta">检查人：{{item.inspectorName}}</view> 
-            </view>  
-            <view class="weui-media-box__info"> 
-              <view class="weui-media-box__info__meta plan_status">{{item.statusName}}</view>
+    <!--顶部 发送顾问消息按钮  开始-->
+    <view class="kind-list">
+        <view class="kind-list__item">
+            <view id="{{item.id}}" class="weui-flex kind-list__item-hd" bindtap="toSendAdviserInfo">
+                <view class="weui-flex__item">我的顾问消息</view>
             </view>
-          </view>
-      </view>            
+        </view>
     </view>
-    <!--actionDetails信息  结束-->
+    <!--顶部 发送顾问消息按钮  结束-->
 
     <!--进程消息列表  开始-->
-    <view class="weui-panel weui-panel_access" wx:if="{{planProgressList.length > 0}}">
-      <view class="weui-panel__hd">计划进程(最新{{planProgressList.length}}条)</view>
+    <view class="weui-panel weui-panel_access" wx:if="{{contentlist.length > 0}}">
       <view class="weui-panel__bd">
-
-        <view class="weui-media-box weui-media-box_text" wx:for-items="{{planProgressList}}" wx:key="id" wx:for-index="key">  
+        <view class="weui-media-box weui-media-box_text" wx:for-items="{{contentlist}}" wx:key="id" wx:for-index="key">  
 
           <view class="planProgressList-flex-C">
             <view class="containerItem">
               <image class='planProgressfirstPic' src='/page/images/vocie/toux.png' ></image>   
             </view>
             <view class="containerItem">
-              <view class="planProgressUserName">{{item.updateUser}}</view>
+              <view class="planProgressUserName">
+                <label style="color:blue">{{item.sendUserName}}</label>
+                <label style="margin-left:5px">来至</label>
+                <label style="color:green;margin-left:5px">{{item.messageFromTo}}</label>
+              </view>
             </view>
-            <view class="containerItem">
-              <view class="planProgressDeptName">{{item.deptName}} {{df.formatDate(item.createTime,2)}}</view>
-            </view>
+
           </view>
 
           <view class="planProgressList-flex-C">
             <view class="containerItem">
-              <view wx:if="{{item.type==0}}" class="planProgressContent">{{item.content}}</view>
+              <view wx:if="{{item.type==0}}" class="planProgressContent">{{item.message}}</view>
               <view wx:if="{{item.type==1}}" class="planProgressContent">
                 <view class='output-audio'>
                   <!-- 默认状态 -->
@@ -95,29 +53,27 @@
             </view>
           </view>
 
+          <view class="planProgressList-flex-C" data-id="{{item.id}}" bindtap="toSendAdviserInfo">
+              <view class="containerItem">
+                <view class="progressDate">{{item.deptName}} {{df.formatDate(item.createDate,2)}}</view>
+              </view>
+              <view class="container-answer">
+                <label class="labelclsss1" wx:if="{{item.adviserMessageExchangeList.length>0}}">{{item.adviserMessageExchangeList.length}}回复</label>
+                <label class="labelclsss2" wx:else>回复</label>
+              </view>
+            </view>
+
         </view>        
       </view>            
     </view>
-    <!--进程消息列表  结束-->
+
+    <view class="loading" hidden="{{!searchLoading}}">正在载入更多...</view>  
+    <view class="loading complete" hidden="{{!searchLoadingComplete}}">已加载全部</view>
   </view>
-  <!--计划详情信息  结束-->
+  <!--进程消息列表  结束-->   
 
   <!--点击发送语音消息喇叭，弹出发送消息框  开始-->
   <view class='voice-mask' wx:if="{{showVoiceMask}}">
-    <!--显示发送顾问老师checkbox  开始-->
-    <view class="flex-Container-SendAdviser">
-      <view class="sendAdviser">
-        <view calss="checkboxCss">
-          <checkbox-group bindchange="checkboxChange">
-            <checkbox style="margin-left:97px;margin-top:7px;" value="1"/>
-          </checkbox-group>
-        </view>
-      </view>
-      <view class="sendAdviser">
-        <view class="comtextCss">是否发送顾问老师</view>
-      </view>
-    </view>
-    <!--显示发送顾问老师checkbox  结束-->
 
     <view class='voice-enter-note'></view>
     <image class='voice-enter-note-image' src='/page/images/vocie/bof2.png' ></image>
@@ -154,10 +110,7 @@
            style="height: 5em" bindinput='getBlurInputValue'></textarea>
         </view>
         <view class="modal-checkbox">
-          <checkbox-group bindchange="checkboxChange">
-            <checkbox style="margin-left:0px;" value="1"/>
-          </checkbox-group>
-          是否发送顾问老师
+          该信息只发送顾问老师
         </view> 
       </view> 
       <view class = "modal-footer"> 
@@ -185,6 +138,5 @@
     </view>
   </view>
   <!--固定在最下方的发送进程消息按钮  结束-->
-
+  
 </view>
-
