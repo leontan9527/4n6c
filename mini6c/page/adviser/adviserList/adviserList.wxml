@@ -22,11 +22,13 @@
               <image class='planProgressfirstPic' src='/page/images/vocie/toux.png' ></image>   
             </view>
             <view class="containerItem">
-              <view class="planProgressUserName">{{item.sendUserName}}</view>
+              <view class="planProgressUserName">
+                <label style="color:blue">{{item.sendUserName}}</label>
+                <label style="margin-left:5px">来至</label>
+                <label style="color:green;margin-left:5px">{{item.messageFromTo}}</label>
+              </view>
             </view>
-            <view class="containerItem">
-              <view class="planProgressDeptName">{{item.deptName}} {{df.formatDate(item.createDate,2)}}</view>
-            </view>
+
           </view>
 
           <view class="planProgressList-flex-C">
@@ -51,6 +53,16 @@
             </view>
           </view>
 
+          <view class="planProgressList-flex-C" data-id="{{item.id}}" bindtap="toSendAdviserInfo">
+              <view class="containerItem">
+                <view class="progressDate">{{item.deptName}} {{df.formatDate(item.createDate,2)}}</view>
+              </view>
+              <view class="container-answer">
+                <label class="labelclsss1" wx:if="{{item.adviserMessageExchangeList.length>0}}">{{item.adviserMessageExchangeList.length}}回复</label>
+                <label class="labelclsss2" wx:else>回复</label>
+              </view>
+            </view>
+
         </view>        
       </view>            
     </view>
@@ -62,20 +74,6 @@
 
   <!--点击发送语音消息喇叭，弹出发送消息框  开始-->
   <view class='voice-mask' wx:if="{{showVoiceMask}}">
-    <!--显示发送顾问老师checkbox  开始-->
-    <view class="flex-Container-SendAdviser">
-      <view class="sendAdviser">
-        <view calss="checkboxCss">
-          <checkbox-group bindchange="checkboxChange">
-            <checkbox style="margin-left:97px;margin-top:7px;" value="1"/>
-          </checkbox-group>
-        </view>
-      </view>
-      <view class="sendAdviser">
-        <view class="comtextCss">是否发送顾问老师</view>
-      </view>
-    </view>
-    <!--显示发送顾问老师checkbox  结束-->
 
     <view class='voice-enter-note'></view>
     <image class='voice-enter-note-image' src='/page/images/vocie/bof2.png' ></image>
@@ -112,10 +110,7 @@
            style="height: 5em" bindinput='getBlurInputValue'></textarea>
         </view>
         <view class="modal-checkbox">
-          <checkbox-group bindchange="checkboxChange">
-            <checkbox style="margin-left:0px;" value="1"/>
-          </checkbox-group>
-          是否发送顾问老师
+          该信息只发送顾问老师
         </view> 
       </view> 
       <view class = "modal-footer"> 
