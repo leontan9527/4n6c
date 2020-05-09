@@ -109,8 +109,10 @@ Page({
     that.getAdviserMessagePage()//获取最新数据
   },
 
-  toSendAdviserInfo() {
-    wx.navigateTo({ url: '../sendAdviserInfo/sendAdviserInfo' })
+  toSendAdviserInfo(e) {
+
+    var id = e.currentTarget.dataset.id
+    wx.navigateTo({ url: '../sendAdviserInfo/sendAdviserInfo?id='+id })
   },
 
   //发送计划进程消息代码                    开始

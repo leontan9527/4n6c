@@ -1,22 +1,176 @@
-<button class = "show-btn" bindtap = "showDialogBtn" >弹窗</button> 
-<!--弹窗-->
-<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
-<view class = "modal-dialog" wx:if = "{{showModal}}" > 
-  <view class = "modal-title">填写进程内容</view>
-  <view class="modal-content">
-    <view class="modal-input">
-      <textarea bindinput="formInputChange" placeholder-class="input-holder" data-field="action" 
-      placeholder="请输入消息内容" style="height: 3.3em"></textarea>
+<wxs src="../../../util/dateutil.wxs" module="df" />
+<view class="page__bd">
+  <!--进程列表        开始-->
+  <view wx:if="{{showVoiceMask==false}}">
+    <!--顶部 发送顾问消息按钮  开始-->
+    <view class="kind-list">
+
+        <view class="planProgressList-flex-C">
+            <view class="containerItem">
+              <image class='planProgressfirstPic' src='/page/images/vocie/toux.png' ></image>   
+            </view>
+            <view class="containerItem">
+              <view class="planProgressUserName">
+               <label style="color:blue">{{adviserMessage.sendUserName}}</label>
+               <label style="margin-left:5px">来至</label>
+               <label style="color:green;margin-left:5px">{{adviserMessage.messageFromTo}}</label>
+              </view>
+            </view>
+        </view>
+
+        <view class="planProgressList-flex-C">
+            <view class="containerItem">
+              <view wx:if="{{adviserMessage.type==0}}" class="planProgressContent">{{adviserMessage.message}}</view>
+              <view wx:if="{{adviserMessage.type==1}}" class="planProgressContent">
+                <view class='output-audio'>
+                  <!-- 默认状态 -->
+                  <view class='audio' wx:if="{{adviserMessage.isBof==false}}" bindtap='audioPlay' data-key="{{key}}" data-id="{{adviserMessage.id}}" data-isBof="{{adviserMessage.isBof}}">
+                    <image class='ico' src='/page/images/vocie/yuying1.png' />
+                    <label class='time'>{{adviserMessage.timeLength}}</label>
+                  </view>
+                  
+                  <!-- 当前正在播放状态 -->
+                  <view class='audio' wx:if="{{adviserMessage.isBof==true}}" bindtap='audioStop' data-key="{{key}}" data-id="{{adviserMessage.id}}" data-isBof="{{adviserMessage.isBof}}">
+                    <image class='ico' src='/page/images/vocie/bof1.png' />
+                    <label class='time'>{{adviserMessage.timeLength}}</label>
+                  </view>
+              </view>
+
+            </view>
+          </view>
+        </view>
+
+        <view class="planProgressList-flex-C">
+            <view class="containerItem">
+              <view class="progressDate">{{adviserMessage.deptName}} {{df.formatDate(adviserMessage.createDate,2)}}</view>
+            </view>
+        </view>
     </view>
-    <view class="modal-checkbox">
-      <checkbox-group bindchange="checkboxChange">
-        <checkbox style="margin-left:5px;" value="1"/>
-      </checkbox-group>
-      是否发送顾问老师
-    </view> 
-  </view> 
-  <view class = "modal-footer"> 
-    <view class = "btn-cancel" bindtap="onCancel" data-status="cancel" >取消</view>
-    <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view> 
+    <!--顶部 发送顾问消息按钮  结束-->
+
+    <!--进程消息列表  开始-->
+    <view class="weui-panel weui-panel_access" wx:if="{{adviserMessageExchangeList.length > 0}}">
+      <view class="weui-panel__bd">
+        <view class="weui-media-box weui-media-box_text" wx:for-items="{{adviserMessageExchangeList}}" wx:key="id" wx:for-index="key">  
+
+          <view class="planProgressList-flex-C">
+            <view class="containerItem">
+              <image class='planProgressfirstPic' src='/page/images/vocie/toux.png' ></image>   
+            </view>
+            <view class="containerItem">
+              <view class="planProgressUserName">
+                <label style="color:blue">{{item.sendUserName}}</label>
+                <label style="margin-left:5px">来至</label>
+                <label style="color:green;margin-left:5px">{{item.cusOrgName}}</label>
+              </view>
+            </view>
+
+          </view>
+
+          <view class="planProgressList-flex-C">
+            <view class="containerItem">
+              <view wx:if="{{item.type==0}}" class="planProgressContent">{{item.message}}</view>
+              <view wx:if="{{item.type==1}}" class="planProgressContent">
+                <view class='output-audio'>
+                  <!-- 默认状态 -->
+                  <view class='audio' wx:if="{{item.isBof==false}}" bindtap='audioPlay' data-key="{{key}}" data-id="{{item.id}}" data-isBof="{{item.isBof}}">
+                    <image class='ico' src='/page/images/vocie/yuying1.png' />
+                    <label class='time'>{{item.timeLength}}</label>
+                  </view>
+                  
+                  <!-- 当前正在播放状态 -->
+                  <view class='audio' wx:if="{{item.isBof==true}}" bindtap='audioStop' data-key="{{key}}" data-id="{{item.id}}" data-isBof="{{item.isBof}}">
+                    <image class='ico' src='/page/images/vocie/bof1.png' />
+                    <label class='time'>{{item.timeLength}}</label>
+                  </view>
+                
+                </view>
+              </view>
+            </view>
+          </view>
+
+          <view class="planProgressList-flex-C" data-receiveuserid="{{item.sendUserId}}" bindtap="showWriteDialog">
+              <view class="containerItem">
+                <view class="progressDate">{{item.deptName}} {{df.formatDate(item.createDate,2)}}</view>
+              </view>
+              <view class="container-answer">
+                <label class="labelclsss1" wx:if="{{item.adviserMessageExchangeList.length>0}}">{{item.adviserMessageExchangeList.length}}回复</label>
+                <label class="labelclsss2" wx:else>回复</label>
+              </view>
+          </view>
+
+        </view>        
+      </view>            
+    </view>
+
   </view>
-</view> 
+  <!--进程消息列表  结束-->   
+
+  <!--点击发送语音消息喇叭，弹出发送消息框  开始-->
+  <view class='voice-mask' wx:if="{{showVoiceMask}}">
+
+    <view class='voice-enter-note'></view>
+    <image class='voice-enter-note-image' src='/page/images/vocie/bof2.png' ></image>
+    <image src='/image/record.png' class='voice-button' bindtouchstart="startRecording" bindtouchend="stopRecording" bindtouchmove="moveToCancle"></image>
+
+    <view class='voice-note'>
+        <text wx:if="{{startRecording==false}}" style="margin-left:14px;">长按下方按钮录音</text>
+        <text wx:if="{{startRecording==true}}" style="margin-left:14px;">手指上滑取消发送</text>
+    </view>
+
+    <view class='record-voice-animations' wx:if="{{showVoiceMask && startRecording && !cancleRecording}}">
+        <image src='/page/images/vocie/voice1.png' wx:if="{{recordAnimationNum===1}}"></image>
+        <image src='/page/images/vocie/voice2.png' wx:if="{{recordAnimationNum===2}}"></image>
+        <image src='/page/images/vocie/voice3.png' wx:if="{{recordAnimationNum===3}}"></image>
+        <image src='/page/images/vocie/voice4.png' wx:if="{{recordAnimationNum===4}}"></image>
+        <image src='/page/images/vocie/voice5.png' wx:if="{{recordAnimationNum===0}}"></image>
+    </view>
+
+    <view class='cancle-record-voice' wx:if="{{showVoiceMask && startRecording && cancleRecording}}">
+        <image src='/page/images/vocie/cancel.png'></image>
+    </view>
+  </view>
+  <!--点击发送语音消息喇叭，弹出发送消息框  结束-->
+
+  <!--点击发送文字消息  开始-->
+  <view class='write-mask' wx:if="{{showWriteMask}}">
+
+    <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showWriteMask}}"></view>
+    <view class = "modal-dialog" wx:if = "{{showWriteMask}}" >
+      <view class = "modal-title">填写进程内容</view>
+      <view class="modal-content">
+        <view class="modal-input">
+          <textarea bindinput="formInputChange" placeholder-class="place-holder" data-field="action" 
+           style="height: 5em" bindinput='getBlurInputValue'></textarea>
+        </view>
+        <view class="modal-checkbox">
+          该信息只发送顾问老师
+        </view> 
+      </view> 
+      <view class = "modal-footer"> 
+        <view class = "btn-cancel" bindtap="onCancel" data-status="cancel" >取消</view>
+        <view class="btn-confirm" bindtap="addCommentFun" data-status="confirm">确定</view> 
+      </view>
+    </view> 
+
+  </view>
+  <!--点击发送文字消息  结束-->
+
+  <!--固定在最下方的发送进程消息按钮  开始-->
+  <view style="position:fixed;bottom:0;width:100%">
+  
+    <view class="flex-Container">
+        <view class="containerItem" data-receiveuserid="{{adviserMessage.sendUserId}}" bindtap="showVoiceDialog">
+          <image class="firstPic" src="/image/record.png"></image>
+        </view>
+        <view class="containerItem">
+            <view class="flex-Container-view" data-receiveuserid="{{adviserMessage.sendUserId}}" bindtap="showWriteDialog">
+              <image class="secondPic" src="/page/images/write.png"></image>
+              <label class="writeclsss">写文字消息...</label>
+            </view>
+        </view>
+    </view>
+  </view>
+  <!--固定在最下方的发送进程消息按钮  结束-->
+  
+</view>

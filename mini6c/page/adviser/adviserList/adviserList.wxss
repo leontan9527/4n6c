@@ -37,11 +37,36 @@
   color: rgb(104, 113, 121);
 }
 
-.planProgressDeptName{
-  margin-top:9px;
+.progressDate{
+  margin-top:10px;
   height: 15px;
-  margin-left: 5px;
+  margin-left: 8px;
   color: rgb(104, 113, 121);
+}
+
+.container-answer{
+  height:22px;
+  width: 60px;
+  background-color:rgb(247, 242, 242);
+  margin-top:12px;
+  margin-left:8px;
+  border-radius:20px;
+}
+
+.labelclsss1{
+  width:60px;
+  margin-left: 13px;
+  margin-top:0px;
+  color: #666;
+  font-size:30rpx;
+}
+
+.labelclsss2{
+  width:60px;
+  margin-left: 16px;
+  margin-top:0px;
+  color: #666;
+  font-size:30rpx;
 }
 
 .planProgressContent{
@@ -55,6 +80,7 @@
   width: 150rpx; 
   margin: 30rpx; 
 }
+
 .output-audio .audio{ 
   padding: 20rpx; border-radius: 10rpx;
   background-color: #fff;
@@ -244,7 +270,7 @@
   width: 540rpx;
   overflow: hidden;
   position: fixed;
-  top: 50%;
+  top: 40%;
   left: 0;
   z-index:9999;
   background: #fff;
