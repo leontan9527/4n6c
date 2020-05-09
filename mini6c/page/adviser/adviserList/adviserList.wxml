@@ -58,7 +58,7 @@
                 <view class="progressDate">{{item.deptName}} {{df.formatDate(item.createDate,2)}}</view>
               </view>
               <view class="container-answer">
-                <label class="labelclsss1" wx:if="{{item.adviserMessageExchangeList.length>0}}">{{item.adviserMessageExchangeList.length}}回复</label>
+                <label class="labelclsss1" wx:if="{{item.exchangeCount>0}}">{{item.exchangeCount}}回复</label>
                 <label class="labelclsss2" wx:else>回复</label>
               </view>
             </view>
@@ -67,8 +67,8 @@
       </view>            
     </view>
 
-    <view class="loading" hidden="{{!searchLoading}}">正在载入更多...</view>  
-    <view class="loading complete" hidden="{{!searchLoadingComplete}}">已加载全部</view>
+    <view class="loading" wx:if="{{searchLoading}}">正在载入更多...</view>  
+    <view class="loading complete" wx:if="{{searchLoadingComplete}}">已加载全部</view>
   </view>
   <!--进程消息列表  结束-->   
 

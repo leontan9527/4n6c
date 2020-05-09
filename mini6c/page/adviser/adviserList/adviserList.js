@@ -12,7 +12,7 @@ Page({
       contentlist: [],   
       pageSize:10,//返回数据的个数 
       pageNumber:1,
-      searchLoading: true, //"上拉加载"的变量，默认false，隐藏 
+      searchLoading: false, //"上拉加载"的变量，默认false，隐藏 
       searchLoadingComplete: false,  //“没有数据”的变量，默认false，隐藏
       showVoiceMask: false,
       startRecording: false,
@@ -31,7 +31,7 @@ Page({
 
     const self = this
     var sessionId = app.globalData.sessionId
-    console.log('pageNumber=='+self.data.pageNumber)
+    
     if (sessionId) {
       wx.request({
         url: config.domain + '/adviserMessageCr/myAdviserMessagePage',
@@ -55,11 +55,14 @@ Page({
             if (self.data.pageNumber == 1) {
               contentlistTem = []
             }
- 
+            
             self.setData({
               contentlist: contentlistTem.concat(contentlist),
-              totalPage:totalPage
+              totalPage:totalPage,
+              searchLoading:false,
             })
+
+            console.log('searchLoading=='+self.data.searchLoading)
           }
         },
   
@@ -75,12 +78,13 @@ Page({
     console.log('上滑动onReachBottom')
     let that = this;  
 
-    if(that.data.searchLoading && !that.data.searchLoadingComplete){ 
+    if(!that.data.searchLoadingComplete){ 
       let pageNumber =that.data.pageNumber+1
       that.setData({  
-        pageNumber: pageNumber,  //每次触发上拉事件，把searchPageNum+1  
+        pageNumber: pageNumber,  //每次触发上拉事件，把searchPageNum+1 
+        searchLoading:true, 
       }); 
-      //console.log('pageNumber=='+pageNumber)
+
       if(pageNumber>=that.data.totalPage){
         that.setData({  
           searchLoadingComplete: true,  //每次触发上拉事件，把searchPageNum+1  
@@ -88,7 +92,8 @@ Page({
         });
       }
       that.getAdviserMessagePage()//获取最新数据
-    }    
+    }  
+    
   },
 
   // 下拉刷新
@@ -98,7 +103,7 @@ Page({
   
     that.setData({  
       pageNumber: 1,  //每次触发上拉事件，把searchPageNum+1  
-      searchLoading: true, //"上拉加载"的变量，默认false，隐藏 
+      searchLoading: false, //"上拉加载"的变量，默认false，隐藏 
       searchLoadingComplete: false  //“没有数据”的变量，默认false，隐藏
     });  
 
@@ -274,7 +279,7 @@ Page({
               },
               //参数绑定,可以向后台传递多个参数
               formData:{
-                upFileType:25,
+                upFileType:16,
                 //recordingtime: recordTime,//发送语音的时间
                 //facId: 11211,//业务id
                 //userId:1,//用户id
