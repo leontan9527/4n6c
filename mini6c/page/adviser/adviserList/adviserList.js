@@ -10,7 +10,6 @@ Page({
     this.setData({     
       icon_add: '../../images/write.png',
       contentlist: [],   
-      isFromSearch: true,   // 用于判断searchSongList数组是不是空数组，默认true，空的数组 
       pageSize:10,//返回数据的个数 
       pageNumber:1,
       searchLoading: true, //"上拉加载"的变量，默认false，隐藏 
@@ -80,14 +79,12 @@ Page({
       let pageNumber =that.data.pageNumber+1
       that.setData({  
         pageNumber: pageNumber,  //每次触发上拉事件，把searchPageNum+1  
-        isFromSearch: false  //触发到上拉事件，把isFromSearch设为为false  
       }); 
       //console.log('pageNumber=='+pageNumber)
       if(pageNumber>=that.data.totalPage){
         that.setData({  
           searchLoadingComplete: true,  //每次触发上拉事件，把searchPageNum+1  
           searchLoading:false,
-          isFromSearch: false  //触发到上拉事件，把isFromSearch设为为false  
         });
       }
       that.getAdviserMessagePage()//获取最新数据
@@ -101,7 +98,6 @@ Page({
   
     that.setData({  
       pageNumber: 1,  //每次触发上拉事件，把searchPageNum+1  
-      isFromSearch: false,  //触发到上拉事件，把isFromSearch设为为false  
       searchLoading: true, //"上拉加载"的变量，默认false，隐藏 
       searchLoadingComplete: false  //“没有数据”的变量，默认false，隐藏
     });  
