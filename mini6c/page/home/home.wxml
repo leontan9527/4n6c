@@ -61,7 +61,7 @@
                     <image src="{{icon_acheck}}" style="width: 50px; height: 50px; display: block"/>
                     <mp-badge content="{{checkDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
                 </view>
-                <view>执行检查</view>
+                <view>执行检查1</view>
                 <view wx:for-items="{{checkDb.items}}" wx:key="itemValue" class="msgItem">
                   {{item.itemTitle}}
                 </view>
