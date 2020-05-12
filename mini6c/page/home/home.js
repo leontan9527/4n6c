@@ -12,7 +12,8 @@ Page({
       image_hd: 'resources/pic/lng.jpg', 
       icon_check: '../images/check.png',
       icon_msg: '../images/msg.png',
-      icon_pro: '../images/process.png'
+      icon_pro: '../images/process.png',
+      icon_acheck: '../images/acheck.png'
     });
 
     var userInfo = app.globalData.userInfo
@@ -55,7 +56,8 @@ Page({
               planDb: result.data.data[0], 
               docDb: result.data.data[1],
               meetingDb: result.data.data[2],
-              adviserDb: result.data.data[3]
+              adviserDb: result.data.data[3],
+              checkDb: result.data.data[4]
             })
           },
 
