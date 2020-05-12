@@ -26,10 +26,12 @@
     "page/target/dashboard/dashboard",
     "page/target/targetBar/targetBar",
     "page/target/deptUserSoc/deptUserSoc",
-    "page/target/excuteWeek/excuteWeek",
-    "page/target/dashboard/excuteMonth/excuteMonth",
+    "page/target/excuteWeek/excuteWeek", 
     "page/target/excuteMonth/excuteMonth",
-    "page/target/targetValue/targetValue"
+    "page/target/targetValue/targetValue",
+    "page/document/documentList/documentList",
+    "page/document/documentDetail/documentDetail"
+
   ],
   "window": {
     "navigationBarTextStyle": "white",
