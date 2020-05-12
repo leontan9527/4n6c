@@ -1,0 +1,29 @@
+<web-view src="{{httpDomainAddr}}"></web-view>
+<!--
+<wxs src="../../../util/dateutil.wxs" module="df" />
+<view class="page__bd">
+   
+    <view class="weui-panel weui-panel_access">           
+        <view class="weui-panel__bd">
+
+          <view class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+              <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                  <view class="weui-media-box__title">主题:{{redDoc.name}}</view>
+                  <view class="weui-media-box__info">
+                      <view class="weui-media-box__info__meta">发件人:{{redDoc.operationDeptName}}</view>
+                      <view class="weui-media-box__info__meta">{{redDoc.publishDateDisply}}({{redDoc.df.formatDate(redDoc.publishDate)}})</view>   
+                  </view>
+                  <view class="weui-media-box__info">
+                      <view class="weui-media-box__info__meta">收件人:{{redDoc.userNames}}</view>
+                  </view>
+                  <view class="weui-media-box__info">
+                      {{redDoc.content}}
+                  </view>
+              </view>
+          </view>
+
+        </view>
+    </view>
+  
+</view>
+-->

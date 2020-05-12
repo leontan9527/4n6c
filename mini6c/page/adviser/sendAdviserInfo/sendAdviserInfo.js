@@ -1,6 +1,17 @@
 const config = require('../../../config')
 var tempFilePath
 const myaudio = wx.createInnerAudioContext()
+//苹果手机，静银模式 也能播放录音
+if (wx.setInnerAudioOption) {
+  wx.setInnerAudioOption({
+    obeyMuteSwitch: false,
+    autoplay: true
+  })
+}else {
+  myaudio.obeyMuteSwitch = false;
+  myaudio.autoplay = true;
+}
+
 const app = getApp()
 
 Page({
@@ -27,7 +38,7 @@ Page({
 
     const self = this
     var sessionId = app.globalData.sessionId
-    console.log('pageNumber=='+self.data.pageNumber)
+
     if (sessionId) {
       wx.request({
         url: config.domain + '/adviserMessageCr/allReplyAdviserMessageList',
@@ -92,6 +103,23 @@ Page({
       success(result) {
 
           if(result.data.success){
+
+            //更新DATE								
+            let pages = getCurrentPages()
+            let prevPage = pages[pages.length - 2]
+            var contentlist = prevPage.data.contentlist
+            let adviserMessageId = that.data.adviserMessageId
+
+            for (let i = 0; i < contentlist.length; i++ ){
+
+              if (adviserMessageId == contentlist[i].id){	
+                contentlist[i].exchangeCount=contentlist[i].exchangeCount+1
+              }
+            }
+            prevPage.setData({
+              contentlist:contentlist
+            })
+
             that.hideModal()
             //创建成功，获取最新消息数据
             that.setData({
@@ -230,7 +258,7 @@ Page({
               },
               //参数绑定,可以向后台传递多个参数
               formData:{
-                upFileType:25,
+                upFileType:16,
                 //recordingtime: recordTime,//发送语音的时间
                 //facId: 11211,//业务id
                 //userId:1,//用户id
@@ -259,6 +287,19 @@ Page({
                     },
                     success(result) {
              
+                        //更新DATE								
+                        let pages = getCurrentPages()
+                        let prevPage = pages[pages.length - 2]
+                        var contentlist = prevPage.data.contentlist
+                        for (let i = 0; i < contentlist.length; i++ ){
+                          if (that.data.adviserMessageId == contentlist[i].id){	
+                            contentlist[i].exchangeCount=contentlist[i].exchangeCount+1
+                          }
+                        }
+                        prevPage.setData({
+                          contentlist:contentlist
+                        })
+
                         if(result.data.success){
                           //创建成功，获取最新消息数据
                           that.allReplyAdviserMessageList()
@@ -341,7 +382,8 @@ Page({
     var that = this
     var id = e.currentTarget.dataset.id
     var key = e.currentTarget.dataset.key
-    var audioArr = that.data.contentlist
+
+    var audioArr = that.data.adviserMessageExchangeList
     
     //设置状态
     audioArr.forEach((v, i, array) => {
@@ -352,13 +394,14 @@ Page({
     })
 
     that.setData({
-      contentlist: audioArr,
+      adviserMessageExchangeList: audioArr,
       audKey: key,
     })
   
     myaudio.autoplay = true
     var audKey = that.data.audKey
     var vidSrc = config.domain + audioArr[audKey].message
+    console.log('vidSrc=='+vidSrc)
     myaudio.src = vidSrc
 
     myaudio.play();
@@ -373,7 +416,7 @@ Page({
       //console.log('onEnded======自动播放完毕');
       audioArr[key].isBof = false;
       that.setData({
-        contentlist: audioArr,
+        adviserMessageExchangeList: audioArr,
       })
       return
     })
@@ -383,7 +426,7 @@ Page({
       console.log(err); 
       audioArr[key].isBof = false;
       that.setData({
-        contentlist: audioArr,
+        adviserMessageExchangeList: audioArr,
       })
       return
     })
@@ -393,13 +436,13 @@ Page({
   audioStop(e){
     var that = this
     var key = e.currentTarget.dataset.key
-    var audioArr = that.data.contentlist
+    var audioArr = that.data.adviserMessageExchangeList
     //设置状态
     audioArr.forEach((v, i, array) => {
       v.isBof = false;
     })
     that.setData({
-      contentlist: audioArr
+      adviserMessageExchangeList: audioArr
     })
 
     myaudio.stop();

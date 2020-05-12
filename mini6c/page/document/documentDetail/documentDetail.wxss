@@ -1,0 +1,5 @@
+@import '../../common/weui.wxss';
+
+.page__bd {
+  padding-bottom: 40px;
+}

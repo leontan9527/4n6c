@@ -139,6 +139,10 @@ Page({
 
   toAdviserMessage() {
     wx.navigateTo({ url: '../adviser/adviserList/adviserList' })
+  },
+
+  toDocument() {
+    wx.navigateTo({ url: '../document/documentList/documentList' })
   }
   
 })
