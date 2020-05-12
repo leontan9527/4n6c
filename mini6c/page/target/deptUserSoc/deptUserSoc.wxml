@@ -13,21 +13,22 @@
   }
 </wxs>
 
-<view class="table-title">部门绩效表 </view>
 <view class="table">
   <view class="table-tr">
-    <view class="table-th">姓名</view>
+    <view class="table-th tleft">姓名</view>
     <view class="table-th">部门</view>   
     <view class="table-th">月份</view>    
     <view class="table-th">绩效</view>
   </view>
-
-  <view class="table-tr" wx:for="{{planScore}}" wx:key="id">
-    <view class="table-td">{{item.userName}}</view>
-    <view class="table-td">{{item.deptName}}</view>
-    <view class="table-td">{{item.seq}}</view>
-    <view class="table-td">{{item.score ? nf.toFixed(item.score) :""}}</view>    
-  </view>
+  <block wx:for="{{planScore}}" wx:key="id">
+    <view class="table-tr {{index % 2 == 0 ? 'bg-g' : ''}}" data-pid="{{item.id}}" bindtap="open">
+      <view class="table-td tleft">{{item.userName}} > </view>
+      <view class="table-td">{{item.deptName}}</view>
+      <view class="table-td">{{item.seq}}</view>
+      <view class="table-td">{{item.score ? nf.toFixed(item.score) :""}}</view>    
+    </view>
+    
+  </block>
 
    
 </view>

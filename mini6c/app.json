@@ -28,7 +28,8 @@
     "page/target/deptUserSoc/deptUserSoc",
     "page/target/excuteWeek/excuteWeek",
     "page/target/dashboard/excuteMonth/excuteMonth",
-    "page/target/excuteMonth/excuteMonth"
+    "page/target/excuteMonth/excuteMonth",
+    "page/target/targetValue/targetValue"
   ],
   "window": {
     "navigationBarTextStyle": "white",

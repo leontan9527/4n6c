@@ -15,23 +15,27 @@
 
 .table-tr {
   display: table-row; 
-  height: 36px; 
+  height: 42px; 
 }
 
 .table-th {
-  display: table-cell;  
-  border: 1rpx solid gray;
+  display: table-cell;   
   text-align: center;
-  vertical-align: middle;
+  vertical-align: middle;  
 }
 
 .table-td {
-  display: table-cell;
-  border: 1rpx solid gray;
+  display: table-cell;  
   text-align: center;
   vertical-align: middle;
-  color: #666;
+  color: #666;  
 }
+
+.bg-g{
+  background: #E6F3F9;
+}
+
+.tleft{text-align: left; padding-left: 10px;}
 
 
 .loading{  

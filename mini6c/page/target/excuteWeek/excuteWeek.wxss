@@ -42,15 +42,19 @@ ec-canvas {
 
 .table-th {
   display: table-cell;  
-  border: 1rpx solid gray;
   text-align: center;
   vertical-align: middle;
 }
 
 .table-td {
   display: table-cell;
-  border: 1rpx solid gray;
   text-align: center;
   vertical-align: middle;
   color: #666;
 }
+
+.bg-g{
+  background: #E6F3F9;
+}
+
+.tleft{text-align: left; padding-left: 10px;}

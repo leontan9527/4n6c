@@ -218,12 +218,20 @@ Page({
       });
     }
 
-    if (sType == 'SOC' && this.data.type == 1) {
+    if (sType == 'SOC' && (this.data.type == 1 || this.data.type == 2)) {
       //部门绩效列表 
       wx.navigateTo({
         url: '../deptUserSoc/deptUserSoc?type=' + this.data.type
       });
     }
+
+    if (sType == 'SOC' && this.data.type == 0 ) {
+      //个人绩效列表 
+      wx.navigateTo({
+        url: '../targetValue/targetValue?pid=' + pid
+      });
+    }
+
 
     if (sType == 'ACTW') {
       wx.navigateTo({
@@ -236,9 +244,6 @@ Page({
         url: '../excuteMonth/excuteMonth?type=' + this.data.type
       });
     }
-
-
-
 
   }
 

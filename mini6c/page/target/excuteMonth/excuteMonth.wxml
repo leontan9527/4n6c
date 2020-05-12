@@ -20,20 +20,22 @@
 <view class="table-title">{{title}}</view>
 <view class="table">
   <view class="table-tr">
-    <view class="table-th">月</view>
+    <view class="table-th tleft">月</view>
     <view class="table-th">计划项</view>   
     <view class="table-th">完成项</view>
     <view class="table-th">计划执行率</view>
     <view class="table-th">累计执行率</view> 
   </view>
 
-  <view class="table-tr" wx:for="{{excuteBullet}}">
-    <view class="table-td">{{item.month}}月</view>
-    <view class="table-td">{{item.planItemNumber ? item.planItemNumber : ""}}</view>
-    <view class="table-td">{{item.finishItemNumber ? item.finishItemNumber : ""}}</view>
-    <view class="table-td">{{item.planExcuteEfficiency ? nf.toFixed(item.planExcuteEfficiency * 100) + "%" : ""}}</view>    
-    <view class="table-td">{{item.cumulativeExcuteEEfficiency ? nf.toFixed(item.cumulativeExcuteEEfficiency* 100)  + "%": ""}}</view>
-  </view>
+  <block wx:for="{{excuteBullet}}" wx:key="month">
+    <view class="table-tr {{index % 2 == 0 ? 'bg-g' : ''}}">
+      <view class="table-td tleft">{{item.month}}月</view>
+      <view class="table-td">{{item.planItemNumber ? item.planItemNumber : ""}}</view>
+      <view class="table-td">{{item.finishItemNumber ? item.finishItemNumber : ""}}</view>
+      <view class="table-td">{{item.planExcuteEfficiency ? nf.toFixed(item.planExcuteEfficiency * 100) + "%" : ""}}</view>    
+      <view class="table-td">{{item.cumulativeExcuteEEfficiency ? nf.toFixed(item.cumulativeExcuteEEfficiency* 100)  + "%": ""}}</view>
+    </view>
+  </block>
  
 </view>
 

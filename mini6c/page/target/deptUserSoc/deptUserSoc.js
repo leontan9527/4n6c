@@ -13,8 +13,11 @@ Page({
     console.info("打开type：" + options.type);
     //type 2: compay, 1: dept, 0 : person
     var type = options.type
+    this.setData({
+      type:type
+    })
 
-    this.getPageDate(1)
+    this.getPageDate(type,1)
   },
 
   addMore(){
@@ -30,7 +33,7 @@ Page({
         currentPage: this.data.currentPage + 1
       })
 
-      this.getPageDate(this.data.currentPage)
+      this.getPageDate(this.data.type, this.data.currentPage)
     }
 
   },
@@ -48,12 +51,12 @@ Page({
         currentPage: this.data.currentPage + 1
       })
 
-      this.getPageDate(this.data.currentPage)
+      this.getPageDate(this.data.type,this.data.currentPage)
     }
   },
 
 
-  getPageDate(newPage){
+  getPageDate(type,newPage){
     //获取最新消息数据  
     const self = this
     var sessionId = app.globalData.sessionId
@@ -62,6 +65,7 @@ Page({
       wx.request({
         url: config.domain + '/targetCr/deptUserSoc',
         data: {
+          type: type,
           page: newPage
         },
         method: 'POST',
@@ -104,10 +108,12 @@ Page({
 
   },
 
-  onReady() {
-    setTimeout(function () {
-      // 获取 chart 实例的方式
-      // console.log(chart)
-    }, 2000);
+  open: function (e) {
+    
+    var pid = e.currentTarget.dataset.pid      
+    wx.navigateTo({
+      url: '../targetValue/targetValue?pid=' + pid
+    });
   }
+
 });
