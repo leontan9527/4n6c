@@ -30,7 +30,10 @@
     "page/target/excuteMonth/excuteMonth",
     "page/target/targetValue/targetValue",
     "page/document/documentList/documentList",
-    "page/document/documentDetail/documentDetail"
+    "page/document/documentDetail/documentDetail",
+    "page/meeting/meetingList/meetingList",
+    "page/meeting/meetingDetail/meetingDetail",
+    "page/meeting/meetingMinutes/meetingMinutes"
 
   ],
   "window": {
