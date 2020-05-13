@@ -15,7 +15,7 @@ Page({
       documentId: options.documentId,
       userId: options.userId,
       organizationId: options.organizationId,
-      httpDomainAddr:url
+      httpDomainDocumentAddr:url
     })
     //获取最新消息数据
     //this.getDocumentDetail()

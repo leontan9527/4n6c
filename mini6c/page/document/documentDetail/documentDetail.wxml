@@ -1,4 +1,4 @@
-<web-view src="{{httpDomainAddr}}"></web-view>
+<web-view src="{{httpDomainDocumentAddr}}"></web-view>
 <!--
 <wxs src="../../../util/dateutil.wxs" module="df" />
 <view class="page__bd">
