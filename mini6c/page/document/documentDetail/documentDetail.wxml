@@ -1,8 +1,9 @@
 <web-view src="{{httpDomainDocumentAddr}}"></web-view>
-<!--
+
 <wxs src="../../../util/dateutil.wxs" module="df" />
 <view class="page__bd">
    
+    <!-- 公文内容    开始-->
     <view class="weui-panel weui-panel_access">           
         <view class="weui-panel__bd">
 
@@ -24,6 +25,44 @@
 
         </view>
     </view>
+    <!-- 公文内容    开始-->
+
+    <!-- 公文附件    开始-->
+    <view class="weui-panel weui-panel_access">      
+        <view style="margin-left:10px;">附件：</view>     
+        <view class="weui-panel__bd">
+            <view wx:if="{{redDoc.uploadFiles.length>0}}">
+                <block wx:for-items="{{redDoc.uploadFiles}}" wx:key="id">
+                    <view data-documentid="{{item.documentId}}" data-userid="{{userId}}" data-organizationid="{{organizationId}}" bindtap="toDocumentDetail" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+                        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                            <view wx:if="{{item.suffixName== '.jpg' || item.suffixName == '.png' || item.suffixName == '.gif' || item.suffixName == '.jpeg'}}">
+                                <view class='imgList'> 
+                                    <view class='imgList-li'>
+                                        <image class='img' src='{{httpPreviewImageAddr}}/{{item.url}}' bindtap='previewImage' data-src="{{httpPreviewImageAddr}}/{{item.url}}">{{item.fileName}}</image>
+                                    </view>
+                                </view>
+                            </view>
+                            <view wx:elif="{{item.suffixName == '.doc' || item.suffixName == '.docx' || item.suffixName == '.ppt' || item.suffixName =='.pptx' || item.suffixName == '.xlsx' || item.suffixName == '.xlsx'}}">
+                                <view data-url="{{httpDownFileAddr}}?uuid={{item.uuid}}&uploadFileType=9&fileName={{item.fileName}}" data-type="{{item.suffixName}}" catchtap="downloadFile">{{item.fileName}}</view>
+                            </view>
+                            <view wx:else>
+                                 <view data-url="{{httpDownFileAddr}}?uuid={{item.uuid}}&uploadFileType=9&fileName={{item.fileName}}" data-type="{{item.suffixName}}" catchtap="downloadFile">{{item.fileName}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </block>
+            </view>
+            <view wx:else>
+                <view class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                        <view class="weui-media-box__desc">对不起,没有找到记录!</view>
+                    </view>
+                </view>
+            </view>
+
+        </view>
+    </view>
+    <!-- 公文附件    结束-->
   
 </view>
--->
+-
