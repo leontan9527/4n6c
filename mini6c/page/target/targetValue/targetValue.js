@@ -16,7 +16,7 @@ Page({
     var sessionId = app.globalData.sessionId
 
     if (sessionId) {
-      console.log('【targetCr/planTargetDetail=】', this.data.type)
+      console.log('【targetCr/planTargetDetail=】', pid)
       wx.request({
         url: config.domain + '/targetCr/planTargetDetail',
         data: {
