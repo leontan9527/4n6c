@@ -26,15 +26,15 @@
     "page/target/dashboard/dashboard",
     "page/target/targetBar/targetBar",
     "page/target/deptUserSoc/deptUserSoc",
-    "page/target/excuteWeek/excuteWeek", 
+    "page/target/excuteWeek/excuteWeek",
     "page/target/excuteMonth/excuteMonth",
     "page/target/targetValue/targetValue",
     "page/document/documentList/documentList",
     "page/document/documentDetail/documentDetail",
     "page/meeting/meetingList/meetingList",
     "page/meeting/meetingDetail/meetingDetail",
-    "page/meeting/meetingMinutes/meetingMinutes"
-
+    "page/meeting/meetingMinutes/meetingMinutes",
+    "page/needCheck/needCheck"
   ],
   "window": {
     "navigationBarTextStyle": "white",
