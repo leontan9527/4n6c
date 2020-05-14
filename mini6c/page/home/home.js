@@ -146,6 +146,7 @@ Page({
   },
   toMeeting() {
     wx.navigateTo({ url: '../meeting/meetingList/meetingList' })
+  },
   toNeedCheck() {
     wx.navigateTo({ url: '../needCheck/needCheck' })
   }
