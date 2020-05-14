@@ -144,9 +144,10 @@ Page({
   toDocument() {
     wx.navigateTo({ url: '../document/documentList/documentList' })
   },
-
   toMeeting() {
     wx.navigateTo({ url: '../meeting/meetingList/meetingList' })
+  toNeedCheck() {
+    wx.navigateTo({ url: '../needCheck/needCheck' })
   }
   
 })
