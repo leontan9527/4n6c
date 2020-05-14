@@ -8,7 +8,6 @@ Page({
    */
   onLoad: function (options) {
 
-    console.log('options.userId===='+options.userId)
     var url=config.domain + '/documentController/detailForMobilePage?id='+options.documentId+'&userId='+options.userId+'&organizationId='+options.organizationId
 
     this.setData({
@@ -18,9 +17,14 @@ Page({
       httpDomainDocumentAddr:url,
       httpDownFileAddr:config.domain + '/fileController/download',
       httpPreviewImageAddr:config.domain,
+      uuid:options.uuid,
+      suffixName:options.suffixName
     })
     //获取最新消息数据
     this.getDocumentDetail()
+    if(options.uuid!=undefined){
+        this.downloadFile()
+    }
   },
 
   getDocumentDetail: function (e) {
@@ -75,9 +79,10 @@ Page({
   */
   downloadFile: function (e) {
    
-    let type = e.currentTarget.dataset.type
-    let url = e.currentTarget.dataset.url
-
+    //let type = e.currentTarget.dataset.type
+    //let url = e.currentTarget.dataset.url
+    let type = this.data.suffixName
+    let url=this.data.httpDownFileAddr+'?uuid='+this.data.uuid+'&uploadFileType=9'
     let fileName = new Date().valueOf();
 
     wx.downloadFile({
