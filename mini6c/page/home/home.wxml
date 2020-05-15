@@ -32,7 +32,7 @@
             <mp-cell>
               <view slot="title" style="position: relative;margin-right: 10px;">
                   <image src="{{icon_pro}}" style="width: 50px; height: 50px; display: block"/>
-                  <mp-badge content="{{planDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
+                  <mp-badge wx:if="{{planDb.msgNum > 0}}" content="{{planDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
               </view>
               <view>计划</view>
               
@@ -46,7 +46,7 @@
             <mp-cell>
                 <view slot="title" style="position: relative;margin-right: 10px;">
                     <image src="{{icon_ggao}}" style="width: 50px; height: 50px; display: block"/>
-                    <mp-badge content="{{docDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
+                    <mp-badge wx:if="{{docDb.msgNum > 0}}" content="{{docDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
                 </view>
                 <view>公文</view>
                 <view wx:for-items="{{docDb.items}}" wx:key="itemValue" class="msgItem">
@@ -55,11 +55,11 @@
             </mp-cell>              
         </mp-cells>        
 
-        <mp-cells title="" bindtap="toNeedCheck">
+        <mp-cells title="" bindtap="toNeedCheck" wx:if="{{checkDb}}">
             <mp-cell>
                 <view slot="title" style="position: relative;margin-right: 10px;">
                     <image src="{{icon_acheck}}" style="width: 50px; height: 50px; display: block"/>
-                    <mp-badge content="{{checkDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
+                    <mp-badge wx:if="{{checkDb.msgNum > 0}}" content="{{checkDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
                 </view>
                 <view>执行检查</view>
                 <view wx:for-items="{{checkDb.items}}" wx:key="itemValue" class="msgItem">
@@ -73,7 +73,7 @@
             <mp-cell>
                 <view slot="title" style="position: relative;margin-right: 10px;">
                     <image src="{{icon_meeting}}" style="width: 50px; height: 50px; display: block"/>
-                    <mp-badge content="{{meetingDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
+                    <mp-badge wx:if="{{meetingDb.msgNum > 0}}" content="{{meetingDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
                 </view>
                 <view>会议</view>
                 <view wx:for-items="{{meetingDb.items}}" wx:key="itemValue" class="msgItem">
@@ -86,7 +86,7 @@
             <mp-cell>
                 <view slot="title" style="position: relative;margin-right: 10px;">
                     <image src="{{icon_check}}" style="width: 50px; height: 50px; display: block"/>
-                    <mp-badge content="{{adviserDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
+                    <mp-badge wx:if="{{adviserDb.msgNum > 0}}" content="{{adviserDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
                 </view>
                 <view>顾问信息</view>
                 <view wx:for-items="{{adviserDb.items}}" wx:key="itemValue" class="msgItem">

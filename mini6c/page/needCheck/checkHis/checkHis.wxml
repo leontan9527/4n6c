@@ -35,9 +35,13 @@
     <view class="kind-list">
       <view class="kind-list-item">
         <view class="kind-list-item-hd">
-          <view class="kind-list-text"> 前一月 </view> 
-          <view class="kind-list-text"> {{title}} </view> 
-          <view class="nav-textRight">后一月</view>           
+          <view class="kind-list-text" bindtap="preMonth"> 前一月 </view> 
+          <view class="kind-list-text">             
+                <picker mode="date" fields="month" data-field="{{theDate}}" bindchange="bindDateChange" >
+                    <view>{{theDateStr}}</view>
+                </picker>            
+          </view> 
+          <view class="nav-textRight" bindtap="nextMonth">后一月</view>           
         </view>
       </view>
 
@@ -153,7 +157,12 @@
 
     <view class="emptyShow"  wx:if="{{num == 0 }}">
       <image class="image-center" src="../../../image/empty.png"></image>
-    </view>    
+    </view>  
+
+    <view class="check-his" wx:if="{{num == 0 }}">            
+        <view class="his-text" >当前月没有检查的数据</view>   
+    </view>
+
 
   </view>    
 </view>

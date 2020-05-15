@@ -183,72 +183,86 @@ Page({
         mask: true,
         duration: 2000
       })      
-      return;
-    }
+      return
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: "确认所有工作结果吗？",
+        cancelText: '我再想想',
+        confirmText: '确认继续',
+        success: function (res) {
+          if (res.confirm) { 
+            var sessionId = app.globalData.sessionId
+            if (sessionId) {
 
-    var sessionId = app.globalData.sessionId
-    if (sessionId) {
+              wx.request({
+                url: config.domain + '/check/checkAll',
+                data: {
+                  kpiIds: skpiIds, 
+                  actionIds: sactionIds
+                },
+                method: 'POST',
+                header: {
+                  'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+                  'Cookie': 'JSESSIONID=' + sessionId
+                },
+                success(result) {
+                  if (result.data.success) {
+                    var num = 0
+                    var title = "当前待检查项"
 
-      wx.request({
-        url: config.domain + '/check/checkAll',
-        data: {
-          kpiIds: skpiIds, 
-          actionIds: sactionIds
-        },
-        method: 'POST',
-        header: {
-          'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
-          'Cookie': 'JSESSIONID=' + sessionId
-        },
-        success(result) {
-          if (result.data.success) {
-            var num = 0
-            var title = "当前待检查项"
+                    for (let i = 0; i < kpiPage.length; i++) {
+                      if (kpiPage[i].checkStatus != 1) {                
+                        kpiPage[i].checkStatus = 1;
+                      }
+                    }
+                    
+                    for (let i = 0; i < actionPage.length; i++) {
+                      if (actionPage[i].checkStatus != 1) {                
+                        actionPage[i].checkStatus = 1;
+                      }
+                    }
 
-            for (let i = 0; i < kpiPage.length; i++) {
-              if (kpiPage[i].checkStatus != 1) {                
-                kpiPage[i].checkStatus = 1;
-              }
+
+                    self.setData({
+                      kpiPage: kpiPage,
+                      actionPage: actionPage,
+                      num: num,
+                      title: title + " ( " + num + " )"
+                    })
+
+                    wx.showToast({
+                      title: '检查完成',
+                      icon: 'success',
+                      mask: false,
+                      duration: 1000
+                    })
+
+                  } else {
+                    wx.showToast({
+                      title: '检查失败',
+                      icon: 'failed',
+                      image: '../../image/failed.png',
+                      mask: true,
+                      duration: 2000
+                    })
+                  }          
+
+                },
+
+                fail({ errMsg }) {
+                  console.log('【plan/detailMonth fail】', errMsg)
+                }
+              })
             }
-            
-            for (let i = 0; i < actionPage.length; i++) {
-              if (actionPage[i].checkStatus != 1) {                
-                actionPage[i].checkStatus = 1;
-              }
-            }
 
-
-            self.setData({
-              kpiPage: kpiPage,
-              actionPage: actionPage,
-              num: num,
-              title: title + " ( " + num + " )"
-            })
-
-            wx.showToast({
-              title: '检查完成',
-              icon: 'success',
-              mask: false,
-              duration: 1000
-            })
-
-          } else {
-            wx.showToast({
-              title: '检查失败',
-              icon: 'failed',
-              image: '../../image/failed.png',
-              mask: true,
-              duration: 2000
-            })
-          }          
-
-        },
-
-        fail({ errMsg }) {
-          console.log('【plan/detailMonth fail】', errMsg)
+          } else if (res.cancel) {
+            return
+          }
         }
-      })
+      }) 
     }
+
 
   },
   goHis: function () {    
