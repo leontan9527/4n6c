@@ -1,66 +1,69 @@
-// page/meeting/meetingDetail/meetingDetail.js
+const config = require('../../../config')
+const app = getApp()
+
 Page({
-
-  /**
-   * 页面的初始数据
-   */
-  data: {
-
-  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
 
+    this.setData({     
+      meetingId:options.meetingId
+    })
+
+    //获取最新消息数据
+    this.meetingDetail()
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
+  meetingDetail: function (e) {
 
+    const self = this
+    var sessionId = app.globalData.sessionId
+
+    if (sessionId) {
+      wx.request({
+        url: config.domain + '/meetingCr/meetingDetail',
+        data: {
+          meetingId:self.data.meetingId
+        },
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          'Cookie': 'JSESSIONID=' + sessionId
+        },
+        success(result) {
+  
+          if(result.data.success){
+            
+            var header=result.data.header
+            var attend=result.data.attend
+            var not_attend=result.data.not_attend
+            var ccUser=result.data.ccUser
+            var agendas=result.data.agendas
+
+            self.setData({
+              header: header,
+              attend:attend,
+              not_attend:not_attend,
+              ccUser:ccUser,
+              agendas:agendas,
+            })
+            
+          }
+        },
+  
+        fail({ errMsg }) {
+          console.log('【meetingDetail/meetingDetail fail】', errMsg)
+        }
+      })
+    }
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  toMeetingMinutes: function (e) {
+    
+    var meetingId = e.currentTarget.dataset.meetingid
+    wx.navigateTo({ url: '../meetingMinutes/meetingMinutes?meetingId='+ this.data.meetingId })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

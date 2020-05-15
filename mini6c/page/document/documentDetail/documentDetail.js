@@ -21,57 +21,9 @@ Page({
       suffixName:options.suffixName
     })
     //获取最新消息数据
-    this.getDocumentDetail()
     if(options.uuid!=undefined){
         this.downloadFile()
     }
-  },
-
-  getDocumentDetail: function (e) {
-
-    const self = this
-    var sessionId = app.globalData.sessionId
-    
-    if (sessionId) {
-      wx.request({
-        url: config.domain + '/documentCr/documentDetail',
-        data: {
-          id:self.data.documentId,
-          userId:self.data.userId,
-          organizationId:self.data.organizationId
-        },
-        method: 'POST',
-        header: {
-          'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
-          'Cookie': 'JSESSIONID=' + sessionId
-        },
-        success(result) {
-  
-          if(result.data.success){
-            
-            var redDoc=result.data.data
-            
-            self.setData({
-              redDoc: redDoc,
-            })
-
-            console.log('redDoc=='+self.data.redDoc)
-          }
-        },
-  
-        fail({ errMsg }) {
-          console.log('【plan/list fail】', errMsg)
-        }
-      })
-    }
-  },
-
-  getBlurInputValue: function(e) {
-    
-    var value = e.detail.value
-    this.setData({
-      title:value
-    })
   },
 
    /**

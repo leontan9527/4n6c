@@ -1,1 +1,51 @@
-/* page/meeting/meetingDetail/meetingDetail.wxss */
+@import '../../common/weui.wxss';
+
+.page__bd {
+  padding-bottom: 40px;
+}
+
+.flex-Container{
+  height:45px;
+  width: 100%;
+  display:flex;
+  flex-direction:row;
+  justify-content:space-between;
+  margin-top:10px;
+  border-style: solid;
+  border-width: 1px 0px 1px 0px;
+  border-color: #C0C0C0;
+}
+
+.containerItem {
+  height:100%;
+  margin-top: 11PX;
+}
+
+.flex-Container-content{
+  height:40px;
+  width: 100%;
+  display:flex;
+  flex-direction:row;
+  justify-content:flex-start;
+  margin-top:2px;
+  border-style: solid;
+  border-width: 0px 0px 1px 0px;
+  border-color: #C0C0C0;
+}
+
+.flex-content-split {
+  border-style: solid;
+  border-width: 0px 1px 0px 0px;
+  border-color: #C0C0C0;
+  margin-bottom: 2px;
+}
+
+.flex-content-i1 {
+  margin-left:10px;
+  width:75px;
+}
+
+.flex-content-i2 {
+  margin-left:10px;
+}
+
