@@ -1,2 +1,1 @@
-<!--page/meeting/meetingMinutes/meetingMinutes.wxml-->
-<text>page/meeting/meetingMinutes/meetingMinutes.wxml</text>
+<web-view src="{{httpDomainDocumentAddr}}"></web-view>

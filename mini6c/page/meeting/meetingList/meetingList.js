@@ -27,7 +27,7 @@ Page({
 
     const self = this
     var sessionId = app.globalData.sessionId
-    
+
     if (sessionId) {
       wx.request({
         url: config.domain + '/meetingCr/myMeetingPage',
@@ -47,19 +47,24 @@ Page({
           if(result.data.success){
             
             var contentlist=result.data.items
+            console.log('contentlist=='+contentlist+'   pageNumber='+self.data.pageNumber+'   contentlistTem='+contentlistTem)
+        
             var totalPage=result.data.totalPage
 
             if (self.data.pageNumber == 1) {
               contentlistTem = []
             }
             
+            if(contentlist!=null){
+              contentlist=contentlistTem.concat(contentlist)
+            }
+
             self.setData({
-              contentlist: contentlistTem.concat(contentlist),
+              contentlist: contentlist,
               totalPage:totalPage,
               searchLoading:false,
             })
-
-            console.log('contentlist=='+self.data.contentlist)
+            
           }
         },
   
@@ -73,6 +78,13 @@ Page({
   getBlurInputValue: function(e) {
     
     var value = e.detail.value
+    if(value==''){
+      this.setData({
+        pageNumber:1,
+        searchLoading: false, //"上拉加载"的变量，默认false，隐藏 
+        searchLoadingComplete: false,  //“没有数据”的变量，默认false，隐藏
+      })
+    }
     this.setData({
       name:value
     })
