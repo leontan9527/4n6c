@@ -16,7 +16,7 @@ Page({
     var sessionId = app.globalData.sessionId
 
     if (sessionId) {
-      console.log('【targetCr/planTargetDetail=】', pid)
+      //console.log('【targetCr/planTargetDetail=】', pid)
       wx.request({
         url: config.domain + '/targetCr/planTargetDetail',
         data: {
@@ -28,7 +28,7 @@ Page({
           'Cookie': 'JSESSIONID=' + sessionId
         },
         success(result) {
-          console.log('【targetCr/planTargetDetail=】', result.data.data.targets)
+          //console.log('【targetCr/planTargetDetail=】', result.data.data.targets)
           
           var targets = result.data.data.targets 
           var title = result.data.data.title

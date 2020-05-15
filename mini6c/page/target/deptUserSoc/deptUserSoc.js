@@ -10,7 +10,7 @@ Page({
   },
   onLoad: function (options) {
     
-    console.info("打开type：" + options.type);
+    //console.info("打开type：" + options.type);
     //type 2: compay, 1: dept, 0 : person
     var type = options.type
     this.setData({
@@ -39,7 +39,7 @@ Page({
   },
   // 上滑加载更多数据
   onReachBottom: function (event) {
-    console.log('上滑动onReachBottom')
+    //console.log('上滑动onReachBottom')
     if (this.data.currentPage == this.data.totalPage) {
       /*wx.showToast({
         title: '没有更多啦...',

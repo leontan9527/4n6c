@@ -11,7 +11,7 @@ Page({
   },
 
   onLoad: function (options) {
-    console.info("onLoad 被调用， this.data.type = " + this.data.type);
+    //console.info("onLoad 被调用， this.data.type = " + this.data.type);
     //type 2: compay, 1: dept, 0 : person
 
     //获取最新消息数据
@@ -19,7 +19,7 @@ Page({
     var sessionId = app.globalData.sessionId
 
     if (sessionId) {
-      console.log('【targetCr/domain=】', this.data.type)
+      //console.log('【targetCr/domain=】', this.data.type)
       wx.request({
         url: config.domain + '/targetCr/domain',
         data: {
@@ -210,7 +210,7 @@ Page({
     var sType = e.currentTarget.dataset.type
     var pid = e.currentTarget.dataset.pid
 
-    console.info("数据ID=" + pid)
+    //console.info("数据ID=" + pid)
     if (sType == 'TAR') {
       wx.navigateTo({
         url: '../targetBar/targetBar?type=' + this.data.type + '&pid=' + pid
