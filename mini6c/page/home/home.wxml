@@ -55,11 +55,11 @@
             </mp-cell>              
         </mp-cells>        
 
-        <mp-cells title="" bindtap="toNeedCheck">
+        <mp-cells title="" bindtap="toNeedCheck" wx:if="{{checkDb}}">
             <mp-cell>
                 <view slot="title" style="position: relative;margin-right: 10px;">
                     <image src="{{icon_acheck}}" style="width: 50px; height: 50px; display: block"/>
-                    <mp-badge content="{{checkDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
+                    <mp-badge wx:if="{{checkDb.msgNum > 0}}" content="{{checkDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
                 </view>
                 <view>执行检查</view>
                 <view wx:for-items="{{checkDb.items}}" wx:key="itemValue" class="msgItem">
