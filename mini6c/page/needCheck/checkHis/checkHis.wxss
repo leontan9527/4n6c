@@ -1,3 +1,4 @@
+@import '../../common.wxss';
 
 .nav-textRight{color: #888888;text-align: right; padding-right: 15px;}
 .nav-opRight{padding-right: 10px;}
@@ -25,9 +26,7 @@
   
 }
 
-.his-text{color:cadetblue;}
-
-
+.his-text{color:#777;}
 
 .navigator-box {
   opacity: 0;
