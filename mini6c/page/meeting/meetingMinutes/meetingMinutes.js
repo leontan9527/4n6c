@@ -32,7 +32,7 @@ Page({
     //let type = e.currentTarget.dataset.type
     //let url = e.currentTarget.dataset.url
     let type = this.data.suffixName
-    let url=this.data.httpDownFileAddr+'?uuid='+this.data.uuid+'&uploadFileType=9'
+    let url=this.data.httpDownFileAddr+'?uuid='+this.data.uuid+'&uploadFileType=2'
     let fileName = new Date().valueOf();
 
     wx.downloadFile({

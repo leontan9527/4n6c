@@ -3,7 +3,16 @@ const app = getApp()
 
 Page({
 
-  onLoad: function () {
+  onLoad: function (options) {
+    /*
+      有些页面需要在选择用户的时候执行操作后台服务器的操作，因此在调用人员选择
+      器的页面传递参数给人员选择器页面,通过参数类型判断是否与后台服务器进行交付
+    */
+    this.setData({     
+      type:options.type,
+      refrenceId: options.refrenceId,
+      refrenceCode:options.refrenceCode
+    })
 
     //检查用户表时间撮，如果相同，从本地获取用户表 
     var lastModifyUserTime = wx.getStorageSync('GLB_LastModifyUserTime')
@@ -71,7 +80,6 @@ Page({
   },
 
   radioChange(e) {
-    console.log('radio发生change事件，携带value值为：', e.detail.value)
 
     const items = this.data.items
     for (let i = 0, len = items.length; i < len; ++i) {
@@ -82,19 +90,60 @@ Page({
       items
     })
   },
+
   selectOneUser: function (e) {
+
     var id = e.currentTarget.dataset.id
     var name = e.currentTarget.dataset.name
     
-    let pages = getCurrentPages();
-    let prevPage = pages[pages.length - 2]
-    prevPage.setData({
-      userId: id,
-      userName: name, 
-      [`formData.userId`]: id
-    })
-    wx.navigateBack({
-      delta: 1
-    })
+    //如果是会议回执调用人员选取器，则需要调用会议回执后台接口
+    if(this.data.type==1){
+      this.replyStatusFun(id,name)
+    }else{
+      let pages = getCurrentPages();
+      let prevPage = pages[pages.length - 2]
+      prevPage.setData({
+        userId: id,
+        userName: name, 
+        [`formData.userId`]: id
+      })
+      wx.navigateBack({
+        delta: 1
+      })
+    }
+  
   },
+
+  //修改会议回执状态
+  replyStatusFun:function(userId,name){
+
+    var that = this;
+    var sessionId = app.globalData.sessionId
+    
+    wx.request({
+      url: config.domain + '/meetingCr/replayMeeting',
+      data : {
+        meetingId: that.data.refrenceId,
+        replayStatus:that.data.refrenceCode,
+        assignUserId:userId,
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        'Cookie': 'JSESSIONID=' + sessionId
+      },
+      success(result) {
+          if(result.data.success){
+            wx.redirectTo({ url: '../../meeting/meetingDetail/meetingDetail?meetingId='+ that.data.refrenceId})
+          }else{ 
+            //创建失败，提示错误信息
+          }
+      },
+      fail({ errMsg }) {
+        //创建失败提示错误信息代码开始
+      }
+    })
+     
+  },
+
 })
