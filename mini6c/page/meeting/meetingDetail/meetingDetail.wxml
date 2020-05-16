@@ -6,7 +6,10 @@
               <view style="margin-left:10px;">{{header.name}}</view>
             </view>
             <view class="containerItem">
-                <view style="margin-right:10px;color:#33FF33" bindtap="toMeetingMinutes">
+                <view wx:if="{{header.status==3}}" style="margin-right:10px;" bindtap="showWriteDialog">
+                  会议回执(默认参加)
+                </view>
+                <view wx:elif="{{header.status==4 || header.status==5}}" style="margin-right:10px;color:#33FF33" bindtap="toMeetingMinutes">
                   会议纪要
                 </view>
             </view>
@@ -106,4 +109,31 @@
             </view>
         </view>  
         <!-- 会议议程 结束-->
+
+        <!--点击发送文字消息  开始-->
+        <view class='write-mask' wx:if="{{showWriteMask}}">
+
+          <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showWriteMask}}"></view>
+          <view class = "modal-dialog" wx:if = "{{showWriteMask}}" >
+            <view class = "modal-title">填选择</view>
+            <radio-group bindchange="radioChange">
+              <view class="modal-content">
+                <view class="modal-checkbox">
+                  <radio value="3" checked/>
+                  指派人参加
+                </view> 
+                <view class="modal-checkbox">
+                  <radio value="2"/>
+                  不参加
+                </view> 
+              </view>
+            </radio-group>
+            <view class = "modal-footer"> 
+              <view class = "btn-cancel" bindtap="onCancel" data-status="cancel" >取消</view>
+              <view class="btn-confirm" bindtap="replyStatusFun" data-status="confirm">确定</view> 
+            </view>
+          </view> 
+
+        </view>
+        <!--点击发送文字消息  结束-->
 </view>
