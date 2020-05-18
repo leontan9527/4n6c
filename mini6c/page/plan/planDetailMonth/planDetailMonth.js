@@ -307,7 +307,7 @@ Page({
     var reasonableValue = e.currentTarget.dataset.reasonablevalue
     var weight = e.currentTarget.dataset.weight
 
-    wx.navigateTo({ url: '../planIntAValue/planIntAValue?id=' + id +'&kpiName='+kpiName+ '&targetIndexId='+targetIndexId+'&unit='+unit+'&reasonableValue='+reasonableValue+'&weight='+weight}) 
+    wx.navigateTo({ url: '../planIntAValue/planIntAValue?id=' + id +'&kpiName='+kpiName+ '&targetIndexId='+targetIndexId+'&unit='+unit+'&reasonableValue='+reasonableValue+'&weight='+weight+'&toType=0'}) 
   },
 
    //跳转到计算IntB("直接加减分(月度无权重)类",7) 页面
@@ -320,7 +320,7 @@ Page({
     var unit = e.currentTarget.dataset.unit
     var reasonableValue = e.currentTarget.dataset.reasonablevalue
 
-    wx.navigateTo({ url: '../planIntBValue/planIntBValue?id=' + id +'&tdeptTdMonthId='+tdeptTdMonthId+'&kpiName='+kpiName+ '&targetIndexId='+targetIndexId+'&unit='+unit+'&reasonableValue='+reasonableValue})
+    wx.navigateTo({ url: '../planIntBValue/planIntBValue?id=' + id +'&tdeptTdMonthId='+tdeptTdMonthId+'&kpiName='+kpiName+ '&targetIndexId='+targetIndexId+'&unit='+unit+'&reasonableValue='+reasonableValue+'&toType=0'})
   },
 
   //跳转到计算电网指标页面
@@ -330,7 +330,7 @@ Page({
     var kpiName = e.currentTarget.dataset.kpiname
     var targetIndexId = e.currentTarget.dataset.targetindexid
 
-    wx.navigateTo({ url: '../planNoVoteValue/planNoVoteValue?id=' + id +'&kpiName='+kpiName+ '&targetIndexId='+targetIndexId+'&isMonthRules=true'})
+    wx.navigateTo({ url: '../planNoVoteValue/planNoVoteValue?id=' + id +'&kpiName='+kpiName+ '&targetIndexId='+targetIndexId+'&isMonthRules=true'+'&toType=0'})
   },
 
   //发送计划进程消息代码                    开始

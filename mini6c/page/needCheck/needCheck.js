@@ -269,7 +269,151 @@ Page({
     wx.navigateTo({
       url: 'checkHis/checkHis'
     });
-  }
+  },
+
+  //跳转到计算IntA("完成率项次扣分类",6) 页面
+  toPlanIntAValue: function (e) {
+
+    var id = e.currentTarget.dataset.kpiid
+    var kpiName = e.currentTarget.dataset.kpiname
+    var targetIndexId = e.currentTarget.dataset.targetindexid
+    var unit = e.currentTarget.dataset.unit
+    var reasonableValue = e.currentTarget.dataset.reasonablevalue
+    var weight = e.currentTarget.dataset.weight
+
+    wx.navigateTo({ url: '../plan/planIntAValue/planIntAValue?id=' + id +'&kpiName='+kpiName+ '&targetIndexId='+targetIndexId+'&unit='+unit+'&reasonableValue='+reasonableValue+'&weight='+weight+'&toType=1'}) 
+  },
+
+   //跳转到计算IntB("直接加减分(月度无权重)类",7) 页面
+  toPlanIntBValue: function (e) {
+
+    var id = e.currentTarget.dataset.kpiid
+    var kpiName = e.currentTarget.dataset.kpiname
+    var targetIndexId = e.currentTarget.dataset.targetindexid
+    var unit = e.currentTarget.dataset.unit
+    var reasonableValue = e.currentTarget.dataset.reasonablevalue
+
+    wx.navigateTo({ url: '../plan/planIntBValue/planIntBValue?id=' + id +'&kpiName='+kpiName+ '&targetIndexId='+targetIndexId+'&unit='+unit+'&reasonableValue='+reasonableValue+'&toType=1'})
+  },
+
+  //跳转到计算电网指标页面
+  toPlanNoVoteValue: function (e) {
+
+    var id = e.currentTarget.dataset.kpiid
+    var kpiName = e.currentTarget.dataset.kpiname
+    var targetIndexId = e.currentTarget.dataset.targetindexid
+    var planCycle = e.currentTarget.dataset.plancycle
+    var isMonthRules
+    if(planCycle==1){
+      isMonthRules=true;
+    }else{
+      isMonthRules=false;
+    }
+    console.log('targetIndexId=='+targetIndexId+'    kpiName==='+kpiName)
+
+    wx.navigateTo({ url: '../plan/planNoVoteValue/planNoVoteValue?id=' + id +'&kpiName='+kpiName+ '&targetIndexId='+targetIndexId+'&isMonthRules='+isMonthRules+'&toType=1'})
+  },
   
+  getBlurInputValue: function(e) {
+    
+    var value = e.detail.value
+    this.setData({
+      actualVal:value
+    })
+  },
+
+  //显示检查实际值消息对话框   开始
+  checkKpiValueDialog:function(e){
+
+    var kpiId = e.currentTarget.dataset.kpiid
+    var kpiName = e.currentTarget.dataset.kpiname
+    var userActualValue=e.currentTarget.dataset.useractualvalue
+    var planCycle = e.currentTarget.dataset.plancycle
+    var isMonthRules;//ture 表示使用月度绩效考核规则，false年度绩效考核规则
+    if(planCycle==1){
+      isMonthRules=true;
+    }else{
+      isMonthRules=false;
+    }
+    this.setData({
+      kpiId:kpiId,
+      isMonthRules:isMonthRules,
+      kpiName:kpiName,
+      userActualValue:userActualValue
+    })
+    if(this.data.showWriteMask){
+      this.setData({
+        showWriteMask:false,
+      })
+    }else{
+      this.setData({
+        showWriteMask:true,
+      })
+    }
+  },
+
+  //输入实际值时，调用的方法       开始
+  checkKpiValue(e) {
+
+    const self = this
+    var sessionId = app.globalData.sessionId
+
+    var kpiId = self.data.kpiId
+    var isMonthRules = self.data.isMonthRules
+    var actualVal=self.data.actualVal
+
+    wx.request({
+      url: config.domain + '/check/checkKpiActualValue',
+      data : {
+        id:kpiId,
+        isNoVote: false,
+        isMonthRules: isMonthRules,
+        actualValue: actualVal
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        'Cookie': 'JSESSIONID=' + sessionId
+      },
+      success(result) {
+
+          self.hideModal()
+          //if(result.data.success==true){
+                                        
+            //更新DATE								
+            var kpiPage=self.data.kpiPage;	 																	
+            for (let i = 0; i < kpiPage.length; i++ ){						
+                if (kpiId == kpiPage[i].id){	
+                  kpiPage[i].actualValue = actualVal;
+                  kpiPage[i].checkStatus = 1;
+                  break;
+                }  
+            }	
+            self.setData({
+              kpiPage: kpiPage
+            })
+          //}
+      },
+      fail({ errMsg }) {
+        //创建失败提示错误信息代码开始
+      }
+    })
+  },
+
+  //隐藏模态对话框
+  hideModal: function() {
+    this.setData({
+      showWriteMask: false,
+      kpiId:'',
+      planCycle:'',
+      kpiName:'',
+    });
+  },
+
+  //对话框取消按钮点击事件
+  onCancel: function() {
+    this.hideModal()
+  },
+
 
 })

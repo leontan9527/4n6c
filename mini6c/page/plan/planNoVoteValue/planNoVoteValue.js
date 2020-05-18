@@ -5,11 +5,11 @@ Page({
   
   onLoad: function(options){   
     
-    console.info('kpiName==='+options.kpiName)
     this.setData({     
         id: options.id,  
         kpiName: options.kpiName, 
         targetIndexId: options.targetIndexId, 
+        toType:options.toType,//0:从计划页面跳转过来，1从检查页面跳转过来
         isMonthRules:options.isMonthRules,
         noVotes:[]
     })
@@ -202,9 +202,16 @@ Page({
           if(flag==0){
             score=-score;
           }
-                          
+
+          var toUrl
+          if(self.data.toType==0){
+            toUrl=config.domain + '/planCr/savekpiActualValue'
+          }else{
+            toUrl=config.domain + '/check/checkKpiActualValue'
+          }
+
           wx.request({
-            url: config.domain + '/planCr/savekpiActualValue',
+            url: toUrl,
             data : {
               id:kpiId,
               isNoVote: true,
@@ -221,41 +228,14 @@ Page({
             success(result) {
                 //填写成功自动返回上级页面
                 if(result.data.success==true){
-
-                  var scoreValue = result.data.data[0].toFixed(2);
-                  var status = result.data.data[2];                               
-                  //更新DATE								
-                  let pages = getCurrentPages()
-                  let prevPage = pages[pages.length - 2]
-                  var plan = prevPage.data.plan
-
-                  let unCommit = prevPage.data.unCommit
-     
-                  for (let i = 0; i < plan.kpiDetails.length; i++ ){
-   
-                      if (kpiId == plan.kpiDetails[i].id){	
-                        if(typeof(plan.kpiDetails[i].actualValueString) == 'undefined' || !plan.kpiDetails[i].actualValueString ){	
-                          unCommit ++;
-                        } 
-                        plan.kpiDetails[i].actualValueString = actualValueString;
-                        plan.kpiDetails[i].actualValueJson = JSON.stringify(noVotes);
-                        plan.kpiDetails[i].score = score;
-                        plan.kpiDetails[i].status = status;
-                        break;
-                      }  
-                  }	 
-                  
-                  prevPage.setData({
-                      plan:plan,
-                      unCommit:unCommit
-                  })
-                  wx.navigateBack({
-                      delta: 1
-                  })
-
-                  self.setData({
-                      plan: plan
-                  })
+                  //toType  0:从计划页面跳转过来，1从检查页面跳转过来
+                  if(self.data.toType==0){
+                    var scoreValue = result.data.data[0].toFixed(2);
+                    var status = result.data.data[2];   
+                    self.toPlanPrevPage(kpiId,actualValueString,noVotes,score,status)
+                  }else{
+                    self.toCheckPrevPage(kpiId,actualValueString,noVotes,score)
+                  }
                 }
             },
             fail({ errMsg }) {
@@ -270,6 +250,59 @@ Page({
     })
   }, 
  
+  //从计划页点击安全指标进来的返回到计划页面
+  toPlanPrevPage: function(kpiId,actualValueString,noVotes,score,status) {
+    //更新DATE								
+    let pages = getCurrentPages()
+    let prevPage = pages[pages.length - 2]
+    var plan = prevPage.data.plan
+    let unCommit = prevPage.data.unCommit
+
+    for (let i = 0; i < plan.kpiDetails.length; i++ ){
+        if (kpiId == plan.kpiDetails[i].id){	
+          if(typeof(plan.kpiDetails[i].actualValueString) == 'undefined' || !plan.kpiDetails[i].actualValueString ){	
+            unCommit ++;
+          } 
+          plan.kpiDetails[i].actualValueString = actualValueString;
+          plan.kpiDetails[i].actualValueJson = JSON.stringify(noVotes);
+          plan.kpiDetails[i].score = score
+          plan.kpiDetails[i].status = status
+          break;
+        }  
+    }	 
+    prevPage.setData({
+        plan:plan,
+        unCommit:unCommit
+    })
+    wx.navigateBack({
+        delta: 1
+    })
+  },
+
+  //从计划页点击安全指标进来的返回到计划页面
+  toCheckPrevPage: function(kpiId,actualValueString,noVotes,score) {
+    //更新DATE								
+    let pages = getCurrentPages()
+    let prevPage = pages[pages.length - 2]
+    var kpiPage=prevPage.data.kpiPage;	 		
+    for (let i = 0; i < kpiPage.length; i++ ){
+        if (kpiId == kpiPage[i].id){	
+          kpiPage[i].actualValueString = actualValueString;
+          kpiPage[i].actualValueJson = JSON.stringify(noVotes);
+          kpiPage[i].score = score;
+          kpiPage[i].checkStatus = 1;
+          break;
+        }  
+    }	 
+    
+    prevPage.setData({
+       kpiPage:kpiPage,
+    })
+    wx.navigateBack({
+        delta: 1
+    })
+  },
+
   navigateBack() {
     wx.navigateBack()
   },

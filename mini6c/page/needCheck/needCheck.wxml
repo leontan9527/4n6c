@@ -91,7 +91,7 @@
                   </view>
 
                   <view class="navigator-text nav-textRight" wx:if="{{item.planCycle == 1 && item.computationRules == 7 && item.storeCode == 'finishAddBuckleScore'}}" >
-                    完成项数：{{item.storeValue1}}，未完成项数：{{item.storeValue2}}
+                    {{item.actualValue}}
                   </view>
                   <view class="navigator-text nav-textRight" wx:if="{{item.planCycle == 1 && item.computationRules == 7 && item.storeCode == 'unPlanScore'}}" >
                     当期无计划
@@ -103,13 +103,14 @@
                 <view class="navigator">
                   <view class="navigator-text nav-name">检查</view> 
                   <view class="nav-opRight" wx:if="{{item.checkStatus == 0}}">
-                    <!-- 有几种修改实际值得方式，需要调用不同的接口 -->
-                    <button class="mini-btn" type="default" size="mini" wx:if="{{item.isNoVote == false && item.planCycle==1 && item.computationRules != 6 && item.computationRules != 7 }}" bindtap="checkValue">修改</button>
-                    <button class="mini-btn" type="default" size="mini" wx:if="{{item.isNoVote == false && item.planCycle==2 }}" bindtap="checkValue">修改</button>
-                    <button class="mini-btn" type="default" size="mini" wx:if="{{item.isNoVote == true }}" bindtap="checkNoVoteValue">修改</button>
-                    <button class="mini-btn" type="default" size="mini" wx:if="{{item.planCycle==1 && item.computationRules == 6 }}" bindtap="INTValue">修改</button>
-                    <button class="mini-btn" type="default" size="mini" wx:if="{{item.planCycle==1 && item.computationRules == 7 }}" bindtap="INTValue">修改</button>
-
+                     <!-- 常规类指标修改 -->
+                    <button class="mini-btn" type="default" size="mini" wx:if="{{item.isNoVote == false && item.planCycle==1 && item.computationRules != 6 && item.computationRules != 7 }}" data-kpiid="{{item.id}}" data-plancycle="{{item.planCycle}}"  data-kpiname="{{item.name}}" data-useractualvalue="{{nf.ifNull(item.actualValue)}}" bindtap="checkKpiValueDialog">修改</button>
+                    <!-- 电网类指标修改 -->
+                    <button class="mini-btn" type="default" size="mini" wx:if="{{item.isNoVote == true }}" data-kpiid="{{item.id}}" data-plancycle="{{item.planCycle}}"  data-kpiname="{{item.name}}" data-targetindexid="{{item.targetIndexId}}" bindtap="toPlanNoVoteValue">修改</button>
+                    <!--INTA类指标修改 -->
+                    <button class="mini-btn" type="default" size="mini" wx:if="{{item.planCycle==1 && item.computationRules == 6 }}" data-kpiid="{{item.id}}" data-plancycle="{{item.planCycle}}"  data-kpiname="{{item.name}}" data-targetindexid="{{item.targetIndexId}}"  data-unit="{{item.unit}}" data-reasonablevalue="{{item.reasonableValue}}" data-weight="{{item.weight}}"   bindtap="toPlanIntAValue">修改</button>
+                    <!--INTB类指标修改 -->
+                    <button class="mini-btn" type="default" size="mini" wx:if="{{item.planCycle==1 && item.computationRules == 7 }}" data-kpiid="{{item.id}}" data-plancycle="{{item.planCycle}}"  data-kpiname="{{item.name}}" data-kpiid="{{item.id}}" data-plancycle="{{item.planCycle}}"  data-kpiname="{{item.name}}" data-targetindexid="{{item.targetIndexId}}"  data-unit="{{item.unit}}" data-reasonablevalue="{{item.reasonableValue}}" bindtap="toPlanIntBValue">修改</button>
 
                     <button class="mini-btn pLeft" type="primary" size="mini" bindtap="checkKpi" data-id="{{item.id}}">确认</button>
                   </view>
@@ -181,5 +182,31 @@
 
     
 
-  </view>    
+  </view>  
+
+  <!--点击发送文字消息  开始-->
+  <view class='write-mask' wx:if="{{showWriteMask}}">
+
+    <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showWriteMask}}"></view>
+    <view class = "modal-dialog" wx:if = "{{showWriteMask}}" >
+      <view class = "modal-title">[{{kpiName}}]确认结果</view>
+      <view class="modal-content">
+        <view style="margin-bottom:10px;">
+            <label style="font-size: 28rpx;margin-right:5px;"> 责任人实际值:</label>
+            <label style="font-size: 28rpx;"> {{userActualValue}} </label>
+        </view>
+        <view class="modal-input">
+            <label style="margin-top:5px;margin-right:8px;"> 检查人确认值: </label>
+            <input placeholder-class="input-holder" type="number" maxlength="10" bindinput="getBlurInputValue" class="input" placeholder="检查人确认值"/>
+        </view> 
+      </view> 
+      <view class = "modal-footer"> 
+        <view class = "btn-cancel" bindtap="onCancel" data-status="cancel" >取消</view>
+        <view class="btn-confirm" bindtap="checkKpiValue" data-status="confirm">确定</view> 
+      </view>
+    </view> 
+
+  </view>
+  <!--点击发送文字消息  结束-->
+
 </view>

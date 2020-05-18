@@ -311,7 +311,7 @@ Page({
     var kpiName = e.currentTarget.dataset.kpiname
     var targetIndexId = e.currentTarget.dataset.targetindexid
 
-    wx.navigateTo({ url: '../planNoVoteValue/planNoVoteValue?id=' + id +'&kpiName='+kpiName+ '&targetIndexId='+targetIndexId+'&isMonthRules=false'})
+    wx.navigateTo({ url: '../planNoVoteValue/planNoVoteValue?id=' + id +'&kpiName='+kpiName+ '&targetIndexId='+targetIndexId+'&isMonthRules=false'+'&toType=0'})
   },
 
   //发送计划进程消息代码                    开始
