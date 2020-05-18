@@ -12,7 +12,11 @@
 
           <view>   
 
-            <view class="weui-media-box__desc plan_action" data-planid="{{plan.id}}" data-actailid="{{item.id}}" data-iseditplan="{{item.isEditPlan}}" bindtap="editAction">{{item.action}}</view>
+            <view class="weui-media-box__desc plan_action" data-planid="{{plan.id}}" data-actailid="{{item.id}}" data-iseditplan="{{item.isEditPlan}}" bindtap="editAction">
+              {{item.action}}
+              <label wx:if="{{item.isMeeting == true && item.isBringInto !=true}}" style="color:red">(来至会议决议)</label>
+              <label wx:if="{{item.isMeeting != true && item.isBringInto ==true}}" style="color:red">(来自上周未完成计划)</label>
+            </view>
             <view class="weui-media-box__desc" data-planid="{{plan.id}}" data-actailid="{{item.id}}" data-iseditplan="{{item.isEditPlan}}" bindtap="editAction">成果要求：{{item.outcome}}</view>
 
             <view class="weui-media-box__info">

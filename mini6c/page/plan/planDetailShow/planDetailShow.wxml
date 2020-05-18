@@ -40,7 +40,11 @@
 
         <view class="weui-panel__bd">
           <view class="weui-media-box weui-media-box_text" wx:for-items="{{plan.actionDetails}}" wx:key="id" >                    
-            <view class="weui-media-box__desc plan_action">{{item.action}}</view>
+            <view class="weui-media-box__desc plan_action">
+              {{item.action}}
+              <label wx:if="{{planCycle==0 && item.isMeeting == true && item.isBringInto !=true}}" style="color:red">(来至会议决议)</label>
+              <label wx:if="{{planCycle==0 && item.isMeeting != true && item.isBringInto == true}}" style="color:red">(来自上周未完成计划)</label>
+            </view>
             <view class="weui-media-box__desc">成果要求：{{item.outcome}}</view>
             <view class="weui-media-box__info">
               <view class="weui-media-box__info__meta">完成时间：{{df.formatDate(item.commitDate)}}</view>
