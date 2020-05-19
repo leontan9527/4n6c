@@ -56,7 +56,6 @@ Page({
               
   submitForm() {
     this.selectComponent('#form').validate((valid, errors) => {
-        //console.log('valid', valid, errors)
         if (!valid) {
             const firstError = Object.keys(errors)
             if (firstError.length) {
@@ -65,27 +64,16 @@ Page({
                 })    
             }
         } else {
-          //wx.showToast({
-          //    title: '校验通过'
-          //})
-
           this.saveNewAction(this.data.formData)
         }
     })
         
   },
   saveNewAction: function (formData) {
-    
-    console.info("form data action= " + formData.action)   
-
     const self = this
     var sessionId = app.globalData.sessionId
-    
-    console.log('【1.begin wx.request】:' + sessionId)
-
     if (sessionId) {
-      console.log('【2.begin config.domain】:' + config.domain)
-
+     
       wx.request({
         url: config.domain + '/planCr/saveNewAction',
         data: {

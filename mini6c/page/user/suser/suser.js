@@ -105,7 +105,8 @@ Page({
       prevPage.setData({
         userId: id,
         userName: name, 
-        [`formData.userId`]: id
+        [`formData.userId`]: id,
+        [`formData.inspectorName`]: name
       })
       wx.navigateBack({
         delta: 1
