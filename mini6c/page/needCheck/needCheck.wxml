@@ -184,7 +184,7 @@
 
   </view>  
 
-  <!--点击发送文字消息  开始-->
+  <!--隐藏域 点击修改按钮时弹出修改实际值弹出框  开始-->
   <view class='write-mask' wx:if="{{showWriteMask}}">
 
     <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showWriteMask}}"></view>
@@ -207,6 +207,6 @@
     </view> 
 
   </view>
-  <!--点击发送文字消息  结束-->
+  <!--隐藏域 点击修改按钮时弹出修改实际值弹出框 结束-->
 
 </view>
