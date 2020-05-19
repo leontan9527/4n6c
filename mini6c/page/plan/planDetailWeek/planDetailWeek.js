@@ -256,7 +256,6 @@ commitPlan:function(e){
         success: function(res) {  
               if (res.confirm) {  
                 //用户点击确认按钮执行创建周计划代码
-                console.log('点击确认按钮后，准备调用：checkOrCreatePlanWeek方法')
                 self.commitWeekPlan(planId,status);
                 
               } else if (res.cancel) { 

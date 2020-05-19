@@ -31,21 +31,21 @@ Page({
           'Cookie': 'JSESSIONID=' + sessionId
         },
         success(result) {
-          //console.log('【plan/planList=】', result.data.data)
+
           var actiondetail = result.data.data
-          var date=util.timestampToTime(actiondetail.commitDate, false)
+          var date=util.timestampToTime(actiondetail.commitDate, 3)
           let setformDataValue = {      
             action: actiondetail.action,
             name: actiondetail.name,
             outcome: actiondetail.outcome,
             unFinishRemark: actiondetail.unFinishRemark,
-            userId: actiondetail.inspectorId,
+            inspectorId: actiondetail.inspectorId,
             inspectorName:actiondetail.inspectorName,
             date:date
           }
 
-          var dateStart=util.timestampToTime(actiondetail.dateStart, false)
-          var dateEnd=util.timestampToTime(actiondetail.dateEnd, false)
+          var dateStart=util.timestampToTime(actiondetail.dateStart, 3)
+          var dateEnd=util.timestampToTime(actiondetail.dateEnd, 3)
        
           self.setData({
             formData: setformDataValue,
@@ -75,7 +75,7 @@ Page({
         name: 'date',
         rules: { required: true, message: '请选择完成时间'},
       }, {
-        name: 'userId',
+        name: 'inspectorId',
           rules: {required: true, message: '请选择检查人'},
     }],
   },
@@ -123,7 +123,7 @@ Page({
 
     const self = this
     var sessionId = app.globalData.sessionId
-    
+    console.log('date==='+formData.date)
     if (sessionId) {
 
       wx.request({
@@ -135,7 +135,7 @@ Page({
           outcome: formData.outcome,
           unFinishRemark: formData.unFinishRemark,
           commitDate: formData.date,
-          inspectorId: formData.userId
+          inspectorId: self.data.userId
         },
         method: 'POST',
         dataType: 'json',
@@ -155,6 +155,7 @@ Page({
               plan.actionDetails[i].outcome =  formData.outcome;
               plan.actionDetails[i].commitDate =  formData.date;
               plan.actionDetails[i].inspectorId =  self.data.userId;
+              plan.actionDetails[i].inspectorName =  formData.inspectorName;
               plan.actionDetails[i].unFinishRemark =  formData.unFinishRemark;
               break;
             } 		
