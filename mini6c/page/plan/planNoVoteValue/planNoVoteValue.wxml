@@ -13,7 +13,7 @@
 
           <view class="flex-Container weui-cell" wx:for="{{noVotes}}" wx:key="{{item.seq}}"  >
 
-            <view class="containerItem" data-seq="{{item.seq}}" data-single="{{item.single}}"   bindtap="selectNoNotes">
+            <view class="containerItem" data-seq="{{item.seq}}" data-single="{{item.single}}">
               <view class="firstSelect">
                 <view wx:if="{{item.selected==true}}">
                   <view class="icon-small-wrp">
