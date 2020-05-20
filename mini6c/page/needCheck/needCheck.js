@@ -28,7 +28,7 @@ Page({
           'Cookie': 'JSESSIONID=' + sessionId
         },
         success(result) {
-          console.log('【targetCr/planTargetDetail=】', result.data.data.kpiPage)
+          //console.log('【targetCr/planTargetDetail=】', result.data.data.kpiPage)
 
           var kpiPage = result.data.data.kpiPage          
           var actionPage = result.data.data.actionPage

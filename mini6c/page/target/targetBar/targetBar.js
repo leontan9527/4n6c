@@ -89,7 +89,7 @@ var option = {
 
 function initChart(canvas, width, height, dpr) {
 
-  console.info("initChart:width=" + width);
+  //console.info("initChart:width=" + width);
 
   chart = echarts.init(canvas, null, {
     width: width,
@@ -111,8 +111,8 @@ Page({
   },
   onLoad: function (options) {
     
-    console.info("打开pid：" + options.pid);
-    console.info("打开type：" + options.type);
+    //console.info("打开pid：" + options.pid);
+    //console.info("打开type：" + options.type);
     //type 2: compay, 1: dept, 0 : person
     var type = options.type
     var pid = options.pid
@@ -134,7 +134,7 @@ Page({
           'Cookie': 'JSESSIONID=' + sessionId
         },
         success(result) {
-          console.log('【targetCr/targetBar=】', result.data.data.targetBar)
+          //console.log('【targetCr/targetBar=】', result.data.data.targetBar)
           var targetBar = result.data.data.targetBar
           var tarDatas = []
           var actDatas = []

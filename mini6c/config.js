@@ -5,7 +5,12 @@
 // 此处主机域名是腾讯云解决方案分配的域名
 // 小程序后台服务解决方案：https://www.qcloud.com/solution/la
 
-const host = '192.168.0.168:8080/eqtit'
+//测试地址，请修改为本地IP
+//const host = '192.168.0.168:8080/eqtit'
+
+//发布地址
+const host = 'wxapp.eqtit.com/eqtit'
+
 
 const config = {
 
@@ -14,10 +19,10 @@ const config = {
 
   // 下面的地址配合云端 Server 工作
   host,
-  domain: `http://${host}`,
+  domain: `https://${host}`,
     
   // 测试的请求地址，用于测试会话
-  wxTestUrl: `http://${host}/userController/wxTestData`,
+  wxTestUrl: `https://${host}/userController/wxTestData`,
 
 }
 
