@@ -3,6 +3,29 @@
 .page__bd {
   padding-bottom: 40px;
 }
+
+.emptyShow{height: 300px;
+  padding: 10px;
+  background-color: #FFFFFF;
+  border-radius: 4rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+}
+
+.image-center{
+   width:128rpx;
+   height: 128rpx;
+}
+
+.empty-msg{
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+  padding:30px;  
+}
+.his-text{color:cadetblue;}
+
 .weui-media-box__title{font-weight:400;font-size:15px;color:rgba(0,0,0,.9);}
 .weui-media-box__info{color:#949191;}
 .link_plan{color:cadetblue}
