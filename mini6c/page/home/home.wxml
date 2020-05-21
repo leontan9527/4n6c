@@ -15,7 +15,7 @@
 </view>
 
    
-<view class="page-body-info" wx:if="{{hasUserInfo === false}}">
+<view class="page-body-info wx-logoView" wx:if="{{hasUserInfo === false}}">
     <block>   
         <text class="page-body-text">6C绩效需要使用微信查询，点击微信登录</text>
         <view class="btn-area">
