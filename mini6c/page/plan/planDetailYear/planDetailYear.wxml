@@ -207,6 +207,7 @@
 
   <!--点击发送文字消息  开始-->
   <view class='write-mask' wx:if="{{showWriteMask}}" bindtap="hideModal" catchtouchmove="preventTouchMove">
+    <view class="modal-mask"  wx:if="{{showWriteMask}}"></view>
     <view class = "modal-dialog" wx:if = "{{showWriteMask}}" >
       <view class = "modal-title">填写进程内容</view>
       <view class="modal-content">
