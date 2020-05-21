@@ -35,18 +35,23 @@
               </view> 
             </view>  
 
-            <view class="weui-media-box__info"> 
-            
-              <view class="weui-cell-picker">
+            <view class="weui-media-box__info">
+              <view bindtap='showResultRemarkDialog' data-detailid="{{item.id}}" data-resultremark="{{item.resultRemark}}" class="weui-input">
+              结果说明(点击填写):
+              <label wx:if="{{item.resultRemark!=null}}">{{item.resultRemark}}</label>
+              </view>
+            </view>
 
+            <view class="weui-media-box__info"> 
+              <view class="weui-cell-picker">
                 <view class="weui-cell__bd">
                   <picker bindchange="bindPickerChange" data-planid="{{plan.id}}" data-actailid="{{item.id}}" value="{{item.status}}" range="{{array}}">
                     <view class="weui-input">完成情况(点击修改):{{array[item.status]}}</view>
                   </picker>
                 </view>
               </view>
-            
             </view>
+
             <view>
               <label wx:if="{{item.isMeeting == true && item.isBringInto !=true}}" style="margin-bottom:2px;font-size:12px;color:red">(来至会议决议)</label>
               <label wx:if="{{item.isMeeting != true && item.isBringInto ==true}}" style="margin-bottom:2px;font-size:12px;color:red">(来自上周未完成计划)</label>
@@ -98,7 +103,10 @@
 
     <!--进程消息列表  开始-->
     <view class="weui-panel weui-panel_access" wx:if="{{planProgressList.length > 0}}">
-      <view class="weui-panel__hd">计划进程(最新{{planProgressList.length}}条)</view>
+      <view class="weui-panel__hd">
+        <label>计划进程(最新{{planProgressList.length}}条)</label>
+        <label bindtap='toPlanProgressPage' data-id="{{pid}}" style="color:green;position:absolute;right:0px;">更多。。。</label>
+      </view>
       <view class="weui-panel__bd">
 
         <view class="weui-media-box weui-media-box_text" wx:for-items="{{planProgressList}}" wx:key="id" wx:for-index="key">  
@@ -194,7 +202,7 @@
       <view class="modal-content">
         <view class="modal-input">
           <textarea bindinput="formInputChange" placeholder-class="place-holder" data-field="action" 
-           style="height: 5em" bindinput='getBlurInputValue'></textarea>
+           style="height: 10em" bindinput='getBlurInputValue'>{{showWriteMask}}</textarea>
         </view>
         <view class="modal-checkbox">
           <checkbox-group bindchange="checkboxChange">
@@ -211,6 +219,27 @@
 
   </view>
   <!--点击发送文字消息  结束-->
+
+   <!--点击填写结果说明  开始-->
+  <view class='write-mask' wx:if="{{showResultRemarkMask}}"  catchtouchmove="noneEnoughPeople">
+    <view class="modal-mask"  wx:if="{{showResultRemarkMask}}"></view>
+    <view class = "modal-dialog" wx:if = "{{showResultRemarkMask}}" >
+      <view class = "modal-title">填写结果说明</view>
+      <view class="modal-content">
+        <view class="modal-input">
+          <textarea bindinput="formInputChange" placeholder-class="place-holder" data-field="action" 
+          style="height: 8em" bindinput='getBlurResultValue' value="{{resultRemark}}">
+          </textarea>
+        </view>
+      </view> 
+      <view class = "modal-footer"> 
+        <view class = "btn-cancel" bindtap="onCancel" data-status="cancel" >取消</view>
+        <view class="btn-confirm" bindtap="writeResultFun" data-status="confirm">确定</view> 
+      </view>
+    </view> 
+
+  </view>
+  <!--点击填写结果说明  结束-->
 
   <!--固定在最下方的发送进程消息按钮  开始-->
   <view style="position:fixed;bottom:0;width:100%">

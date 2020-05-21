@@ -2,7 +2,7 @@ const config = require('../../../config')
 var util = require("../../../util/dateutil.js")
 var tempFilePath
 const myaudio = wx.createInnerAudioContext()
-//苹果手机，静银模式 也能播放录音
+//苹果手机，静音模式 也能播放录音
 if (wx.setInnerAudioOption) {
   wx.setInnerAudioOption({
     obeyMuteSwitch: false,
@@ -499,9 +499,6 @@ Page({
               //参数绑定,可以向后台传递多个参数
               formData:{
                 upFileType:16,
-                //recordingtime: recordTime,//发送语音的时间
-                //facId: 11211,//业务id
-                //userId:1,//用户id
               },
               success:function(result){
 
@@ -627,7 +624,6 @@ Page({
     myaudio.autoplay = true
     var audKey = that.data.audKey
     var vidSrc = config.domain + audioArr[audKey].content
-    console.log('vidSrc===='+vidSrc)
     myaudio.src = vidSrc
 
     myaudio.play();
@@ -685,7 +681,7 @@ Page({
     console.log('showWriteDialog  方法被调用')
     if(this.data.showWriteMask){
       this.setData({
-        showWriteMask:false,
+         showWriteMask:false,
          isSendAdviser:false
       })
     }else{
@@ -698,20 +694,97 @@ Page({
 
   //弹出框蒙层截断touchmove事件
   preventTouchMove: function() {
-    
+    console.log('preventTouchMove =========================')
   },
 
   //隐藏模态对话框
   hideModal: function() {
     this.setData({
-      showWriteMask: false
+      showWriteMask: false,
+      showResultRemarkMask:false
     });
   },
+
 
   //对话框取消按钮点击事件
   onCancel: function() {
     this.hideModal()
   },
   //发送计划进程消息代码                    结束
+
+   
+  toPlanProgressPage: function(e){
+
+    var id = e.currentTarget.dataset.id
+    wx.navigateTo({ url: '../planProgressList/planProgressList?planId=' + id }) 
+  },
+
+  //显示结果说明   开始
+  showResultRemarkDialog:function(e){
+    
+    var itemDetialId = e.currentTarget.dataset.detailid
+    var resultRemark = e.currentTarget.dataset.resultremark
+    if(resultRemark==null){
+      resultRemark='';
+    }
+
+    if(this.data.showResultRemarkMask){
+      this.setData({
+        showResultRemarkMask:false,
+        itemDetialId:itemDetialId,
+        resultRemark:resultRemark
+      })
+    }else{
+      this.setData({
+        showResultRemarkMask:true,
+        itemDetialId:itemDetialId,
+        resultRemark:resultRemark
+      })
+    }
+  },
+  
+//添加结果说明
+writeResultFun:function(e){
+
+  var that = this;
+  var sessionId = app.globalData.sessionId
+  wx.request({
+    url: config.domain + '/planCr/saveActionResultRemark',
+    data : {
+      id: that.data.itemDetialId,
+      resultRemark:that.data.resultRemark,
+    },
+    method: 'POST',
+    header: {
+      'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      'Cookie': 'JSESSIONID=' + sessionId
+    },
+    success(result) {
+
+        if(result.data.success){
+          that.hideModal()
+          //创建成功，获取最新消息数据
+          that.setData({
+            content:''
+          })
+          that.getNewPlanData()
+        }else{ 
+          //创建失败，提示错误信息
+        }
+    },
+    fail({ errMsg }) {
+      //创建失败提示错误信息代码开始
+    }
+  })
+   
+},
+
+getBlurResultValue: function(e) {
+  
+  var value = e.detail.value
+  this.setData({
+    resultRemark:value
+  })
+},
 
 })

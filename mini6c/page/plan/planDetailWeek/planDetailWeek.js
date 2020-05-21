@@ -676,7 +676,8 @@ commitPlan:function(e){
   //隐藏模态对话框
   hideModal: function() {
     this.setData({
-      showWriteMask: false
+      showWriteMask: false,
+      showResultRemarkMask:false
     });
   },
 
@@ -685,5 +686,79 @@ commitPlan:function(e){
     this.hideModal();
   },
   //发送计划进程消息代码                    结束
+
+  toPlanProgressPage: function(e){
+
+    var id = e.currentTarget.dataset.id
+    wx.navigateTo({ url: '../planProgressList/planProgressList?planId=' + id }) 
+  },
+  
+  //显示结果说明   开始
+  showResultRemarkDialog:function(e){
+    
+    var itemDetialId = e.currentTarget.dataset.detailid
+    var resultRemark = e.currentTarget.dataset.resultremark
+    if(resultRemark==null){
+      resultRemark='';
+    }
+    
+    if(this.data.showResultRemarkMask){
+      this.setData({
+        showResultRemarkMask:false,
+        itemDetialId:itemDetialId,
+        resultRemark:resultRemark
+      })
+    }else{
+      this.setData({
+        showResultRemarkMask:true,
+        itemDetialId:itemDetialId,
+        resultRemark:resultRemark
+      })
+    }
+  },
+  
+//添加结果说明
+writeResultFun:function(e){
+
+  var that = this;
+  var sessionId = app.globalData.sessionId
+  wx.request({
+    url: config.domain + '/planCr/saveActionResultRemark',
+    data : {
+      id: that.data.itemDetialId,
+      resultRemark:that.data.resultRemark,
+    },
+    method: 'POST',
+    header: {
+      'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      'Cookie': 'JSESSIONID=' + sessionId
+    },
+    success(result) {
+
+        if(result.data.success){
+          that.hideModal()
+          //创建成功，获取最新消息数据
+          that.setData({
+            content:''
+          })
+          that.getNewPlanData()
+        }else{ 
+          //创建失败，提示错误信息
+        }
+    },
+    fail({ errMsg }) {
+      //创建失败提示错误信息代码开始
+    }
+  })
+   
+},
+
+getBlurResultValue: function(e) {
+  
+  var value = e.detail.value
+  this.setData({
+    resultRemark:value
+  })
+},
 
 })

@@ -127,7 +127,6 @@
 
 .planProgressContent{
   margin-top:9px;
-  height: 15px;
   margin-left: 38px;
   color: rgb(104, 113, 121);
 }
@@ -257,7 +256,7 @@
   width: 540rpx;
   overflow: hidden;
   position: fixed;
-  top: 40%;
+  top:25%;
   left: 0;
   z-index:9999;
   background: #fff;

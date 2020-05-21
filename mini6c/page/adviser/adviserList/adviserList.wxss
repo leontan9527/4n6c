@@ -71,7 +71,6 @@
 
 .planProgressContent{
   margin-top:9px;
-  height: 15px;
   margin-left: 38px;
   color: rgb(104, 113, 121);
 }
