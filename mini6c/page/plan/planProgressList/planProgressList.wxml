@@ -1,0 +1,51 @@
+<wxs src="../../../util/dateutil.wxs" module="df" />
+<view class="page__bd">
+    <!--进程消息列表  开始-->
+    <view class="weui-panel weui-panel_access" wx:if="{{contentlist.length > 0}}">
+      <view class="weui-panel__bd">
+        <view class="weui-media-box weui-media-box_text" wx:for-items="{{contentlist}}" wx:key="id" wx:for-index="key">  
+
+          <view class="planProgressList-flex-C">
+            <view class="containerItem">
+              <image class='planProgressfirstPic' src='/page/images/vocie/toux.png' ></image>   
+            </view>
+            <view class="containerItem">
+              <view class="planProgressUserName">
+                <label style="color:blue">{{item.updateUser}}</label>
+                <label style="margin-left:5px">{{df.formatDate(item.createTime,2)}}</label>
+              </view>
+            </view>
+
+          </view>
+
+          <view class="planProgressList-flex-C">
+            <view class="containerItem">
+              <view wx:if="{{item.type==0}}" class="planProgressContent">{{item.content}}</view>
+              <view wx:if="{{item.type==1}}" class="planProgressContent">
+                <view class='output-audio'>
+                  <!-- 默认状态 -->
+                  <view class='audio' wx:if="{{item.isBof==false}}" bindtap='audioPlay' data-key="{{key}}" data-id="{{item.id}}" data-isBof="{{item.isBof}}">
+                    <image class='ico' src='/page/images/vocie/yuying1.png' />
+                    <label class='time'>{{item.timeLength}}</label>
+                  </view>
+                  
+                  <!-- 当前正在播放状态 -->
+                  <view class='audio' wx:if="{{item.isBof==true}}" bindtap='audioStop' data-key="{{key}}" data-id="{{item.id}}" data-isBof="{{item.isBof}}">
+                    <image class='ico' src='/page/images/vocie/bof1.png' />
+                    <label class='time'>{{item.timeLength}}</label>
+                  </view>
+                
+                </view>
+              </view>
+            </view>
+          </view>
+
+        </view>        
+      </view>            
+    </view>
+
+    <view class="loading" wx:if="{{searchLoading}}">正在载入更多...</view>  
+    <view class="loading complete" wx:if="{{searchLoadingComplete}}">已加载全部</view>
+  <!--进程消息列表  结束-->   
+  
+</view>
