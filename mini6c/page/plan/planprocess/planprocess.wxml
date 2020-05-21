@@ -36,4 +36,12 @@
 
   </view>
 
+  <view class="emptyShow"  wx:if="{{planList.length == 0}}">
+    <image class="image-center" src="../../../image/empty.png"></image>
+  </view>
+  <view class="empty-msg" wx:if="{{planList.length == 0}}">            
+      <view class="his-text">进程信息已阅读，没有最新进程信息啦</view>   
+  </view>
+
+
 </view>
