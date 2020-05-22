@@ -30,7 +30,6 @@ Page({
         hasUserInfo: false
       })
     }
-    
 
     //获取最新消息数据
     this.waitLogin().then((res) => {
@@ -72,7 +71,7 @@ Page({
     })
     //获取首页数据结束
   },
- 
+
   onShareAppMessage() {
     return {
       title: '6C绩效',
@@ -133,6 +132,50 @@ Page({
     return promise;
   },
 
+  // 下拉刷新
+  onPullDownRefresh: function(event) {
+    let that = this;    
+    //获取最新消息数据
+    this.waitLogin().then((res) => {
+        
+      const self = this    
+      var sessionId = getApp().globalData.sessionId
+
+      console.info('2. Home page 开始请求数据,使用sessionId=' + sessionId)
+      if (sessionId) {
+        wx.request({
+          url: config.domain + '/home/message',
+          data: {
+            api: "message"
+          },
+          method: 'POST',
+          header: {
+            'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+            'Cookie': 'JSESSIONID=' + sessionId
+          },
+          success(result) {
+            console.log('3.【home/message=】', result.data.data)
+            self.setData({
+              planDb: result.data.data[0], 
+              docDb: result.data.data[1],
+              meetingDb: result.data.data[2],
+              adviserDb: result.data.data[3],
+              checkDb: result.data.data[4]
+            })
+          },
+
+          fail({ errMsg }) {
+            console.log('3.【home/message fail】', errMsg)          
+          }
+        })      
+      }
+
+    }, (error) => {
+      console.log('登录超时：' + error)
+    })
+    //获取首页数据结束
+  },
+  
   toPlanprocess() {
     wx.navigateTo({ url: '../plan/planprocess/planprocess' })
   },
