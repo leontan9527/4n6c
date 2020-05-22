@@ -50,22 +50,22 @@ App({
 
           this.globalData.openid = res.result.openid
           console.log('App 【3.2设置全局变量】openid: ', this.globalData.openid)
-          //wx.navigateTo({
-          //     url: '../userConsole/userCov
-          //})               
+           
+          this.wxLogin()              
 
         },
         fail: err => {
-          console.error('App [云函数] [login] 调用失败', err)
-          //wx.navigateTo({
-          //     url: '../deployFunctions/deployFunctions',
-          //})
+          console.error('App [云函数] [login] 调用失败', err)          
         }
       })
+    } else {
+      this.wxLogin()
     }
-
+    
+  },
+  wxLogin: function () {
     //使用openid登陆，获取后台session
-    var sessionId = wx.getStorageSync('sessionId')    
+    var sessionId = wx.getStorageSync('sessionId')
     /**
      * sessionId 有两种方法获取； 1. 本地存储中获取，2. 从全局变量中获取
      * Leon: 选择第1种方式的原因
@@ -73,21 +73,31 @@ App({
      * 而使用本地存储的方式，用户当关闭小程序后，可能又很快重新打开小程序，这个时候后台的Session还是有效的。
      */
     console.info('App 4.开始登陆,使用Cookie=' + sessionId)
-    if (this.globalData.openid){
-      
+    if (this.globalData.openid) {
+
       wx.request({
-        url: config.domain +'/userController/wxLogin',
+        url: config.domain + '/userController/wxLogin',
         data: {
           openid: this.globalData.openid
         },
         method: 'POST',
-        header: { 'content-type': 'application/x-www-form-urlencoded;charset=UTF-8', 
-                  'Cookie': 'JSESSIONID='+sessionId },
-        success(result) {          
-          console.log('App 5.【wxLogin cookies=】', result.data.data)
-          //获取新的sessionId,并保存下来
-          getApp().globalData.sessionId = result.data.data
-          wx.setStorageSync('sessionId', result.data.data)
+        header: {
+          'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          'Cookie': 'JSESSIONID=' + sessionId
+        },
+        success(result) {
+          if (result.data.success){
+            console.log('App 5.userController wxLogin=】登录成功')
+            console.log('App 5.【wxLogin cookies=】', result.data.data)
+            //获取新的sessionId,并保存下来
+            getApp().globalData.sessionId = result.data.data
+            wx.setStorageSync('sessionId', result.data.data)
+          } else {
+            console.log('App 5.userController wxLogin= 失败，没有绑定】')
+
+            wx.navigateTo({ url: '../user/scan-code/scan-code' })
+
+          }
         },
 
         fail({ errMsg }) {
@@ -97,10 +107,6 @@ App({
       })
       //登陆END
     }
-
-
-
-
   },
   onShow(opts) {
     //console.log('App Show', opts)

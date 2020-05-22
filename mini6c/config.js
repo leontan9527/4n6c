@@ -6,10 +6,10 @@
 // 小程序后台服务解决方案：https://www.qcloud.com/solution/la
 
 //测试地址，请修改为本地IP
-//const host = '192.168.0.168:8080/eqtit'
+const host = '192.168.0.168:8080/eqtit'
 
 //发布地址
-const host = 'wxapp.eqtit.com/eqtit'
+//const host = 'wxapp.eqtit.com/eqtit'
 
 
 const config = {
@@ -19,7 +19,9 @@ const config = {
 
   // 下面的地址配合云端 Server 工作
   host,
-  domain: `https://${host}`,
+  //domain: `https://${host}`,
+  //测试地址
+  domain: `http://${host}`,
     
   // 测试的请求地址，用于测试会话
   wxTestUrl: `https://${host}/userController/wxTestData`,
