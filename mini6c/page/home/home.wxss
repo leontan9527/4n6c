@@ -59,3 +59,7 @@
   font-size: 13px;
   color: #888888;
 }
+
+.wx-logoView{
+  height: 60%;
+}
