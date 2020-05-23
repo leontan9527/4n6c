@@ -26,12 +26,12 @@
   height: 100%;
 }
 
-.header-avatar {
-  background-color: #fff;
+.header-avatar {  
   width: 100rpx;
   height: 100rpx;
   margin: 0 20rpx;
   border-radius: 50%;
+  border-color:  #fff;
 }
 
 .nickname {
