@@ -49,6 +49,12 @@
               <view class="weui-media-box__info__meta">检查人：{{item.inspectorName}}</view> 
             </view>  
             <view class="weui-media-box__info"> 
+              <view class="weui-media-box__info__meta">
+                结果说明(点击填写):
+                <label wx:if="{{item.resultRemark!=null}}" style="line-height:20px;">{{item.resultRemark}}</label>
+              </view>
+            </view>
+            <view class="weui-media-box__info"> 
               <view class="weui-media-box__info__meta plan_status">{{item.statusName}}</view>
             </view>
             <view>

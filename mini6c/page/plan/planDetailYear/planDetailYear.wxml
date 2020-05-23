@@ -69,9 +69,9 @@
           </view>  
 
           <view class="weui-media-box__info">
-            <view bindtap='showResultRemarkDialog' data-detailid="{{item.id}}" data-resultremark="{{item.resultRemark}}" class="weui-input">
+            <view bindtap='showResultRemarkDialog' data-detailid="{{item.id}}" data-resultremark="{{item.resultRemark}}">
               结果说明(点击填写):
-              <label wx:if="{{item.resultRemark!=null}}">{{item.resultRemark}}</label>
+              <label wx:if="{{item.resultRemark!=null}}" style="line-height:20px;">{{item.resultRemark}}</label>
             </view>
           </view>
 

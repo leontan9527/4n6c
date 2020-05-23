@@ -67,7 +67,7 @@
 
 /*计划进程消息列表显示css  开始 */
 .planProgressList-flex-C{
-  height:45px;
+  height:100%;
   width: 100%;
   display:flex;
   flex-direction:row;
@@ -99,6 +99,7 @@
   margin-top:9px;
   margin-left: 38px;
   color: rgb(104, 113, 121);
+  font-size: 13px;
 }
 
 .output-audio{ 

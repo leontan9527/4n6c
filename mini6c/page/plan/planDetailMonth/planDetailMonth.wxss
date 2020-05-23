@@ -124,6 +124,7 @@
   margin-top:9px;
   margin-left: 38px;
   color: rgb(104, 113, 121);
+  font-size: 13px;
 }
 
 .output-audio{ 
