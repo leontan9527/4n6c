@@ -357,3 +357,37 @@
 /*发送顾问消息css 结束 */
 
 /*计划进程消息css              结束 */
+
+/*一些小样式  开始*/
+.resultRemark{
+  line-height:20px;
+}
+.meetingBringInto{
+  margin-bottom:2px;
+  font-size:12px;
+  color:red
+}
+.moreItem{
+  margin-top:3px;
+  position:absolute;
+  right:0px;
+}
+.sendAdviserCheckbox{
+  margin-left:97px;
+  margin-top:7px;
+}
+.textVoice{
+  margin-left:14px;
+}
+.bottomSide{
+  position:fixed;
+  bottom:0;
+  width:100%
+}
+.textareaHeight1{
+  height: 10em
+}
+.textareaHeight2{
+  height: 8em
+}
+/*一些小样式  结束*/
