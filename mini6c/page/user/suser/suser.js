@@ -50,13 +50,13 @@ Page({
             }
             //本地存储
             wx.setStorageSync('GLB_ORGUsers', us) 
-            console.log('【从数据库中读取最新的userCr/items=】', us)
+            //console.log('【从数据库中读取最新的userCr/items=】', us)
 
           } else {
             //获取本地存储的数据            
             us = wx.getStorageSync('GLB_ORGUsers')
 
-            console.log('【从本地缓存中读取最新的userCr/items=】', us)
+            //console.log('【从本地缓存中读取最新的userCr/items=】', us)
 
           }
 
