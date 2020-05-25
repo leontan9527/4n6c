@@ -24,7 +24,7 @@ Page({
             that.setData({
               qa: res.result               
             })  
-            console.log('【1.scanCode success】', res.result)            
+            //console.log('【1.scanCode success】', res.result)            
             that.gotoMark()
          } 
       },
@@ -40,14 +40,14 @@ Page({
 
    gotoMark:function() {
     
-     console.log('【2.gotoMark】' + app.globalData.openid)
+     //console.log('【2.gotoMark】' + app.globalData.openid)
      const self = this
 
      self.setData({
           loading: true
      })
 
-      console.log('【3.begin wx.request')
+      //console.log('【3.begin wx.request')
 
 
       wx.request({
@@ -71,13 +71,17 @@ Page({
               'content-type': 'application/x-www-form-urlencoded;charset=UTF-8'
             },
             success(result) {
-              console.log('【wxLogin cookies=】', result.data.data)
               //获取新的sessionId,并保存下来
               getApp().globalData.sessionId = result.data.data
               wx.setStorageSync('sessionId', result.data.data)
               
-              wx.setStorageSync('GLB_ORGUsers', null) 
-              wx.setStorageSync('GLB_LastModifyUserTime', null)
+              //绑定成功，默认登录了，不需要用户再重新登录，改善用户体验
+              getApp().globalData.hasLogin = true 
+
+              console.log('【wxLogin 绑定的sessioniD=】', result.data.data)
+              
+              //wx.setStorageSync('GLB_ORGUsers', null) 
+              //wx.setStorageSync('GLB_LastModifyUserTime', null)
 
             },
 
@@ -99,7 +103,7 @@ Page({
               loading: false,
               scResult: true
           })
-          console.log('【request success】', result.data.msg)    
+          //console.log('【request success】', result.data.msg)    
                   
          },
 
@@ -112,7 +116,7 @@ Page({
          }
       })
 
-      console.log('【4.End wx.request')
+      //console.log('【4.End wx.request')
 
    },
 

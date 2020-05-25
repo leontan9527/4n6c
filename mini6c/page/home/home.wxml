@@ -1,21 +1,19 @@
 
 <view class="header-container">
     <image class='header-bg' src = '{{image_hd}}'></image>
-    <view class='userContent' wx:if="{{hasUserInfo === true}}">
-         <view class='newinfo'>最新信息</view>
-         <image bindtap='changePhotoImg' class="header-avatar" src="{{userInfo.avatarUrl}}" ></image>
-         <text class="nickname">{{userInfo.nickName}}</text> 
-         <view class="user-setting">     
-            <navigator url="../user/scan-code/scan-code" class="navigator">
-                  <view class="navigator-text">认证</view>          
-            </navigator>
+    <view class='userContent'>
+         <view class='newinfo'>最近信息</view>
+         <image class="header-avatar" src="{{userInfo? userInfo.avatarUrl :'resources/pic/unuser.png'}}" ></image>
+         <text class="nickname" >{{userInfo? userInfo.nickName:'欢迎您'}}</text> 
+         <view class="user-setting">
+          <view class="navigator-text" bindtap="toScan">认证</view> 
          </view>
     </view>
         
 </view>
 
    
-<view class="page-body-info wx-logoView" wx:if="{{hasUserInfo === false}}">
+<!--view class="page-body-info wx-logoView" wx:if="{{hasUserInfo === false}}">
     <block>   
         <text class="page-body-text">6C绩效需要使用微信查询，点击微信登录</text>
         <view class="btn-area">
@@ -25,118 +23,127 @@
         </view>        
 
     </block>
-</view> 
+</view--> 
 
-<view class="page__bd" wx:if="{{hasUserInfo === true}}">
-        <mp-cells title="" bindtap="toPlanprocess">
-            <mp-cell>
-              <view slot="title" style="position: relative;margin-right: 10px;">
-                  <image src="{{icon_pro}}" style="width: 50px; height: 50px; display: block"/>
-                  <mp-badge wx:if="{{planDb.msgNum > 0}}" content="{{planDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
-              </view>
-              <view>计划</view>
-              
-              <view wx:for-items="{{planDb.items}}" wx:key="itemValue" class="msgItem">
-                {{item.itemTitle}}
-              </view>                            
-            </mp-cell>              
-        </mp-cells>
+<view class="page__bd" wx:if="{{hasLogin === true}}">
+  <mp-cells title="" bindtap="toPlanprocess">
+      <mp-cell>
+        <view slot="title" style="position: relative;margin-right: 10px;">
+            <image src="{{icon_pro}}" style="width: 50px; height: 50px; display: block"/>
+            <mp-badge wx:if="{{planDb.msgNum > 0}}" content="{{planDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
+        </view>
+        <view>计划</view>
+        
+        <view wx:for-items="{{planDb.items}}" wx:key="itemValue" class="msgItem">
+          {{item.itemTitle}}
+        </view>                            
+      </mp-cell>              
+  </mp-cells>
 
-        <mp-cells title=" " bindtap="toDocument">
-            <mp-cell>
-                <view slot="title" style="position: relative;margin-right: 10px;">
-                    <image src="{{icon_ggao}}" style="width: 50px; height: 50px; display: block"/>
-                    <mp-badge wx:if="{{docDb.msgNum > 0}}" content="{{docDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
-                </view>
-                <view>公文</view>
-                <view wx:for-items="{{docDb.items}}" wx:key="itemValue" class="msgItem">
-                  {{item.itemTitle}}
-                </view>
-            </mp-cell>              
-        </mp-cells>        
+  <mp-cells title=" " bindtap="toDocument">
+      <mp-cell>
+          <view slot="title" style="position: relative;margin-right: 10px;">
+              <image src="{{icon_ggao}}" style="width: 50px; height: 50px; display: block"/>
+              <mp-badge wx:if="{{docDb.msgNum > 0}}" content="{{docDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
+          </view>
+          <view>公文</view>
+          <view wx:for-items="{{docDb.items}}" wx:key="itemValue" class="msgItem">
+            {{item.itemTitle}}
+          </view>
+      </mp-cell>              
+  </mp-cells>        
 
-        <mp-cells title="" bindtap="toNeedCheck" wx:if="{{checkDb}}">
-            <mp-cell>
-                <view slot="title" style="position: relative;margin-right: 10px;">
-                    <image src="{{icon_acheck}}" style="width: 50px; height: 50px; display: block"/>
-                    <mp-badge wx:if="{{checkDb.msgNum > 0}}" content="{{checkDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
-                </view>
-                <view>执行检查</view>
-                <view wx:for-items="{{checkDb.items}}" wx:key="itemValue" class="msgItem">
-                  {{item.itemTitle}}
-                </view>
-            </mp-cell>              
-        </mp-cells>
-
-
-        <mp-cells title="" bindtap="toMeeting">
-            <mp-cell>
-                <view slot="title" style="position: relative;margin-right: 10px;">
-                    <image src="{{icon_meeting}}" style="width: 50px; height: 50px; display: block"/>
-                    <mp-badge wx:if="{{meetingDb.msgNum > 0}}" content="{{meetingDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
-                </view>
-                <view>会议</view>
-                <view wx:for-items="{{meetingDb.items}}" wx:key="itemValue" class="msgItem">
-                  {{item.itemTitle}}
-                </view>
-            </mp-cell>              
-        </mp-cells>
-
-        <mp-cells title="" bindtap="toAdviserMessage">
-            <mp-cell>
-                <view slot="title" style="position: relative;margin-right: 10px;">
-                    <image src="{{icon_check}}" style="width: 50px; height: 50px; display: block"/>
-                    <mp-badge wx:if="{{adviserDb.msgNum > 0}}" content="{{adviserDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
-                </view>
-                <view>顾问信息</view>
-                <view wx:for-items="{{adviserDb.items}}" wx:key="itemValue" class="msgItem">
-                  {{item.itemTitle}}
-                </view>
-            </mp-cell>              
-        </mp-cells>
+  <mp-cells title="" bindtap="toNeedCheck" wx:if="{{checkDb}}">
+      <mp-cell>
+          <view slot="title" style="position: relative;margin-right: 10px;">
+              <image src="{{icon_acheck}}" style="width: 50px; height: 50px; display: block"/>
+              <mp-badge wx:if="{{checkDb.msgNum > 0}}" content="{{checkDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
+          </view>
+          <view>执行检查</view>
+          <view wx:for-items="{{checkDb.items}}" wx:key="itemValue" class="msgItem">
+            {{item.itemTitle}}
+          </view>
+      </mp-cell>              
+  </mp-cells>
 
 
-        <!--view class="weui-panel weui-panel_access">           
-            <view class="weui-panel__bd">
+  <mp-cells title="" bindtap="toMeeting">
+      <mp-cell>
+          <view slot="title" style="position: relative;margin-right: 10px;">
+              <image src="{{icon_meeting}}" style="width: 50px; height: 50px; display: block"/>
+              <mp-badge wx:if="{{meetingDb.msgNum > 0}}" content="{{meetingDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
+          </view>
+          <view>会议</view>
+          <view wx:for-items="{{meetingDb.items}}" wx:key="itemValue" class="msgItem">
+            {{item.itemTitle}}
+          </view>
+      </mp-cell>              
+  </mp-cells>
 
-              <block wx:for-items="{{message}}" wx:key="id">
-                <navigator url="../user/clipboard-data/clipboard-data" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
-                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                      <image class="weui-media-box__thumb" src="resources/pic/icon_{{item.messageType}}.png" />
-                    </view>
-                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                      <view class="weui-media-box__title">{{item.messTitle}}</view>
-                      <view class="weui-media-box__desc">{{item.message}}，请查阅该信息并及时处理回复</view>
-                    </view>
-                </navigator>
-              </block> 
+  <mp-cells title="" bindtap="toAdviserMessage">
+      <mp-cell>
+          <view slot="title" style="position: relative;margin-right: 10px;">
+              <image src="{{icon_check}}" style="width: 50px; height: 50px; display: block"/>
+              <mp-badge wx:if="{{adviserDb.msgNum > 0}}" content="{{adviserDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
+          </view>
+          <view>顾问信息</view>
+          <view wx:for-items="{{adviserDb.items}}" wx:key="itemValue" class="msgItem">
+            {{item.itemTitle}}
+          </view>
+      </mp-cell>              
+  </mp-cells>            
+</view>
 
-                <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
-                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                        <image class="weui-media-box__thumb" src="{{icon_check}}" />
-                    </view>
-                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                        <view class="weui-media-box__title">检查工作</view>
-                        <view class="weui-media-box__desc">请及时检查刘成城、李凯等人的工作结果。</view>
-                    </view>
-                </navigator>
+<view class="page__bd" wx:if="{{hasLogin === false}}">
+  <mp-cells title="" bindtap="to">
+      <mp-cell>
+        <view slot="title" style="position: relative;margin-right: 10px;">
+            <image src="{{icon_pro}}" style="width: 50px; height: 50px; display: block"/>            
+        </view>
+        <view>计划</view>
+        
+        <view class="msgItem">密切跟踪计划执行过程，个人执行力是员工对企业最大的价值贡献</view>                            
+      </mp-cell>              
+  </mp-cells>
 
-                <navigator url="../user/clipboard-data/clipboard-data" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
-                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                        <image class="weui-media-box__thumb" src="{{icon_pro}}" />
-                    </view>
-                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                        <view class="weui-media-box__title">进程信息</view>
-                        <view class="weui-media-box__desc">工作项：完成销售金额26万，李丽修改了实际值：25.6万元。</view>
-                    </view>
-                </navigator>
+  <mp-cells title=" " bindtap="toDesc">
+      <mp-cell>
+          <view slot="title" style="position: relative;margin-right: 10px;">
+              <image src="{{icon_ggao}}" style="width: 50px; height: 50px; display: block"/>              
+          </view>
+          <view>公文</view>
+          <view class="msgItem">阅读公司重大决策和制度，把握公司动向，个人和公司一起发展</view>
+      </mp-cell>              
+  </mp-cells>        
 
-            </view>
-            <view class="weui-panel__ft">
-                <view class="weui-cell weui-cell_access weui-cell_link">
-                    <view class="weui-cell__bd">查看更多</view>
-                    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-                </view>
-            </view>
-        </view -->    
+  <mp-cells title="" bindtap="toCheckinfo">
+      <mp-cell>
+          <view slot="title" style="position: relative;margin-right: 10px;">
+              <image src="{{icon_acheck}}" style="width: 50px; height: 50px; display: block"/>              
+          </view>
+          <view>执行检查</view>
+          <view class="msgItem">计划后的执行检查是保证计划结果正确的唯一保障, 事关重大</view>
+      </mp-cell>              
+  </mp-cells>
+
+
+  <mp-cells title="" bindtap="toMeetDesc">
+      <mp-cell>
+          <view slot="title" style="position: relative;margin-right: 10px;">
+              <image src="{{icon_meeting}}" style="width: 50px; height: 50px; display: block"/>              
+          </view>
+          <view>会议</view>
+          <view class="msgItem">会议有决议，会议才更有价值。决议的落实和追踪是会议后的首要任务...</view>
+      </mp-cell>              
+  </mp-cells>
+
+  <mp-cells title="" bindtap="toAdvDesc">
+      <mp-cell>
+          <view slot="title" style="position: relative;margin-right: 10px;">
+              <image src="{{icon_check}}" style="width: 50px; height: 50px; display: block"/>              
+          </view>
+          <view>顾问信息</view>
+          <view class="msgItem">如何提高执行力，和顾问老师交流分享</view>
+      </mp-cell>              
+  </mp-cells>            
 </view>
