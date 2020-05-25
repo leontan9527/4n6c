@@ -86,10 +86,10 @@
               提示：行动举措每项提交结果后，点击提交结果； 提交结果后，不可修改
             </view> 
 
-            <view wx:if="{{plan.status == 0  && unCommit>0}}" class="button-sp-area">
-              <button style="margin-left:3px;" class="mini-btn" type="primary" size="mini">
+            <view wx:if="{{plan.status == 0  && unCommit>0}}">
+              <label style="margin-left:1px;margin-top:25px;color:green">
                 余{{unCommit}}项，待提交结果
-              </button>
+              </label>
             </view>
 
             <view class="button-sp-area" wx:if="{{plan.status == 0 && plan.isCommitPlanResult==true && unCommit==0}}">
@@ -105,7 +105,7 @@
     <view class="weui-panel weui-panel_access" wx:if="{{planProgressList.length > 0}}">
       <view class="weui-panel__hd">
         <label>计划进程(最新{{planProgressList.length}}条)</label>
-        <label bindtap='toPlanProgressPage' data-id="{{pid}}" style="color:green;position:absolute;right:0px;">更多。。。</label>
+        <label bindtap='toPlanProgressPage' data-id="{{pid}}" style="margin-top:3px;position:absolute;right:0px;" class="weui-media-box__title link_plan">更多。。。</label>
       </view>
       <view class="weui-panel__bd">
 

@@ -31,7 +31,7 @@
 }
 
 .planProgressUserName{
-  margin-top:9px;
+  margin-top:8px;
   height: 15px;
   margin-left: 5px;
   color: rgb(104, 113, 121);
