@@ -16,18 +16,16 @@ Page({
       icon_acheck: '../images/acheck.png'
     });
 
+    var hasLogin = app.globalData.hasLogin
     var userInfo = app.globalData.userInfo
+    this.setData({     
+      hasLogin
+    })
           
     if (userInfo){
       console.info('1. Home page 从全局变量中读取用户信息：' + userInfo.nickName)
       this.setData({
-        userInfo,
-        hasUserInfo: true          
-      })
-
-    } else {
-      this.setData({        
-        hasUserInfo: false
+        userInfo   
       })
     }
 
@@ -36,9 +34,13 @@ Page({
       
       const self = this    
       var sessionId = getApp().globalData.sessionId
+      var hasLogin = getApp().globalData.hasLogin
 
-      console.info('2. Home page 开始请求数据,使用sessionId=' + sessionId)
-      if (sessionId) {
+      if (hasLogin && sessionId) {
+        this.setData({
+          hasLogin
+        })
+        console.info('2. Home page 开始请求数据,使用sessionId=' + sessionId)
         wx.request({
           url: config.domain + '/home/message',
           data: {
@@ -50,7 +52,7 @@ Page({
             'Cookie': 'JSESSIONID=' + sessionId
           },
           success(result) {
-            console.log('3.【home/message=】', result.data.data)
+            //console.log('3.【home/message=】', result.data.data)
             self.setData({
               planDb: result.data.data[0], 
               docDb: result.data.data[1],
@@ -78,42 +80,13 @@ Page({
       path: 'page/home/home'
     }
   },
-  getUserInfo(info) {
-    var userInfo = wx.getStorageSync('userInfo')
-        
-    if (userInfo){
-      console.info('从本地读取用户信息' + userInfo.nickName)
-      app.globalData.userInfo  = userInfo     
-    } else {
-      console.info('获取用户授权，重新获取用户信息Begin')
-      userInfo = info.detail.userInfo
-       console.info('获取cloudID:'+info.detail.cloudID)
-      //1.存用户信息到本地存储
-      wx.setStorageSync('userInfo', userInfo)
-      wx.setStorageSync('cloudID', info.detail.cloudID)
-      //2.存用户信息到全局变量
-      app.globalData.userInfo = userInfo
-      console.info('获取用户授权，重新获取用户信息END')
-    }
-
-    this.setData({
-      userInfo,
-      hasUserInfo: true
-    })
-  },
-  clear() {
-    this.setData({
-      hasUserInfo: false,
-      userInfo: {}
-    })
-  },
 
   waitLogin: function () {
 
     let promise = new Promise((resolve, reject) => {
       var timeout = 0;
       let timer = setInterval(() => {
-        if (getApp().globalData.sessionId) {
+        if (getApp().globalData.hasLogin) {
           console.info("已经登录了，不需要等待，请立即请求数据")
           clearInterval(timer);
           resolve(getApp().globalData.sessionId);
@@ -192,6 +165,14 @@ Page({
   },
   toNeedCheck() {
     wx.navigateTo({ url: '../needCheck/needCheck' })
+  },
+
+  toScan() {
+    if (this.data.userInfo){
+      wx.navigateTo({ url: '../user/scan-code/scan-code' })
+    } else {
+      wx.navigateTo({ url: '../user/login/login' })
+    }
   }
   
 })
