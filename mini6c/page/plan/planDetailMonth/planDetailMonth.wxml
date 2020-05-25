@@ -87,7 +87,7 @@
           <view class="weui-media-box__info">
             <view bindtap='showResultRemarkDialog' data-detailid="{{item.id}}" data-resultremark="{{item.resultRemark}}">
               结果说明(点击填写):
-              <label wx:if="{{item.resultRemark!=null}}" style="line-height:20px;">{{item.resultRemark}}</label>
+              <label wx:if="{{item.resultRemark!=null}}" class="resultRemark">{{item.resultRemark}}</label>
             </view>
           </view>
           
@@ -119,13 +119,13 @@
         </view> 
 
         <view wx:if="{{plan.status == 0  && unCommit>0}}">
-          <label style="margin-left:1px;margin-top:25px;color:green">
+          <label class="unCommit">
             余{{unCommit}}项，待提交结果
           </label>
         </view>
 
         <view class="button-sp-area" wx:if="{{plan.status == 0 && plan.isCommitPlanResult==true && unCommit==0}}">
-          <button style="margin-left:3px;" class="mini-btn" type="primary" size="mini" data-planid="{{plan.id}}" data-status="1" bindtap="commitPlan">
+          <button class="mini-btn commitPlan" type="primary" size="mini" data-planid="{{plan.id}}" data-status="1" bindtap="commitPlan">
             提交结果
           </button>
         </view>
@@ -135,7 +135,7 @@
     <view class="weui-panel weui-panel_access" wx:if="{{planProgressList.length > 0}}">
       <view class="weui-panel__hd">
         <label>计划进程(最新{{planProgressList.length}}条)</label>
-        <label  bindtap='toPlanProgressPage' data-id="{{pid}}" style="margin-top:3px;position:absolute;right:0px;" class="weui-media-box__title link_plan">更多。。。</label>
+        <label  bindtap='toPlanProgressPage' data-id="{{pid}}"  class="weui-media-box__title link_plan moreItem">更多。。。</label>
       </view>
       <view class="weui-panel__bd">
 
@@ -189,7 +189,7 @@
       <view class="sendAdviser">
         <view calss="checkboxCss">
           <checkbox-group bindchange="checkboxChange">
-            <checkbox style="margin-left:97px;margin-top:7px;" value="1"/>
+            <checkbox class="sendAdviserCheckbox" value="1"/>
           </checkbox-group>
         </view>
       </view>
@@ -204,8 +204,8 @@
     <image src='/image/record.png' class='voice-button' bindtouchstart="startRecording" bindtouchend="stopRecording" bindtouchmove="moveToCancle"></image>
 
     <view class='voice-note'>
-        <text wx:if="{{startRecording==false}}" style="margin-left:14px;">长按下方按钮录音</text>
-        <text wx:if="{{startRecording==true}}" style="margin-left:14px;">手指上滑取消发送</text>
+        <text wx:if="{{startRecording==false}}" class="textVoice">长按下方按钮录音</text>
+        <text wx:if="{{startRecording==true}}" class="textVoice">手指上滑取消发送</text>
     </view>
 
     <view class='record-voice-animations' wx:if="{{showVoiceMask && startRecording && !cancleRecording}}">
@@ -231,11 +231,11 @@
       <view class="modal-content">
         <view class="modal-input">
           <textarea bindinput="formInputChange" placeholder-class="place-holder" data-field="action" 
-           style="height: 10em" bindinput='getBlurInputValue'></textarea>
+           class="textareaHeight1" bindinput='getBlurInputValue'></textarea>
         </view>
         <view class="modal-checkbox">
           <checkbox-group bindchange="checkboxChange">
-            <checkbox style="margin-left:0px;" value="1"/>
+            <checkbox value="1"/>
           </checkbox-group>
           是否发送顾问老师
         </view> 
@@ -257,7 +257,7 @@
       <view class="modal-content">
         <view class="modal-input">
           <textarea bindinput="formInputChange" placeholder-class="place-holder" data-field="action" 
-          style="height: 8em" bindinput='getBlurResultValue' value="{{resultRemark}}">
+          class="textareaHeight2" bindinput='getBlurResultValue' value="{{resultRemark}}">
           </textarea>
         </view>
       </view> 
@@ -271,7 +271,7 @@
   <!--点击填写结果说明  结束-->
 
   <!--固定在最下方的发送进程消息按钮  开始-->
-  <view style="position:fixed;bottom:0;width:100%">
+  <view class="bottomSide">
   
     <view class="flex-Container-bottom">
         <view class="containerItem-bottom" bindtap="showVoiceDialog">

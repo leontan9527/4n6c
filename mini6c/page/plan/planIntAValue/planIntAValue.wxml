@@ -7,7 +7,7 @@
 
   <view class="page-body">
     <view class="page-section">
-      <view class="page-section-title" style="font-size:15px;margin-top:4px;margin-bottom:4px;">【{{kpiName}}】实际结果</view>
+      <view class="page-section-title" class="kpiName">【{{kpiName}}】实际结果</view>
 
       <view class="weui-cells weui-cells_after-title">
         <radio-group bindchange="radioChange">
