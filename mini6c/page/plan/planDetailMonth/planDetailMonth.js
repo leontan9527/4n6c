@@ -156,7 +156,7 @@ Page({
                   unCommit ++;
                 } 
               } else {
-                if(plan.kpiDetails[i].actualValue==null ){							
+                if(plan.kpiDetails[i].actualValue==null  || plan.kpiDetails[i].actualValue=='' ){							
                   unCommit ++;
                 }  							
               }

@@ -155,17 +155,18 @@ Page({
 
             //kpi未添加结果的条数
             for (let i = 0; i < plan.kpiDetails.length; i++ ){	
+
               if (plan.kpiDetails[i].isNoVote == true){
                 if(typeof(plan.kpiDetails[i].actualValueString) == 'undefined' || !plan.kpiDetails[i].actualValueString ){						
                   unCommit ++;
                 } 
               } else {
-                if(plan.kpiDetails[i].actualValue==null ){							
+                if(plan.kpiDetails[i].actualValue==null || plan.kpiDetails[i].actualValue=='' ){							
                   unCommit ++;
                 }  							
               }
             }
-
+            
             for (let i = 0; i < plan.actionDetails.length; i++ ){
               
               if ( plan.actionDetails[i].id == detailId){	
