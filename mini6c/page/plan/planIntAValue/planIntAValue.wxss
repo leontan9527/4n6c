@@ -38,18 +38,13 @@
  }
 
   .conItem2{
-    height:100%;
-    width:30px;
-    border-bottom: 1px solid gray;
+    font-size:18px;
+    line-height:100%;
+    width:25px;
+    border-bottom: 1px solid rgb(206, 203, 203);
   }
 
   .conItem3{
     width:80px;
     margin-left:8px;
   }
-
-  .conItem4{
-    height:100%;
-    width:30px;
-    border-bottom: 1px solid gray;
- }
