@@ -94,16 +94,16 @@
             <radio-group bindchange="radioChange">
               <view class="modal-content">
                 <view class="modal-checkbox">
+                  <radio value="1"/>
+                  参加
+                </view> 
+                <view class="modal-checkbox">
                   <radio value="3"/>
                   指派人参加
                 </view> 
                 <view class="modal-checkbox">
                   <radio value="2"/>
                   不参加
-                </view> 
-                <view class="modal-checkbox">
-                  <radio value="1"/>
-                  参加
                 </view> 
               </view>
             </radio-group>
