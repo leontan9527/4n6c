@@ -135,7 +135,15 @@ Page({
       },
       success(result) {
           if(result.data.success){
-            wx.redirectTo({ url: '../../meeting/meetingDetail/meetingDetail?meetingId='+ that.data.refrenceId})
+            var not_attend=result.data.not_attend
+            let pages = getCurrentPages();
+            let prevPage = pages[pages.length - 2]
+            prevPage.setData({
+              not_attend:not_attend,
+            })
+            wx.navigateBack({
+              delta: 1
+            })
           }else{ 
             //创建失败，提示错误信息
           }
