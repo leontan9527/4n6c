@@ -113,7 +113,7 @@ Page({
     console.log('replayStatus=='+that.data.replayStatus)
     if(that.data.replayStatus != 2){
       that.hideModal()
-      wx.redirectTo({ 
+      wx.navigateTo({ 
         url: '../../user/suser/suser?type=1&refrenceCode=3&refrenceId='+that.data.meetingId
       })
     }else{
@@ -132,7 +132,10 @@ Page({
   
             if(result.data.success){
               that.hideModal()
-              that.meetingDetail()
+              var not_attend=result.data.not_attend
+              that.setData({
+                not_attend:not_attend,
+            })
             }else{ 
               //创建失败，提示错误信息
             }
