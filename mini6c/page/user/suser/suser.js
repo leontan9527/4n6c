@@ -135,11 +135,16 @@ Page({
       },
       success(result) {
           if(result.data.success){
+
             var not_attend=result.data.not_attend
+            var label_attend=result.data.label_attend
+            var attend=result.data.attend
             let pages = getCurrentPages();
             let prevPage = pages[pages.length - 2]
             prevPage.setData({
+              attend:attend,
               not_attend:not_attend,
+              label_attend:label_attend
             })
             wx.navigateBack({
               delta: 1
