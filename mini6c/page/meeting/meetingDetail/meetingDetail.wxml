@@ -1,121 +1,95 @@
 <wxs src="../../../util/dateutil.wxs" module="df" />
 <view class="page__bd">
         <!-- 会议标题 开始-->
-        <view class="flex-Container">
-            <view class="containerItem">
-              <view style="margin-left:10px;">{{header.name}}</view>
-            </view>
-            <view class="containerItem">
-                <view wx:if="{{header.status==3}}" style="margin-right:10px;color:#33FF33;" bindtap="showWriteDialog">
-                  会议回执(默认参加)
-                </view>
-                <view wx:elif="{{header.status==4 || header.status==5}}" style="margin-right:10px;color:#33FF33;" bindtap="toMeetingMinutes">
-                  会议纪要
-                </view>
-            </view>
-        </view>
-        <!-- 会议标题 结束-->
+  <view class="kind-list-item">
+    <view class="kind-list-item-hd">
+      <view class="kind-list-text">{{header.name}}</view>
+    </view>         
+    <view class="kind-list-item-sb">时间：{{df.formatDate(header.startDate,2)}}至{{df.formatDate(header.endDate,2)}}</view>          
 
-        <!-- 会议内容 开始-->
-        <view class="flex-Container-content">
-            <view class="containerItem">
-              <view class="flex-content-i1">会议时间</view>
-            </view>
-            <view class="flex-content-split"></view>
-            <view class="containerItem">
-                <view class="flex-content-i2">
-                  {{df.formatDate(header.startDate,2)}}至{{df.formatDate(header.endDate,2)}}
-                </view>
-            </view>
-        </view>
-        <view class="flex-Container-content">
-            <view class="containerItem">
-              <view class="flex-content-i1">会议地点</view>
-            </view>
-            <view class="flex-content-split"></view>
-            <view class="containerItem">
-                <view class="flex-content-i2">
-                  {{header.meetingRoomName}}
-                </view>
-            </view>
-        </view>
-        <view class="flex-Container-content">
-            <view class="containerItem">
-              <view class="flex-content-i1">类型</view>
-            </view>
-            <view class="flex-content-split"></view>
-            <view class="containerItem">
-                <view class="flex-content-i2">
-                  {{header.meetingTypeName}}
-                </view>
-            </view>
-        </view>
-        <view class="flex-Container-content">
-            <view class="containerItem">
-              <view class="flex-content-i1">发起人</view>
-            </view>
-            <view class="flex-content-split"></view>
-            <view class="containerItem">
-                <view class="flex-content-i2">
-                   {{header.promoterName}}
-                </view>
-            </view>
-        </view>
-        <view class="flex-Container-content">
-            <view class="containerItem">
-              <view class="flex-content-i1">记录人</view>
-            </view>
-            <view class="flex-content-split"></view>
-            <view class="containerItem">
-                <view class="flex-content-i2">
-                   {{header.recorderName}}
-                </view>
-            </view>
-        </view>
-        <!-- 会议内容 结束-->
+    <view class="kind-list-item-bd kind-list-item-bd-show">
+      <view class="navigator-box navigator-box-show">
+        
+          <view class="navigator">
+            <view class="navigator-text nav-name">地点</view> 
+            <view class="navigator-text nav-textRight">{{header.meetingRoomName}}</view>
+          </view>
 
-        <!-- 会议成员 开始-->
-        <view style="margin-left:10px;margin-top:10px;">会议成员</view>
-        <view style="margin-left:10px;margin-top:10px;margin-bottom:15px;">
-          <label style="color:#FFCC00">参加:</label>
-          <label style="color:#C0C0C0">{{attend}}</label>
-        </view>
-        <view wx:if="{{not_attend!=''}}" style="margin-left:10px;margin-top:10px;margin-bottom:15px;">
-          <label style="color:#FFCC00">不参加:</label>
-          <label style="color:#C0C0C0">{{not_attend}}</label>
-        </view>
-        <view wx:if="{{ccUser!=''}}" style="margin-left:10px;margin-top:10px;margin-bottom:15px;color:#C0C0C0">
-          <label style="color:#FFCC00">抄送:</label>
-          <label style="color:#C0C0C0">{{ccUser}}</label>
-        </view>
-        <!-- 会议成员 结束-->
+          <view class="navigator">
+            <view class="navigator-text nav-name">类型</view> 
+            <view class="navigator-text nav-textRight">{{header.meetingTypeName}}</view>
+          </view>
 
-        <!-- 会议议程 开始-->
-        <view class="flex-Container">
-            <view style="margin-left:10px;margin-top:11px;">会议议程</view>
-        </view>
+          <view class="navigator">
+            <view class="navigator-text nav-name">发起人</view> 
+            <view class="navigator-text nav-textRight">{{header.promoterName}}</view>
+          </view>
 
-        <view class="weui-panel weui-panel_access">           
-            <view class="weui-panel__bd">
-                <block wx:for-items="{{agendas}}" wx:key="id">
-                  <view class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
-                      <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                          <view class="weui-flex__item">{{item.name}}</view>
-                          <view class="weui-media-box__desc" >汇报人：{{item.reporterName}}</view>
-                          <view class="weui-media-box__desc" >用时：{{item.reportDate}}分钟</view>
-                      </view>
-                  </view>
-                </block>
+          <view class="navigator">
+            <view class="navigator-text nav-name">会议人</view> 
+            <view class="navigator-text nav-textRight">{{header.recorderName}}</view>
+          </view>
+
+          <view class="navigator" wx:if="{{header.status==4 || header.status==5}}">
+            <view class="navigator-text nav-name">会议纪要</view>             
+            <view class="navigator-arrow" bindtap="toMeetingMinutes">
+              <view class="navigator-text nav-textRight">查看</view> 
             </view>
-        </view>  
-        <!-- 会议议程 结束-->
+          </view>
+
+          <view class="navigator" wx:if="{{header.status==3}}">
+            <view class="navigator-text nav-name">参会回执</view>             
+            <view class="navigator-arrow" bindtap="showWriteDialog">
+              <view class="navigator-text nav-textRight" style="color:#33FF33;">默认参加</view> 
+            </view>
+          </view>                        
+        
+      </view>
+    </view>
+  </view>
+
+        
+
+  <!-- 会议议程 开始-->
+ 
+  <view class="item-title">会议议程</view>
+  <view class="weui-panel weui-panel_access">           
+      <view class="weui-panel__bd">
+          <block wx:for-items="{{agendas}}" wx:key="id">
+            <view class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                    <view class="weui-flex__item">{{item.name}}</view>
+                    <view class="weui-media-box__desc" >汇报人：{{item.reporterName}}</view>
+                    <view class="weui-media-box__desc" >用时：{{item.reportDate}}分钟</view>
+                </view>
+            </view>
+          </block>
+      </view>
+  </view>  
+  <!-- 会议议程 结束-->
+
+  <!-- 会议成员 开始-->
+  <view class="item-title">会议成员</view>
+  <view class="item-title">
+    <label style="color:#FFCC00">参加：</label>
+    <label class="user-list">{{attend}}</label>
+  </view>
+  <view wx:if="{{not_attend!=''}}" class="item-title">
+    <label style="color:#FFCC00">不参加：</label>
+    <label class="user-list">{{not_attend}}</label>
+  </view>
+  <view wx:if="{{ccUser!=''}}" class="item-title">
+    <label style="color:#FFCC00">抄送：</label>
+    <label class="user-list">{{ccUser}}</label>
+  </view>
+  <!-- 会议成员 结束-->
 
         <!--会议回执选项  开始-->
         <view class='write-mask' wx:if="{{showWriteMask}}">
 
           <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showWriteMask}}"></view>
           <view class = "modal-dialog" wx:if = "{{showWriteMask}}" >
-            <view class = "modal-title">填选择</view>
+            <view class = "modal-title">请选择</view>
             <view style="margin-top:-15px;">
             <radio-group bindchange="radioChange">
               <view class="modal-content">
