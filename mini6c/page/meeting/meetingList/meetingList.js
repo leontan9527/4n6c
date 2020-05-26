@@ -57,6 +57,8 @@ Page({
             
             if(contentlist!=null){
               contentlist=contentlistTem.concat(contentlist)
+            }else{
+              contentlist=contentlistTem
             }
 
             self.setData({

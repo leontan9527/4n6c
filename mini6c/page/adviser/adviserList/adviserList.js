@@ -66,8 +66,14 @@ Page({
               contentlistTem = []
             }
             
+            if(contentlist!=null){
+              contentlist=contentlistTem.concat(contentlist)
+            }else{
+              contentlist=contentlistTem
+            }
+
             self.setData({
-              contentlist: contentlistTem.concat(contentlist),
+              contentlist: contentlist,
               totalPage:totalPage,
               searchLoading:false,
             })
