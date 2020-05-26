@@ -47,7 +47,7 @@ Page({
           if(result.data.success){
             
             var contentlist=result.data.items
-            console.log('contentlist=='+contentlist+'   pageNumber='+self.data.pageNumber+'   contentlistTem='+contentlistTem)
+            //console.log('contentlist=='+contentlist+'   pageNumber='+self.data.pageNumber+'   contentlistTem='+contentlistTem)
         
             var totalPage=result.data.totalPage
 
@@ -100,7 +100,7 @@ Page({
 
   // 上滑加载更多数据
   onReachBottom: function(event) {
-    console.log('上滑动onReachBottom')
+
     let that = this;  
 
     if(!that.data.searchLoadingComplete){ 
@@ -123,7 +123,7 @@ Page({
 
   // 下拉刷新
   onPullDownRefresh: function(event) {
-    console.log('onPullDownRefresh')
+
     let that = this;  
   
     that.setData({  
