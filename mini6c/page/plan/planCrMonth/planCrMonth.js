@@ -14,7 +14,6 @@ Page({
     const self = this
     var sessionId = app.globalData.sessionId
 
-    console.info('1. onLoad 开始登陆,使用Cookie=')
     if (sessionId) {
       wx.request({
         url: config.domain + '/planCr/createMonthPaln',
@@ -27,7 +26,6 @@ Page({
           'Cookie': 'JSESSIONID=' + sessionId
         },
         success(result) {
-          console.log('【plan/planList=】', result.data.data)
           self.setData({
             planList: result.data.data
           })
@@ -42,7 +40,6 @@ Page({
   },
 
   radioChange(e) {
-    console.log('radio发生change事件，携带value值为：', e.detail.value)
 
     const items = this.data.planList
     for (let i = 0, len = items.length; i < len; ++i) {
@@ -64,7 +61,6 @@ Page({
     const items = this.data.planList
     let set = [];
     for (let i = 0; i < items.length; i ++ ){
-      console.log('selected='+items[i].selected)
       if ( items[i].selected == true){	
         set	= items[i];
       } 

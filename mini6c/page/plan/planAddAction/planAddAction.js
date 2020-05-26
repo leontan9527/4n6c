@@ -4,7 +4,6 @@ const app = getApp()
 Page({
 
   onLoad: function (options) {
-    console.info("ComponentplanId=" + options.id);
     this.setData({
       planId: options.id
     })
@@ -127,8 +126,6 @@ Page({
         }
       })
     }
-
-    console.log('【2.End wx.request】')
 
   },
 

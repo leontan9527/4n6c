@@ -42,7 +42,6 @@ Page({
     const self = this
     var sessionId = app.globalData.sessionId
 
-    //console.info('1. onLoad this.pid' + this.data.pid)
     if (sessionId) {
       wx.request({
         url: config.domain + '/planCr/detailMonth',
@@ -117,7 +116,6 @@ Page({
 
   addAction: function (e) {
     var id = e.currentTarget.dataset.id
-    console.log('【planAddAction/planAddAction】id=', id)
     wx.navigateTo({ url: '../planAddAction/planAddAction?id=' + id })
   },
 
@@ -193,7 +191,6 @@ Page({
     var targetIndexId = e.currentTarget.dataset.targetindexid
     var weight = e.currentTarget.dataset.weight
     var value=e.detail.value
-    console.log('targetIndexId:'+targetIndexId)
 
     const self = this
     var sessionId = app.globalData.sessionId
@@ -209,7 +206,6 @@ Page({
         'Cookie': 'JSESSIONID=' + sessionId
       },
       success(result) {
-        //console.log('find:'+result.data.success+'  year:'+year+'seq:'+seq)
         if(result.data.success==true){
 
           var isTrueWeight=true;
@@ -415,7 +411,6 @@ Page({
   //按住录音按钮，开始录音方法
   startRecording:function (e) {
 
-    console.log('开始录音');
     this.setData({
       selectType: 'voice',
       startRecording:true
@@ -446,7 +441,6 @@ Page({
     recorderManager.stop();
     recorderManager.onStop((res) => {
      
-      console.log('recorder stop', res)
       //const { tempFilePath } = res;
       tempFilePath=res.tempFilePath
 

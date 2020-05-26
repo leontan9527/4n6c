@@ -112,7 +112,6 @@ Page({
     var that = this;
     var sessionId = app.globalData.sessionId
 
-    console.log('replayStatus=='+that.data.replayStatus)
     if(that.data.replayStatus == 3){
       that.hideModal()
       wx.navigateTo({ 

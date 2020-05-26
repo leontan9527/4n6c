@@ -13,8 +13,6 @@ Page({
     //获取最新消息数据
     const self = this
     var sessionId = app.globalData.sessionId
-
-    console.info('1. onLoad 开始登陆,使用Cookie=')
     if (sessionId) {
       wx.request({
         url: config.domain + '/planCr/createWeekPaln',
@@ -27,7 +25,6 @@ Page({
           'Cookie': 'JSESSIONID=' + sessionId
         },
         success(result) {
-          console.log('【plan/planList=】', result.data.data)
           self.setData({
             planList: result.data.data
           })
@@ -42,7 +39,6 @@ Page({
   },
 
   radioChange(e) {
-    console.log('radio发生change事件，携带value值为：', e.detail.value)
 
     const items = this.data.planList
     for (let i = 0, len = items.length; i < len; ++i) {
@@ -91,7 +87,6 @@ Page({
         success: function(res) {  
               if (res.confirm) {  
                 //用户点击确认按钮执行创建周计划代码
-                console.log('点击确认按钮后，准备调用：checkOrCreatePlanWeek方法')
                 this.checkOrCreatePlanWeek(setWeek.year,setWeek.seq);
                 
               } else if (res.cancel) { 
@@ -100,7 +95,6 @@ Page({
           }  
       }) 
     }else{
-      console.log('准备调用：checkOrCreatePlanWeek方法')
       this.checkOrCreatePlanWeek(setWeek.year,setWeek.seq);
     }
   } , 
@@ -122,7 +116,6 @@ Page({
         'Cookie': 'JSESSIONID=' + sessionId
       },
       success(result) {
-        console.log('find:'+result.data.success+'  year:'+year+'seq:'+seq)
         if(result.data.success==true){
           wx.request({
             url: config.domain + '/planCr/createWeek',
@@ -137,9 +130,7 @@ Page({
             },
             success(result) {
                 //创建成功自动返回上级页面
-                console.log('创建成功:'+result.data.success)
                 if(result.data.success==true){
-                  console.log('跳转页面:')
                   var id = result.data.data
                   wx.redirectTo({ url: '../planDetailWeek/planDetailWeek?id=' + id})
                 }else{ 
@@ -165,8 +156,7 @@ Page({
         } 
       },
       fail({ errMsg }) {
-        //查询方法出错，提示错误信息
-        console.log('【plan/list fail】', errMsg)
+
       }
     })
   },
