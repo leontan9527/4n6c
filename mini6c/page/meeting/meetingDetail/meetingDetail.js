@@ -44,6 +44,7 @@ Page({
             var not_attend=result.data.not_attend
             var ccUser=result.data.ccUser
             var agendas=result.data.agendas
+            var label_attend=result.data.label_attend
 
             self.setData({
               header: header,
@@ -51,6 +52,7 @@ Page({
               not_attend:not_attend,
               ccUser:ccUser,
               agendas:agendas,
+              label_attend:label_attend,
             })
             
           }
@@ -111,7 +113,7 @@ Page({
     var sessionId = app.globalData.sessionId
 
     console.log('replayStatus=='+that.data.replayStatus)
-    if(that.data.replayStatus != 2){
+    if(that.data.replayStatus == 3){
       that.hideModal()
       wx.navigateTo({ 
         url: '../../user/suser/suser?type=1&refrenceCode=3&refrenceId='+that.data.meetingId
@@ -132,9 +134,13 @@ Page({
   
             if(result.data.success){
               that.hideModal()
+              var attend=result.data.attend
               var not_attend=result.data.not_attend
+              var label_attend=result.data.label_attend
               that.setData({
+                attend:attend,
                 not_attend:not_attend,
+                label_attend:label_attend
             })
             }else{ 
               //创建失败，提示错误信息
