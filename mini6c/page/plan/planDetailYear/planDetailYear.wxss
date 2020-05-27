@@ -10,6 +10,7 @@
 .button-sp-area{
   margin: 0 auto;
   width: 60%;
+  text-align: center;
 }
 
 .link_plan{color:cadetblue}
@@ -359,7 +360,7 @@
 }
 .unCommit{
   margin-left:1px;
-  margin-top:25px;
+  margin-top:30px;
   color:green;
 }
 .moreItem{

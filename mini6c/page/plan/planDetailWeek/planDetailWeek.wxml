@@ -65,7 +65,7 @@
     </view>
 
     <view class="weui-panel__bd" >
-      <view class="weui-media-box weui-media-box_text">  
+      <view class="weui-media-box_text">  
         
           <view class="page-section-spacing">
             <view class="flex-wrp cssplanadd">
