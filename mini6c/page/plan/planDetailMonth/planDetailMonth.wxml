@@ -124,7 +124,7 @@
           </label>
         </view>
 
-        <view class="button-sp-area" wx:if="{{plan.status == 0 && plan.isCommitPlanResult==true && unCommit==0}}">
+        <view class="button-sp-area" wx:if="{{plan.isPassWeigth==true && unCommit==0}}">
           <button class="mini-btn commitPlan" type="primary" size="mini" data-planid="{{plan.id}}" data-status="1" bindtap="commitPlan">
             提交结果
           </button>

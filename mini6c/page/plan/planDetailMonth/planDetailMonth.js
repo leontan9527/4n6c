@@ -329,6 +329,103 @@ Page({
     wx.navigateTo({ url: '../planNoVoteValue/planNoVoteValue?id=' + id +'&kpiName='+kpiName+ '&targetIndexId='+targetIndexId+'&isMonthRules=true'+'&toType=0'})
   },
 
+  //提交计划
+  commitPlan:function(e){  
+
+    var isHasResultRemark=true
+    const self = this
+    var plan=self.data.plan;
+    for (let i = 0; i < plan.actionDetails.length; i++ ){						
+      if ( plan.actionDetails[i].resultRemark == null || plan.actionDetails[i].resultRemark == ''){	
+        isHasResultRemark=false
+        break
+      } 
+    }
+
+    var errormsg
+    if(isHasResultRemark==false){
+      errormsg='有结果说明没有填写，请检查并填写完成后，才能提交计划!';
+    }
+
+    //上周未完成带入本周的计划，由于计划完成时间情况了，所以在本周提交计划的时候要校验计划完成时间必须填写
+    //结果说明必须填写
+    if(isHasResultRemark==false){
+      
+      wx.showModal({  
+        title: '提示',  
+        content: errormsg,  
+        showCancel:false,
+        confirmText:'关闭',
+        success: function(res) {  
+            
+        }  
+      })  
+    }else{
+
+      var planId = e.currentTarget.dataset.planid
+      var status = e.currentTarget.dataset.status
+      var layerMsg="确认要提交计划吗?";
+      if(status==1){
+        layerMsg="确认要提交结果吗?";
+      }
+      wx.showModal({  
+        title: '提示',  
+        content: layerMsg,  
+        cancelText:'取消',
+        confirmText:'确认',
+        success: function(res) {  
+              if (res.confirm) {  
+                //用户点击确认按钮执行创建周计划代码
+                self.commitMonthPlan(planId,status);
+                
+              } else if (res.cancel) { 
+                //用户点击取消按钮执行如下代码
+              }  
+          }  
+      }) 
+    }
+
+  } , 
+
+  //提交月度计划方法
+  commitMonthPlan: function(planId,status){   
+
+    const self = this
+    var sessionId = app.globalData.sessionId
+    wx.request({
+      url: config.domain + '/planCr/commitMonthPlan',
+      data : {
+        id: planId,
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        'Cookie': 'JSESSIONID=' + sessionId
+      },
+      success(result) {
+          //创建成功自动返回上级页面
+          if(result.data.success==true){
+            if(status==1){
+              
+              wx.redirectTo({ url: '../planDetail/planDetail?id=' + planId })
+            }else{
+              var plan=self.data.plan
+              plan.status=status;
+              self.setData({
+                plan: plan
+              })
+            }
+          }else{ 
+
+          }
+      },
+      fail({ errMsg }) {
+        //创建失败提示错误信息代码开始
+      }
+    })
+  },
+  //提交计划 结束 
+
   //发送计划进程消息代码                    开始
   getBlurInputValue: function(e) {
     
