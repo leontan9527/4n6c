@@ -11,6 +11,7 @@
 .button-sp-area{
   margin: 0 auto;
   width: 60%;
+  text-align: center;
 }
 
 .link_plan{color:cadetblue}
