@@ -217,20 +217,34 @@ editAction: function (e) {
 
 commitPlan:function(e){  
 
-    var isTrueCommitPlan=true
+    var isHasCommitDate=true
+    var isHasResultRemark=true
     const self = this
     var plan=self.data.plan;
-    for (let i = 0; i < plan.actionDetails.length; i++ ){						
-      if ( plan.actionDetails[i].commitDate == null){	
-        isTrueCommitPlan=false
+    for (let i = 0; i < plan.actionDetails.length; i++ ){	
+			
+      if ( plan.actionDetails[i].commitDate == null || plan.actionDetails[i].commitDate == ''){	
+        isHasCommitDate=false
+        break
+      } 
+      if ( plan.actionDetails[i].resultRemark == null || plan.actionDetails[i].resultRemark == ''){	
+        isHasResultRemark=false
         break
       } 
     }
-    console.log('isTrueCommitPlan=】', isTrueCommitPlan)
+
+    var errormsg
+    if(isHasCommitDate==false){
+      errormsg='有计划完成时间没有填写，请检查并填写完成后，才能提交计划!';
+    }
+    if(isHasResultRemark==false){
+      errormsg='有结果说明没有填写，请检查并填写完成后，才能提交计划!';
+    }
+
     //上周未完成带入本周的计划，由于计划完成时间情况了，所以在本周提交计划的时候要校验计划完成时间必须填写
-    if(isTrueCommitPlan==false){
+    //结果说明必须填写
+    if(isHasCommitDate==false || isHasResultRemark==false){
       
-      var errormsg='有计划完成时间没有填写，请检查并填写完成后，才能提交计划!';
       wx.showModal({  
         title: '提示',  
         content: errormsg,  
