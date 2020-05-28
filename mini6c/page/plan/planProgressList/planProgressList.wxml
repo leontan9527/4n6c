@@ -11,7 +11,7 @@
             </view>
             <view class="containerItem">
               <view class="planProgressUserName">
-                <label style="color:blue">{{item.updateUser}}</label>
+                <label>{{item.updateUser}}</label>
                 <label style="margin-left:5px">{{item.deptName}} {{df.formatDate(item.createTime,2)}}</label>
               </view>
             </view>
