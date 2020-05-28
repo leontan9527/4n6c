@@ -29,7 +29,8 @@ Page({
       recordAnimationNum:0,
       lastVoiceYPostion:0,
       audKey:'',  //当前选中的音频key
-      isSendAdviser:false
+      isSendAdviser:false,
+      isShowBottomVoice:false
     })
 
     //获取最新消息数据
@@ -37,6 +38,18 @@ Page({
 
   },
 
+  showSendMessageFun:function(e){
+    if(this.data.isShowBottomVoice){
+      this.setData({
+        isShowBottomVoice: false,
+      })
+    } else{
+      this.setData({
+        isShowBottomVoice: true,
+      })
+    }
+  },
+  
   getNewPlanData: function () {
     
     const self = this

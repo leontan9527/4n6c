@@ -5,8 +5,14 @@
     <!--顶部 发送顾问消息按钮  开始-->
     <view class="kind-list">
         <view class="kind-list__item">
-            <view id="{{item.id}}" class="weui-flex kind-list__item-hd" bindtap="toSendAdviserInfo">
-                <view class="weui-flex__item">我的顾问消息</view>
+            <view id="{{item.id}}" class="weui-flex kind-list__item-hd">
+                <view class="weui-flex__item">
+                  <label>我的顾问消息</label>
+                  <label bindtap='showSendMessageFun' class="rightCss">
+                    <image wx:if="{{isShowBottomVoice==false}}" class="showPic" src="/image/record.png"></image>
+                    <image wx:if="{{isShowBottomVoice==true}}" class="showPic" src="/image/closeVocie.png"></image>
+                  </label>
+                  </view>
             </view>
         </view>
     </view>
@@ -123,7 +129,7 @@
   <!--点击发送文字消息  结束-->
 
   <!--固定在最下方的发送进程消息按钮  开始-->
-  <view style="position:fixed;bottom:0;width:100%">
+  <view style="position:fixed;bottom:0;width:100%"  wx:if="{{isShowBottomVoice}}">
   
     <view class="flex-Container">
         <view class="containerItem" bindtap="showVoiceDialog">

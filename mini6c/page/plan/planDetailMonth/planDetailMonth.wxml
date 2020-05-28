@@ -4,7 +4,13 @@
   <!--计划详情信息  开始-->
   <view wx:if="{{showVoiceMask==false}}">
     <view class="weui-panel weui-panel_access" wx:if="{{plan.kpiDetails.length > 0}}">
-      <view class="weui-panel__hd">核心KPI（{{plan.kpiDetails.length}}）</view>
+      <view class="weui-panel__hd">
+        <label>核心KPI（{{plan.kpiDetails.length}}</label>
+        <label bindtap='showSendMessageFun' class="rightCss">
+          <image wx:if="{{isShowBottomVoice==false}}" class="showPic" src="/image/record.png"></image>
+          <image wx:if="{{isShowBottomVoice==true}}" class="showPic" src="/image/closeVocie.png"></image>
+        </label>
+      </view>
       <view class="weui-panel__bd">
         <view class="weui-media-box weui-media-box_text" wx:for-items="{{plan.kpiDetails}}" wx:key="id" >                    
           <view class="weui-media-box__desc plan_action">{{item.name}}（{{item.unit}}）</view>
@@ -271,7 +277,7 @@
   <!--点击填写结果说明  结束-->
 
   <!--固定在最下方的发送进程消息按钮  开始-->
-  <view class="bottomSide">
+  <view class="bottomSide" wx:if="{{isShowBottomVoice}}">
   
     <view class="flex-Container-bottom">
         <view class="containerItem-bottom" bindtap="showVoiceDialog">
