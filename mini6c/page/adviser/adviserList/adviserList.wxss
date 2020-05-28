@@ -367,3 +367,13 @@
   background-color: aliceblue;
 }
 /*发送顾问消息css 结束 */
+
+.rightCss{
+  margin-top:-4px;
+  position:absolute;
+  right:0px;
+}
+.showPic{
+  width:35px;
+  height:35px;
+}
