@@ -26,10 +26,9 @@
   position: absolute; /* 要约束所在位置的子元素的位置要设置成绝对 */
   left: 0;/* 调节靠左 */
   width: 500rpx;
-  height: 70rpx;
-  margin-left: 20rpx;
-  margin-top: 28rpx;
-  font-size: 26rpx;
+  height: 90rpx;
+  margin-left: 35rpx;
+  margin-top: 35rpx;
 }
 
 .flex-item-right{
@@ -42,7 +41,8 @@
 }
 
 .message-top{
-  margin-top: 80rpx;
+  margin-top: 100rpx;
+  margin-left: 8px;
 }
 
 /*计划进程消息css                 开始 */
@@ -371,6 +371,11 @@
 }
 .resultRemark{
   line-height:20px;
+}
+.unCommit{
+  margin-left:1px;
+  margin-top:25px;
+  color:green;
 }
 .meetingBringInto{
   margin-bottom:2px;
