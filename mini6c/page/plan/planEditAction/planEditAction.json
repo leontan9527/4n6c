@@ -1,5 +1,8 @@
 {  
   "usingComponents": {
+    "mp-cells": "../../common/cells/cells",
+    "mp-cell": "../../common/cell/cell",
+    "mp-form": "../../common/form/form"
   },
   "navigationBarTextStyle": "black",
   "navigationBarTitleText": "编辑行动计划",
