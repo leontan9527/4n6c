@@ -29,9 +29,9 @@
             </view>
             <view class="containerItem">
               <view class="planProgressUserName">
-                <label style="color:blue">{{item.sendUserName}}</label>
+                <label>{{item.sendUserName}}</label>
                 <label style="margin-left:5px">来至</label>
-                <label style="color:green;margin-left:5px">{{item.messageFromTo}}</label>
+                <label style="margin-left:5px">{{item.messageFromTo}}</label>
               </view>
             </view>
 
