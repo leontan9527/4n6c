@@ -208,7 +208,7 @@
       <view class="modal-content">
         <view class="modal-input">
           <textarea bindinput="formInputChange" placeholder-class="place-holder" data-field="action" 
-           class="textareaHeight1" bindinput='getBlurInputValue'>{{showWriteMask}}</textarea>
+           class="textareaHeight1" bindinput='getBlurInputValue'></textarea>
         </view>
         <view class="modal-checkbox">
           <checkbox-group bindchange="checkboxChange">
