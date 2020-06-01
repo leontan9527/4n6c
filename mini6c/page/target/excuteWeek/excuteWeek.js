@@ -1,4 +1,4 @@
-import * as echarts from '../../components/ec-canvas/echarts';
+import * as echarts from '../../common/ec-canvas/echarts';
 const config = require('../../../config')
 const app = getApp()
 
