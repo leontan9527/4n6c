@@ -11,9 +11,9 @@
             </view>
             <view class="containerItem">
               <view class="planProgressUserName">
-               <label style="color:blue">{{adviserMessage.sendUserName}}</label>
+               <label>{{adviserMessage.sendUserName}}</label>
                <label style="margin-left:5px">来至</label>
-               <label style="color:green;margin-left:5px">{{adviserMessage.messageFromTo}}</label>
+               <label style="margin-left:5px">{{adviserMessage.messageFromTo}}</label>
               </view>
             </view>
         </view>
@@ -59,9 +59,9 @@
             </view>
             <view class="containerItem">
               <view class="planProgressUserName">
-                <label style="color:blue">{{item.sendUserName}}</label>
+                <label>{{item.sendUserName}}</label>
                 <label style="margin-left:5px">来至</label>
-                <label style="color:green;margin-left:5px">{{item.cusOrgName}}</label>
+                <label style="margin-left:5px">{{item.cusOrgName}}</label>
               </view>
             </view>
 
