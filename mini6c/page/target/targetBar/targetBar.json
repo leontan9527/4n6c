@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "ec-canvas": "../../components/ec-canvas/ec-canvas"
+    "ec-canvas": "../../common/ec-canvas/ec-canvas"
   },
   "navigationBarTitleText": "指标看板"
 }
