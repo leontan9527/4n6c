@@ -4,22 +4,22 @@
   <view wx:if="{{showVoiceMask==false}}">
     <!--顶部 发送顾问消息按钮  开始-->
     <view class="kind-list">
-        <view class="kind-list__item">
-            <view id="{{item.id}}" class="weui-flex kind-list__item-hd">
-                <view class="weui-flex__item">
-                  <label>我的顾问消息</label>
-                  <label bindtap='showSendMessageFun' class="rightCss">
-                    <image wx:if="{{isShowBottomVoice==false}}" class="showPic" src="/image/record.png"></image>
-                    <image wx:if="{{isShowBottomVoice==true}}" class="showPic" src="/image/closeVocie.png"></image>
-                  </label>
-                  </view>
-            </view>
+      <view class="kind-list__item">
+        <view id="{{item.id}}" class="weui-flex kind-list__item-hd">
+          <view class="weui-flex__item">
+            <label>顾问消息</label>
+            <label bindtap='showSendMessageFun' class="rightCss">
+              <image wx:if="{{isShowBottomVoice==false}}" class="showPic" src="/image/record.png"></image>
+              <image wx:if="{{isShowBottomVoice==true}}" class="showPic" src="/image/closeVocie.png"></image>
+            </label>
+          </view>
         </view>
+      </view>
     </view>
     <!--顶部 发送顾问消息按钮  结束-->
 
     <!--进程消息列表  开始-->
-    <view class="weui-panel weui-panel_access" wx:if="{{contentlist.length > 0}}">
+    <view class="weui-panel" wx:if="{{contentlist.length > 0}}">
       <view class="weui-panel__bd">
         <view class="weui-media-box weui-media-box_text" wx:for-items="{{contentlist}}" wx:key="id" wx:for-index="key">  
 
@@ -29,47 +29,44 @@
             </view>
             <view class="containerItem">
               <view class="planProgressUserName">
-                <label>{{item.sendUserName}}</label>
-                <label style="margin-left:5px">来至</label>
-                <label style="margin-left:5px">{{item.messageFromTo}}</label>
+                <label>{{item.sendUserName}}</label>                
+                <label class="company">（来至：{{item.messageFromTo}}）</label>
               </view>
             </view>
 
           </view>
 
-          <view class="planProgressList-flex-C">
-            <view class="containerItem">
-              <view wx:if="{{item.type==0}}" class="planProgressContent">{{item.message}}</view>
-              <view wx:if="{{item.type==1}}" class="planProgressContent">
-                <view class='output-audio'>
-                  <!-- 默认状态 -->
-                  <view class='audio' wx:if="{{item.isBof==false}}" bindtap='audioPlay' data-key="{{key}}" data-id="{{item.id}}" data-isBof="{{item.isBof}}">
-                    <image class='ico' src='/page/images/vocie/yuying1.png' />
-                    <label class='time'>{{item.timeLength}}</label>
-                  </view>
-                  
-                  <!-- 当前正在播放状态 -->
-                  <view class='audio' wx:if="{{item.isBof==true}}" bindtap='audioStop' data-key="{{key}}" data-id="{{item.id}}" data-isBof="{{item.isBof}}">
-                    <image class='ico' src='/page/images/vocie/bof1.png' />
-                    <label class='time'>{{item.timeLength}}</label>
-                  </view>
-                
+          <view class="content">            
+            <view wx:if="{{item.type==0}}" class="planProgressContent">{{item.message}}</view>
+            <view wx:if="{{item.type==1}}" class="planProgressContent">
+              <view class='output-audio'>
+                <!-- 默认状态 -->
+                <view class='audio' wx:if="{{item.isBof==false}}" bindtap='audioPlay' data-key="{{key}}" data-id="{{item.id}}" data-isBof="{{item.isBof}}">
+                  <image class='ico' src='/page/images/vocie/yuying1.png' />
+                  <label class='time'>{{item.timeLength}}</label>
                 </view>
-              </view>
+                
+                <!-- 当前正在播放状态 -->
+                <view class='audio' wx:if="{{item.isBof==true}}" bindtap='audioStop' data-key="{{key}}" data-id="{{item.id}}" data-isBof="{{item.isBof}}">
+                  <image class='ico' src='/page/images/vocie/bof1.png' />
+                  <label class='time'>{{item.timeLength}}</label>
+                </view> 
+              </view>              
             </view>
-          </view>
 
-          <view class="planProgressList-flex-C" data-id="{{item.id}}" bindtap="toSendAdviserInfo">
-              <view class="containerItem">
-                <view class="progressDate">{{item.deptName}} {{df.formatDate(item.createDate,2)}}</view>
-              </view>
+            <view class="replay" data-id="{{item.id}}" bindtap="toSendAdviserInfo">              
+              <view class="progressDate">{{item.deptName}} {{df.formatDate(item.createDate,2)}}</view>
+              
               <view class="container-answer">
-                <label class="labelclsss1" wx:if="{{item.exchangeCount>0}}">{{item.exchangeCount}}回复</label>
+                <label class="labelclsss1" wx:if="{{item.exchangeCount>0}}">{{item.exchangeCount}} 回复</label>
                 <label class="labelclsss2" wx:else>回复</label>
               </view>
             </view>
 
-        </view>        
+          </view>
+
+        </view>  
+
       </view>            
     </view>
 
