@@ -14,7 +14,7 @@
   text-align: center;
 }
 
-.link_plan{color:cadetblue}
+.link_plan{color:#6196e6}
 
 .weui-cell-picker{margin-left:1px;}
 
@@ -121,7 +121,6 @@
 .unCommit{
   margin-left:1px;
   margin-top:25px;
-  color:green;
 }
 .meetingBringInto{
   margin-bottom:2px;

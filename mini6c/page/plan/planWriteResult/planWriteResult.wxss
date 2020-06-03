@@ -75,7 +75,7 @@
 .btn-confirm {
   width: 100% ;
   margin-right: 2px;
-  color: #ec5300;
+  color: #6196e6;
   text-align: center;
 }
 /*点击发送文字消息按钮 显示发送语音消息列表css  开始*/

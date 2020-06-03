@@ -12,7 +12,7 @@
   width: 60%;
 }
 
-.link_plan{color:cadetblue}
+.link_plan{color:#6196e6}
 
 /*计划进程消息列表显示css  开始 */
 .planProgressList-flex-C{

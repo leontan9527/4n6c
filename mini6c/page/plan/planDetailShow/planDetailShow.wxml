@@ -64,7 +64,7 @@
               </view>
             </view>
             <view class="weui-media-box__info"> 
-              <view class="weui-media-box__info__meta plan_status">{{item.statusName}}</view>
+              <view class="weui-media-box__info__meta link_plan">{{item.statusName}}</view>
             </view>
             <view>
               <label wx:if="{{planCycle==0 && item.isMeeting == true && item.isBringInto !=true}}" class="meetingBringInto">(来至会议决议)
