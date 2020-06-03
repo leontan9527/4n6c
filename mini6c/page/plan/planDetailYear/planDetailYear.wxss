@@ -114,7 +114,6 @@
 .unCommit{
   margin-left:1px;
   margin-top:30px;
-  color:green;
 }
 .moreItem{
   margin-top:3px;
