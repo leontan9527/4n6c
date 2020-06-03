@@ -1,37 +1,25 @@
 
-.container {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-}
-
-ec-canvas {
+.move-container {
   width: 100%;
-  height: 800px;
+  min-height: 600px;
 }
 
-.table-title{
-  position: absolute;
-  top: 520px;
-  margin: 10px;
+#mychart-dom-move-bar {
+  width: 100%;
+  height: 600px;
+  margin: 0;  
+  display: block;
 }
 
-.table{
-  position: absolute;
-  top: 550px;  
+.table-title{  
+  margin: 0 10px;
+  display: block;
 }
 
 .table {
   display: table;
   margin: 8px;
-  width: 96%;
+  width: 99%;
   border-collapse: collapse; 
 }
 
