@@ -7,8 +7,8 @@ Page({
   onLoad: function (options) {
 
     var resultRemark=options.resultRemark
-    console.log('resultRemark=='+resultRemark)
-    if(resultRemark=='null'){
+
+    if(resultRemark=='null' || resultRemark==undefined){
       resultRemark=''
     }
     this.setData({
