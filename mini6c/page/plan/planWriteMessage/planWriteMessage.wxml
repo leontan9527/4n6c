@@ -1,0 +1,84 @@
+  <view class="page__bd">
+
+  <!--文字消息界面  开始-->
+  <view class='write-mask' wx:if="{{showWriteMask}}"  catchtouchmove="noneEnoughPeople">
+    <view class = "modal-dialog" wx:if = "{{showWriteMask}}" >
+      <view class = "modal-title">填写进程内容</view>
+      <view class="modal-content">
+        <view class="modal-input">
+          <textarea bindinput="formInputChange" placeholder-class="place-holder" data-field="action" 
+           class="textareaHeight1" bindinput='getBlurInputValue'></textarea>
+        </view>
+        <view class="modal-checkbox">
+          <checkbox-group bindchange="checkboxChange">
+            <checkbox value="1"/>
+          </checkbox-group>
+          是否发送顾问老师
+        </view> 
+      </view> 
+      <view class = "modal-footer"> 
+        <view class="btn-confirm" bindtap="addCommentFun" data-status="confirm">提交</view> 
+      </view>
+    </view> 
+
+  </view>
+  <!--文字消息界面  结束-->
+
+  <!--语音消息界面  开始-->
+  <view class='voice-mask' wx:if="{{showVoiceMask}}">
+    <!--显示发送顾问老师checkbox  开始-->
+    <view class="flex-Container-SendAdviser">
+      <view class="sendAdviser">
+        <view class="checkboxCss">
+          <checkbox-group bindchange="checkboxChange">
+            <checkbox  value="1"/>
+          </checkbox-group>
+        </view>
+      </view>
+      <view class="sendAdviser">
+        <view class="comtextCss">是否发送顾问老师</view>
+      </view>
+    </view>
+    <!--显示发送顾问老师checkbox  结束-->
+
+    <view class='voice-enter-note'></view>
+    <image class='voice-enter-note-image' src='/page/images/vocie/bof2.png' ></image>
+    <image src='/image/record.png' class='voice-button' bindtouchstart="startRecording" bindtouchend="stopRecording" bindtouchmove="moveToCancle"></image>
+
+    <view class='voice-note'>
+        <text wx:if="{{startRecording==false}}" class="textVoice">长按下方按钮录音</text>
+        <text wx:if="{{startRecording==true}}" class="textVoice">手指上滑取消发送</text>
+    </view>
+
+    <view class='record-voice-animations' wx:if="{{showVoiceMask && startRecording && !cancleRecording}}">
+        <image src='/page/images/vocie/voice1.png' wx:if="{{recordAnimationNum===1}}"></image>
+        <image src='/page/images/vocie/voice2.png' wx:if="{{recordAnimationNum===2}}"></image>
+        <image src='/page/images/vocie/voice3.png' wx:if="{{recordAnimationNum===3}}"></image>
+        <image src='/page/images/vocie/voice4.png' wx:if="{{recordAnimationNum===4}}"></image>
+        <image src='/page/images/vocie/voice5.png' wx:if="{{recordAnimationNum===0}}"></image>
+    </view>
+
+    <view class='cancle-record-voice' wx:if="{{showVoiceMask && startRecording && cancleRecording}}">
+        <image src='/page/images/vocie/cancel.png'></image>
+    </view>
+  </view>
+  <!--语音消息界面  结束-->
+
+  <!--固定在最下方的发送进程消息按钮  开始-->
+  <view class="bottomSide">
+  
+    <view class="flex-Container-bottom">
+        <view class="containerItem-bottom" bindtap="showVoiceDialog">
+          <image class="firstPic" src="/image/record.png"></image>
+        </view>
+        <view class="containerItem-bottom">
+            <view class="flex-Container-view" bindtap="showWriteDialog">
+              <image class="secondPic" src="/page/images/write.png"></image>
+              <label class="writeclsss">写文字消息...</label>
+            </view>
+        </view>
+    </view>
+  </view>
+  <!--固定在最下方的发送进程消息按钮  结束-->
+
+  </view>
