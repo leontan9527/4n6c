@@ -107,7 +107,7 @@
         </view> 
 
         <view wx:if="{{plan.status == 0  && unCommit>0}}" >
-          <label class="unCommit">
+          <label class="unCommit link_plan">
             余{{unCommit}}项，待提交结果
           </label>
         </view>

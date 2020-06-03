@@ -46,7 +46,6 @@
 .weui-search-bar__cancel-btn {
   margin-left: 10px;
   line-height: 28px;
-  color: #09BB07;
   white-space: nowrap;
 }
 

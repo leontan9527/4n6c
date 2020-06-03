@@ -13,7 +13,7 @@
   text-align: center;
 }
 
-.link_plan{color:cadetblue}
+.link_plan{color:#6196e6}
 
 .message-top{
   margin-left:20rpx;
@@ -114,7 +114,6 @@
 .unCommit{
   margin-left:1px;
   margin-top:25px;
-  color:green;
 }
 .moreItem{
   margin-top:3px;
