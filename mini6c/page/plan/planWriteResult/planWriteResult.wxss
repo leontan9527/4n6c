@@ -19,7 +19,7 @@
 }
 
 .modal-content {
-  padding: 20rpx 32rpx;
+  padding: 5rpx 32rpx;
 }
 
 .modal-input {
@@ -52,6 +52,7 @@
 }
 
 .modal-footer {
+  margin-top: 20px;
   margin-left:2px;
   margin-right:4px;
   display: flex;
