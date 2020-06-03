@@ -3,7 +3,7 @@
   <!--文字消息界面  开始-->
   <view class='write-mask' wx:if="{{showWriteMask}}"  catchtouchmove="noneEnoughPeople">
     <view class = "modal-dialog" wx:if = "{{showWriteMask}}" >
-      <view class = "modal-title">填写进程内容</view>
+      <view class = "modal-title">请填写进程内容</view>
       <view class="modal-content">
         <view class="modal-input">
           <textarea bindinput="formInputChange" placeholder-class="place-holder" data-field="action" 

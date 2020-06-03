@@ -6,7 +6,7 @@
     </view>
 
     <view class = "modal-dialog">
-      <view class = "modal-title">填写结果说明</view>
+      <view class = "modal-title">请填写结果说明</view>
       <view class="modal-content">
         <view class="modal-input">
           <textarea placeholder-class="place-holder" data-field="action" 
