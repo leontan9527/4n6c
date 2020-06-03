@@ -5,74 +5,100 @@
 }
 
 .kind-list__item:first-child{margin-top:0}
-.kind-list__img{width:30px;height:20px}
 .kind-list__item-hd{
   padding:6px;
   -webkit-transition:opacity .3s;
   transition:opacity .3s
 }
 
-.link_plan{color:cadetblue}
-
+.weui-panel{position:inherit;}
+.weui-media-box{position:inherit;padding: 8px 16px;}
 /*计划进程消息列表显示css */
 .planProgressList-flex-C{
-  height:45px;
+  height:32px;
   width: 100%;
   display:flex;
   flex-direction:row;
   justify-content:flex-start;
 }
 
+.content{
+  font-size: 15px;
+}
+
+.replay{  
+  margin-left: 38px;
+  font-size: 15px;   
+  display:flex;
+  flex-direction:row;
+  justify-content:flex-start;  
+}
+
+.replay_item{  
+  margin-left: 23px;
+  font-size: 15px;   
+  display:flex;
+  flex-direction:row;
+  justify-content:flex-start;  
+}
+
+.plist-item{
+  margin-left: 23px;
+}
+
 .planProgressfirstPic{
-  width:35px;
-  height:35px;
+  width:32px;
+  height:32px;
   margin-left: 0px;
   margin-top:1px;
 }
 
-.planProgressUserName{
-  margin-top:9px;
-  height: 15px;
+.planProgressUserName{ 
+  padding-top:3px;   
   margin-left: 5px;
-  color: rgb(104, 113, 121);
+  color:#6196e6;
 }
 
-.progressDate{
-  margin-top:10px;
-  height: 15px;
-  margin-left: 8px;
-  color: rgb(104, 113, 121);
+.replay_UserName{
+  padding-top:3px; 
+  color:#6196e6;
+}
+.company{margin-left:5px;  font-size:15px; color:rgb(104, 113, 121)}
+
+.progressDate{  
+  height: 15px;  
+  color:#999;
 }
 
-.container-answer{
-  height:22px;
-  width: 60px;
-  background-color:rgb(247, 242, 242);
-  margin-top:12px;
-  margin-left:8px;
+.container-answer{  
+  background-color:rgb(247, 242, 242);  
+  margin-left:8px;  
   border-radius:20px;
 }
 
 .labelclsss1{
   width:60px;
-  margin-left: 13px;
-  margin-top:0px;
-  color: #666;
-  font-size:30rpx;
+  padding: 0 8px;  
+  color: #999;
+  font-size:15px;
 }
 
 .labelclsss2{
   width:60px;
-  margin-left: 16px;
-  margin-top:0px;
-  color: #666;
-  font-size:30rpx;
+  padding: 0 8px;  
+  color: #999;
+  font-size:15px;
 }
 
 .planProgressContent{
-  margin-top:9px;
-  height: 15px;
+  margin-top:5px;
   margin-left: 38px;
+  color: rgb(104, 113, 121);
+}
+
+.replay_Content{
+  margin-top:5px;
+  margin-left: 23px;
   color: rgb(104, 113, 121);
 }
 
@@ -125,10 +151,6 @@
   flex-direction:row;
   justify-content:center;
   background-color: #949191;
-}
-
-.containerItem {
-  height:100%;
 }
 
 .firstPic{
@@ -354,17 +376,14 @@
   height:100%;
 }
 
-.checkboxCss{
-  width:35px;
-  height:15px;
-  margin-top:10px;
-}
 
-.comtextCss{
-  margin-top:9px;
-  width:122px;
-  height: 22px;
-  margin-left: 0px;
-  background-color: aliceblue;
-}
 /*发送顾问消息css 结束 */
+
+.rightCss{  
+  position:absolute;
+  right:5px;
+}
+.showPic{
+  width:30px;
+  height:30px;
+}
