@@ -20,8 +20,11 @@ Page({
   onLoad: function (options) {
 
     this.setData({
-      planId: options.planId,
+      refrenceId: options.refrenceId,
+      receiveUserId:options.receiveUserId,
       toType: options.toType,
+      pageSize:options.pageSize,
+      pageNumber:options.pageNumber,
       index: 0,
       unCommit:0,
       showVoiceMask: false,
@@ -68,14 +71,22 @@ Page({
     }
 
     var sessionId = app.globalData.sessionId
+    var toUrl=config.domain + '/planCr/addComment'
+    if(that.data.toType==4){
+      toUrl=config.domain + '/adviserMessageCr/addAdviserMessage'
+    }else if(that.data.toType==5){
+      toUrl=config.domain + '/adviserMessageCr/addAdviserMessageExchagne'
+    }
     wx.request({
-      url: config.domain + '/planCr/addComment',
+      url: toUrl,
       data : {
-        planId: that.data.planId,
+        refrenceId: that.data.refrenceId,
         detailId:'',
         content:that.data.content,
         idType: 0,
-        isSendAdviser:that.data.isSendAdviser
+        isSendAdviser:that.data.isSendAdviser,
+        receiveUserId:that.data.receiveUserId,
+        mainType:2,
       },
       method: 'POST',
       header: {
@@ -85,34 +96,13 @@ Page({
       success(result) {
 
           if(result.data.success){
-            //创建成功，更新数据
-            
-            wx.request({
-              url: config.domain + '/planCr/planProgressList',
-              data: {
-                id: that.data.planId
-              },
-              method: 'POST',
-              header: {
-                'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
-                'Cookie': 'JSESSIONID=' + sessionId
-              },
-              success(result) {
-      
-                var planProgressList=result.data.planProgressList
-                let pages = getCurrentPages();
-                let prevPage = pages[pages.length - 2]
-                prevPage.setData({
-                  planProgressList:planProgressList,
-                })
-                wx.navigateBack({
-                  delta: 1
-                })
-              },
-              fail({ errMsg }) {
-                console.log('【plan/detailMonth fail】', errMsg)
+              if(that.data.toType==4){
+                that.getAdviserMessagePage(that.data.pageSize,that.data.pageNumber)
+              }else if(that.data.toType==5){
+                that.allReplyAdviserMessageList(that.data.refrenceId)
+              }else{
+                that.toPlanPrevPage(that.data.refrenceId)
               }
-            })
           }else{ 
             //创建失败，提示错误信息
           }
@@ -248,16 +238,23 @@ Page({
                 var resultData = JSON.parse(result.data.replace(/\n/g,"\\n").replace(/\r/g,"\\r"))
                 //语音文件上传成功后
                 if(resultData.success){
-
+                  var toUrl=config.domain + '/planCr/addVoiceProcess'
+                  if(that.data.toType==4){
+                    toUrl=config.domain + '/adviserMessageCr/addVoiceProcess'
+                  }else if(that.data.toType==5){
+                    toUrl=config.domain + '/adviserMessageCr/addVoiceProcessExchagne'
+                  }
                   wx.request({
-                    url: config.domain + '/planCr/addVoiceProcess',
+                    url: toUrl,
                     data : {
-                      planId: that.data.planId,
+                      refrenceId: that.data.refrenceId,
                       detailId:'',
                       uuid:resultData.uuid,
                       timeLength:that.data.recordingTime,
                       idType: 0,
-                      isSendAdviser:that.data.isSendAdviser
+                      isSendAdviser:that.data.isSendAdviser,
+                      receiveUserId:that.data.receiveUserId,
+                      mainType:2,
                     },
                     method: 'POST',
                     header: {
@@ -267,33 +264,13 @@ Page({
                     success(result) {
              
                         if(result.data.success){
-                          //创建成功，获取最新消息数据
-                          wx.request({
-                            url: config.domain + '/planCr/planProgressList',
-                            data: {
-                              id: that.data.planId
-                            },
-                            method: 'POST',
-                            header: {
-                              'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
-                              'Cookie': 'JSESSIONID=' + sessionId
-                            },
-                            success(result) {
-                    
-                              var planProgressList=result.data.planProgressList
-                              let pages = getCurrentPages();
-                              let prevPage = pages[pages.length - 2]
-                              prevPage.setData({
-                                planProgressList:planProgressList,
-                              })
-                              wx.navigateBack({
-                                delta: 1
-                              })
-                            },
-                            fail({ errMsg }) {
-                              console.log('【plan/detailMonth fail】', errMsg)
+                            if(that.data.toType==4){
+                              that.getAdviserMessagePage(that.data.pageSize,that.data.pageNumber)
+                            }else if(that.data.toType==5){
+                              that.allReplyAdviserMessageList(that.data.refrenceId)
+                            }else{
+                              that.toPlanPrevPage(that.data.refrenceId)
                             }
-                          })
                         }else{ 
                           //创建失败，提示错误信息
                         }
@@ -319,7 +296,6 @@ Page({
           startRecording: false,
           cancleRecording:false
         })
-        //console.log('recorderManager.onStop被调用showVoiceMask========='+this.data.showVoiceMask+'   startRecording============='+this.data.startRecording);
         that.stopVoiceRecordAnimation();
       }
 
@@ -366,4 +342,137 @@ Page({
   },
   //语音上传   结束
   //发送计划进程消息代码                    结束
+
+  //从计划页点击进来的返回到计划页面
+  toPlanPrevPage: function(refrenceId) {
+    var sessionId = app.globalData.sessionId		
+    wx.request({
+      url: config.domain + '/planCr/planProgressList',
+      data: {
+        id: refrenceId
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        'Cookie': 'JSESSIONID=' + sessionId
+      },
+      success(result) {
+
+        var planProgressList=result.data.planProgressList
+        let pages = getCurrentPages();
+        let prevPage = pages[pages.length - 2]
+        prevPage.setData({
+          planProgressList:planProgressList,
+        })
+        wx.navigateBack({
+          delta: 1
+        })
+      },
+      fail({ errMsg }) {
+        console.log('【plan/detailMonth fail】', errMsg)
+      }
+    })
+  },
+
+  //从顾问信息页面进来的返回到顾问信息页面
+  getAdviserMessagePage: function (pageSize,pageNumber) {
+
+    const self = this
+    var sessionId = app.globalData.sessionId
+    
+    if (sessionId) {
+      wx.request({
+        url: config.domain + '/adviserMessageCr/myAdviserMessagePage',
+        data: {
+          pageSize: pageSize,
+          pageNumber:pageNumber
+        },
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          'Cookie': 'JSESSIONID=' + sessionId
+        },
+        success(result) {
+  
+          var contentlistTem = self.data.contentlist;
+          if(result.data.success){
+            
+            var contentlist=result.data.items
+            var totalPage=result.data.totalPage
+
+            if (self.data.pageNumber == 1) {
+              contentlistTem = []
+            }
+            
+            if(contentlist!=null){
+              contentlist=contentlistTem.concat(contentlist)
+            }else{
+              contentlist=contentlistTem
+            }
+
+            let pages = getCurrentPages();
+            let prevPage = pages[pages.length - 2]
+            prevPage.setData({
+              contentlist: contentlist,
+              totalPage:totalPage,
+              searchLoading:false,
+            })
+            wx.navigateBack({
+              delta: 1
+            })
+
+          }
+        },
+  
+        fail({ errMsg }) {
+          console.log('【plan/list fail】', errMsg)
+        }
+      })
+    }
+  },
+
+   //从顾问子信息页面进来的返回到顾问子信息页面
+  allReplyAdviserMessageList: function (refrenceId) {
+
+    const self = this
+    var sessionId = app.globalData.sessionId
+
+    if (sessionId) {
+      wx.request({
+        url: config.domain + '/adviserMessageCr/allReplyAdviserMessageList',
+        data: {
+          id: refrenceId,
+        },
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          'Cookie': 'JSESSIONID=' + sessionId
+        },
+        success(result) {
+  
+          if(result.data.success){
+            
+            var adviserMessageExchangeList=result.data.adviserMessageExchangeList
+            var adviserMessage=result.data.adviserMessage
+
+            let pages = getCurrentPages();
+            let prevPage = pages[pages.length - 2]
+            prevPage.setData({
+              adviserMessageExchangeList: adviserMessageExchangeList,
+              adviserMessage:adviserMessage
+            })
+            wx.navigateBack({
+              delta: 1
+            })
+
+          }
+        },
+  
+        fail({ errMsg }) {
+          console.log('【plan/list fail】', errMsg)
+        }
+      })
+    }
+  },
+
 })
