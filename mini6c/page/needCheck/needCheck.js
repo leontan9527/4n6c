@@ -7,7 +7,9 @@ Page({
   data: {
     kpiPage: [],
     actionPage:[],
-    num:0
+    num:0,
+    array: ['完成', '未完成'],
+    checkItemstatus:0
   },
 
   onLoad: function (options) {
@@ -404,6 +406,7 @@ Page({
   hideModal: function() {
     this.setData({
       showWriteMask: false,
+      showCheckMask: false,
       kpiId:'',
       planCycle:'',
       kpiName:'',
@@ -415,5 +418,78 @@ Page({
     this.hideModal()
   },
 
+  //显示检查实际值消息对话框   开始
+  checkActionDialog:function(e){
+
+    var actionid = e.currentTarget.dataset.actionid
+    var actionName = e.currentTarget.dataset.action
+
+    this.setData({
+      actionDetailId:actionid,
+      actionName:actionName,
+    })
+    if(this.data.showCheckMask){
+      this.setData({
+        showCheckMask:false,
+      })
+    }else{
+      this.setData({
+        showCheckMask:true,
+      })
+    }
+  },
+
+  bindPickerChange(e) {
+
+    const self = this
+    var sessionId = app.globalData.sessionId
+
+    var actionDetailId = e.currentTarget.dataset.actionid
+    var actionName = e.currentTarget.dataset.action
+    var checkItemstatus=e.detail.value
+    var checkItemStatusName
+    if(checkItemstatus==0){
+      checkItemstatus=1
+      checkItemStatusName='完成'
+    }else{
+      checkItemstatus=9
+      checkItemStatusName='未完成'
+    }
+
+    wx.request({
+      url: config.domain + '/check/checkActionStatus',
+      data : {
+        id:actionDetailId,
+        status:checkItemstatus
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        'Cookie': 'JSESSIONID=' + sessionId
+      },
+      success(result) {
+
+          self.hideModal()
+          //if(result.data.success==true){
+                                        
+            //更新DATE								
+            var actionPage=self.data.actionPage;	 																	
+            for (let i = 0; i < actionPage.length; i++ ){						
+                if (actionDetailId == actionPage[i].id){	
+                  actionPage[i].checkStatus = 1;
+                  actionPage[i].status = checkItemstatus;
+                  actionPage[i].statusName = checkItemStatusName;   
+                  break;
+                }  
+            }	
+            self.setData({
+              actionPage: actionPage
+            })
+      },
+      fail({ errMsg }) {
+        //创建失败提示错误信息代码开始
+      }
+    })
+  },
 
 })

@@ -154,9 +154,12 @@
 
                 <view class="navigator">
                   <view class="navigator-text nav-name">检查</view> 
-                  <view class="nav-opRight" wx:if="{{item.checkStatus == 0}}">
+                  <view class="nav-opRight withEdit" wx:if="{{item.checkStatus == 0}}">
                     <!-- 有几种修改实际值得方式，需要调用不同的接口 -->
-                    <button class="mini-btn" type="default" size="mini" bindtap="checkActionPage">修改</button>
+                    
+                    <picker bindchange="bindPickerChange" range="{{array}}" data-action="{{item.action}}" data-actionid="{{item.id}}">
+                       <button class="mini-btn" type="default" size="mini" >修改</button>
+                    </picker>
                     
                     <button class="mini-btn pLeft" type="primary" size="mini" bindtap="checkAction" data-id="{{item.id}}">确认</button>
                   </view>
@@ -203,6 +206,28 @@
       <view class = "modal-footer"> 
         <view class = "btn-cancel" bindtap="onCancel" data-status="cancel" >取消</view>
         <view class="btn-confirm" bindtap="checkKpiValue" data-status="confirm">确定</view> 
+      </view>
+    </view> 
+
+  </view>
+  <!--隐藏域 点击修改按钮时弹出修改实际值弹出框 结束-->
+
+    <!--隐藏域 点击修改按钮时弹出修改实际值弹出框  开始-->
+  <view class='write-mask' wx:if="{{showCheckMask}}">
+
+    <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showCheckMask}}"></view>
+    <view class = "modal-dialog" wx:if = "{{showCheckMask}}" >
+      <view class = "modal-title">[{{actionName}}]确认结果</view>
+      <view class="modal-content">
+        <view class="modal-input">
+            <picker bindchange="bindPickerChange" data-planid="{{plan.id}}" data-actailid="{{item.id}}" value="{{checkItemstatus}}" range="{{array}}">
+              <view style="margin-left:20px;">完成情况(点击选择):{{array[checkItemstatus]}}</view>
+            </picker>
+        </view> 
+      </view> 
+      <view class = "modal-footer"> 
+        <view class = "btn-cancel" bindtap="onCancel" data-status="cancel" >取消</view>
+        <view class="btn-confirm" bindtap="checkActionValue" data-status="confirm">确定</view> 
       </view>
     </view> 
 
