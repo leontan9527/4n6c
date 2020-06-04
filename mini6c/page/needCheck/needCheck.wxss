@@ -12,10 +12,13 @@
   justify-content: center;  
 }
 
+
 .image-center{
    width:128rpx;
    height: 128rpx;
 }
+
+.withEdit{display: flex;}
 
 .check-his{
   display: flex;
@@ -138,10 +141,10 @@
 }
 
 .modal-dialog {
-  width: 540rpx;
+  width: 600rpx;
   overflow: hidden;
   position: fixed;
-  top: 40%;
+  top: 30%;
   left: 0;
   z-index:9999;
   background: #fff;
