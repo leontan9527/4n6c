@@ -486,9 +486,9 @@ Page({
   },
   
   //跳转到发送消息对话框页面
-  planWriteMessage: function(e){
+  writeProcessMessage: function(e){
 
-    wx.navigateTo({ url: '../planWriteMessage/planWriteMessage?planId=' + this.data.pid +'&toType=1'}) 
+    wx.navigateTo({ url: '../../common/writeProcessMessage/writeProcessMessage?refrenceId=' + this.data.pid +'&toType=2'}) 
   },
 
   //跳转到发送消息对话框页面

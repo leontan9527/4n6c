@@ -197,12 +197,13 @@ Page({
   toPlanProgressPage: function(e){
 
     var id = e.currentTarget.dataset.id
-    wx.navigateTo({ url: '../planProgressList/planProgressList?planId=' + id }) 
+    wx.navigateTo({ url: '../planProgressList/planProgressList?refrenceId=' + id  +'&toType=3'}) 
   },
 
-  //跳转到发送消息对话框页面
-  planWriteMessage: function(e){
-    wx.navigateTo({ url: '../planWriteMessage/planWriteMessage?planId=' + this.data.planId}) 
+   //跳转到发送消息对话框页面
+   writeProcessMessage: function(e){
+
+    wx.navigateTo({ url: '../../common/writeProcessMessage/writeProcessMessage?refrenceId=' + this.data.planId +'&toType=3'}) 
   },
 
 })

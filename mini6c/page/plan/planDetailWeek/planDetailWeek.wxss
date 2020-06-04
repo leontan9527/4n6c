@@ -130,6 +130,6 @@
 .moreItem{
   margin-top:3px;
   position:absolute;
-  right:0px;
+  right:12px;
 }
 /*一些小样式  结束*/

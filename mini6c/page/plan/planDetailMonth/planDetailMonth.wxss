@@ -118,7 +118,7 @@
 .moreItem{
   margin-top:3px;
   position:absolute;
-  right:0px;
+  right:12px;
 }
 .commitPlan{
   margin-left:3px;
