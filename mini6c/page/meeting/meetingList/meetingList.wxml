@@ -34,7 +34,7 @@
                             <view class="containerItem">
                               <view wx:if="{{item.confirmPrecent > 0}}" class="weui-media-box__desc">决议进度{{item.confirmPrecent*100}}%</view>
                               <view wx:else class="weui-media-box__desc" >会议决议：未产生</view>
-                              <progress wx:if="{{item.confirmPrecent > 0}}" percent="{{item.confirmPrecent*100}}" stroke-width="3" />
+                              <progress wx:if="{{item.confirmPrecent > 0}}" percent="{{item.confirmPrecent*100}}" stroke-width="3" color="#6196e6" active />
                             </view>
                             <view class="containerItem">
                                 <view class="flex-Container-view statusIng" wx:if="{{item.status == 3}}">{{item.statusName}}</view>
