@@ -509,8 +509,7 @@ Page({
    
   toPlanProgressPage: function(e){
 
-    var id = e.currentTarget.dataset.id
-    wx.navigateTo({ url: '../planProgressList/planProgressList?planId=' + id }) 
+    wx.navigateTo({ url: '../planProgressList/planProgressList?planId=' + this.data.pid }) 
   },
 
   //跳转到发送消息对话框页面
