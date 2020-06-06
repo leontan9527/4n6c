@@ -40,7 +40,7 @@
           <view class="navigator" wx:if="{{header.status==3}}">
             <view class="navigator-text nav-name">参会回执</view>             
             <view class="navigator-arrow" bindtap="showWriteDialog">
-              <view class="navigator-text nav-textRight" style="color:#33FF33;">{{label_attend}}</view> 
+              <view class="navigator-text nav-textRight" style="color:#6196e6;">{{label_attend}}</view> 
             </view>
           </view>                        
         
