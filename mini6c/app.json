@@ -47,32 +47,32 @@
   },
   "tabBar": {
     "color": "#7A7E83",
-    "selectedColor": "#3cc51f",
+    "selectedColor": "#13227a",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "list": [
       {
         "pagePath": "page/home/home",
-        "iconPath": "image/icon_component.png",
-        "selectedIconPath": "image/icon_component_HL.png",
+        "iconPath": "image/icon_home.png",
+        "selectedIconPath": "image/icon_home_HL.png",
         "text": "首页"
       },
       {
-        "pagePath": "page/plan/planlist/planlist",
-        "iconPath": "image/icon_component.png",
-        "selectedIconPath": "image/icon_component_HL.png",
+        "pagePath": "page/plan/planlist/planlist",        
+        "iconPath": "image/icon_plan.png",
+        "selectedIconPath": "image/icon_plan_HL.png",
         "text": "计划"
       },
       {
         "pagePath": "page/target/dashboard/dashboard",
-        "iconPath": "image/icon_API.png",
-        "selectedIconPath": "image/icon_API_HL.png",
-        "text": "目标"
+        "iconPath": "image/icon_result.png",
+        "selectedIconPath": "image/icon_result_HL.png",
+        "text": "结果"
       },
       {
         "pagePath": "page/ke/web-view/web-view",
-        "iconPath": "image/icon_API.png",
-        "selectedIconPath": "image/icon_API_HL.png",
+        "iconPath": "image/icon_ke.png",
+        "selectedIconPath": "image/icon_ke_HL.png",
         "text": "课程"
       }
     ]
