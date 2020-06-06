@@ -1,5 +1,17 @@
 const config = require('../../../config')
 const app = getApp()
+var tempFilePath
+const myaudio = wx.createInnerAudioContext()
+//苹果手机，静音模式 也能播放录音
+if (wx.setInnerAudioOption) {
+  wx.setInnerAudioOption({
+    obeyMuteSwitch: false,
+    autoplay: true
+  })
+}else {
+  myaudio.obeyMuteSwitch = false;
+  myaudio.autoplay = true;
+}
 
 Page({
 
@@ -30,9 +42,10 @@ Page({
           'Cookie': 'JSESSIONID=' + sessionId
         },
         success(result) {
-          console.log('【plan/unReadProcess=】', result.data.data)
+          
           self.setData({
-            planList: result.data.data
+            planList: result.data.unReadProcess,
+            process:result.data.wxPlanProcessList
           })
         },
 
@@ -60,6 +73,105 @@ Page({
     }else{  
       wx.navigateTo({ url: '../planDetailShow/planDetailShow?id=' + id + '&planCycle='+planCycle })
     }
-  }
+  },
+
+  //音频播放   开始
+  audioPlay: function (e) {
+
+    var that = this
+    var id = e.currentTarget.dataset.id
+
+    var unReadProcess=that.data.planList
+    var vidSrc
+    var process
+    for (let i = 0; i < unReadProcess.length; i++ ){			
+      process=unReadProcess[i].process
+      for (let j = 0; j < process.length; j++ ){
+        process[j].isBof = false
+        if(id=process[j].id){
+          process[j].isBof = true
+          vidSrc=config.domain + process[j].content
+          that.setData({
+            planList: unReadProcess,
+          })
+        }
+      }
+    }
+  
+    myaudio.autoplay = true
+    myaudio.src = vidSrc
+
+    myaudio.play();
+    //开始监听
+    myaudio.onPlay(() => {
+      //console.log('onPlay======开始播放')
+    })
+    
+    //结束监听
+    myaudio.onEnded(() => {
+
+      //console.log('onEnded======自动播放完毕');
+      for (let i = 0; i < unReadProcess.length; i++ ){			
+        process=unReadProcess[i].process
+        for (let j = 0; j < process.length; j++ ){
+          process[j].isBof = false
+          if(id=process[j].id){
+            process[j].isBof = false
+            that.setData({
+              planList: unReadProcess,
+            })
+          }
+        }
+      }
+      return
+    })
+
+    //错误回调
+    myaudio.onError((err) => {
+      console.log(err); 
+      for (let i = 0; i < unReadProcess.length; i++ ){			
+        process=unReadProcess[i].process
+        for (let j = 0; j < process.length; j++ ){
+          process[j].isBof = false
+          if(id=process[j].id){
+            process[j].isBof = false
+            that.setData({
+              planList: unReadProcess,
+            })
+          }
+        }
+      }
+      return
+    })
+  },
+
+  // 再次点击播放按钮， 停止播放
+  audioStop(e){
+
+    var that = this
+    var id = e.currentTarget.dataset.id
+    var vidSrc = config.domain + audioArr[audKey].content
+    var unReadProcess=that.data.planList
+    var process
+    for (let i = 0; i < unReadProcess.length; i++ ){			
+      process=unReadProcess[i].process
+      for (let j = 0; j < process.length; j++ ){
+        process[j].isBof = false
+        if(id=process[j].id){
+          process[j].isBof = false
+          that.setData({
+            planList: unReadProcess,
+          })
+        }
+      }
+    }
+
+    myaudio.stop();
+
+    //停止监听
+    myaudio.onStop(() => {
+      //console.log('停止播放');
+    })
+  },
   
 })
