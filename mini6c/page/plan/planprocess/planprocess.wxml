@@ -19,7 +19,23 @@
     <view class="weui-panel__bd" wx:for-items="{{plan.process}}">
         <view class="weui-media-box weui-media-box_text">   
             <view class="weui-media-box__title weui-media-box__title_in-text" wx:if="{{item.title}}" >{{item.title}}</view>         
-            <view class="weui-media-box__desc">{{item.content}}</view>
+            <view wx:if="{{item.type==0}}" class="weui-media-box__desc">{{item.content}}</view>
+            <view wx:if="{{item.type==1}}" class="planProgressContent">
+                <view class='output-audio'>
+                  <!-- 默认状态 -->
+                  <view class='audio' wx:if="{{item.isBof==false}}" bindtap='audioPlay' data-id="{{item.id}}" data-isBof="{{item.isBof}}">
+                    <image class='ico' src='/page/images/vocie/yuying1.png' />
+                    <label class='time'>{{item.timeLength}}</label>
+                  </view>
+                  
+                  <!-- 当前正在播放状态 -->
+                  <view class='audio' wx:if="{{item.isBof==true}}" bindtap='audioStop' data-id="{{item.id}}" data-isBof="{{item.isBof}}">
+                    <image class='ico' src='/page/images/vocie/bof1.png' />
+                    <label class='time'>{{item.timeLength}}</label>
+                  </view>
+                
+                </view>
+            </view>
             <view class="weui-media-box__info">
                 <view class="weui-media-box__info__meta">{{item.progressUser}}</view>
                 <view class="weui-media-box__info__meta">{{item.createDate}}</view>                
