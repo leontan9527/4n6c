@@ -83,6 +83,7 @@
       <view class="weui-panel__bd">
         <view class="weui-media-box weui-media-box_text" wx:for-items="{{plan.actionDetails}}" wx:key="id" >                    
           <view class="weui-media-box__desc plan_action">{{item.action}}</view>
+          <view class="weui-media-box__desc" wx:if="{{item.targetName!=null}}">核心事件：{{item.targetName}}</view>
           <view class="weui-media-box__desc">成果要求：{{item.outcome}}</view>
           <view class="weui-media-box__info">
             <view class="weui-media-box__info__meta">完成时间：{{df.formatDate(item.commitDate)}}</view>

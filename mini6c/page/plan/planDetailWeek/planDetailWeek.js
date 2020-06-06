@@ -213,7 +213,6 @@ addAction: function (e) {
 
 editAction: function (e) {
     var isEditPlan=e.currentTarget.dataset.iseditplan
-    console.log('planEditAction/planEditAction】isEditPlan=', isEditPlan)
     if(isEditPlan==true){
       var planId = e.currentTarget.dataset.planid
       var detailId = e.currentTarget.dataset.actailid
@@ -223,6 +222,7 @@ editAction: function (e) {
 
 commitPlan:function(e){  
 
+    var commitstatus = e.currentTarget.dataset.status
     var isHasCommitDate=true
     var isHasResultRemark=true
     const self = this
@@ -233,10 +233,11 @@ commitPlan:function(e){
         isHasCommitDate=false
         break
       } 
-      if ( plan.actionDetails[i].resultRemark == null || plan.actionDetails[i].resultRemark == ''){	
+      if (commitstatus==1 && plan.actionDetails[i].resultRemark == null || plan.actionDetails[i].resultRemark == ''){	
         isHasResultRemark=false
         break
       } 
+      
     }
 
     var errormsg
