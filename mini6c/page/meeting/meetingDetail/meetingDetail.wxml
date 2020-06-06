@@ -26,7 +26,7 @@
           </view>
 
           <view class="navigator">
-            <view class="navigator-text nav-name">会议人</view> 
+            <view class="navigator-text nav-name">记录人</view> 
             <view class="navigator-text nav-textRight">{{header.recorderName}}</view>
           </view>
 
