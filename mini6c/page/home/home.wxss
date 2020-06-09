@@ -63,3 +63,4 @@
 .wx-logoView{
   height: 60%;
 }
+.img-icon{width: 40px; height: 40px; display: block}

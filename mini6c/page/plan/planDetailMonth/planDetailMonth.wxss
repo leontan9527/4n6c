@@ -52,8 +52,7 @@
 .planProgressfirstPic{
   width:35px;
   height:35px;
-  margin-left: 0px;
-  margin-top:1px;
+  margin-left: 0px; 
 }
 
 .planProgressUserName{
@@ -71,15 +70,14 @@
 }
 
 .planProgressContent{
-  margin-top:9px;
-  margin-left: 38px;
+  margin-top:0px;
+  margin-left: 10px;
   color: rgb(104, 113, 121);
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .output-audio{ 
-  width: 150rpx; 
-  margin: 30rpx; 
+  width: 150rpx;   
 }
 .output-audio .audio{ 
   padding: 20rpx; border-radius: 10rpx;
@@ -105,8 +103,8 @@
   right:0px;
 }
 .showPic{
-  width:35px;
-  height:35px;
+  width:32px;
+  height:32px;
 }
 .resultRemark{
   line-height:20px;
@@ -124,3 +122,14 @@
   margin-left:3px;
 }
 /*一些小样式  结束*/
+
+.noboder{padding:5px 16px;}
+
+.commitButton{width:100%;text-align: center;
+  color: #fff;
+  background-color: #07c160;
+  height:48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  }

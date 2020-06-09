@@ -5,10 +5,8 @@
   <view>
     <view class="weui-panel weui-panel_access" wx:if="{{plan.kpiDetails.length > 0}}">
       <view class="weui-panel__hd">
-        <label>核心KPI（{{plan.kpiDetails.length}})</label>
-        <label bindtap='writeProcessMessage' class="rightCss">
-          <image class="showPic" src="/image/record.png"></image>
-        </label>
+        <label>核心KPI（{{plan.kpiDetails.length}}）</label>
+        <label class="rightCss"></label>
       </view>
       <view class="weui-panel__bd">
         <view class="weui-media-box weui-media-box_text" wx:for-items="{{plan.kpiDetails}}" wx:key="id" >                    
@@ -118,7 +116,7 @@
       </view>
     </view>
 
-    <view class="message-top">
+    <!--view class="message-top">
 
         <view wx:if="{{plan.status == 0}}" class="weui-media-box__desc">
           提示：行动举措每项提交结果后，点击提交结果； 提交结果后，不可修改
@@ -135,53 +133,54 @@
             提交结果
           </button>
         </view>
-    </view>
+    </view-->
     
     <!--进程消息列表  开始-->
     <view class="weui-panel weui-panel_access" wx:if="{{planProgressList.length > 0}}">
       <view class="weui-panel__hd">
         <label>计划进程(最新{{planProgressList.length}}条)</label>
-        <label  bindtap='toPlanProgressPage' data-id="{{pid}}"  class="weui-media-box__title link_plan moreItem">更多</label>
+        <label bindtap='writeProcessMessage' class="rightCss">
+          <image class="showPic" src="/image/write.png"></image>
+        </label>
+        <!--label  bindtap='toPlanProgressPage' data-id="{{pid}}"  class="weui-media-box__title link_plan moreItem">更多</label-->
       </view>
       <view class="weui-panel__bd">
 
-        <view class="weui-media-box weui-media-box_text" wx:for-items="{{planProgressList}}" wx:key="id" wx:for-index="key">  
+        <view class="noboder" wx:for-items="{{planProgressList}}" wx:key="id" wx:for-index="key">  
 
           <view class="planProgressList-flex-C">
             <view class="containerItem">
               <image class='planProgressfirstPic' src='/page/images/vocie/toux.png' ></image>   
             </view>
-            <view class="containerItem">
-              <view class="planProgressUserName">{{item.updateUser}}</view>
-            </view>
-            <view class="containerItem">
-              <view class="planProgressDeptName">{{item.deptName}} {{df.formatDate(item.createTime,2)}}</view>
-            </view>
-          </view>
 
-          <view class="planProgressList-flex-C">
             <view class="containerItem">
-              <view wx:if="{{item.type==0}}" class="planProgressContent">{{item.content}}</view>
+              <view wx:if="{{item.type==0}}" class="planProgressContent">{{item.updateUser}}：{{item.content}} （ {{df.formatDate(item.createTime,2)}} ）</view>
               <view wx:if="{{item.type==1}}" class="planProgressContent">
+                {{item.updateUser}}（ {{df.formatDate(item.createTime,2)}} ）
                 <view class='output-audio'>
                   <!-- 默认状态 -->
                   <view class='audio' wx:if="{{item.isBof==false}}" bindtap='audioPlay' data-key="{{key}}" data-id="{{item.id}}" data-isBof="{{item.isBof}}">
                     <image class='ico' src='/page/images/vocie/yuying1.png' />
-                    <label class='time'>{{item.timeLength}}</label>
+                    <label class='time'>{{item.timeLength}}s</label>
                   </view>
                   
                   <!-- 当前正在播放状态 -->
                   <view class='audio' wx:if="{{item.isBof==true}}" bindtap='audioStop' data-key="{{key}}" data-id="{{item.id}}" data-isBof="{{item.isBof}}">
                     <image class='ico' src='/page/images/vocie/bof1.png' />
-                    <label class='time'>{{item.timeLength}}</label>
-                  </view>
-                
+                    <label class='time'>{{item.timeLength}}s</label>
+                  </view>                  
                 </view>
               </view>
             </view>
           </view>
+        </view>   
 
-        </view>        
+        <view class="noboder">
+          <view class="planProgressList-flex-C">            
+            <view class="planProgressContent" style="padding-left:38px;" bindtap='toPlanProgressPage' data-id="{{pid}}">更多>></view> 
+          </view>
+        </view>
+
       </view>            
     </view>
     <!--进程消息列表  结束-->
@@ -189,3 +188,12 @@
   <!--计划详情信息  结束-->
 
 </view>
+
+<view style="position:fixed;bottom:0;width:100%;" wx:if="{{plan.isPassWeigth==true && unCommit==0}}">
+  <view class="commitButton" data-planid="{{plan.id}}" data-status="1" bindtap="commitPlan">提交结果</view>
+</view>
+
+
+
+
+
