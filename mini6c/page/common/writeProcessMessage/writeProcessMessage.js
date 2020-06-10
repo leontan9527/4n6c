@@ -96,13 +96,29 @@ Page({
       success(result) {
 
           if(result.data.success){
-              if(that.data.toType==4){
-                that.getAdviserMessagePage(that.data.pageSize,that.data.pageNumber)
-              }else if(that.data.toType==5){
-                that.allReplyAdviserMessageList(that.data.refrenceId)
-              }else{
-                that.toPlanPrevPage(that.data.refrenceId)
-              }
+              that.setData({
+                accessToken: result.data.accessToken,
+                openid: result.data.openid,
+              })           
+              wx.requestSubscribeMessage({
+                tmplIds: ['OeKnAQ_cdFdHc4dBYqwizwzShtEKWnaV7JrJlIeqjmw'],
+                success (res) {
+                  if(res['OeKnAQ_cdFdHc4dBYqwizwzShtEKWnaV7JrJlIeqjmw'] === 'accept'){
+                    
+                    that.sendAdviserToWeiXin(0)    
+                  }
+                },
+                complete (res) { 
+                  if(that.data.toType==4){
+                    that.getAdviserMessagePage(that.data.pageSize,that.data.pageNumber)
+                  }else if(that.data.toType==5){
+                    that.allReplyAdviserMessageList(that.data.refrenceId)
+                  }else{
+                    that.toPlanPrevPage(that.data.refrenceId)
+                  }
+                }
+              })       
+  
           }else{ 
             //创建失败，提示错误信息
           }
@@ -264,6 +280,10 @@ Page({
                     success(result) {
              
                         if(result.data.success){
+                            that.setData({
+                              accessToken: result.data.accessToken,
+                              openid: result.data.openid,
+                            })
                             if(that.data.toType==4){
                               that.getAdviserMessagePage(that.data.pageSize,that.data.pageNumber)
                             }else if(that.data.toType==5){
@@ -464,6 +484,42 @@ Page({
             wx.navigateBack({
               delta: 1
             })
+
+          }
+        },
+  
+        fail({ errMsg }) {
+          console.log('【plan/list fail】', errMsg)
+        }
+      })
+    }
+  },
+
+  sendAdviserToWeiXin: function (refrenceId) {
+
+    const self = this
+    var sessionId = app.globalData.sessionId
+
+    let _access_token =self.data.accessToken;
+    let openid =self.data.openid;
+    let form_id=self.data.refrenceId
+
+    if (sessionId) {
+      wx.request({
+        url: config.domain + '/adviserMessageCr/weiXinSubscribeMessage',
+        data: {
+          openid: openid,
+          form_id: form_id,
+          access_token: _access_token,
+        },
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          'Cookie': 'JSESSIONID=' + sessionId
+        },
+        success(result) {
+  
+          if(result.data.success){
 
           }
         },
