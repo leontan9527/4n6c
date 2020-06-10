@@ -1,24 +1,18 @@
-<view class="page__bd">
-  <view class="page-section">
 
-    <view class="page-section-title" class="kpiName">
-      【{{actionName}}】
+<view class="page__bd">  
+  <view class="page-section">
+    <view class="page-section-title actionName">
+      计划项：{{actionName}}
+    </view> 
+
+    <view class="modal-input">      
+      <textarea placeholder-class="place-holder" data-field="action" placeholder="请填写结果说明"
+          class="textRemark" bindinput='getBlurResultValue' value="{{resultRemark}}"></textarea>
     </view>
 
-    <view class = "modal-dialog">
-      <view class = "modal-title">请填写结果说明</view>
-      <view class="modal-content">
-        <view class="modal-input">
-          <textarea placeholder-class="place-holder" data-field="action" 
-          class="textareaHeight1" bindinput='getBlurResultValue' value="{{resultRemark}}"></textarea>
-        </view>
-      </view> 
-      <view class = "modal-footer"> 
-        <!--<view class = "btn-cancel" bindtap="onCancel" data-status="cancel" >取消</view>-->
-        <view class="btn-confirm" bindtap="writeResultFun" data-status="confirm">提交</view> 
-      </view>
-
-    </view> 
+    <view class="page-section-title">      
+      <button type="primary" bindtap="writeResultFun" data-status="confirm" >确定</button>
+    </view>
     
   </view>
 </view>

@@ -4,7 +4,8 @@
   padding-bottom: 40px;
 }
 .weui-media-box__title{font-weight:400;font-size:15px;color:rgba(0,0,0,.9);}
-.weui-media-box__info{color:#949191;}
+.weui-media-box__info{color:#777;margin-top: 8px;font-size: 14px;}
+
 .plan_action{font-weight:400;font-size:16px;color:rgba(0,0,0,.9);}
 .plan_status{color: darkgreen;}
 .button-sp-area{
@@ -31,12 +32,14 @@
 }
 
 .actual-text{
-  width:50px;
-  margin-top:3px;
+  height: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .actual-input{
-  width:100px;
+  width:150px;
   padding-top: 0px;
 }
 
@@ -94,6 +97,8 @@
   float: right; 
   font-size: 24rpx;
 }
+.text_edit{color:#6196e6}
+.text_write{color:maroon}
 /*计划进程消息列表显示css  结束 */
 
 /*一些小样式  开始*/
@@ -133,3 +138,8 @@
   align-items: center;
   justify-content: center;
   }
+
+  .phcolor{
+    color:maroon;
+  }
+ 
