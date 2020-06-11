@@ -1,37 +1,15 @@
-@import '../../common/weui.wxss';
 @import '../../common.wxss';
 
-.modal-dialog {
-  width: 100%;
-  overflow: hidden;
-  position: fixed;
-  left: 0;
-  z-index:9999;
-  background: #fff;
-  border-radius:0rpx;
+.actionName{
+  padding-top: 30px;
 }
 
-.modal-title {
-  padding-top: 10rpx;
-  font-size: 36rpx;
-  color: #030303;
-  text-align: center;
-}
+.textRemark{padding:10rpx 30rpx; width:auto; font-size: 14px;}
 
-.modal-content {
-  padding: 5rpx 32rpx;
-}
-
-.modal-input {
-  display: flex;
-  z-index:9999;
+.modal-input {  
   background:#fff;
-  border-top: 1rpx solid#ddd;
-  border-left: 1rpx solid#ddd;
-  border-right: 1rpx solid#ddd;
-  border-bottom: 1rpx solid#ddd;
-  border-radius: 4rpx;
-  margin-left:0px;
+  border: 1rpx solid#ddd;  
+  border-radius: 4rpx;  
   font-size:28rpx;
 }
 
@@ -42,40 +20,7 @@
   margin-left: 2px;
 }
 
-.modal-checkbox {
-  display: flex;
-  background:#fff;
-  border-radius: 4rpx;
-  font-size:28rpx;
-  margin-top: 10px;
-  margin-left:-1px;
-}
 
-.modal-footer {
-  margin-top: 20px;
-  margin-left:2px;
-  margin-right:4px;
-  display: flex;
-  flex-direction: row;
-  height: 86rpx;
-  font-size: 34rpx;
-  line-height: 86rpx;
-  border: 1px solid#dedede;
-}
-/*
-.btn-cancel {
-  width: 50% ;
-  color: #666;
-  text-align: center;
-  margin-left: 3px;
-  border-right: 1px solid #dedede;
-}
-*/
 
-.btn-confirm {
-  width: 100% ;
-  margin-right: 2px;
-  color: #6196e6;
-  text-align: center;
-}
+
 /*点击发送文字消息按钮 显示发送语音消息列表css  开始*/

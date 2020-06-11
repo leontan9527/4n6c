@@ -24,7 +24,7 @@
 
           <view class="weui-media-box__info">
             <view class="weui-media-box__info__meta">检查人：{{item.checkUserName}}</view>      
-            <view class="weui-media-box__info__meta">绩效分数：{{item.score}}</view>         
+            <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">绩效分数：{{item.score}}</view>         
           </view>
 
           <!-- 输入实际值  开始 -->
@@ -33,8 +33,8 @@
 
               <!-- 常规类指标直接输入实际值 -->
               <view wx:if="{{item.isNoVote == false  && item.computationRules != 6 && item.computationRules != 7}}" class="flex-Container">
-                <text class="actual-text">实际值:</text>
-                <input bindblur="writeKpiValue" type="digit" data-kpiid="{{item.id}}" data-targetindexid="{{item.targetIndexId}}" data-weight="{{item.weight}}" data-field="actualValue" value="{{item.actualValue}}" class="actual-input" placeholder="请输入实际值"/>
+                <view class="actual-text">实际值：</view>
+                <input bindblur="writeKpiValue" type="digit" data-kpiid="{{item.id}}" data-targetindexid="{{item.targetIndexId}}" data-weight="{{item.weight}}" data-field="actualValue" value="{{item.actualValue}}" class="actual-input" placeholder-class="phcolor" placeholder="（点击填写）"/>
               </view>
 
               <!-- 电网类指标弹出页面选择电网指标 -->
@@ -45,19 +45,19 @@
               <!-- IntA("完成率项次扣分类",6) 类指标弹出页面选择 -->                            	
               <view class="noVoteValue"  wx:if="{{item.computationRules == 6}}"
                 data-kpiid="{{item.id}}" data-kpiname="{{item.name}}" data-targetindexid="{{item.targetIndexId}}" data-unit="{{item.unit}}" data-reasonablevalue="{{item.reasonableValue}}" data-weight="{{item.weight}}"  bindtap="toPlanIntAValue" >
-                <view wx:if="{{item.storeCode == 'unfinishBuckleScore' }}">实际值: 未完成项次数：{{item.storeValue1}}，总项数：{{item.storeValue2}}</view>
-                <view wx:elif="{{item.storeCode == 'unexpandedScore' }}">实际值: 当期无计划</view>
-                <view wx:elif="{{item.storeCode == 'finishMultiple' }}">实际值: 100%完成</view>
-                <view wx:else>实际值:</view>
+                <view wx:if="{{item.storeCode == 'unfinishBuckleScore' }}">实际值： 未完成项次数：{{item.storeValue1}}，总项数：{{item.storeValue2}}</view>
+                <view wx:elif="{{item.storeCode == 'unexpandedScore' }}">实际值：当期无计划</view>
+                <view wx:elif="{{item.storeCode == 'finishMultiple' }}">实际值：100%完成</view>
+                <view wx:else>实际值：</view>
               </view>
 
               <!-- IntB("直接加减分(月度无权重)类",7)类指标弹出页面选择 -->
               <view class="noVoteValue" wx:if="{{item.computationRules == 7}}"
                 data-kpiid="{{item.id}}" data-kpiname="{{item.name}}" data-targetindexid="{{item.targetIndexId}}" data-unit="{{item.unit}}" data-reasonablevalue="{{item.reasonableValue}}" bindtap="toPlanIntBValue" >
                 
-                <view wx:if="{{item.storeCode == 'finishAddBuckleScore' }}">实际值: {{item.actualValue}}</view>
-                <view wx:elif="{{item.storeCode == 'unPlanScore' }}">实际值: 当期无计划</view>
-                <view wx:else>实际值:</view>
+                <view wx:if="{{item.storeCode == 'finishAddBuckleScore' }}">实际值：{{item.actualValue}}</view>
+                <view wx:elif="{{item.storeCode == 'unPlanScore' }}">实际值：当期无计划</view>
+                <view wx:else>实际值：</view>
               </view>
 
               <!-- 页面提示信息-->
@@ -90,20 +90,31 @@
 
           <view class="weui-media-box__info">
             <view bindtap='planWriteResult' data-detailid="{{item.id}}" data-resultremark="{{item.resultRemark}}" data-actionname="{{item.action}}">
-              结果说明(点击填写):
-              <label wx:if="{{item.resultRemark!=null}}" class="resultRemark">{{item.resultRemark}}</label>
+              结果说明：
+              <label wx:if="{{item.resultRemark != null}}" class="resultRemark">{{item.resultRemark}} </label>
+              <label wx:if="{{item.resultRemark != null}}" class="resultRemark text_edit">（点击修改）</label>
+              <label wx:if="{{item.resultRemark == null}}" class="resultRemark text_write">（点击填写）</label>
+              
             </view>
           </view>
           
           <view class="weui-media-box__info"> 
-            <view class="weui-cell-picker">
+            
+            <view class="weui-media-box__info__meta">完成情况：</view>
+            <view class="weui-media-box__info__meta">                       
+              <picker bindchange="bindPickerChange" data-planid="{{plan.id}}" data-actailid="{{item.id}}" value="{{item.status}}" range="{{array}}">
+                <view wx:if="{{item.status != null}}" >{{array[item.status]}}</view>
+                <view wx:if="{{item.status == null}}" >{{array[item.status]}}</view> 
+              </picker>                
+            </view>
 
-                <view class="weui-cell__bd">
-                  <picker bindchange="bindPickerChange" data-planid="{{plan.id}}" data-actailid="{{item.id}}" value="{{item.status}}" range="{{array}}">
-                    <view class="weui-input">完成情况(点击修改):{{array[item.status]}}</view>
-                  </picker>
-                </view>
-              </view>
+            <view class="weui-media-box__info__meta">                       
+              <picker bindchange="bindPickerChange" data-planid="{{plan.id}}" data-actailid="{{item.id}}" value="{{item.status}}" range="{{array}}">
+                <view wx:if="{{item.status != null}}" class="text_edit">（点击修改）</view>
+                <view wx:if="{{item.status == null}}" class="text_write">（点击选择）</view> 
+              </picker>                
+            </view>
+
           </view>
 
         </view>        
