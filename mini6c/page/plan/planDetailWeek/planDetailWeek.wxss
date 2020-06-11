@@ -133,3 +133,15 @@
   right:12px;
 }
 /*一些小样式  结束*/
+.commitButton{width:100%;text-align: center;
+  color: #fff;
+  background-color: #07c160;
+  height:48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  }
+
+  .phcolor{
+    color:maroon;
+  }

@@ -9,9 +9,6 @@
     <view class="weui-panel weui-panel_access" wx:if="{{plan.kpiDetails.length > 0}}">
       <view class="weui-panel__hd">
         <label>核心KPI（{{plan.kpiDetails.length}})</label>
-        <label bindtap='writeProcessMessage' class="rightCss" wx:if="{{planCycle!=0}}">
-          <image class="showPic" src="/image/record.png"></image>
-        </label>
       </view>
 
       <view class="weui-panel__bd">
@@ -43,9 +40,6 @@
     <view class="weui-panel weui-panel_access" wx:if="{{plan.actionDetails.length > 0}}">
        <view class="weui-panel__hd">
         <label>行动计划（{{plan.actionDetails.length}}）</label>
-        <label bindtap='writeProcessMessage' class="rightCss" wx:if="{{planCycle==0}}">
-          <image class="showPic" src="/image/record.png"></image>
-        </label>
       </view>
         <view class="weui-panel__bd">
           <view class="weui-media-box weui-media-box_text" wx:for-items="{{plan.actionDetails}}" wx:key="id" >                    
@@ -81,7 +75,9 @@
     <view class="weui-panel weui-panel_access" wx:if="{{planProgressList.length > 0}}">
       <view class="weui-panel__hd">
         <label>计划进程(最新{{planProgressList.length}}条)</label>
-        <label bindtap='toPlanProgressPage' data-id="{{planId}}" class="weui-media-box__title link_plan moreItem">更多</label>
+        <label bindtap='writeProcessMessage' class="rightCss">
+          <image class="showPic" src="/image/write.png"></image>
+        </label>
       </view>
       <view class="weui-panel__bd">
 
@@ -120,8 +116,14 @@
               </view>
             </view>
           </view>
+        </view>   
+ 
+        <view class="noboder">
+          <view class="planProgressList-flex-C">            
+            <view class="planProgressContent" style="padding-left:38px;" bindtap='toPlanProgressPage' data-id="{{planId}}">更多>></view> 
+          </view>
+        </view>
 
-        </view>        
       </view>            
     </view>
     <!--进程消息列表  结束-->

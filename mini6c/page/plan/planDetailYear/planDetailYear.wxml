@@ -6,9 +6,6 @@
     <view class="weui-panel weui-panel_access" wx:if="{{plan.kpiDetails.length > 0}}">
       <view class="weui-panel__hd">
         <label>核心KPI（{{plan.kpiDetails.length}})</label>
-        <label bindtap='writeProcessMessage' class="rightCss">
-          <image class="showPic" src="/image/record.png"></image>
-        </label>
       </view>
       <view class="weui-panel__bd">
         <view class="weui-media-box weui-media-box_text" wx:for-items="{{plan.kpiDetails}}" wx:key="id" >                    
@@ -47,7 +44,7 @@
               <!-- 非电网类指标接输入实际值(年度计划，INTA和INTB类直接输入实际值，和月度计划不一样 -->
               <view wx:if="{{plan.isPassWeigth == true && item.isNoVote == false}}" class="flex-Container">
                 <text class="actual-text">实际值:</text>
-                <input bindblur="writeKpiValue" type="digit" data-kpiid="{{item.id}}" data-targetindexid="{{item.targetIndexId}}" data-weight="{{item.weight}}" data-isperformancecptrule="{{item.isPerformanceCptRule}}"  data-field="actualValue" value="{{item.actualValue}}" class="actual-input" placeholder="请输入实际值"/>
+                <input bindblur="writeKpiValue" type="digit" data-kpiid="{{item.id}}" data-targetindexid="{{item.targetIndexId}}" data-weight="{{item.weight}}" data-isperformancecptrule="{{item.isPerformanceCptRule}}"  data-field="actualValue" value="{{item.actualValue}}" class="actual-input" placeholder-class="phcolor" placeholder="（点击填写）"/>
               </view>
 
               <!-- 电网类指标弹出页面选择电网指标 -->
@@ -75,19 +72,29 @@
 
           <view class="weui-media-box__info">
             <view bindtap='planWriteResult' data-detailid="{{item.id}}" data-resultremark="{{item.resultRemark}}" data-actionname="{{item.action}}">
-              结果说明(点击填写):
-              <label wx:if="{{item.resultRemark!=null}}" class="resultRemark">{{item.resultRemark}}</label>
+              结果说明:
+              <label wx:if="{{item.resultRemark != null}}" class="resultRemark">{{item.resultRemark}} </label>
+              <label wx:if="{{item.resultRemark != null}}" class="resultRemark text_edit">（点击修改）</label>
+              <label wx:if="{{item.resultRemark == null}}" class="resultRemark text_write">（点击填写）</label>
+
             </view>
           </view>
 
           <view class="weui-media-box__info"> 
-            <view class="weui-cell-picker">
-                <view class="weui-cell__bd">
-                  <picker bindchange="bindPickerChange" data-planid="{{plan.id}}" data-actailid="{{item.id}}" value="{{item.status}}" range="{{array}}">
-                    <view class="weui-input">完成情况(点击修改):{{array[item.status]}}</view>
-                  </picker>
-                </view>
-              </view>
+            <view class="weui-media-box__info__meta">完成情况：</view>
+            <view class="weui-media-box__info__meta">                       
+              <picker bindchange="bindPickerChange" data-planid="{{plan.id}}" data-actailid="{{item.id}}" value="{{item.status}}" range="{{array}}">
+                <view wx:if="{{item.status != null}}" >{{array[item.status]}}</view>
+                <view wx:if="{{item.status == null}}" >{{array[item.status]}}</view> 
+              </picker>                
+            </view>
+
+            <view class="weui-media-box__info__meta">                       
+              <picker bindchange="bindPickerChange" data-planid="{{plan.id}}" data-actailid="{{item.id}}" value="{{item.status}}" range="{{array}}">
+                <view wx:if="{{item.status != null}}" class="text_edit">（点击修改）</view>
+                <view wx:if="{{item.status == null}}" class="text_write">（点击选择）</view> 
+              </picker>                
+            </view>
           </view>
 
         </view>        
@@ -100,30 +107,13 @@
       </view>
     </view>
 
-    <view class="message-top">
-
-        <view wx:if="{{plan.status == 0}}" class="weui-media-box__desc">
-          提示：行动举措每项提交结果后，点击提交结果； 提交结果后，不可修改
-        </view> 
-
-        <view wx:if="{{plan.status == 0  && unCommit>0}}" >
-          <label class="unCommit link_plan">
-            余{{unCommit}}项，待提交结果
-          </label>
-        </view>
-
-        <view class="button-sp-area" wx:if="{{plan.isShowCommitYearPlan==true && unCommit==0}}">
-          <button class="mini-btn commitPlan" type="primary" size="mini" data-planid="{{plan.id}}" data-status="1" bindtap="commitPlan">
-            提交结果
-          </button>
-        </view>
-    </view>
-
     <!--进程消息列表  开始-->
     <view class="weui-panel weui-panel_access" wx:if="{{planProgressList.length > 0}}">
       <view class="weui-panel__hd">
         <label>计划进程(最新{{planProgressList.length}}条)</label>
-        <label bindtap='toPlanProgressPage' data-id="{{pid}}" class="weui-media-box__title link_plan moreItem">更多</label>
+        <label bindtap='writeProcessMessage' class="rightCss">
+          <image class="showPic" src="/image/write.png"></image>
+        </label>
       </view>
       <view class="weui-panel__bd">
 
@@ -162,12 +152,22 @@
               </view>
             </view>
           </view>
+        </view>   
 
-        </view>        
+        <view class="noboder">
+          <view class="planProgressList-flex-C">            
+            <view class="planProgressContent" style="padding-left:38px;" bindtap='toPlanProgressPage' data-id="{{pid}}">更多>></view> 
+          </view>
+        </view>
+
       </view>            
     </view>
     <!--进程消息列表  结束-->
   </view>
   <!--计划详情信息  结束-->
 
+</view>
+
+<view style="position:fixed;bottom:0;width:100%;" wx:if="{{plan.isShowCommitYearPlan==true && unCommit==0}}">
+  <view class="commitButton" data-planid="{{plan.id}}" data-status="1" bindtap="commitPlan">提交结果</view>
 </view>
