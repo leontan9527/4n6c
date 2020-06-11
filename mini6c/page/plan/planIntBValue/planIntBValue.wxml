@@ -6,7 +6,7 @@
   <template is="head" data="{{title: 'radio'}}"/>
 
   <view class="page-body">
-    <view class="page-section">
+    <view class="page-section topSplit">
       <view class="page-section-title" class="kpiName">【{{kpiName}}】实际结果</view>
 
       <view class="weui-cells weui-cells_after-title">
@@ -31,7 +31,7 @@
                   <text class="conItem1">完成项数:</text>
               </view>
               <view class="containerItem">
-                  <input class="conItem2" type="number" name="storevalue1" value="{{planKpiDetail.storeValue1}}"/>
+                  <input class="conItem2" type="number" name="storevalue1" value="{{planKpiDetail.storeValue1}}" placeholder="请填写数字" placeholder-class="phcolor"/>
               </view>  
             </view>
 
@@ -44,8 +44,8 @@
   <template is="foot" />
 
   <view class="button-sp-area">
-    <button formType="submit" class="mini-btn1" type="primary" size="mini">确定</button>
-    <button class="mini-btn2" type="default" size="mini" bindtap="navigateBack">取消</button> 
+    <view class="mini-btn2" type="default" size="mini" bindtap="navigateBack">取消</view> 
+    <button class="mini-btn1" type="primary" formType="submit">确定</button>
   </view>
 
 </view>

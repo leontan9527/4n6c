@@ -1,6 +1,7 @@
 @import '../../common/weui.wxss';
 @import '../../common.wxss';
 
+.topSplit{padding-top:20px;}
 .radio {
   margin-right: 20rpx;
 }
@@ -17,6 +18,7 @@
 
 .mini-btn2{
   align-self:center;
+  padding-left:50px;
 }
 
 .flex-Container{
@@ -29,7 +31,7 @@
   }
 
   .containerItem {
-    height:100%;
+    height:100%;    
   }
 
   .conItem1{
@@ -38,14 +40,20 @@
  }
 
 .conItem2{
-  font-size:18px;
+  font-size:16px;
   line-height:100%;
-  width:25px;
+  width:100px;
   border-bottom: 1px solid rgb(206, 203, 203);
+  padding-left: 10px;
+  text-align: center;   
 }
 
-.kpiName{
-  font-size:15px;
-  margin-top:4px;
-  margin-bottom:4px;
+.phcolor{
+    color:maroon;
+  }
+
+.kpiName{  
+  font-size:16px;  
+  margin-bottom:5px;
+  padding-left: 5px;
 }
