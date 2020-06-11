@@ -243,7 +243,7 @@ Page({
                   //创建成功自动返回上级页面
                   if(result.data.success==true){
                     if(isPerformanceCptRule==false){
-       
+                      
                       var scoreValue
                       if(result.data.data[0]!=null){
                         var scoreValue = result.data.data[0].toFixed(2);
@@ -252,12 +252,17 @@ Page({
                       var status
                       if(result.data.data[2]!=null){
                         var status = result.data.data[2];  
-                      }   
-                                                  
+                      }
+                      let unCommit = self.data.unCommit
                       //更新DATE								
                       var plan=self.data.plan;	 																	
                       for (let i = 0; i < plan.kpiDetails.length; i++ ){						
-                          if (kpiId == plan.kpiDetails[i].id){	
+                          if (kpiId == plan.kpiDetails[i].id){
+                            if(plan.kpiDetails[i].actualValue!='' && value==''){
+                              unCommit --;
+                            }else if(plan.kpiDetails[i].actualValue=='' && value!=''){
+                              unCommit ++;
+                            }
                             plan.kpiDetails[i].actualValue = value;
                             plan.kpiDetails[i].score = scoreValue;
                             plan.kpiDetails[i].status = status;
@@ -266,7 +271,8 @@ Page({
                         }	
 
                         self.setData({
-                          plan: plan
+                          plan: plan,
+                          unCommit:unCommit
                         })
                     }
                       

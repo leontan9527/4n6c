@@ -13,8 +13,10 @@
     </mp-cells>
 
     <mp-cells title="成果要求">
-        <mp-cell title="" ext-class="">
-            <input bindinput="formInputChange" data-field="outcome"  class="weui-input" value="{{formData.outcome}}"/>
+        <mp-cell has-header="{{false}}" has-footer="{{false}}" prop="outcome" title="" ext-class="">
+            <textarea bindinput="formInputChange" class="weui-textarea" data-field="outcome"  style="height: 3.3em" value="{{formData.outcome}}">               
+            </textarea>
+            <view class="weui-textarea-counter">0/200</view>
         </mp-cell>
     </mp-cells>
 
