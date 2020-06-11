@@ -109,6 +109,10 @@ Page({
     })
   },
 
+  handleTap: function(e){
+
+  },
+
   //输入实际值时，调用的方法       开始
   computeNoVoteValue(e) {
 
