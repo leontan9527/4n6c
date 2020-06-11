@@ -48,7 +48,7 @@
                 <view wx:if="{{item.storeCode == 'unfinishBuckleScore' }}">实际值： 未完成项次数：{{item.storeValue1}}，总项数：{{item.storeValue2}}</view>
                 <view wx:elif="{{item.storeCode == 'unexpandedScore' }}">实际值：当期无计划</view>
                 <view wx:elif="{{item.storeCode == 'finishMultiple' }}">实际值：100%完成</view>
-                <view wx:else>实际值：</view>
+                <view wx:else>实际值：<text class="phcolor">(点击填写)</text></view>
               </view>
 
               <!-- IntB("直接加减分(月度无权重)类",7)类指标弹出页面选择 -->
@@ -57,7 +57,7 @@
                 
                 <view wx:if="{{item.storeCode == 'finishAddBuckleScore' }}">实际值：{{item.actualValue}}</view>
                 <view wx:elif="{{item.storeCode == 'unPlanScore' }}">实际值：当期无计划</view>
-                <view wx:else>实际值：</view>
+                <view wx:else>实际值：<text class="phcolor">(点击填写)</text></view>
               </view>
 
               <!-- 页面提示信息-->
