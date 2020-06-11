@@ -123,4 +123,17 @@
 .commitPlan{
   margin-left:3px;
 }
+.phcolor{
+  color:maroon;
+}
+.text_edit{color:#6196e6}
+.text_write{color:maroon}
 /*一些小样式  结束*/
+.commitButton{width:100%;text-align: center;
+  color: #fff;
+  background-color: #07c160;
+  height:48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  }
