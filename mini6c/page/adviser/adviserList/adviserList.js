@@ -15,6 +15,11 @@ const app = getApp()
 
 Page({
   
+
+  onShow: function(){
+    this.getAdviserMessagePage()
+  },
+
   onLoad: function(){   
     
     this.setData({     

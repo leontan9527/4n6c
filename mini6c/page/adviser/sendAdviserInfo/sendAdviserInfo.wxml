@@ -12,9 +12,9 @@
             <view class="containerItem">
               <view class="planProgressUserName">
                <label>{{adviserMessage.sendUserName}}</label>               
-               <label class="company">（来至：{{adviserMessage.messageFromTo}})</label>
+               <!--<label class="company">（来至：{{adviserMessage.messageFromTo}})</label>-->
                <label bindtap='writeProcessMessage' class="rightCss" data-receiveuserid="{{adviserMessage.sendUserId}}">
-                <image class="showPic" src="/image/record.png"></image>
+                <image class="showPic" src="/image/write.png"></image>
               </label>
               </view>
             </view>
@@ -54,7 +54,7 @@
           <view class="plist-item"> 
             <view class="replay_UserName">
               <label>{{item.sendUserName}}</label>
-              <label class="company">（来至：{{item.cusOrgName}})</label>                
+              <!--<label class="company">（来至：{{item.cusOrgName}})</label>-->                
             </view> 
           </view>
 
@@ -79,11 +79,7 @@
               <view class="replay_item" data-receiveuserid="{{item.sendUserId}}" bindtap="showWriteDialog">
                   
                   <view class="progressDate">{{item.deptName}} {{df.formatDate(item.createDate,2)}}</view>
-                  
-                  <view class="container-answer">
-                    <label class="labelclsss1" wx:if="{{item.adviserMessageExchangeList.length>0}}">{{item.adviserMessageExchangeList.length}}回复</label>
-                    <label class="labelclsss2" wx:else>回复</label>
-                  </view>
+
               </view>
 
           </view>

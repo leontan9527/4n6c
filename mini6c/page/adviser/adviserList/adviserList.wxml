@@ -9,7 +9,7 @@
           <view class="weui-flex__item">
             <label>顾问消息</label>
             <label bindtap='writeProcessMessage' class="rightCss">
-              <image class="showPic" src="/image/record.png"></image>
+              <image class="showPic" src="/image/write.png"></image>
             </label>
           </view>
         </view>
@@ -29,7 +29,7 @@
             <view class="containerItem">
               <view class="planProgressUserName">
                 <label>{{item.sendUserName}}</label>                
-                <label class="company">（来至：{{item.messageFromTo}}）</label>
+                <!--<label class="company">（来至：{{item.messageFromTo}}）</label>-->
               </view>
             </view>
 
