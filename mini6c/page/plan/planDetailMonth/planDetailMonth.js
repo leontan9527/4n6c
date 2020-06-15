@@ -67,7 +67,7 @@ Page({
           let kpis = plan.kpiDetails;
           let actions = plan.actionDetails	
           let actionsLength = actions.length;
-
+          console.log('unCommit===='+unCommit);
           //kpi未添加结果的条数
           for (let i = 0; i < kpis.length; i++ ){	
 						if (kpis[i].isNoVote == true){
@@ -75,9 +75,9 @@ Page({
 								unCommit ++;
 							} 
 						} else {
-							if(kpis[i].actualValue==null ){							
+              if(typeof(kpis[i].actualValue) == 'undefined' || !kpis[i].actualValue.toString() ){									
 								unCommit ++;
-							}  							
+              }  							
             }
             kpis[i].score=util.formatDouble(kpis[i].score)
             kpis[i].baseValue=util.formatDouble(kpis[i].baseValue)
