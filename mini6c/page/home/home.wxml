@@ -32,7 +32,7 @@
             <image src="{{icon_pro}}" class="img-icon"/>
             <mp-badge wx:if="{{planDb.msgNum > 0}}" content="{{planDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
         </view>
-        <view>计划</view>
+        <view>计划进程</view>
         
         <view wx:for-items="{{planDb.items}}" wx:key="itemValue" class="msgItem">
           {{item.itemTitle}}
