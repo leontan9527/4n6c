@@ -96,6 +96,15 @@ Page({
       success(result) {
 
           if(result.data.success){
+
+              if(that.data.toType==4){
+                that.getAdviserMessagePage(that.data.pageSize,that.data.pageNumber)
+              }else if(that.data.toType==5){
+                that.allReplyAdviserMessageList(that.data.refrenceId)
+              }else{
+                that.toPlanPrevPage(that.data.refrenceId)
+              }
+              /*
               that.setData({
                 accessToken: result.data.accessToken,
                 openid: result.data.openid,
@@ -118,7 +127,7 @@ Page({
                   }
                 }
               })       
-  
+              */
           }else{ 
             //创建失败，提示错误信息
           }
@@ -494,7 +503,7 @@ Page({
       })
     }
   },
-
+  /*
   sendAdviserToWeiXin: function (refrenceId) {
 
     const self = this
@@ -530,5 +539,6 @@ Page({
       })
     }
   },
+  */
 
 })
