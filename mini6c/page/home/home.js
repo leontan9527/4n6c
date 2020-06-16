@@ -5,7 +5,6 @@ const app = getApp()
 Page({
   
   onLoad: function(){   
-    
     this.setData({  
       icon_meeting: 'resources/pic/meeting.png',
       icon_ggao: 'resources/pic/ggao.png',
@@ -147,6 +146,7 @@ Page({
       console.log('登录超时：' + error)
     })
     //获取首页数据结束
+    wx.stopPullDownRefresh() //刷新完成后停止下拉刷新动效
   },
   
   toPlanprocess() {

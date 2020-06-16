@@ -135,6 +135,7 @@ Page({
     });  
 
     that.getAdviserMessagePage()//获取最新数据
+    wx.stopPullDownRefresh() //刷新完成后停止下拉刷新动效
   },
 
   toSendAdviserInfo(e) {
