@@ -35,7 +35,8 @@ Page({
           if(result.data.success){
   
             self.setData({
-              planList: result.data.data
+              planCurrList: result.data.planCurrList,
+              planList: result.data.planAllList
             })
           }
         },
@@ -68,9 +69,10 @@ Page({
         success(result) {
   
           if(result.data.success){
-  
+            
             self.setData({
-              planList: result.data.data
+              planCurrList: result.data.planCurrList,
+              planList: result.data.planAllList
             })
           }
         },

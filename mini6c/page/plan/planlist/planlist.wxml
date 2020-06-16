@@ -36,6 +36,26 @@
         <view class="weui-panel weui-panel_access">           
             <view class="weui-panel__bd">
 
+                <block wx:for-items="{{planCurrList}}" wx:key="id">
+                  <view data-id="{{item.id}}" data-plancycle="{{item.planCycle}}" data-istoeditpage="{{item.isToEditPage}}" bindtap="toPlanDetail" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+                      <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                          <image class="weui-media-box__thumb" src="pic/icon_{{item.planCycle}}.png" />
+                      </view>
+                      <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                          <view class="weui-media-box__title">{{item.title}}</view>
+                          <view class="weui-media-box__desc" wx:if="{{item.status === -2}}" >计划被退回，请完善计划内容并及时提交计划</view>
+                          <view class="weui-media-box__desc" wx:if="{{item.status === -1}}" >请完善计划内容并及时提交计划</view>
+                          <view class="weui-media-box__desc" wx:if="{{item.status === 0}}" >计划执行率{{item.actioncompleted > 0 ? item.actioncompleted:0 }}% {{item.status == 0 ? '，请及时提交结果':''}}</view>
+                          <view class="weui-media-box__desc" wx:if="{{item.status >= 1}}" >计划执行率{{item.actioncompleted > 0 ? item.actioncompleted:0 }}% </view>
+                          <view class="weui-media-box__info">
+                              <view class="weui-media-box__info__meta">{{item.statusName}}</view>
+                              <view class="weui-media-box__info__meta" wx:if="{{item.status >= 1 && item.planCycle!=0}}" >绩效:{{nf.toFixed(item.score)}}</view>                            
+                              <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">查看详情</view>
+                          </view>
+                      </view>
+                  </view>
+                </block>
+                <view wx:if="{{planList!=null}}" class="splic-border-bottom"></view>
                 <block wx:for-items="{{planList}}" wx:key="id">
                   <view data-id="{{item.id}}" data-plancycle="{{item.planCycle}}" data-istoeditpage="{{item.isToEditPage}}" bindtap="toPlanDetail" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
                       <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">

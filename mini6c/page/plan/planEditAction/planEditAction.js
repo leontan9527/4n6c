@@ -1,5 +1,5 @@
 const config = require('../../../config')
-var util = require("../../../util/dateutil.js");
+var util = require("../../../util/dateutil.js")
 const app = getApp()
 
 Page({

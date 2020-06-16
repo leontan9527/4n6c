@@ -60,10 +60,11 @@ Page({
           for (let i = 0; i < kpis.length; i++ ){	
 						if (kpis[i].isNoVote == true){
 							if(typeof(kpis[i].actualValueString) == 'undefined' || !kpis[i].actualValueString ){						
-								unCommit ++;
+                unCommit ++;
+                kpis[i].actualValueString=''
 							} 
-						} else {
-							if(kpis[i].actualValue==null ){							
+						} else {			
+              if(kpis[i].actualValue == null || typeof(kpis[i].actualValue) == 'undefined'){					
 								unCommit ++;
 							}  							
             }
