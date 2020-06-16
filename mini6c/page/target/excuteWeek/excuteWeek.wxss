@@ -12,8 +12,8 @@
 }
 
 .table-title{  
-  margin: 0 10px;
-  display: block;
+  padding: 8px 15px;
+  background-color:#fff;
 }
 
 .table {
