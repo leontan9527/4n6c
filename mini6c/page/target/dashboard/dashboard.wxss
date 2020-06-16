@@ -11,6 +11,27 @@
 .page__bd {
   padding-bottom: 0px;
 }
+
+.placeholder{
+    margin: 5px;
+    padding: 0 10px;
+    text-align: center;    
+    height: 80px;
+    line-height: 80px;    
+}
+
+.split{
+    margin: 5px;
+    padding: 0 10px;
+    text-align: center;
+    
+    height: 5.3em;
+    line-height: 5.3em;
+    color:#DCDCDC;
+}
+
+.hsplit{height: 10px;background-color:#FFFFFF; }
+
 .yuan{
   border: 1px solid #D8D8D8;
   width:105px;
@@ -29,8 +50,8 @@
   margin: 0px;
   padding: 0 0px;
   text-align: center;
-  height: 2.3em;
-  line-height: 2.3em;
+  height: 48px;
+  line-height: 48px;
   color: rgba(0,0,0,.3);
 }
 .selected{
@@ -38,12 +59,13 @@
   margin-left: 5px;
   padding: 0 0px;
   text-align: center;  
-  height: 2.3em;
-  line-height: 2.3em; 
-  border-bottom: 1px solid darkgreen;  
-  color:darkgreen;
+  height: 48px;
+  line-height: 48px; 
+  border-bottom: 1px solid #6196e6;  
+  color:#6196e6;
 }
 
+.nav-name{color: #888888;}
 .nav-textRight{color: #888888;text-align: right; padding-right: 15px;}
 
 .navigator-box {
@@ -126,7 +148,7 @@
   transition: opacity .3s;
 }
 .kind-list-item-hd-show {
-  opacity: .2;
+  opacity: 1.0;
 }
 .kind-list-item-bd {
   height: 0;

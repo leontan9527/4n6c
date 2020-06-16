@@ -39,6 +39,7 @@ Page({
           var excuteWeek = result.data.data.excuteWeek
           var excuteMonth = result.data.data.excuteMonth
           var excuteRate = result.data.data.excuteRate
+          var newestOrAvgSoce = result.data.data.newestOrAvgSoce
           var isOpened = false
 
           if (excuteRate){
@@ -46,6 +47,13 @@ Page({
           } else {
             excuteRate = 0.0
           }
+
+          if (newestOrAvgSoce) {
+            newestOrAvgSoce = newestOrAvgSoce.toFixed(1)
+          } else {
+            newestOrAvgSoce = 0.0
+          }
+
 
           var listDB = []
 
@@ -162,6 +170,7 @@ Page({
           self.setData({
             list: listDB,
             excuteRate: excuteRate,
+            newestOrAvgSoce: newestOrAvgSoce,
             canReadCompany: canReadCompany
           })
          
