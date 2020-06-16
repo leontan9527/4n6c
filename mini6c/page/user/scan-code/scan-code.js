@@ -91,14 +91,19 @@ Page({
             }
           })
           //登陆END
-          
+
 
           wx.showToast({
               title: '绑定成功',
               icon: 'success',
               mask: true,
-              duration:2000
+              duration:1000
           })
+
+          wx.reLaunch({
+            url: '/page/home/home'
+          })          
+
           self.setData({
               loading: false,
               scResult: true
