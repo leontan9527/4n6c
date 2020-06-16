@@ -390,16 +390,15 @@ Page({
       success(result) {
           //创建成功自动返回上级页面
           if(result.data.success==true){
-            if(status==1){
-              
-              wx.redirectTo({ url: '../planDetail/planDetail?id=' + planId })
-            }else{
-              var plan=self.data.plan
-              plan.status=status;
-              self.setData({
-                plan: plan
-              })
-            }
+            wx.showModal({  
+              title: '提示',  
+              content: '提交成功',  
+              showCancel:false,
+              confirmText:'关闭',
+              success: function(res) {  
+                wx.switchTab({ url: '../planlist/planlist' })
+              }  
+            }) 
           }else{ 
 
           }
