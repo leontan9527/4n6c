@@ -1,15 +1,4 @@
 
-<view class="page">
-    <view class="page__hd">
-        <view class="page__title">
-          <view class="yuan">{{excuteRate}}%</view>
-        </view>
-        <view class="page__desc" wx:if="{{type == 0}}">个人执行率</view>
-        <view class="page__desc" wx:if="{{type == 1}}">部门执行率</view>
-        <view class="page__desc" wx:if="{{type == 2}}">公司执行率</view>
-    </view>    
-</view>
-
 <view class="page__bd">
   <view class="weui-flex">
     <view class="weui-flex__item" data-type="0" bindtap="switchType"><view class="{{type == 0 ? 'selected':'unSelect'}}">个人</view></view>
@@ -17,6 +6,31 @@
     <view wx:if="{{canReadCompany}}" class="weui-flex__item" data-type="2" bindtap="switchType"><view class="{{type == 2 ? 'selected':'unSelect'}}">公司</view></view>
   </view>
 </view>
+
+<view class="hsplit"></view>
+
+<view class="page">
+    <!--view class="page__hd">
+        <view class="page__title">
+          <view class="yuan">{{excuteRate}}%</view>
+        </view>
+        <view class="page__desc" wx:if="{{type == 0}}">个人执行率</view>
+        <view class="page__desc" wx:if="{{type == 1}}">部门执行率</view>
+        <view class="page__desc" wx:if="{{type == 2}}">公司执行率</view>
+    </view--> 
+    <view class="page__bd page__bd_spacing">
+        <view class="weui-flex">
+            <view class="weui-flex__item">
+              <view class="placeholder">执行率：{{excuteRate}}%</view>              
+            </view>
+            <view><view class="split">|</view></view>
+            <view class="weui-flex__item"><view class="placeholder">绩效：{{newestOrAvgSoce}}</view></view>
+        </view>        
+
+    </view>
+
+</view>
+
 
 <view class="index">
   
