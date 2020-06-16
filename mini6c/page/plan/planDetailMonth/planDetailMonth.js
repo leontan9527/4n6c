@@ -67,23 +67,27 @@ Page({
           let kpis = plan.kpiDetails;
           let actions = plan.actionDetails	
           let actionsLength = actions.length;
-          console.log('unCommit===='+unCommit);
+
           //kpi未添加结果的条数
-          for (let i = 0; i < kpis.length; i++ ){	
-						if (kpis[i].isNoVote == true){
-							if(typeof(kpis[i].actualValueString) == 'undefined' || !kpis[i].actualValueString ){						
-								unCommit ++;
-							} 
-						} else {
-              if(typeof(kpis[i].actualValue) == 'undefined' || !kpis[i].actualValue.toString() ){									
-								unCommit ++;
-              }  							
+          if(kpis!=null && kpis!=undefined){
+            for (let i = 0; i < kpis.length; i++ ){	
+              if (kpis[i].isNoVote == true){
+                if(typeof(kpis[i].actualValueString) == 'undefined' || !kpis[i].actualValueString ){						
+                  unCommit ++;
+                  kpis[i].actualValueString=''
+                } 
+              } else {
+                if(kpis[i].actualValue == null || typeof(kpis[i].actualValue) == 'undefined'){									
+                  unCommit ++;
+                }  							
+              }
+              kpis[i].score=util.formatDouble(kpis[i].score)
+              kpis[i].baseValue=util.formatDouble(kpis[i].baseValue)
+              kpis[i].reasonableValue=util.formatDouble(kpis[i].reasonableValue)
+              kpis[i].weight=util.formatDouble(kpis[i].weight)
+              kpis[i].actualValue=util.formatDouble(kpis[i].actualValue)
+
             }
-            kpis[i].score=util.formatDouble(kpis[i].score)
-            kpis[i].baseValue=util.formatDouble(kpis[i].baseValue)
-            kpis[i].reasonableValue=util.formatDouble(kpis[i].reasonableValue)
-            kpis[i].weight=util.formatDouble(kpis[i].weight)
-            kpis[i].actualValue=util.formatDouble(kpis[i].actualValue)
           }
           
           //行动计划为添加结果的条数

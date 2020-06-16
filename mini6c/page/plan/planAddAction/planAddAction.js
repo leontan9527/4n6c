@@ -1,4 +1,5 @@
 const config = require('../../../config')
+var util = require("../../../util/dateutil.js")
 const app = getApp()
 
 Page({
@@ -7,6 +8,39 @@ Page({
     this.setData({
       planId: options.id
     })
+
+    //获取最新消息数据
+    const self = this
+    var sessionId = app.globalData.sessionId
+    if (sessionId) {
+      wx.request({
+        url: config.domain + '/planCr/getStartAndEndDate',
+        data: {
+          id: self.data.planId
+        },
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          'Cookie': 'JSESSIONID=' + sessionId
+        },
+        success(result) {
+
+          var dateStart=util.timestampToTime(result.data.dateStart, 3)
+          var dateEnd=util.timestampToTime(result.data.dateEnd, 3)
+       
+          self.setData({
+            dateStart: dateStart, 
+            dateEnd: dateEnd
+          })
+
+        },
+
+        fail({ errMsg }) {
+          console.log('【plan/planList fail】', errMsg)
+        }
+      })
+    }
+
   },
   
   data: {
@@ -14,8 +48,6 @@ Page({
     date: "请选择",  
     userId:'',
     userName:'请选择', 
-    dateStart: '2020-04-01', 
-    dateEnd: '2020-10-01', 
 
     formData: {      
       action: "",
