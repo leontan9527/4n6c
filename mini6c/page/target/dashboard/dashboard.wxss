@@ -16,31 +16,22 @@
     margin: 5px;
     padding: 0 10px;
     text-align: center;    
-    height: 80px;
-    line-height: 80px;    
+    height: 60px;
+    line-height: 60px;    
 }
 
 .split{
     margin: 5px;
     padding: 0 10px;
-    text-align: center;
-    
-    height: 5.3em;
-    line-height: 5.3em;
+    text-align: center;    
+    height: 60px;
+    line-height: 60px; 
     color:#DCDCDC;
 }
 
 .hsplit{height: 10px;background-color:#FFFFFF; }
 
-.yuan{
-  border: 1px solid #D8D8D8;
-  width:105px;
-  line-height:105px;
-  height:105px;
-  border-radius: 50%;
-  text-align: center;
-  color: #D8D8D8;
-}
+
 .page__desc{ 
   width:105px;
   text-align: center;
