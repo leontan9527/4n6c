@@ -6,7 +6,8 @@
          <image class="header-avatar" src="{{userInfo? userInfo.avatarUrl :'resources/pic/unuser.png'}}" ></image>
          <text class="nickname" >{{userInfo? userInfo.nickName:'欢迎您'}}</text> 
          <view class="user-setting">
-          <view class="navigator-text" bindtap="toScan">认证</view> 
+          <view class="navigator-text" bindtap="toScan" wx:if="{{hasLogin === false}}">未认证</view> 
+          <view class="nickname" bindtap="toScan" wx:if="{{hasLogin === true}}">{{bindingUser}}</view>
          </view>
     </view>
         

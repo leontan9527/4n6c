@@ -74,11 +74,12 @@ Page({
               //获取新的sessionId,并保存下来
               getApp().globalData.sessionId = result.data.data
               wx.setStorageSync('sessionId', result.data.data)
+              getApp().globalData.bindingUser = result.data.obj
               
               //绑定成功，默认登录了，不需要用户再重新登录，改善用户体验
               getApp().globalData.hasLogin = true 
 
-              console.log('【wxLogin 绑定的sessioniD=】', result.data.data)
+              //console.log('【wxLogin 绑定的sessioniD=】', result.data.data)
               
               //wx.setStorageSync('GLB_ORGUsers', null) 
               //wx.setStorageSync('GLB_LastModifyUserTime', null)

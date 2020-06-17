@@ -97,10 +97,15 @@ App({
             //获取新的sessionId,并保存下来
             getApp().globalData.sessionId = result.data.data
             wx.setStorageSync('sessionId', result.data.data)
+            
+            getApp().globalData.bindingUser = result.data.obj
+            
+
           } else {
             //console.log('App 5.userController wxLogin= 失败，没有绑定】')
             getApp().globalData.hasLogin = false
             getApp().globalData.sessionId = null
+            getApp().globalData.bindingUser = null
 
             //wx.navigateTo({ url: '../user/scan-code/scan-code' })
 

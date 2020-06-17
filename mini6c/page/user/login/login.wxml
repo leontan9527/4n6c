@@ -6,7 +6,7 @@
   <view class="page-body">
     <view class="page-section">      
       <block wx:if="{{!userInfo}}">        
-        <text class="page-body-text">6C绩效系统使用微信号登录，获取用户头像和名称仅用于显示</text>
+        <text class="page-body-text">绩效增长执行模式使用微信号登录，获取头像和名称仅用于显示</text>
         
         <button class="page-body-button" type="primary" open-type="getUserInfo" bindgetuserinfo="getUserInfo">微信登录</button>
       </block>
