@@ -40,6 +40,9 @@
     <view class="weui-panel weui-panel_access" wx:if="{{plan.actionDetails.length > 0}}">
        <view class="weui-panel__hd">
         <label>行动计划（{{plan.actionDetails.length}}）</label>
+        <label wx:if="{{plan.isReturnPlan}}" data-title="{{plan.title}}" bindtap='planWriteResult' class="rightReturn link_plan">
+          退回计划
+        </label>
       </view>
         <view class="weui-panel__bd">
           <view class="weui-media-box weui-media-box_text" wx:for-items="{{plan.actionDetails}}" wx:key="id" >                    

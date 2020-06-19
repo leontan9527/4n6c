@@ -25,7 +25,8 @@ Page({
         icon_year: 'pic/icon_2.png',
         icon_month: 'pic/icon_1.png',
         icon_week: 'pic/icon_0.png',      
-        icon_add: '../../images/add.png'
+        icon_add: '../../images/add.png',
+        icon_query: '../../images/query.png'
     })
 
     //获取最新消息数据
@@ -157,6 +158,11 @@ Page({
       list
     })
     wx.reportAnalytics('click_view_programmatically', {})
+  },
+
+  toPlanQuery(e) {
+
+    wx.navigateTo({ url: '../planQuery/planQuery'})
   },
 
   toPlanDetail: function (e) {

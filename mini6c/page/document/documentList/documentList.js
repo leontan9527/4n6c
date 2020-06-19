@@ -90,7 +90,6 @@ Page({
 
   // 上滑加载更多数据
   onReachBottom: function(event) {
-    console.log('上滑动onReachBottom')
     let that = this;  
 
     if(!that.data.searchLoadingComplete){ 

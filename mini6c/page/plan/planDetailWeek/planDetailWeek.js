@@ -413,13 +413,13 @@ commitPlan:function(e){
     wx.navigateTo({ url: '../../common/writeProcessMessage/writeProcessMessage?refrenceId=' + this.data.pid +'&toType=0'}) 
   },
 
-  //跳转到发送消息对话框页面
+  //跳转到填写结果说明对话框页面
   planWriteResult: function(e){
 
       var actionDetailId = e.currentTarget.dataset.detailid
       var resultRemark = e.currentTarget.dataset.resultremark
       var actionName = e.currentTarget.dataset.actionname
-      wx.navigateTo({ url: '../planWriteResult/planWriteResult?actionDetailId=' + actionDetailId +'&resultRemark='+resultRemark+'&actionName='+actionName}) 
+      wx.navigateTo({ url: '../planWriteResult/planWriteResult?refrenceId=' + actionDetailId +'&resultRemark='+resultRemark+'&refrenceName='+actionName+'&refrenceType=0'}) 
   },
 
 
