@@ -130,7 +130,7 @@
                     </view>
                     <view class="weui-media-box__desc">
                         类别：{{item.planCycleName}}
-                        <text wx:if="{{planCycle==0}}">({{item.seq}}周:{{df.formatDate(item.startDate,3)}}至{{df.formatDate(item.endDate,3)}})</text>   <text wx:if="{{planCycle==1}}">({{item.seq}}月份)</text>  
+                        <text wx:if="{{planCycle==0}}">({{item.seq}}周:{{df.formatDate(item.startDate,3)}}至{{df.formatDate(item.endDate,3)}})</text>   <text wx:if="{{planCycle==1}}">({{item.year}}年{{item.seq}}月份)</text>  
                         <text wx:if="{{planCycle==2}}">({{item.year}}年)</text>       
                     </view>
                     <view class="weui-media-box__desc" wx:if="{{item.planCycle==1}}">
