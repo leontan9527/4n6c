@@ -1,0 +1,172 @@
+<wxs src="../../../util/dateutil.wxs" module="df" />
+<wxs module="nf">
+  var toFixed = function (value) {
+    if (value){
+      return value.toFixed(2);
+    } else {
+      return null;
+    }
+    
+  }
+  module.exports = {
+    toFixed :toFixed
+  }
+</wxs>
+<!--         计划查询条件 结束            -->
+<!-- 部门 姓名 开始 结束 年 月 类别 查询条件栏 开始-->
+<view class="flex-Container">
+  <view class="flex-Container-item" data-stype="1" bindtap="toGetDeptListFun">
+    <text class="conItem1">部门:</text>
+    <image class="conItemImg" src='/page/images/xiangxia.png' />
+  </view>
+
+  <view class="flex-Container-item" data-stype="2" bindtap="toGetDeptListFun">
+    <text class="conItem1">姓名:</text>
+    <image class="conItemImg" src='/page/images/xiangxia.png' />
+  </view>
+
+  <view wx:if="{{planCycle==1}}" class="flex-Container-item" bindtap="toSetFileFun">
+    <picker data-type="1" mode="date" fields="month" bindchange="bindDateChange" >
+      <view class="flex-Container-item">
+        <view class="conItem1">月度</view>
+        <image class="conItemImg" src='/page/images/xiangxia.png' />
+      </view>
+    </picker>
+  </view>
+
+  <view wx:if="{{planCycle==2}}" class="flex-Container-item" bindtap="toSetFileFun">
+    <picker data-type="2" mode="date" fields="year" bindchange="bindDateChange" >
+      <view class="flex-Container-item">
+        <view class="conItem1">年度</view>
+        <image class="conItemImg" src='/page/images/xiangxia.png' />
+      </view>
+    </picker>
+  </view>
+
+  <view wx:if="{{planCycle==0}}" class="flex-Container-item" bindtap="toSetFileFun">
+    <picker data-type="3" mode="date" bindchange="bindDateChange" >
+      <view class="flex-Container-item">
+        <view class="conItem1">开始</view>
+        <image class="conItemImg" src='/page/images/xiangxia.png' />
+      </view>
+    </picker>
+  </view>
+
+  <view wx:if="{{planCycle==0}}" class="flex-Container-item" bindtap="toSetFileFun">
+    <picker data-type="4" mode="date" bindchange="bindDateChange" >
+      <view class="flex-Container-item">
+        <view class="conItem1">结束</view>
+        <image class="conItemImg" src='/page/images/xiangxia.png' />
+      </view>
+    </picker>
+  </view>
+
+  <view class="flex-Container-item" bindtap="toSetFileFun">
+    <picker bindchange="toGetPlanCycleFun" value="{{planCycle}}" range="{{objectArray}}" range-key="name">
+      <view class="flex-Container-item">
+        <view class="conItem1">类别:</view>
+        <image class="conItemImg" src='/page/images/xiangxia.png' />
+      </view>
+    </picker>
+  </view>
+</view>
+<!-- 部门 姓名 开始 结束 年 月 类别 查询条件栏 开始-->
+
+<!-- 当点击部门时，显示部门列表 -->
+<view  wx:if="{{isShowDept}}"  catchtouchmove="true"> 
+  <view class = "modal-dialog" style="height: {{deptList.length*58}}px;" wx:if = "{{isShowDept}}" > 
+      <view class="conItemDept">
+        <view class="weui-cells weui-cells_after-title">
+            <scroll-view scroll-y='true' style='height:{{deptList.length*58}}px;'>
+              <label class="weui-cell weui-check__label" wx:for="{{deptList}}" data-id="{{item.id}}" bindtap="getDeptIdFun">
+                <view class="weui-cell__bd">{{item.name}}</view>
+              </label>
+            </scroll-view>
+        </view>
+      </view>
+  </view>  
+</view> 
+<!--显示部门列表结束 -->
+<!-- 当点击姓名时，显示人员列表 -->
+<view wx:if="{{isShowUser}}"  catchtouchmove="true"> 
+  <view class = "modal-dialog" style="height: 300px;" wx:if = "{{isShowUser}}" >
+        <view class="flex-deptuser" wx:if="{{isShowUser==true}}">
+            <view class="conItemDept">
+              <view class="weui-cells weui-cells_after-title">
+                  <scroll-view scroll-y='true' style='height:300px;'>
+                    <label class="weui-cell weui-check__label" wx:for="{{deptList}}" data-deptid="{{item.id}}" bindtap="toGetUserListFun">
+                      <view class="weui-cell__bd">{{item.name}}</view>
+                    </label>
+                  </scroll-view>
+              </view>
+            </view>
+            
+            <view class="conItemDept">
+              <view class="weui-cells weui-cells_after-title">
+                  <scroll-view scroll-y='true' style='height:300px;'>
+                    <label class="weui-cell weui-check__label" wx:for="{{userList}}" data-id="{{item.id}}"  bindtap="getUserIdFun">
+                      <view class="weui-cell__bd">{{item.name}}</view>
+                    </label>
+                  </scroll-view>
+              </view>
+            </view>
+        </view>
+    </view>  
+</view> 
+<!--显示人员列表结束 -->
+<!--         计划查询条件 结束            -->
+
+<view class="split"></view>
+
+<!-- 计划查询内容  开始 -->          
+<view class="weui-panel__bd">
+    <view wx:if="{{contentlist != ''}}">
+        <block wx:for-items="{{contentlist}}" wx:key="id">
+            <view data-meetingid="{{item.id}}" data-id="{{item.id}}" data-plancycle="{{item.planCycle}}" data-istoeditpage="{{item.isToEditPage}}" bindtap="toPlanDetail" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                    <view class="weui-media-box__title">{{item.userName}}</view>
+                    <view class="weui-media-box__desc">
+                        部门：{{item.deptName}}                    
+                    </view>
+                    <view class="weui-media-box__desc">
+                        类别：{{item.planCycleName}}
+                        <text wx:if="{{planCycle==0}}">({{item.seq}}周:{{df.formatDate(item.startDate,3)}}至{{df.formatDate(item.endDate,3)}})</text>   <text wx:if="{{planCycle==1}}">({{item.year}}年{{item.seq}}月份)</text>  
+                        <text wx:if="{{planCycle==2}}">({{item.year}}年)</text>       
+                    </view>
+                    <view class="weui-media-box__desc" wx:if="{{item.planCycle==1}}">
+                        KPI绩效：<text wx:if="{{item.score!=null}}">{{nf.toFixed(item.score)}}</text>          
+                    </view>
+                    <view class="flex-Container-v">
+                        <view class="containerItem">
+                          <view class="weui-media-box__desc">
+                            决议进度<text wx:if="{{item.actioncompleted==null}}">0%</text>
+                            <text wx:else>{{item.actioncompleted}}%</text>
+                          </view>
+                          <progress percent="{{item.actioncompleted}}" stroke-width="3" color="#6196e6" active />
+                        </view>
+                        <view class="containerItem">
+                            <view class="flex-Container-view statusIng" wx:if="{{item.status == -2}}">
+                              {{item.statusName}}
+                            </view>
+                            <view class="flex-Container-view statusIng" wx:if="{{item.status == -1}}">
+                              {{item.statusName}}
+                            </view>
+                            <view class="flex-Container-view statusIng" wx:if="{{item.status == 0}}">
+                              {{item.statusName}}
+                            </view>
+                            <view class="flex-Container-view statusIng" wx:if="{{item.status == 1}}">
+                              {{item.statusName}}
+                            </view>
+                            <view class="flex-Container-view" wx:if="{{item.status == 9}}">
+                              {{item.statusName}}
+                            </view>
+                        </view>
+                    </view>
+
+                </view>
+            </view>
+        </block>
+    </view>
+
+</view>
+<!-- 计划查询内容  结束 -->

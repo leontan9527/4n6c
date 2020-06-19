@@ -73,6 +73,11 @@
 /*计划进程消息列表显示css  结束 */
 
 /*一些小样式  开始*/
+.rightReturn{
+  margin-right: 4px;
+  position:absolute;
+  right:0px;
+}
 .rightCss{
   margin-top:-4px;
   position:absolute;

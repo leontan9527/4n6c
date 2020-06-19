@@ -2,11 +2,11 @@
 <view class="page__bd">  
   <view class="page-section">
     <view class="page-section-title actionName">
-      计划项：{{actionName}}
+      {{refrenceName}}
     </view> 
 
     <view class="modal-input">      
-      <textarea placeholder-class="place-holder" data-field="action" placeholder="请填写结果说明"
+      <textarea placeholder-class="place-holder" data-field="action" placeholder="{{placeholderName}}"
           class="textRemark" bindinput='getBlurResultValue' value="{{resultRemark}}"></textarea>
     </view>
 

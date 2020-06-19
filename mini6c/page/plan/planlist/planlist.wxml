@@ -16,9 +16,14 @@
         <view class="kind-list">
             <block wx:for="{{list}}" wx:key="id">
                 <view class="kind-list__item">
-                    <view id="{{item.id}}" class="weui-flex kind-list__item-hd {{item.open ? 'kind-list__item-hd_show' : ''}}" bindtap="kindToggle">
+                    <view  class="weui-flex kind-list__item-hd {{item.open ? 'kind-list__item-hd_show' : ''}}" >
                         <view class="weui-flex__item">{{item.name}}</view>
-                        <image class="kind-list__img" src="{{icon_add}}"></image>
+                        <view id="{{item.id}}" bindtap="kindToggle">
+                            <image  class="kind-list__img" src="{{icon_add}}"></image>
+                        </view>
+                        <view style="margin-left:10px;" bindtap="toPlanQuery">
+                            <image  class="kind-list__img" src="{{icon_query}}"></image>
+                        </view>
                     </view>
                     <view class="kind-list__item-bd {{item.open ? 'kind-list__item-bd_show' : ''}}">
                         <view class="weui-cells {{item.open ? 'weui-cells_show' : ''}}">

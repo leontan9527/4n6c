@@ -205,4 +205,12 @@ Page({
     wx.navigateTo({ url: '../../common/writeProcessMessage/writeProcessMessage?refrenceId=' + this.data.planId +'&toType=3'}) 
   },
 
+  
+  //跳转到退回计划填写原因对话框页面
+  planWriteResult: function(e){
+
+    var refrenceName = e.currentTarget.dataset.title
+    wx.navigateTo({ url: '../planWriteResult/planWriteResult?refrenceId=' + this.data.planId +'&refrenceName='+refrenceName+'&refrenceType=3&refrenceStatus=-2'}) 
+  },
+
 })
