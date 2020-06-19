@@ -17,8 +17,10 @@ Page({
 
     var hasLogin = app.globalData.hasLogin
     var userInfo = app.globalData.userInfo
+    var bindingUser = getApp().globalData.bindingUser
     this.setData({     
-      hasLogin
+      hasLogin,
+      bindingUser
     })
           
     if (userInfo){
@@ -34,10 +36,12 @@ Page({
       const self = this    
       var sessionId = getApp().globalData.sessionId
       var hasLogin = getApp().globalData.hasLogin
+      var bindingUser = getApp().globalData.bindingUser
 
       if (hasLogin && sessionId) {
         this.setData({
-          hasLogin
+          hasLogin,
+          bindingUser
         })
         console.info('2. Home page 开始请求数据,使用sessionId=' + sessionId)
         wx.request({

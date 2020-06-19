@@ -65,7 +65,7 @@
                   <view class="navigator-text nav-textRight">{{nf.ifNull(item.reasonableValue)}}</view>
                 </view>
 
-                <view class="navigator">
+                <!--view class="navigator">
                   <view class="navigator-text nav-name">要求提交时间</view> 
                   <view class="navigator-text nav-textRight">{{df.formatDate(item.commitDate)}}</view>
                 </view>
@@ -73,7 +73,7 @@
                 <view class="navigator">
                   <view class="navigator-text nav-name">实际提交时间</view> 
                   <view class="navigator-text nav-textRight">{{df.formatDate(item.lastCommitDate)}}</view>
-                </view>
+                </view-->
 
                 <view class="navigator">
                   <view class="navigator-text nav-name">实际值</view> 
@@ -126,15 +126,15 @@
           <view class="kind-list-item-bd kind-list-item-bd-show">
             <view class="navigator-box navigator-box-show">                           
 
-                <view class="navigator">
-                  <view class="navigator-text nav-name">要求提交时间</view> 
+                <!--view class="navigator">
+                  <view class="navigator-text nav-name">要求完成时间</view> 
                   <view class="navigator-text nav-textRight">{{df.formatDate(item.commitDate)}}</view>
                 </view>
 
                 <view class="navigator">
                   <view class="navigator-text nav-name">实际提交时间</view> 
                   <view class="navigator-text nav-textRight">{{df.formatDate(item.lastCommitDate)}}</view>
-                </view>
+                </view-->
 
                 <view class="navigator">
                   <view class="navigator-text nav-name">完成情况</view> 

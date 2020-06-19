@@ -3,7 +3,21 @@ const app = getApp()
 
 Page({
   
-  onLoad: function(){   
+  onLoad: function(){ 
+    
+    var hasLogin = app.globalData.hasLogin
+    var userInfo = app.globalData.userInfo
+
+    if (hasLogin) {
+      //去登录。。。
+    } else {
+      if (userInfo) {
+        wx.redirectTo({ url: '../../user/scan-code/scan-code' })
+      } else {
+        wx.redirectTo({ url: '../../user/login/login' })
+      }
+    }
+
     
     this.setData({     
         planList: '',
@@ -18,7 +32,7 @@ Page({
     const self = this
     var sessionId = app.globalData.sessionId
 
-    console.info('1. onLoad 开始登陆,使用Cookie=')
+    //console.info('1. onLoad 开始登陆,使用Cookie=')
     if (sessionId) {
       wx.request({
         url: config.domain + '/planCr/list',

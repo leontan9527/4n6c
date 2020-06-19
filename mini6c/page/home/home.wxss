@@ -47,7 +47,7 @@
   font-weight: 500;   
 }
 .user-setting{
-   padding-left: 30rpx;
+   padding-left: 15rpx;
    color:gold;
    font-size: 30rpx;
 }

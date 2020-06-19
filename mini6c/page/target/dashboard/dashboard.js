@@ -14,6 +14,20 @@ Page({
     //console.info("onLoad 被调用， this.data.type = " + this.data.type);
     //type 2: compay, 1: dept, 0 : person
 
+    var hasLogin = app.globalData.hasLogin
+    var userInfo = app.globalData.userInfo
+
+    if (hasLogin) {
+      //去登录。。。
+    } else {
+      if (userInfo) {
+        wx.redirectTo({ url: '../../user/scan-code/scan-code' })
+      } else {
+        wx.redirectTo({ url: '../../user/login/login' })
+      }
+    }
+
+
     //获取最新消息数据
     const self = this
     var sessionId = app.globalData.sessionId
