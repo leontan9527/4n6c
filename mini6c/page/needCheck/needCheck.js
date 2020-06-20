@@ -113,7 +113,7 @@ Page({
     var actionId = e.currentTarget.dataset.id
 
     const self = this
-    var sessionId = app.globalData.sessionId
+    var sessionId = app.globalData.sessionId    
 
     if (sessionId) {
 
