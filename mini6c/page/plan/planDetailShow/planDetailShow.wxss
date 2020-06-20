@@ -119,5 +119,7 @@
 .cssplanadd{
   flex-direction:row;
 }
-
+.setWidth{
+  width:40%;
+ }
 /*一些小样式  结束*/

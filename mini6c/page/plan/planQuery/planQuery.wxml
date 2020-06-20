@@ -70,14 +70,14 @@
     </picker>
   </view>
 </view>
-<!-- 部门 姓名 开始 结束 年 月 类别 查询条件栏 开始-->
+<!-- 部门 姓名 开始 结束 年 月 类别 查询条件栏 结束-->
 
 <!-- 当点击部门时，显示部门列表 -->
 <view  wx:if="{{isShowDept}}"  catchtouchmove="true"> 
-  <view class = "modal-dialog" style="height: {{deptList.length*58}}px;" wx:if = "{{isShowDept}}" > 
+  <view class = "modal-dialog" style="height: {{deptList.length*58<300?deptList.length*58:300}}px;" wx:if = "{{isShowDept}}" > 
       <view class="conItemDept">
         <view class="weui-cells weui-cells_after-title">
-            <scroll-view scroll-y='true' style='height:{{deptList.length*58}}px;'>
+            <scroll-view scroll-y='true' style='height:{{deptList.length*58<300?deptList.length*58:300}}px;'>
               <label class="weui-cell weui-check__label" wx:for="{{deptList}}" data-id="{{item.id}}" bindtap="getDeptIdFun">
                 <view class="weui-cell__bd">{{item.name}}</view>
               </label>
@@ -89,11 +89,11 @@
 <!--显示部门列表结束 -->
 <!-- 当点击姓名时，显示人员列表 -->
 <view wx:if="{{isShowUser}}"  catchtouchmove="true"> 
-  <view class = "modal-dialog" style="height: 300px;" wx:if = "{{isShowUser}}" >
+  <view class = "modal-dialog" style="height: {{userLength}}px;" wx:if = "{{isShowUser}}" >
         <view class="flex-deptuser" wx:if="{{isShowUser==true}}">
             <view class="conItemDept">
               <view class="weui-cells weui-cells_after-title">
-                  <scroll-view scroll-y='true' style='height:300px;'>
+                  <scroll-view scroll-y='true' style='height: {{userLength}}px;'>
                     <label class="weui-cell weui-check__label" wx:for="{{deptList}}" data-deptid="{{item.id}}" bindtap="toGetUserListFun">
                       <view class="weui-cell__bd">{{item.name}}</view>
                     </label>
@@ -103,7 +103,7 @@
             
             <view class="conItemDept">
               <view class="weui-cells weui-cells_after-title">
-                  <scroll-view scroll-y='true' style='height:300px;'>
+                  <scroll-view scroll-y='true' style='height:{{userLength}}px;'>
                     <label class="weui-cell weui-check__label" wx:for="{{userList}}" data-id="{{item.id}}"  bindtap="getUserIdFun">
                       <view class="weui-cell__bd">{{item.name}}</view>
                     </label>
