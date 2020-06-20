@@ -9,21 +9,22 @@
       </view>
       <view class="weui-panel__bd">
         <view class="weui-media-box weui-media-box_text" wx:for-items="{{plan.kpiDetails}}" wx:key="id" >                    
-          <view class="weui-media-box__desc plan_action">{{item.name}}（{{item.unit}}）</view>
+          <view class="weui-media-box__desc plan_action">{{item.name}}</view>
+
           <view class="weui-media-box__info">
-            <view class="weui-media-box__info__meta">保底：{{item.baseValue}}</view>                
-            <view class="weui-media-box__info__meta">合理：{{item.reasonableValue}}</view>
+            <view class="weui-media-box__info__meta setWidth">单位：{{item.unit}}</view>                
+            <view class="weui-media-box__info__meta setWidth" wx:if="{{item.weight != null}}">权重：{{df.formatDouble(item.weight,0)}}%</view>
+            <view class="weui-media-box__info__meta setWidth" wx:else>权重：</view>
           </view>
 
           <view class="weui-media-box__info">
-            <view class="weui-media-box__info__meta">要求时间：{{df.formatDate(item.commitDate)}}</view>                
-            <view class="weui-media-box__info__meta weui-media-box__info__meta_extra" wx:if="{{item.weight != null}}">权重：{{item.weight}}%</view>
-            <view class="weui-media-box__info__meta weui-media-box__info__meta_extra" wx:else>权重：</view>
+            <view class="weui-media-box__info__meta setWidth">保底：{{item.baseValue}}</view>                
+            <view class="weui-media-box__info__meta setWidth">合理：{{item.reasonableValue}}</view>
           </view>
 
           <view class="weui-media-box__info">
-            <view class="weui-media-box__info__meta">检查人：{{item.checkUserName}}</view>      
-            <view class="weui-media-box__info__meta">绩效分数：{{item.score}}</view>         
+            <view class="weui-media-box__info__meta setWidth">检查人：{{item.checkUserName}}</view>      
+            <view class="weui-media-box__info__meta setWidth">绩效分数：{{item.score}}</view>         
           </view>
 
           <view class="weui-media-box__info">
@@ -101,7 +102,7 @@
       </view>            
     </view>
 
-    <view class="weui-panel__bd" data-id="{{plan.id}}" bindtap="addAction">
+    <view wx:if="{{plan.isShowAddActionButton==true}}" class="weui-panel__bd" data-id="{{plan.id}}" bindtap="addAction">
       <view class="weui-media-box weui-media-box_text">            
           <view class="weui-media-box__title link_plan">+行动计划</view>   
       </view>

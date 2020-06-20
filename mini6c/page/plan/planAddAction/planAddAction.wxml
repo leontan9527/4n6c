@@ -6,7 +6,7 @@
         <mp-cell has-header="{{false}}" has-footer="{{false}}" prop="action" title="" ext-class="">
             <textarea bindinput="formInputChange" class="weui-textarea" data-field="action" placeholder="请输入工作事项内容" style="height: 3.3em">
             </textarea>
-            <view class="weui-textarea-counter">0/200</view>
+            <view class="weui-textarea-counter">字限200</view>
         </mp-cell>
     </mp-cells>
 
@@ -14,7 +14,7 @@
         <mp-cell has-header="{{false}}" has-footer="{{false}}" prop="outcome" title="" ext-class="">
             <textarea bindinput="formInputChange" class="weui-textarea" data-field="outcome" placeholder="请输入成果要求" style="height: 3.3em">
             </textarea>
-            <view class="weui-textarea-counter">0/200</view>
+            <view class="weui-textarea-counter">字限200</view>
         </mp-cell>
     </mp-cells>
 
