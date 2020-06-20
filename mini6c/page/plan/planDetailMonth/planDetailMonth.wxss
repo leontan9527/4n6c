@@ -39,10 +39,9 @@
 }
 
 .actual-input{
-  width:150px;
+  width:80px;
   padding-top: 0px;
 }
-
 /*计划进程消息列表显示css  开始 */
 .planProgressList-flex-C{
   height:100%;
@@ -125,6 +124,9 @@
 }
 .commitPlan{
   margin-left:3px;
+}
+.setWidth{
+ width:40%;
 }
 /*一些小样式  结束*/
 

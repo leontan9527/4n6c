@@ -6,9 +6,11 @@
 <mp-form id="form" rules="{{rules}}" models="{{formData}}">
     <mp-cells title="工作事项">
         <mp-cell has-header="{{false}}" has-footer="{{false}}" prop="action" title="" ext-class="">
-            <textarea bindinput="formInputChange" class="weui-textarea" data-field="action"  style="height: 3.3em" value="{{formData.action}}">               
+            <textarea wx:if="{{isBringInto}}" disabled bindinput="formInputChange" class="weui-textarea" data-field="action"  style="height: 3.3em" value="{{formData.action}}">               
             </textarea>
-            <view class="weui-textarea-counter">0/200</view>
+            <textarea wx:else bindinput="formInputChange" class="weui-textarea" data-field="action"  style="height: 3.3em" value="{{formData.action}}">               
+            </textarea>
+            <view class="weui-textarea-counter">字限200</view>
         </mp-cell>
     </mp-cells>
 
@@ -16,7 +18,7 @@
         <mp-cell has-header="{{false}}" has-footer="{{false}}" prop="outcome" title="" ext-class="">
             <textarea bindinput="formInputChange" class="weui-textarea" data-field="outcome"  style="height: 3.3em" value="{{formData.outcome}}">               
             </textarea>
-            <view class="weui-textarea-counter">0/200</view>
+            <view class="weui-textarea-counter">字限200</view>
         </mp-cell>
     </mp-cells>
 

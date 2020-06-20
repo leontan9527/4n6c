@@ -132,10 +132,23 @@ Page({
           'Cookie': 'JSESSIONID=' + sessionId
         },
         success(result) {
-        
+          var deptList=result.data.deptList
+          var deptLength=deptList.length
+          var userList=result.data.userList
+          var userLength=userList.length
+          if(userLength<deptLength){
+            userLength=deptLength*58
+          }else{
+            userLength=userLength*58
+          }
+          if(userLength>300){
+            userLength=300
+          }
+
           self.setData({
-            deptList:result.data.deptList,
-            userList:result.data.userList
+            deptList:deptList,
+            userList:userList,
+            userLength:userLength
           })
         },
         fail({ errMsg }) {
@@ -151,7 +164,6 @@ Page({
     if(deptId==null){
       deptId=''
     }
-    console.log('deptId===='+deptId)
     //获取最新用户数据
     const self = this
     var sessionId = app.globalData.sessionId
@@ -169,8 +181,22 @@ Page({
         },
         success(result) {
         
+          var deptList=self.data.deptList
+          var deptLength=deptList.length
+          var userList=result.data.userList
+          var userLength=userList.length
+          if(userLength<deptLength){
+            userLength=deptLength*58
+          }else{
+            userLength=userLength*58
+          }
+          if(userLength>300){
+            userLength=300
+          }
+
           self.setData({
-            userList:result.data.userList
+            userList:userList,
+            userLength:userLength
           })
         },
         fail({ errMsg }) {

@@ -8,7 +8,7 @@
   height:7%;
   display:flex;
   flex-direction:row;
-  justify-content:space-between;
+  justify-content:space-around;
   }
 
   .split{
@@ -93,8 +93,7 @@
 } 
 .conItemDept {
   width:100%;
-  color: #8a8787; 
-  background: #8a8787; 
+  color: #696868; 
 }
 .totopcss {
   margin-top:17px; 
@@ -110,3 +109,12 @@
   -webkit-transform: translateX(-50%);
 }
 /*点击发送文字消息按钮 显示发送语音消息列表css  开始*/ 
+.scroll-view_H{
+  width: 100%;
+  white-space: nowrap; 
+}
+.scroll-view-item_H{
+  width: 40px;
+  height: 100px;
+  display: inline-block;
+}

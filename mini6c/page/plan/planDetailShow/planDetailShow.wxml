@@ -13,22 +13,37 @@
 
       <view class="weui-panel__bd">
         <view class="weui-media-box weui-media-box_text" wx:for-items="{{plan.kpiDetails}}" wx:key="id" >                    
-          <view class="weui-media-box__desc plan_action">{{item.name}}（{{item.unit}}）</view>
+          <view class="weui-media-box__desc plan_action">{{item.name}}</view>
 
           <view class="weui-media-box__info">
-            <view class="weui-media-box__info__meta">保底：{{item.baseValue}}</view>                
-            <view class="weui-media-box__info__meta">合理：{{item.reasonableValue}}</view>
-            <view class="weui-media-box__info__meta" wx:if="{{item.actualValue}}">实际值：{{item.actualValue}}</view>
+            <view class="weui-media-box__info__meta setWidth">单位：{{item.unit}}</view>              
+            <view class="weui-media-box__info__meta setWidth">权重：{{item.weight}}%</view>
+          </view>
+          
+          <view class="weui-media-box__info">
+            <view class="weui-media-box__info__meta setWidth">保底：{{item.baseValue}}</view>                
+            <view class="weui-media-box__info__meta"setWidth>合理：{{item.reasonableValue}}</view>
           </view>
 
           <view class="weui-media-box__info">
-            <view class="weui-media-box__info__meta">要求时间：{{df.formatDate(item.commitDate)}}</view>                
-            <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">权重：{{item.weight}}%</view>
+            <view class="weui-media-box__info__meta setWidth">检查人：{{item.checkUserName}}</view>
+            <view class="weui-media-box__info__meta setWidth" wx:if="{{item.score}}">绩效：{{item.score}}</view>              
           </view>
 
           <view class="weui-media-box__info">
-            <view class="weui-media-box__info__meta">检查人：{{item.checkUserName}}</view>
-            <view class="weui-media-box__info__meta weui-media-box__info__meta_extra" wx:if="{{item.score}}">绩效：{{item.score}}</view>              
+            <view class="weui-media-box__info__meta" wx:if="{{item.isNoVote == false  && item.computationRules != 6 && item.computationRules != 7}}">实际值：{{item.actualValue}}</view>
+            <view class="weui-media-box__info__meta" wx:if="{{item.isNoVote == true}}">实际值：{{item.actualValueString}}</view>
+            <view class="weui-media-box__info__meta" wx:if="{{item.computationRules == 6}}">
+              <view wx:if="{{item.storeCode == 'unfinishBuckleScore' }}">实际值： 未完成项次数：{{item.storeValue1}}，总项数：{{item.storeValue2}}</view>
+                <view wx:elif="{{item.storeCode == 'unexpandedScore' }}">实际值：当期无计划</view>
+                <view wx:elif="{{item.storeCode == 'finishMultiple' }}">实际值：100%完成</view>
+                <view wx:else>实际值：</view>
+            </view>
+            <view class="weui-media-box__info__meta" wx:if="{{item.computationRules == 7}}">
+                <view wx:if="{{item.storeCode == 'finishAddBuckleScore' }}">实际值：{{item.actualValue}}</view>
+                <view wx:elif="{{item.storeCode == 'unPlanScore' }}">实际值：当期无计划</view>
+                <view wx:else>实际值：</view>
+            </view>
           </view>
 
         </view>        
@@ -65,6 +80,8 @@
             </view>
             <view>
               <label wx:if="{{planCycle==0 && item.isMeeting == true && item.isBringInto !=true}}" class="meetingBringInto">(来至会议决议)
+              </label>
+              <label wx:if="{{planCycle==0 && item.isMeeting == true && item.isBringInto ==true}}" class="meetingBringInto">(来至会议决议)
               </label>
               <label wx:if="{{planCycle==0 && item.isMeeting != true && item.isBringInto ==true}}" class="meetingBringInto">(来自上周未完成计划)
               </label>

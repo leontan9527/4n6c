@@ -66,7 +66,8 @@
             </view>
 
             <view>
-              <label wx:if="{{item.isMeeting == true && item.isBringInto !=true}}" class="meetingBringInto">(来至会议决议)</label>
+              <label wx:if="{{item.isMeeting == true && item.isBringInto !=true}}" class="meetingBringInto">(来自会议决议)</label>
+              <label wx:if="{{item.isMeeting == true && item.isBringInto ==true}}" class="meetingBringInto">(来自会议决议)</label>
               <label wx:if="{{item.isMeeting != true && item.isBringInto ==true}}" class="meetingBringInto">(来自上周未完成计划)</label>
             </view>
           </view>
@@ -77,7 +78,7 @@
 
     </view>
 
-    <view class="weui-panel__bd" data-id="{{plan.id}}"  bindtap="addAction">
+    <view wx:if="{{plan.isShowAddActionButton==true}}" class="weui-panel__bd" data-id="{{plan.id}}"  bindtap="addAction">
       <view class="weui-media-box weui-media-box_text">            
           <view class="weui-media-box__title link_plan">+行动计划</view>   
       </view>
