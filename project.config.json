@@ -27,11 +27,12 @@
 	},
 	"compileType": "mini6c",
 	"libVersion": "2.10.0",
-	"appid": "wx48adf79ca5de7fd9",
+	"appid": "wx7d1c747a11254ddc",
 	"projectname": "mini6c",
 	"isGameTourist": false,
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
+	"cloudfunctionTemplateRoot": "cloudfunctionTemplate",
 	"condition": {
 		"search": {
 			"current": -1,
