@@ -136,8 +136,8 @@ Page({
           var deptLength=deptList.length
           var userList=result.data.userList
           var userLength=userList.length
-          if(userLength<deptList){
-            userLength=deptList*58
+          if(userLength<deptLength){
+            userLength=deptLength*58
           }else{
             userLength=userLength*58
           }
@@ -146,8 +146,8 @@ Page({
           }
 
           self.setData({
-            deptList:result.data.deptList,
-            userList:result.data.userList,
+            deptList:deptList,
+            userList:userList,
             userLength:userLength
           })
         },
@@ -181,8 +181,22 @@ Page({
         },
         success(result) {
         
+          var deptList=self.data.deptList
+          var deptLength=deptList.length
+          var userList=result.data.userList
+          var userLength=userList.length
+          if(userLength<deptLength){
+            userLength=deptLength*58
+          }else{
+            userLength=userLength*58
+          }
+          if(userLength>300){
+            userLength=300
+          }
+
           self.setData({
-            userList:result.data.userList
+            userList:userList,
+            userLength:userLength
           })
         },
         fail({ errMsg }) {
