@@ -42,7 +42,7 @@
                           <view class="weui-media-box__info">
                               <view class="weui-media-box__info__meta">{{item.statusName}}</view>
                               <view class="weui-media-box__info__meta" wx:if="{{item.status >= 1 && item.planCycle!=0}}" >
-                                绩效:{{df.formatDate(item.score,2)}}
+                                绩效:{{item.score}}
                               </view>                            
                               <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">查看详情</view>
                           </view>
@@ -63,7 +63,7 @@
                           <view class="weui-media-box__desc" wx:if="{{item.status >= 1}}" >计划执行率{{item.actioncompleted > 0 ? item.actioncompleted:0 }}% </view>
                           <view class="weui-media-box__info">
                               <view class="weui-media-box__info__meta">{{item.statusName}}</view>
-                              <view class="weui-media-box__info__meta" wx:if="{{item.status >= 1 && item.planCycle!=0}}" >绩效:{{nf.toFixed(item.score)}}</view>                            
+                              <view class="weui-media-box__info__meta" wx:if="{{item.status >= 1 && item.planCycle!=0}}" >绩效:{{item.score}}</view>                            
                               <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">查看详情</view>
                           </view>
                       </view>

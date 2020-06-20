@@ -79,9 +79,9 @@
               <view class="weui-media-box__info__meta link_plan">{{item.statusName}}</view>
             </view>
             <view>
-              <label wx:if="{{planCycle==0 && item.isMeeting == true && item.isBringInto !=true}}" class="meetingBringInto">(来至会议决议)
+              <label wx:if="{{planCycle==0 && item.isMeeting == true && item.isBringInto !=true}}" class="meetingBringInto">(来自会议决议)
               </label>
-              <label wx:if="{{planCycle==0 && item.isMeeting == true && item.isBringInto ==true}}" class="meetingBringInto">(来至会议决议)
+              <label wx:if="{{planCycle==0 && item.isMeeting == true && item.isBringInto ==true}}" class="meetingBringInto">(来自会议决议)
               </label>
               <label wx:if="{{planCycle==0 && item.isMeeting != true && item.isBringInto ==true}}" class="meetingBringInto">(来自上周未完成计划)
               </label>

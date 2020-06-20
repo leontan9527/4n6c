@@ -22,6 +22,7 @@
     "page/plan/planNoVoteValue/planNoVoteValue",
     "page/plan/planProgressList/planProgressList",
     "page/plan/planWriteResult/planWriteResult",
+    "page/plan/planQuery/planQuery",
     "page/user/suser/suser",
     "page/adviser/adviserList/adviserList",
     "page/adviser/sendAdviserInfo/sendAdviserInfo",

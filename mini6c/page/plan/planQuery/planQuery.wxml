@@ -134,12 +134,12 @@
                         <text wx:if="{{planCycle==2}}">({{item.year}}年)</text>       
                     </view>
                     <view class="weui-media-box__desc" wx:if="{{item.planCycle==1}}">
-                        KPI绩效：<text wx:if="{{item.score!=null}}">{{nf.toFixed(item.score)}}</text>          
+                        KPI绩效：<text wx:if="{{item.score!=null && item.score!=''}}">{{nf.toFixed(item.score)}}</text>          
                     </view>
                     <view class="flex-Container-v">
                         <view class="containerItem">
                           <view class="weui-media-box__desc">
-                            决议进度<text wx:if="{{item.actioncompleted==null}}">0%</text>
+                            行动计划完成:<text wx:if="{{item.actioncompleted==null}}">0%</text>
                             <text wx:else>{{item.actioncompleted}}%</text>
                           </view>
                           <progress percent="{{item.actioncompleted}}" stroke-width="3" color="#6196e6" active />
