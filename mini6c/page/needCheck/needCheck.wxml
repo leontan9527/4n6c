@@ -200,7 +200,7 @@
         </view>
         <view class="modal-input">
             <label style="margin-top:5px;margin-right:8px;"> 检查人确认值: </label>
-            <input placeholder-class="input-holder" type="number" maxlength="10" bindinput="getBlurInputValue" class="input" placeholder="检查人确认值"/>
+            <input placeholder-class="input-holder" type="digit" maxlength="10" bindinput="getBlurInputValue" class="input" placeholder="检查人确认值"/>
         </view> 
       </view> 
       <view class = "modal-footer"> 

@@ -35,11 +35,11 @@ function formatNull(strValue) {
   对传递过来的double类型数据进行处理，如果传递过来是null，则返回''给前台页面
   如果传递过来的是多位小数点，则只保留2位小数点
 */
-function formatDouble(numberValue) {
+function formatDouble(numberValue,digit) {
   if (numberValue == null) {
     return ''
   }else{
-    numberValue=numberValue.toFixed(2)
+    numberValue=numberValue.toFixed(digit)
     return numberValue
   }
 }

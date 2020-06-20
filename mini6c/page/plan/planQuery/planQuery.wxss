@@ -93,8 +93,7 @@
 } 
 .conItemDept {
   width:100%;
-  color: #8a8787; 
-  background: #8a8787; 
+  color: #696868; 
 }
 .totopcss {
   margin-top:17px; 

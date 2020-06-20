@@ -50,7 +50,8 @@ Page({
           self.setData({
             formData: setformDataValue,
             dateStart: dateStart, 
-            dateEnd: dateEnd
+            dateEnd: dateEnd,
+            isBringInto:actiondetail.isBringInto
           })
 
         },
