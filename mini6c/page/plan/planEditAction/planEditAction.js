@@ -5,8 +5,6 @@ const app = getApp()
 Page({
 
   onLoad: function (options) {
-    console.info("ComponentplanId=" + options.planId);
-    console.info("act=" + options.detailId);
     var detailId=options.detailId;
     if (detailId== undefined) {
       detailId=''
@@ -31,7 +29,6 @@ Page({
           'Cookie': 'JSESSIONID=' + sessionId
         },
         success(result) {
-
           var actiondetail = result.data.data
           var date=util.timestampToTime(actiondetail.commitDate, 3)
           let setformDataValue = {      
@@ -43,10 +40,8 @@ Page({
             inspectorName:actiondetail.inspectorName,
             date:date
           }
-
           var dateStart=util.timestampToTime(actiondetail.dateStart, 3)
           var dateEnd=util.timestampToTime(actiondetail.dateEnd, 3)
-       
           self.setData({
             formData: setformDataValue,
             dateStart: dateStart, 
@@ -82,8 +77,6 @@ Page({
   },
     
   bindDateChange: function (e) {
-
-      console.log('【e.detail.value】=' +e.detail.value)
       this.setData({
           date: e.detail.value,
           [`formData.date`]: e.detail.value
@@ -102,7 +95,6 @@ Page({
               
   submitForm() {
     this.selectComponent('#form').validate((valid, errors) => {
-          //console.log('valid', valid, errors)
       if (!valid) {
         const firstError = Object.keys(errors)
           if (firstError.length) {
@@ -111,10 +103,6 @@ Page({
                   })    
               }
           } else {
-            //wx.showToast({
-            //    title: '校验通过'
-            //})
-
             this.saveNewAction(this.data.formData)
           }
     })
@@ -124,7 +112,6 @@ Page({
 
     const self = this
     var sessionId = app.globalData.sessionId
-    console.log('date==='+formData.date)
     if (sessionId) {
 
       wx.request({

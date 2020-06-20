@@ -204,7 +204,7 @@ Page({
     })
   }, 
  
-  //从计划页点击安全指标进来的返回到计划页面
+  //从计划页点击INTA类指标进来的返回到计划页面
   toPlanPrevPage: function(kpiId,actualValue,storeCode,storeValue1,storeValue2,scoreValue,status) {
     //更新DATE								
     let pages = getCurrentPages()
@@ -212,10 +212,8 @@ Page({
     var plan = prevPage.data.plan
     let unCommit = prevPage.data.unCommit
     for (let i = 0; i < plan.kpiDetails.length; i++ ){						
-        if (kpiId == plan.kpiDetails[i].id){	
-          if(plan.kpiDetails[i].actualValue==null ){							
-            unCommit ++;
-          } 
+        if (kpiId == plan.kpiDetails[i].id){							
+          unCommit --;
           plan.kpiDetails[i].actualValue = actualValue
           plan.kpiDetails[i].storeCode=storeCode
           plan.kpiDetails[i].storeValue1=storeValue1
@@ -235,7 +233,7 @@ Page({
     })
   },
 
-  //从计划页点击安全指标进来的返回到计划页面
+  //从检查页点击安全指标进来的返回到计划页面
   toCheckPrevPage: function(kpiId,actualValue,storeCode,storeValue1,storeValue2,scoreValue,status) {
     //更新DATE								
     let pages = getCurrentPages()

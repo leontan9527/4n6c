@@ -14,12 +14,12 @@
 
           <view class="weui-media-box__info">
             <view class="weui-media-box__info__meta setWidth">单位：{{item.unit}}</view>                
-            <view class="weui-media-box__info__meta setWidth" wx:if="{{item.weight != null}}">
+            <view class="weui-media-box__info__meta setWidth">
               权重：
-              <text wx:if="{{item.computationRules != 7}}">{{df.formatDouble(item.weight,0)}}%</text>
-              <text wx:else>不占权重</text>
+              <text wx:if="{{item.computationRules == 7}}">不占权重</text>
+              <text wx:elif="{{item.isNoVote == true}}">不占权重</text>
+              <text wx:else>{{item.weight}}%</text>
             </view>
-            <view class="weui-media-box__info__meta setWidth" wx:else>权重：</view>
           </view>
 
           <view class="weui-media-box__info">

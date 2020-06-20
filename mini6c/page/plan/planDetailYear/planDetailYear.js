@@ -260,9 +260,9 @@ Page({
                       for (let i = 0; i < plan.kpiDetails.length; i++ ){						
                           if (kpiId == plan.kpiDetails[i].id){
                             if(plan.kpiDetails[i].actualValue!='' && value==''){
-                              unCommit --;
-                            }else if(plan.kpiDetails[i].actualValue=='' && value!=''){
                               unCommit ++;
+                            }else if(plan.kpiDetails[i].actualValue=='' && value!=''){
+                              unCommit --;
                             }
                             plan.kpiDetails[i].actualValue = value;
                             plan.kpiDetails[i].score = scoreValue;
