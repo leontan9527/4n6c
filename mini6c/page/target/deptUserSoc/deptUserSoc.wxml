@@ -25,7 +25,7 @@
       <view class="table-td tleft">{{item.userName}} > </view>
       <view class="table-td">{{item.deptName}}</view>
       <view class="table-td">{{item.seq}}</view>
-      <view class="table-td">{{item.score ? nf.toFixed(item.score) :""}}</view>    
+      <view class="table-td">{{item.score ? nf.toFixed(item.score) : "0.00"}}</view>    
     </view>
     
   </block>

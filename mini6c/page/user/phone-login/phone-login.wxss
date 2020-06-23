@@ -1,1 +1,18 @@
-/* mini6c/page/user/phone-login/phone-login.wxss */
+@import "../../common/lib/weui.wxss";
+
+.weui-cell__bd{
+  min-height: 48rpx;
+  word-break: break-all;
+}
+
+.image-scan{
+   width:128rpx;
+   height: 128rpx;
+}
+.icon-success{
+   display: flex;
+   align-items: center;
+   justify-content: center;  
+}
+
+.simple{font-weight: 400;background-color: #F8F8F8;color:#6196e6;}

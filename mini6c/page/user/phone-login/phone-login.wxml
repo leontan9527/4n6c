@@ -1,2 +1,39 @@
-<!--mini6c/page/user/phone-login/phone-login.wxml-->
-<text>mini6c/page/user/phone-login/phone-login.wxml</text>
+<import src="../../common/head.wxml" />
+
+<view class="container">
+  <template is="head" data="{{title: '账户登陆认证'}}" />
+
+  <view class="page-body">
+   <form catchsubmit="phonelogin" catchreset="formReset">
+    <view class="page-section">
+      <view class="weui-cells__title">账户预留的手机号</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <input class="weui-input" name="userNo" maxlength="11" placeholder="请输入11位手机号码" />
+        </view>
+      </view>
+    </view>
+
+    <view class="page-section">
+      <view class="weui-cells__title">密码</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <input class="weui-input" name="password" password type="text" maxlength="20"  placeholder="请输入密码" />
+        </view>
+      </view>
+    </view>
+    
+    <view class="btn-area">
+      <button wx:if="{{scResult === false}}" type="primary" formType="submit">确认</button> 
+    </view>
+
+    </form>
+
+    <view class="btn-area">      
+      <button type="default" class="simple" bindtap="returnPage">切换扫码认证</button>    
+    </view>
+
+  </view>
+
+  
+</view>
