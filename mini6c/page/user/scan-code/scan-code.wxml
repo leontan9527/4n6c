@@ -26,7 +26,7 @@
       <button wx:if="{{scResult === false}}" type="primary" bindtap="scanCode">扫一扫</button>
     </view>
     <view class="btn-area">      
-      <button type="default" class="simple" bindtap="returnPage">切换账户认证</button>    
+      <button type="default" class="simple" bindtap="returnPage">账户认证</button>    
     </view>
   </view>
   
