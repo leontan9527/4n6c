@@ -23,8 +23,10 @@
       </block>
     </view>  
     <view class="btn-area">
-      <button wx:if="{{scResult === false}}" type="primary" bindtap="scanCode">扫一扫</button>  
-      <button type="default" bindtap="returnPage">返回</button>    
+      <button wx:if="{{scResult === false}}" type="primary" bindtap="scanCode">扫一扫</button>
+    </view>
+    <view class="btn-area">      
+      <button type="default" class="simple" bindtap="returnPage">账户认证</button>    
     </view>
   </view>
   

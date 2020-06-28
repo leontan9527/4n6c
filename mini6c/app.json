@@ -38,11 +38,12 @@
     "page/meeting/meetingDetail/meetingDetail",
     "page/meeting/meetingMinutes/meetingMinutes",
     "page/needCheck/needCheck",
-    "page/needCheck/checkHis/checkHis"
+    "page/needCheck/checkHis/checkHis",
+    "page/user/phone-login/phone-login"
   ],
   "window": {
     "navigationBarTextStyle": "white",
-    "navigationBarTitleText": "利润增长落地系统",
+    "navigationBarTitleText": "企业增长的终身顾问",
     "navigationBarBackgroundColor": "#6196e6",
     "backgroundColor": "#F8F8F8"
   },
@@ -59,7 +60,7 @@
         "text": "首页"
       },
       {
-        "pagePath": "page/plan/planlist/planlist",        
+        "pagePath": "page/plan/planlist/planlist",
         "iconPath": "image/icon_plan.png",
         "selectedIconPath": "image/icon_plan_HL.png",
         "text": "计划"
@@ -92,7 +93,7 @@
   "style": "v2",
   "permission": {
     "scope.userLocation": {
-      "desc": "你的信息将用于展示1"
+      "desc": "你的信息将用于展示"
     }
   },
   "cloud": true,

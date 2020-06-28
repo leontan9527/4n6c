@@ -127,8 +127,6 @@ Page({
    },
 
    returnPage(){
-      wx.reLaunch({
-         url: '/page/home/home'
-      })
+     wx.redirectTo({ url: '../../user/phone-login/phone-login' })     
    }
 })

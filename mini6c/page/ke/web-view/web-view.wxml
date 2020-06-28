@@ -1,7 +1,7 @@
 <!--web-view src="https://wxapp.eqtit.com"></web-view-->
 <view class="page">
     <view class="page__hd">
-        <view class="page__title">课堂</view>
+        <view class="page__title">课程</view>
         <view class="page__desc"></view>
     </view>
     <view class="page__bd">
@@ -13,7 +13,7 @@
                         <image class="weui-media-box__thumb" src="{{icon_huawei}}" />
                     </view>
                     <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                        <view class="weui-media-box__title">业务领先模式介绍</view>
+                        <view class="weui-media-box__title">业务领先模式介绍（预告）</view>
                         <view class="weui-media-box__desc">战略目标代表了未来，战略意味着现在，是现在要做的事情。只有推动了战略的落地，才能实现未来的战略目标。</view>
                     </view>
                 </navigator>
@@ -22,7 +22,7 @@
                         <image class="weui-media-box__thumb" src="{{icon_wxb}}" />
                     </view>
                     <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                        <view class="weui-media-box__title">战略和执行如何落地</view>
+                        <view class="weui-media-box__title">战略和执行如何落地（预告）</view>
                         <view class="weui-media-box__desc">战略执行难、落地难是很多企业面临的一个管理难题。请听吴祥波老师讲解绩效引擎系统，让战略如何落地生根。</view>
                     </view>
                 </navigator>

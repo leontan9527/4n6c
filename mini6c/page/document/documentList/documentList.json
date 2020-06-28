@@ -1,4 +1,5 @@
 {
+  "navigationBarTitleText": "公文",
   "usingComponents": {},
   "enablePullDownRefresh": true 
 }
