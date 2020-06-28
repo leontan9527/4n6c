@@ -55,7 +55,9 @@ Page({
   },
 
   createdWeekPlan:function(){  
-    const items = this.data.planList
+
+    const self = this
+    const items = self.data.planList
 
     var min;
 	  var max;
@@ -87,7 +89,7 @@ Page({
         success: function(res) {  
               if (res.confirm) {  
                 //用户点击确认按钮执行创建周计划代码
-                this.checkOrCreatePlanWeek(setWeek.year,setWeek.seq);
+                self.checkOrCreatePlanWeek(setWeek.year,setWeek.seq)
                 
               } else if (res.cancel) { 
                 //用户点击取消按钮执行如下代码
@@ -95,7 +97,7 @@ Page({
           }  
       }) 
     }else{
-      this.checkOrCreatePlanWeek(setWeek.year,setWeek.seq);
+      self.checkOrCreatePlanWeek(setWeek.year,setWeek.seq)
     }
   } , 
 

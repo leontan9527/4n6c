@@ -86,6 +86,7 @@ Page({
               kpis[i].reasonableValue=util.formatDouble(kpis[i].reasonableValue)
               kpis[i].weight=util.formatDouble(kpis[i].weight)
               kpis[i].actualValue=util.formatDouble(kpis[i].actualValue)
+              kpis[i].accumulateValue=util.formatDouble(kpis[i].accumulateValue)
 
             }
           }
@@ -131,6 +132,10 @@ Page({
 
   bindPickerChange(e) {
 
+    var status = e.currentTarget.dataset.status
+    if(status!=0){
+      return
+    }
     var planId = e.currentTarget.dataset.planid
     var detailId = e.currentTarget.dataset.actailid
     var value=e.detail.value
@@ -530,10 +535,14 @@ Page({
   //跳转到填写结果说明对话框页面
   planWriteResult: function(e){
 
-    var actionDetailId = e.currentTarget.dataset.detailid
-    var resultRemark = e.currentTarget.dataset.resultremark
-    var actionName = e.currentTarget.dataset.actionname
-    wx.navigateTo({ url: '../planWriteResult/planWriteResult?refrenceId=' + actionDetailId +'&resultRemark='+resultRemark+'&refrenceName='+actionName+'&refrenceType=3'}) 
+    var status = e.currentTarget.dataset.status
+    if(status==0){
+      var actionDetailId = e.currentTarget.dataset.detailid
+      var resultRemark = e.currentTarget.dataset.resultremark
+      var actionName = e.currentTarget.dataset.actionname
+      wx.navigateTo({ url: '../planWriteResult/planWriteResult?refrenceId=' + actionDetailId +'&resultRemark='+resultRemark+'&refrenceName='+actionName+'&refrenceType=1'}) 
+    }
+    
   },
 
 })
