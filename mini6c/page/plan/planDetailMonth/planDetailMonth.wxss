@@ -98,6 +98,7 @@
 }
 .text_edit{color:#6196e6}
 .text_write{color:maroon}
+.accumulateValueInfo{margin-top: 11px;}
 /*计划进程消息列表显示css  结束 */
 
 /*一些小样式  开始*/

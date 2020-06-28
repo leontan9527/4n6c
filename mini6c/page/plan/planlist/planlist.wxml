@@ -82,7 +82,10 @@
                           <view class="weui-media-box__desc" wx:if="{{item.status === 0}}" >计划执行率{{item.actioncompleted > 0 ? item.actioncompleted:0 }}% {{item.status == 0 ? '，请及时提交结果':''}}</view>
                           <view class="weui-media-box__desc" wx:if="{{item.status >= 1}}" >计划执行率{{item.actioncompleted > 0 ? item.actioncompleted:0 }}% </view>
                           <view class="weui-media-box__info">
-                              <view class="weui-media-box__info__meta">{{item.statusName}}</view>
+                              <view class="weui-media-box__info__meta">
+                                <text style="color:red" wx:if="{{item.status==-2}}">{{item.statusName}}</text>
+                                <text wx:else>{{item.statusName}}</text>
+                              </view>
                               <view class="weui-media-box__info__meta" wx:if="{{item.status >= 1 && item.planCycle!=0}}" >绩效:{{nf.toFixed(item.score)}}</view>                            
                               <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">查看详情</view>
                           </view>

@@ -154,7 +154,6 @@ Page({
 },
 
 bindPickerChange(e) {
-
     var planId = e.currentTarget.dataset.planid
     var detailId = e.currentTarget.dataset.actailid
     var value=e.detail.value
@@ -242,10 +241,10 @@ commitPlan:function(e){
 
     var errormsg
     if(isHasCommitDate==false){
-      errormsg='有计划完成时间没有填写，请检查并填写完成后，才能提交计划!';
+      errormsg='上周未完成事项的完成时间未填写，请填写后再提交计划!';
     }
     if(isHasResultRemark==false){
-      errormsg='有结果说明没有填写，请检查并填写完成后，才能提交计划!';
+      errormsg='有结果说明没有填写，请填写后再提交计划!';
     }
 
     //上周未完成带入本周的计划，由于计划完成时间情况了，所以在本周提交计划的时候要校验计划完成时间必须填写
@@ -415,11 +414,13 @@ commitPlan:function(e){
 
   //跳转到填写结果说明对话框页面
   planWriteResult: function(e){
-
+    var status = e.currentTarget.dataset.status
+    if(status==0){
       var actionDetailId = e.currentTarget.dataset.detailid
       var resultRemark = e.currentTarget.dataset.resultremark
       var actionName = e.currentTarget.dataset.actionname
       wx.navigateTo({ url: '../planWriteResult/planWriteResult?refrenceId=' + actionDetailId +'&resultRemark='+resultRemark+'&refrenceName='+actionName+'&refrenceType=0'}) 
+    }
   },
 
 

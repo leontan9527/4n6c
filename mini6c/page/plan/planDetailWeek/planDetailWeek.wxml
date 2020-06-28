@@ -24,7 +24,7 @@
               <view wx:if="{{item.isBringInto == true && item.commitDate==null}}" class="weui-media-box__info__meta" >
                 <view class="weui-cell__bd">
                   <picker data-planid="{{plan.id}}" data-actailid="{{item.id}}" value="{{item.commitDate}}" data-field="date" mode="date" start="{{item.dateStart}}" end="{{item.dateEnd}}" bindchange="bindDateChange" >
-                    <view class="weui-input">完成时间(点击填写)：{{df.formatDate(item.commitDate)}}</view>
+                    <view class="weui-input">完成时间<text class="text_edit">(点击填写)：</text>{{df.formatDate(item.commitDate)}}</view>
                   </picker>
                 </view>
               </view>
@@ -38,25 +38,27 @@
             </view>  
 
             <view class="weui-media-box__info">
-              <view bindtap='planWriteResult' data-detailid="{{item.id}}" data-resultremark="{{item.resultRemark}}" data-actionname="{{item.action}}">
+              <view bindtap='planWriteResult' data-status="{{plan.status}}" data-detailid="{{item.id}}" data-resultremark="{{item.resultRemark}}" data-actionname="{{item.action}}">
                 结果说明:
                 <label wx:if="{{item.resultRemark != null}}" class="resultRemark">{{item.resultRemark}} </label>
-                <label wx:if="{{item.resultRemark != null}}" class="resultRemark text_edit">（点击修改）</label>
-                <label wx:if="{{item.resultRemark == null}}" class="resultRemark text_write">（点击填写）</label>
+                <label wx:if="{{item.resultRemark != null && plan.status == 0}}" class="resultRemark text_edit">（点击修改）</label>
+                <label wx:if="{{item.resultRemark == null && plan.status == 0}}" class="resultRemark text_write">（点击填写）</label>
               </view>
             </view>
 
             <view class="weui-media-box__info"> 
 
               <view class="weui-media-box__info__meta">完成情况：</view>
-              <view class="weui-media-box__info__meta">                       
+              <view class="weui-media-box__info__meta" wx:if="{{plan.status != 0}}">                       
+                待提交结果                
+              </view>
+              <view class="weui-media-box__info__meta" wx:if="{{plan.status  == 0}}">                       
                 <picker bindchange="bindPickerChange" data-planid="{{plan.id}}" data-actailid="{{item.id}}" value="{{item.status}}" range="{{array}}">
                   <view wx:if="{{item.status != null}}" >{{array[item.status]}}</view>
                   <view wx:if="{{item.status == null}}" >{{array[item.status]}}</view> 
                 </picker>                
               </view>
-
-              <view class="weui-media-box__info__meta">                       
+              <view class="weui-media-box__info__meta" wx:if="{{plan.status  == 0}}">                       
                 <picker bindchange="bindPickerChange" data-planid="{{plan.id}}" data-actailid="{{item.id}}" value="{{item.status}}" range="{{array}}">
                   <view wx:if="{{item.status != null}}" class="text_edit">（点击修改）</view>
                   <view wx:if="{{item.status == null}}" class="text_write">（点击选择）</view> 

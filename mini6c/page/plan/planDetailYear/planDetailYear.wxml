@@ -53,7 +53,10 @@
 
               <!-- 电网类指标弹出页面选择电网指标 -->
               <view wx:if="{{plan.isPassWeigth == true && item.isNoVote == true}}" data-kpiid="{{item.id}}" data-kpiname="{{item.name}}" data-targetindexid="{{item.targetIndexId}}" bindtap="toPlanNoVoteValue" class="weui-media-box__info__meta">
-                实际值：{{item.actualValueString}}
+                <view wx:if="{{item.actualValueString != '' && item.actualValueString != null}}">
+                  实际值：{{item.actualValueString}}
+                </view>
+                <view wx:else>实际值：<text class="phcolor">(点击填写)</text></view>
               </view>
 
             </view>                
@@ -75,25 +78,28 @@
           </view>  
 
           <view class="weui-media-box__info">
-            <view bindtap='planWriteResult' data-detailid="{{item.id}}" data-resultremark="{{item.resultRemark}}" data-actionname="{{item.action}}">
+            <view bindtap='planWriteResult' data-status="{{plan.status}}" data-detailid="{{item.id}}" data-resultremark="{{item.resultRemark}}" data-actionname="{{item.action}}">
               结果说明:
               <label wx:if="{{item.resultRemark != null}}" class="resultRemark">{{item.resultRemark}} </label>
-              <label wx:if="{{item.resultRemark != null}}" class="resultRemark text_edit">（点击修改）</label>
-              <label wx:if="{{item.resultRemark == null}}" class="resultRemark text_write">（点击填写）</label>
+              <label wx:if="{{item.resultRemark != null && plan.status == 0}}" class="resultRemark text_edit">（点击修改）</label>
+              <label wx:if="{{item.resultRemark == null && plan.status == 0}}" class="resultRemark text_write">（点击填写）</label>
 
             </view>
           </view>
 
           <view class="weui-media-box__info"> 
             <view class="weui-media-box__info__meta">完成情况：</view>
-            <view class="weui-media-box__info__meta">                       
+            <view class="weui-media-box__info__meta" wx:if="{{plan.status != 0}}">                       
+                待提交结果                
+            </view>
+            <view class="weui-media-box__info__meta" wx:if="{{plan.status  == 0}}">                       
               <picker bindchange="bindPickerChange" data-planid="{{plan.id}}" data-actailid="{{item.id}}" value="{{item.status}}" range="{{array}}">
                 <view wx:if="{{item.status != null}}" >{{array[item.status]}}</view>
                 <view wx:if="{{item.status == null}}" >{{array[item.status]}}</view> 
               </picker>                
             </view>
 
-            <view class="weui-media-box__info__meta">                       
+            <view class="weui-media-box__info__meta" wx:if="{{plan.status  == 0}}">                       
               <picker bindchange="bindPickerChange" data-planid="{{plan.id}}" data-actailid="{{item.id}}" value="{{item.status}}" range="{{array}}">
                 <view wx:if="{{item.status != null}}" class="text_edit">（点击修改）</view>
                 <view wx:if="{{item.status == null}}" class="text_write">（点击选择）</view> 
