@@ -11,8 +11,15 @@ Page({
     month:'',
     startDate:'',
     endDate:'',
+    oldPlanCycle:0,
+    oldDeptId:'',
+    oldUserId:'',
+    oldYear:'',
+    oldMonth:'',
+    oldStartDate:'',
+    oldEndDate:'',
     contentlist: [],   
-    pageSize:30,//返回数据的个数 
+    pageSize:10,//返回数据的个数 
     pageNumber:1,
     searchLoading: false, //"上拉加载"的变量，默认false，隐藏 
     searchLoadingComplete: false,  //“没有数据”的变量，默认false，隐藏
@@ -51,17 +58,52 @@ Page({
     if(self.data.userId==null){
       self.data.userId=''
     }
+    var deptId=self.data.deptId
+    var userId=self.data.userId
+    var year=self.data.year
+    var month=self.data.month
+    var planCycle=self.data.planCycle
+    var startDate=self.data.startDate
+    var endDate=self.data.endDate
+    let oldDeptId=self.data.oldDeptId
+    let oldUserId=self.data.oldUserId
+    let oldYear=self.data.oldYear
+    let oldMonth=self.data.oldMonth
+    let oldPlanCycle=self.data.oldPlanCycle
+    let oldStartDate=self.data.oldStartDate
+    let oldEndDate=self.data.oldEndDate
+    /*
+    因为做了分页处理，翻到下一页的时候需要把以前的数据连接起来，但是如果条件发生变化则需要清空以前的数据，即从第一页开始查询，为了达到目的，设置了两套变量来存放查询条件已old开头的变量用于存放老查询条件，目的时为了和最新的查询条件做比对，用于检查最新的查询条件是否发生了变化，发生了变化则清空以前所有查询数据，查询重第一页开始
+    */
+    var isContent=true
+    if(deptId!=oldDeptId || userId!=oldUserId || year != oldYear || month!=oldMonth 
+      || planCycle!=oldPlanCycle || startDate!=oldStartDate || endDate!=oldEndDate){
+        isContent=false;
+        self.setData({  
+          oldPlanCycle:planCycle,
+          oldDeptId:deptId,
+          oldUserId:userId,
+          oldYear:year,
+          oldMonth:month,
+          oldStartDate:startDate,
+          oldEndDate:endDate,
+          pageNumber: 1, //条件发生变化，数据从第一页开始查询 
+          searchLoading: false, //"上拉加载"的变量，默认false，隐藏 
+          searchLoadingComplete: false  //“没有数据”的变量，默认false，隐藏
+        }); 
+    }
+
     if (sessionId) {
       wx.request({
         url: config.domain + '/planCr/queryPlanData',
         data: {
-          deptId:self.data.deptId,
-          userId:self.data.userId,
-          year:self.data.year,
-          month:self.data.month,
-          planCycle:self.data.planCycle,
-          startDate:self.data.startDate,
-          endDate:self.data.endDate,
+          deptId:deptId,
+          userId:userId,
+          year:year,
+          month:month,
+          planCycle:planCycle,
+          startDate:startDate,
+          endDate:endDate,
           pageSize: self.data.pageSize,
           pageNumber:self.data.pageNumber
         },
@@ -71,23 +113,18 @@ Page({
           'Cookie': 'JSESSIONID=' + sessionId
         },
         success(result) {
-  
-          var contentlistTem = self.data.contentlist;
+          var contentlistTem=[]
+          if(isContent==false){
+              contentlistTem=[]
+          }else{
+              contentlistTem = self.data.contentlist;
+          }
           if(result.data.success){
-            
             var contentlist=result.data.items
             var totalPage=result.data.totalPage
-            var isQueryDept=result.data.isQueryDept
-            if (self.data.pageNumber == 1) {
-              contentlistTem = []
-            }
-            
-            if(contentlist!=null){
+            if(contentlistTem.length!=0){
               contentlist=contentlistTem.concat(contentlist)
-            }else{
-              contentlist=contentlistTem
             }
-
             self.setData({
               contentlist: contentlist,
               totalPage:totalPage,
@@ -95,7 +132,6 @@ Page({
             })
           }
         },
-  
         fail({ errMsg }) {
           console.log('【plan/list fail】', errMsg)
         }
@@ -207,6 +243,9 @@ Page({
   },
 
   getDeptIdFun(e){
+    this.setData({
+      oldDeptId:this.data.deptId,
+    })
     var deptId = e.currentTarget.dataset.id
     this.setData({
       deptId:deptId,
@@ -216,6 +255,9 @@ Page({
   },
 
   getUserIdFun(e){
+    this.setData({
+      oldUserId:this.data.userId,
+    })
     var userId = e.currentTarget.dataset.id
     this.setData({
       userId:userId,
@@ -232,10 +274,13 @@ Page({
   },
 
   bindDateChange: function (e) {
-
     var type = e.currentTarget.dataset.type
     var selectData = e.detail.value
     if(type==1){
+      this.setData({
+        oldYear: this.data.year,
+        oldMonth: this.data.month,
+      })
       var arr=selectData.split("-");
       var year=arr[0]
       var month=arr[1]
@@ -245,13 +290,22 @@ Page({
       })
     }else if(type==2){
       this.setData({
+        oldYear: this.data.year,
+      })
+      this.setData({
         year: selectData,
       })
     }else if(type==3){
       this.setData({
+        oldStartDate: this.data.startDate,
+      })
+      this.setData({
         startDate: selectData,
       })
     }else if(type==4){
+      this.setData({
+        oldEndDate: this.data.endDate,
+      })
       this.setData({
         endDate: selectData,
       })
@@ -261,6 +315,9 @@ Page({
   },
 
   toGetPlanCycleFun: function (e) {
+    this.setData({
+      oldPlanCycle: this.data.planCycle,
+    })
     this.setData({
       planCycle: e.detail.value,
       isShowDept:false,
@@ -303,7 +360,6 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
     let that = this;  
     that.setData({  
       pageNumber: 1,  //每次触发上拉事件，把searchPageNum+1  
@@ -312,13 +368,29 @@ Page({
     });  
 
     that.getPlanData()//获取最新数据
-    wx.stopPullDownRefresh() //刷新完成后停止下拉刷新动效
+    wx.stopPullDownRefresh() //刷新完成后停止下拉刷新动效 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    
+    console.log('上滑动onReachBottom')
+    let that = this;  
+    if(!that.data.searchLoadingComplete){ 
+      let pageNumber =that.data.pageNumber+1
+      that.setData({  
+        pageNumber: pageNumber,  //每次触发上拉事件，把searchPageNum+1 
+        searchLoading:true, 
+      }); 
+
+      if(pageNumber>=that.data.totalPage){
+        that.setData({  
+          searchLoadingComplete: true,  //每次触发上拉事件，把searchPageNum+1  
+          searchLoading:false,
+        });
+      }
+      that.getPlanData()//获取最新数据
+    }  
   },
 })
