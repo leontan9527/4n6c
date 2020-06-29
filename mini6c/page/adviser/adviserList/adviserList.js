@@ -15,7 +15,6 @@ const app = getApp()
 
 Page({
   
-
   onShow: function(){
     this.getAdviserMessagePage()
   },
@@ -88,8 +87,6 @@ Page({
               totalPage:totalPage,
               searchLoading:false,
             })
-
-            console.log('searchLoading=='+self.data.searchLoading)
           }
         },
   
@@ -102,7 +99,6 @@ Page({
 
   // 上滑加载更多数据
   onReachBottom: function(event) {
-    console.log('上滑动onReachBottom')
     let that = this;  
 
     if(!that.data.searchLoadingComplete){ 
@@ -125,21 +121,17 @@ Page({
 
   // 下拉刷新
   onPullDownRefresh: function(event) {
-    console.log('onPullDownRefresh')
     let that = this;  
-  
     that.setData({  
       pageNumber: 1,  //每次触发上拉事件，把searchPageNum+1  
       searchLoading: false, //"上拉加载"的变量，默认false，隐藏 
       searchLoadingComplete: false  //“没有数据”的变量，默认false，隐藏
     });  
-
     that.getAdviserMessagePage()//获取最新数据
     wx.stopPullDownRefresh() //刷新完成后停止下拉刷新动效
   },
 
   toSendAdviserInfo(e) {
-
     var id = e.currentTarget.dataset.id
     wx.navigateTo({ url: '../sendAdviserInfo/sendAdviserInfo?id='+id })
   },
@@ -220,7 +212,6 @@ Page({
 
   //跳转到发送消息对话框页面
   writeProcessMessage: function(e){
-
     wx.navigateTo({ 
       url: '../../common/writeProcessMessage/writeProcessMessage?refrenceId=' +'&toType=4'+'&pageSize='+this.data.pageSize+'&pageNumber='+this.data.pageNumber
     }) 

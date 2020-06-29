@@ -91,7 +91,6 @@ Page({
   // 上滑加载更多数据
   onReachBottom: function(event) {
     let that = this;  
-
     if(!that.data.searchLoadingComplete){ 
       let pageNumber =that.data.pageNumber+1
       that.setData({  
@@ -112,9 +111,7 @@ Page({
 
   // 下拉刷新
   onPullDownRefresh: function(event) {
-    console.log('onPullDownRefresh')
     let that = this;  
-  
     that.setData({  
       pageNumber: 1,  //每次触发上拉事件，把searchPageNum+1  
       searchLoading: false, //"上拉加载"的变量，默认false，隐藏 
