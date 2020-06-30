@@ -18,6 +18,7 @@ Page({
     oldMonth:'',
     oldStartDate:'',
     oldEndDate:'',
+    selectDeptId:'',
     contentlist: [],   
     pageSize:10,//返回数据的个数 
     pageNumber:1,
@@ -45,7 +46,33 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getPlanData()
+    const self = this
+    var sessionId = app.globalData.sessionId
+    //初始化查询条件
+    wx.request({
+      url: config.domain + '/planCr/setInitQueryCondition',
+      data: {},
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        'Cookie': 'JSESSIONID=' + sessionId
+      },
+      success(result) {
+
+          var startDate=result.data.startDate
+          var endDate=result.data.endDate
+          self.setData({
+            startDate:startDate,
+            endDate: endDate,
+            oldStartDate:startDate,
+            oldEndDate:endDate,
+          })
+      },
+      fail({ errMsg }) {
+        console.log('【plan/list fail】', errMsg)
+      }
+    })
+    this.getPlanData()//获取查询数据
   },
 
   getPlanData: function (e) {
@@ -143,24 +170,64 @@ Page({
     //获取最新用户数据
     const self = this
     var stype = e.currentTarget.dataset.stype
-    if(stype==1){
-      self.setData({
-        isShowDept:true,
-        isShowUser:false,
-      })
-    }else{
-      self.setData({
-        isShowDept:false,
-        isShowUser:true,
-      })
-    }
+    self.setData({
+      isShowDept:true,
+      isShowUser:false,
+    })
 
     var sessionId = app.globalData.sessionId
-    
     if (sessionId) {
       wx.request({
         url: config.domain + '/planCr/getDeptList',
+        data: {},
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          'Cookie': 'JSESSIONID=' + sessionId
+        },
+        success(result) {
+          var deptList=result.data.deptList
+          var deptLength=deptList.length
+          var userList=result.data.userList
+          var userLength=userList.length
+          if(userLength<deptLength){
+            userLength=deptLength*58
+          }else{
+            userLength=userLength*58
+          }
+          if(userLength>300){
+            userLength=300
+          }
+
+          self.setData({
+            deptList:deptList,
+            userList:userList,
+            userLength:userLength
+          })
+        },
+        fail({ errMsg }) {
+          console.log('【userCr/deptList fail】', errMsg)
+        }
+      })
+    }
+  },
+
+  toGetUserDeptListFun(e) {
+    //获取最新用户数据
+    const self = this
+    var stype = e.currentTarget.dataset.stype
+    self.setData({
+      isShowDept:false,
+      isShowUser:true,
+    })
+
+    var sessionId = app.globalData.sessionId
+    if (sessionId) {
+      wx.request({
+        url: config.domain + '/planCr/getUserDeptList',
         data: {
+          deptId:self.data.deptId,
+          userDeptId:self.data.selectDeptId
         },
         method: 'POST',
         header: {
@@ -196,14 +263,16 @@ Page({
 
   toGetUserListFun(e) {
 
+    const self = this
     var deptId = e.currentTarget.dataset.deptid
     if(deptId==null){
       deptId=''
     }
+    self.setData({
+      selectDeptId:deptId,
+    })
     //获取最新用户数据
-    const self = this
     var sessionId = app.globalData.sessionId
-    
     if (sessionId) {
       wx.request({
         url: config.domain + '/planCr/getUserList',
