@@ -24,7 +24,7 @@ Page({
     })
           
     if (userInfo){
-      console.info('1. Home page 从全局变量中读取用户信息：' + userInfo.nickName)
+      //console.info('1. Home page 从全局变量中读取用户信息：' + userInfo.nickName)
       this.setData({
         userInfo   
       })
@@ -43,7 +43,7 @@ Page({
           hasLogin,
           bindingUser
         })
-        console.info('2. Home page 开始请求数据,使用sessionId=' + sessionId)
+        //console.info('2. Home page 开始请求数据,使用sessionId=' + sessionId)
         wx.request({
           url: config.domain + '/home/message',
           data: {
@@ -130,7 +130,7 @@ Page({
             'Cookie': 'JSESSIONID=' + sessionId
           },
           success(result) {
-            console.log('3.【home/message=】', result.data.data)
+            //console.log('3.【home/message=】', result.data.data)
             self.setData({
               planDb: result.data.data[0], 
               docDb: result.data.data[1],
