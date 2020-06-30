@@ -15,12 +15,12 @@
 <!--         计划查询条件 结束            -->
 <!-- 部门 姓名 开始 结束 年 月 类别 查询条件栏 开始-->
 <view class="flex-Container">
-  <view class="flex-Container-item" data-stype="1" bindtap="toGetDeptListFun">
+  <view class="flex-Container-item" bindtap="toGetDeptListFun">
     <text class="conItem1">部门:</text>
     <image class="conItemImg" src='/page/images/xiangxia.png' />
   </view>
 
-  <view class="flex-Container-item" data-stype="2" bindtap="toGetDeptListFun">
+  <view class="flex-Container-item" bindtap="toGetUserDeptListFun">
     <text class="conItem1">姓名:</text>
     <image class="conItemImg" src='/page/images/xiangxia.png' />
   </view>
@@ -44,7 +44,7 @@
   </view>
 
   <view wx:if="{{planCycle==0}}" class="flex-Container-item" bindtap="toSetFileFun">
-    <picker data-type="3" mode="date" bindchange="bindDateChange" >
+    <picker data-type="3" mode="date" value="{{startDate}}" bindchange="bindDateChange" >
       <view class="flex-Container-item">
         <view class="conItem1">开始</view>
         <image class="conItemImg" src='/page/images/xiangxia.png' />
@@ -53,7 +53,7 @@
   </view>
 
   <view wx:if="{{planCycle==0}}" class="flex-Container-item" bindtap="toSetFileFun">
-    <picker data-type="4" mode="date" bindchange="bindDateChange" >
+    <picker data-type="4" mode="date" value="{{endDate}}" bindchange="bindDateChange" >
       <view class="flex-Container-item">
         <view class="conItem1">结束</view>
         <image class="conItemImg" src='/page/images/xiangxia.png' />
@@ -79,7 +79,8 @@
         <view class="weui-cells weui-cells_after-title">
             <scroll-view scroll-y='true' style='height:{{deptList.length*58<300?deptList.length*58:300}}px;'>
               <label class="weui-cell weui-check__label" wx:for="{{deptList}}" data-id="{{item.id}}" bindtap="getDeptIdFun">
-                <view class="weui-cell__bd">{{item.name}}</view>
+                <view wx:if="{{item.id==deptId}}" class="weui-cell__bd" style="color:green">{{item.name}}</view>
+                <view class="weui-cell__bd" wx:else >{{item.name}}</view>
               </label>
             </scroll-view>
         </view>
@@ -95,7 +96,8 @@
               <view class="weui-cells weui-cells_after-title">
                   <scroll-view scroll-y='true' style='height: {{userLength}}px;'>
                     <label class="weui-cell weui-check__label" wx:for="{{deptList}}" data-deptid="{{item.id}}" bindtap="toGetUserListFun">
-                      <view class="weui-cell__bd">{{item.name}}</view>
+                      <view wx:if="{{item.id==selectDeptId}}" class="weui-cell__bd" style="color:green">{{item.name}}</view>
+                      <view class="weui-cell__bd" wx:else >{{item.name}}</view>
                     </label>
                   </scroll-view>
               </view>
@@ -105,7 +107,8 @@
               <view class="weui-cells weui-cells_after-title">
                   <scroll-view scroll-y='true' style='height:{{userLength}}px;'>
                     <label class="weui-cell weui-check__label" wx:for="{{userList}}" data-id="{{item.id}}"  bindtap="getUserIdFun">
-                      <view class="weui-cell__bd">{{item.name}}</view>
+                      <view wx:if="{{item.id==userId}}" class="weui-cell__bd" style="color:green">{{item.name}}</view>
+                      <view class="weui-cell__bd" wx:else >{{item.name}}</view>
                     </label>
                   </scroll-view>
               </view>
