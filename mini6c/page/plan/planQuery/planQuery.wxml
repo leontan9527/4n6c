@@ -170,6 +170,9 @@
             </view>
         </block>
     </view>
+    <view class="nofound" wx:else>
+        没有找到记录,可尝试扩大查询范围继续查找!
+    </view>
 
 </view>
 <!-- 计划查询内容  结束 -->
