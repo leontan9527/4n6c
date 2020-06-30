@@ -2,7 +2,8 @@
   "usingComponents": {
     "mp-cells": "../../common/cells/cells",
     "mp-cell": "../../common/cell/cell",
-    "mp-form": "../../common/form/form"
+    "mp-form": "../../common/form/form",
+    "mp-toptips": "../../common/toptips/toptips"
   },
   "navigationBarTextStyle": "black",
   "navigationBarTitleText": "添加行动计划",
