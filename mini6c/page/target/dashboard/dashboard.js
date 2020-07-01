@@ -7,7 +7,8 @@ Page({
     list: [],    
     icon_target: 'pic/target.png',
     type: 0,
-    canReadCompany:false
+    canReadCompany:false,
+    canReadDept:false
   },
 
   onLoad: function (options) {
@@ -48,6 +49,7 @@ Page({
           //console.log('【targetCr/domain=】', result.data.data.target)
 
           var canReadCompany = result.data.data.canReadCompany
+          var canReadDept = result.data.data.canReadDept
           var targets = result.data.data.target
           var planScore = result.data.data.planScore
           var excuteWeek = result.data.data.excuteWeek
@@ -185,7 +187,8 @@ Page({
             list: listDB,
             excuteRate: excuteRate,
             newestOrAvgSoce: newestOrAvgSoce,
-            canReadCompany: canReadCompany
+            canReadCompany: canReadCompany,
+            canReadDept: canReadDept
           })
          
 

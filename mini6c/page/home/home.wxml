@@ -27,6 +27,28 @@
         </view>                            
       </mp-cell>              
   
+      <mp-cell bindtap="toNeedCheck" wx:if="{{checkDb}}">
+          <view slot="title" style="position: relative;margin-right: 10px;">
+              <image src="{{icon_acheck}}" class="img-icon"/>
+              <mp-badge wx:if="{{checkDb.msgNum > 0}}" content="{{checkDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
+          </view>
+          <view>执行检查</view>
+          <view wx:for-items="{{checkDb.items}}" wx:key="itemValue" class="msgItem">
+            {{item.itemTitle}}
+          </view>
+      </mp-cell>    
+
+      <mp-cell bindtap="toMeeting">
+          <view slot="title" style="position: relative;margin-right: 10px;">
+              <image src="{{icon_meeting}}" class="img-icon"/>
+              <mp-badge wx:if="{{meetingDb.msgNum > 0}}" content="{{meetingDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
+          </view>
+          <view>会议</view>
+          <view wx:for-items="{{meetingDb.items}}" wx:key="itemValue" class="msgItem">
+            {{item.itemTitle}}
+          </view>
+      </mp-cell>  
+
       <mp-cell bindtap="toDocument">
           <view slot="title" style="position: relative;margin-right: 10px;">
               <image src="{{icon_ggao}}" class="img-icon"/>
@@ -38,27 +60,7 @@
           </view>
       </mp-cell>              
   
-      <mp-cell bindtap="toNeedCheck" wx:if="{{checkDb}}">
-          <view slot="title" style="position: relative;margin-right: 10px;">
-              <image src="{{icon_acheck}}" class="img-icon"/>
-              <mp-badge wx:if="{{checkDb.msgNum > 0}}" content="{{checkDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
-          </view>
-          <view>执行检查</view>
-          <view wx:for-items="{{checkDb.items}}" wx:key="itemValue" class="msgItem">
-            {{item.itemTitle}}
-          </view>
-      </mp-cell>              
   
-      <mp-cell bindtap="toMeeting">
-          <view slot="title" style="position: relative;margin-right: 10px;">
-              <image src="{{icon_meeting}}" class="img-icon"/>
-              <mp-badge wx:if="{{meetingDb.msgNum > 0}}" content="{{meetingDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
-          </view>
-          <view>会议</view>
-          <view wx:for-items="{{meetingDb.items}}" wx:key="itemValue" class="msgItem">
-            {{item.itemTitle}}
-          </view>
-      </mp-cell>              
   
       <mp-cell bindtap="toAdviserMessage">
           <view slot="title" style="position: relative;margin-right: 10px;">
@@ -86,6 +88,23 @@
   
       <mp-cell>
           <view slot="title" style="position: relative;margin-right: 10px;">
+              <image src="{{icon_acheck}}" class="img-icon"/>              
+          </view>
+          <view>执行检查</view>
+          <view class="msgItem">计划后的执行检查是保证计划结果正确的唯一保障, 需认真检查</view>
+      </mp-cell>              
+  
+  
+      <mp-cell>
+          <view slot="title" style="position: relative;margin-right: 10px;">
+              <image src="{{icon_meeting}}" class="img-icon"/>              
+          </view>
+          <view>会议</view>
+          <view class="msgItem">会议有决议，会议才更有价值。决议的落实和追踪是会议后的首要任务...</view>
+      </mp-cell>  
+                  
+      <mp-cell>
+          <view slot="title" style="position: relative;margin-right: 10px;">
               <image src="{{icon_ggao}}" class="img-icon"/>              
           </view>
           <view>公文</view>
@@ -94,26 +113,10 @@
   
       <mp-cell>
           <view slot="title" style="position: relative;margin-right: 10px;">
-              <image src="{{icon_acheck}}" class="img-icon"/>              
-          </view>
-          <view>执行检查</view>
-          <view class="msgItem">计划后的执行检查是保证计划结果正确的唯一保障, 需认真检查</view>
-      </mp-cell>              
-  
-      <mp-cell>
-          <view slot="title" style="position: relative;margin-right: 10px;">
-              <image src="{{icon_meeting}}" class="img-icon"/>              
-          </view>
-          <view>会议</view>
-          <view class="msgItem">会议有决议，会议才更有价值。决议的落实和追踪是会议后的首要任务...</view>
-      </mp-cell>              
-  
-      <mp-cell>
-          <view slot="title" style="position: relative;margin-right: 10px;">
               <image src="{{icon_check}}" class="img-icon"/>              
           </view>
           <view>顾问信息</view>
-          <view class="msgItem">如何提高执行力，和顾问老师交流分享</view>
+          <view class="msgItem">如何提升绩效和执行力，和顾问老师交流分享</view>
       </mp-cell>              
   </mp-cells>            
 </view>
