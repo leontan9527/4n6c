@@ -94,6 +94,7 @@ Page({
     let pages = getCurrentPages()
     let prevPage = pages[pages.length - 2]
     var plan = prevPage.data.plan
+    
     if(refrenceType==0 || refrenceType==1 || refrenceType==2){
       for (let i = 0; i < plan.actionDetails.length; i++ ){						
         if (refrenceId == plan.actionDetails[i].id){	
@@ -101,6 +102,8 @@ Page({
           break;
         }  
       }	
+    }else if(refrenceType==3){
+      plan.isReturnPlan=false
     }
    
     prevPage.setData({

@@ -61,45 +61,7 @@ Page({
         }
       })
     }
-
   },
-  onShow() { 
-    console.info('2. onShow')     
-    wx.reportAnalytics('enter_home_programmatically', {})
-
-    //每次点击计划tar时候都会请求一次后台
-    const self = this
-    var sessionId = app.globalData.sessionId
-    if (sessionId) {
-      wx.request({
-        url: config.domain + '/planCr/list',
-        data: {
-          api: "list"
-        },
-        method: 'POST',
-        header: {
-          'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
-          'Cookie': 'JSESSIONID=' + sessionId
-        },
-        success(result) {
-  
-          if(result.data.success){
-            
-            self.setData({
-              planCurrList: result.data.planCurrList,
-              planList: result.data.planAllList
-            })
-          }
-        },
-  
-        fail({ errMsg }) {
-          console.log('【plan/list fail】', errMsg)
-        }
-      })
-    }
-    
-  },
-
 
   onShareAppMessage() {
     console.info('3. onShareAppMessage')     
