@@ -114,7 +114,6 @@ Page({
 
   addAction: function (e) {
     var id = e.currentTarget.dataset.id
-    console.log('【planAddAction/planAddAction】id=', id)
     wx.navigateTo({ url: '../planAddAction/planAddAction?id=' + id })
   },
 
@@ -191,24 +190,19 @@ Page({
     myaudio.onStop(() => {
       //console.log('停止播放');
     })
-
   },
 
   toPlanProgressPage: function(e){
-
     wx.navigateTo({ url: '../planProgressList/planProgressList?planId=' + this.data.planId  +'&toType=3'}) 
   },
 
    //跳转到发送消息对话框页面
    writeProcessMessage: function(e){
-
     wx.navigateTo({ url: '../../common/writeProcessMessage/writeProcessMessage?refrenceId=' + this.data.planId +'&toType=3'}) 
   },
-
   
   //跳转到退回计划填写原因对话框页面
   planWriteResult: function(e){
-
     var refrenceName = e.currentTarget.dataset.title
     wx.navigateTo({ url: '../planWriteResult/planWriteResult?refrenceId=' + this.data.planId +'&refrenceName='+refrenceName+'&refrenceType=3&refrenceStatus=-2'}) 
   },

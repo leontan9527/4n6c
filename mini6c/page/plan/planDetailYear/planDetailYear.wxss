@@ -4,7 +4,7 @@
   padding-bottom: 40px;
 }
 .weui-media-box__title{font-weight:400;font-size:15px;color:rgba(0,0,0,.9);}
-.weui-media-box__info{color:#949191;}
+.weui-media-box__info{color:#777;margin-top: 8px;font-size: 14px;}
 .plan_action{font-weight:400;font-size:16px;color:rgba(0,0,0,.9);}
 .plan_status{color: darkgreen;}
 .button-sp-area{
@@ -128,7 +128,7 @@
 }
 .text_edit{color:#6196e6}
 .text_write{color:maroon}
-.setWidth{width:40%;}
+.setWidth{width:42%;}
 /*一些小样式  结束*/
 .commitButton{width:100%;text-align: center;
   color: #fff;

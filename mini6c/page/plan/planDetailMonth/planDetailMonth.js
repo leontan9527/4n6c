@@ -81,12 +81,12 @@ Page({
                   unCommit ++;
                 }  							
               }
-              kpis[i].score=util.formatDouble(kpis[i].score)
-              kpis[i].baseValue=util.formatDouble(kpis[i].baseValue)
-              kpis[i].reasonableValue=util.formatDouble(kpis[i].reasonableValue)
+              kpis[i].score=util.formatDouble(kpis[i].score,2)
+              kpis[i].baseValue=util.formatDouble(kpis[i].baseValue,2)
+              kpis[i].reasonableValue=util.formatDouble(kpis[i].reasonableValue,2)
               kpis[i].weight=util.formatDouble(kpis[i].weight)
-              kpis[i].actualValue=util.formatDouble(kpis[i].actualValue)
-              kpis[i].accumulateValue=util.formatDouble(kpis[i].accumulateValue)
+              kpis[i].actualValue=util.formatDouble(kpis[i].actualValue,2)
+              kpis[i].accumulateValue=util.formatDouble(kpis[i].accumulateValue,2)
 
             }
           }

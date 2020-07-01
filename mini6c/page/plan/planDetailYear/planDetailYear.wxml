@@ -93,14 +93,14 @@
                 待提交结果                
             </view>
             <view class="weui-media-box__info__meta" wx:if="{{plan.status  == 0}}">                       
-              <picker bindchange="bindPickerChange" data-planid="{{plan.id}}" data-actailid="{{item.id}}" value="{{item.status}}" range="{{array}}">
+              <picker bindchange="bindPickerChange" data-status="{{plan.status}}" data-planid="{{plan.id}}" data-actailid="{{item.id}}" value="{{item.status}}" range="{{array}}">
                 <view wx:if="{{item.status != null}}" >{{array[item.status]}}</view>
                 <view wx:if="{{item.status == null}}" >{{array[item.status]}}</view> 
               </picker>                
             </view>
 
             <view class="weui-media-box__info__meta" wx:if="{{plan.status  == 0}}">                       
-              <picker bindchange="bindPickerChange" data-planid="{{plan.id}}" data-actailid="{{item.id}}" value="{{item.status}}" range="{{array}}">
+              <picker bindchange="bindPickerChange" data-status="{{plan.status}}" data-planid="{{plan.id}}" data-actailid="{{item.id}}" value="{{item.status}}" range="{{array}}">
                 <view wx:if="{{item.status != null}}" class="text_edit">（点击修改）</view>
                 <view wx:if="{{item.status == null}}" class="text_write">（点击选择）</view> 
               </picker>                
