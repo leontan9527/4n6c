@@ -68,12 +68,12 @@ Page({
 								unCommit ++;
 							}  							
             }
-            kpis[i].score=util.formatDouble(kpis[i].score)
-            kpis[i].baseValue=util.formatDouble(kpis[i].baseValue)
-            kpis[i].reasonableValue=util.formatDouble(kpis[i].reasonableValue)
+            kpis[i].score=util.formatDouble(kpis[i].score,2)
+            kpis[i].baseValue=util.formatDouble(kpis[i].baseValue,2)
+            kpis[i].reasonableValue=util.formatDouble(kpis[i].reasonableValue,2)
             kpis[i].weight=util.formatDouble(kpis[i].weight)
-            kpis[i].accumulateActualValue=util.formatDouble(kpis[i].accumulateActualValue)
-            kpis[i].actualValue=util.formatDouble(kpis[i].actualValue)
+            kpis[i].accumulateActualValue=util.formatDouble(kpis[i].accumulateActualValue,2)
+            kpis[i].actualValue=util.formatDouble(kpis[i].actualValue,2)
             kpis[i].yearActualValueString=util.formatNull(kpis[i].yearActualValueString)
             kpis[i].actualValueString=util.formatNull(kpis[i].actualValueString)
           }
