@@ -2,7 +2,7 @@
 <view class="page__bd">
   <view class="weui-flex">
     <view class="weui-flex__item" data-type="0" bindtap="switchType"><view class="{{type == 0 ? 'selected':'unSelect'}}">个人</view></view>
-    <view class="weui-flex__item" data-type="1" bindtap="switchType"><view class="{{type == 1 ? 'selected':'unSelect'}}">部门</view></view>
+    <view wx:if="{{canReadDept}}" class="weui-flex__item" data-type="1" bindtap="switchType"><view class="{{type == 1 ? 'selected':'unSelect'}}">部门</view></view>
     <view wx:if="{{canReadCompany}}" class="weui-flex__item" data-type="2" bindtap="switchType"><view class="{{type == 2 ? 'selected':'unSelect'}}">公司</view></view>
   </view>
 </view>

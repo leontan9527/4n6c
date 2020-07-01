@@ -31,11 +31,11 @@ App({
     }
 
     var cloudID = wx.getStorageSync('cloudID') 
-    //console.info('App 2.本地存储的cloudID:' + cloudID)
+    console.info('App 2.本地存储的cloudID:' + cloudID)
 
     //用户微信和本小程序的openid
     this.globalData.openid = wx.getStorageSync('openid')
-    //console.info('App 3.本地存储的openid:' + this.globalData.openid)
+    console.info('App 3.本地存储的openid:' + this.globalData.openid)
 
     //如果没有，需要获取openid
     if (!this.globalData.openid){
@@ -44,7 +44,7 @@ App({
         name: 'login',
         data: { weRunData: wx.cloud.CloudID(cloudID)},
         success: res => {
-          //console.log('App 【3.1云函数】[login] 返回 openid: ', res.result.openid)
+          console.log('App 【3.1云函数】[login] 返回 openid: ', res.result.openid)
           //console.log('【云函数】[login] 返回 appid: ', res.result.appid)
           //console.log('【云函数】[login] 返回 unionid: ', res.result.unionid)
           //console.log('【云函数】[login] 返回 env: ', res.result.env)

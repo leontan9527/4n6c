@@ -70,12 +70,6 @@
         "iconPath": "image/icon_result.png",
         "selectedIconPath": "image/icon_result_HL.png",
         "text": "结果"
-      },
-      {
-        "pagePath": "page/ke/web-view/web-view",
-        "iconPath": "image/icon_ke.png",
-        "selectedIconPath": "image/icon_ke_HL.png",
-        "text": "课程"
       }
     ]
   },
@@ -86,7 +80,7 @@
     "downloadFile": 10000
   },
   "navigateToMiniProgramAppIdList": [
-    "wx31ab952b30232ac7"
+    "wx20a9a2175f7b7409"
   ],
   "workers": "workers",
   "debug": false,
