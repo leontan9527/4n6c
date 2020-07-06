@@ -73,8 +73,8 @@ Page({
 
 					for (let i = 0; i < actions.length; i++ ){
             //处理页面计划完成时间只能选择本周内的时间
-            actions[i].dateStart=util.timestampToTime(actions[i].dateStart, false)
-            actions[i].dateEnd=util.timestampToTime(actions[i].dateEnd, false)
+            actions[i].dateStart=util.timestampToTime(actions[i].dateStart, 3)
+            actions[i].dateEnd=util.timestampToTime(actions[i].dateEnd, 3)
             //当改变状态时，页面未完成项数改变
 						if (actions[i].status == 0){	
 							unCommit ++
