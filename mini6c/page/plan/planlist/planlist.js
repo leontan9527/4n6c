@@ -17,8 +17,6 @@ Page({
         wx.redirectTo({ url: '../../user/login/login' })
       }
     }
-
-    
     this.setData({     
         planList: '',
         hasUserInfo: false,   
@@ -29,11 +27,19 @@ Page({
         icon_query: '../../images/query.png'
     })
 
+    this.getPlanList()
+  },
+  
+  onShow: function(){ 
+    this.getPlanList()
+  },
+
+  getPlanList:function(e){
+   
     //获取最新消息数据
     const self = this
     var sessionId = app.globalData.sessionId
 
-    //console.info('1. onLoad 开始登陆,使用Cookie=')
     if (sessionId) {
       wx.request({
         url: config.domain + '/planCr/list',
@@ -62,7 +68,6 @@ Page({
       })
     }
   },
-
   onShareAppMessage() {
     console.info('3. onShareAppMessage')     
     return {

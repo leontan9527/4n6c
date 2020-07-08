@@ -1,0 +1,153 @@
+<view class="page__bd">
+  <!--执行目标信息  开始-->
+  <view class="weui-panel weui-panel_access" wx:if="{{targetMonthExcute != null}}">
+      <view class="weui-panel__bd">
+        <view class="weui-media-box weui-media-box_text" >    
+                        
+          <view class="weui-media-box__desc plan_action">
+            执行目标:{{targetMonthExcute.planItemNumber}}
+          </view>
+
+          <view class="weui-media-box__info">
+            <view class="weui-media-box__info__meta">达标：{{targetMonthExcute.finishItemNumber}}</view>
+            <view class="weui-media-box__info__meta">不达标：{{targetMonthExcute.unFinishItemNumber}}</view> 
+          </view> 
+
+          <view class="weui-media-box__info"> 
+            <view class="weui-media-box__info__meta">
+              累计达标:
+              <label wx:if="{{targetMonthExcute.cumulativeFinishItemNumber!=null}}" class="resultRemark">{{targetMonthExcute.cumulativeItemNumber}}</label>
+            </view>
+          </view>
+
+          <view class="weui-media-box__info"> 
+            <view class="weui-media-box__info__meta">
+              累计未达标:
+              <label wx:if="{{targetMonthExcute.cumulativeFinishItemNumber!=null}}" class="resultRemark">{{targetMonthExcute.cumulativeItemNumber-targetMonthExcute.cumulativeFinishItemNumber}}</label>
+            </view>
+          </view>
+
+          <view class="weui-media-box__info"> 
+            <view class="weui-media-box__info__meta">
+              累计达标率最高:
+              <label wx:if="{{targetMAXExcuteRadioDept.cumulativeExcuteEEfficiency!=null}}" class="resultRemark">
+              {{targetMAXExcuteRadioDept.deptName}}({{targetMAXExcuteRadioDept.cumulativeExcuteEEfficiency*100}}%)</label>
+            </view>
+          </view>
+
+          <view class="weui-media-box__info"> 
+            <view class="weui-media-box__info__meta">
+              累计达标率最底:
+              <label wx:if="{{targetMinExcuteRadioDept.cumulativeExcuteEEfficiency!=null}}" class="resultRemark">
+               {{targetMinExcuteRadioDept.deptName}}({{targetMinExcuteRadioDept.cumulativeExcuteEEfficiency*100}}%)</label>
+            </view>
+          </view>
+
+        </view>
+    </view>            
+  </view>
+  <!--执行目标信息  结束-->
+
+  <!--月度计划统计信息  开始-->
+  <view class="weui-panel weui-panel_access" wx:if="{{monthExcuteBulletinBoard != null}}">
+      <view class="weui-panel__bd">
+        <view class="weui-media-box weui-media-box_text" >    
+                        
+          <view class="weui-media-box__desc plan_action">
+            月行动计划项:{{monthExcuteBulletinBoard.planItemNumber}}
+          </view>
+
+          <view class="weui-media-box__info">
+            <view class="weui-media-box__info__meta">已完成：{{monthExcuteBulletinBoard.finishItemNumber}}</view>
+            <view class="weui-media-box__info__meta">未完成：{{monthExcuteBulletinBoard.unFinishItemNumber}}</view> 
+          </view> 
+
+          <view class="weui-media-box__info"> 
+            <view class="weui-media-box__info__meta">
+              累计完成:
+              <label wx:if="{{monthExcuteBulletinBoard.cumulativeFinishItemNumber!=null}}" class="resultRemark">{{monthExcuteBulletinBoard.cumulativeFinishItemNumber}}</label>
+            </view>
+          </view>
+
+          <view class="weui-media-box__info"> 
+            <view class="weui-media-box__info__meta">
+              累计未完成:
+              <label wx:if="{{monthExcuteBulletinBoard.cumulativeItemNumber!=null}}" class="resultRemark">{{monthExcuteBulletinBoard.cumulativeItemNumber-monthExcuteBulletinBoard.cumulativeFinishItemNumber}}</label>
+            </view>
+          </view>
+
+          <view class="weui-media-box__info"> 
+            <view class="weui-media-box__info__meta">
+              累计完成率最高:
+              <label wx:if="{{monthMaxExcuteRadioDept.cumulativeExcuteEEfficiency!=null}}" class="resultRemark">
+               {{monthMaxExcuteRadioDept.deptName}}({{monthMaxExcuteRadioDept.cumulativeExcuteEEfficiency*100}}%)</label>
+            </view>
+          </view>
+
+          <view class="weui-media-box__info"> 
+            <view class="weui-media-box__info__meta">
+              累计完成率最底:
+              <label wx:if="{{monthMinExcuteRadioDept.cumulativeExcuteEEfficiency!=null}}" class="resultRemark">
+               {{monthMinExcuteRadioDept.deptName}}({{monthMinExcuteRadioDept.cumulativeExcuteEEfficiency*100}}%)</label>
+            </view>
+          </view>
+
+        </view>
+    </view>            
+  </view>
+  <!--月度计划统计信息  结束-->
+
+  <!--周计划统计信息  开始-->
+  <view class="weui-panel weui-panel_access" wx:if="{{weekExcuteBulletinBoard != null}}">
+      <view class="weui-panel__bd">
+        <view class="weui-media-box weui-media-box_text" >    
+                        
+          <view class="weui-media-box__desc plan_action">
+            周行动计划项:
+            <label wx:if="{{weekExcuteBulletinBoard.planItemNumber!=null}}" class="resultRemark">{{weekExcuteBulletinBoard.planItemNumber}}</label>
+          </view>
+
+          <view class="weui-media-box__info">
+            <view class="weui-media-box__info__meta">已完成：
+            <label wx:if="{{weekExcuteBulletinBoard.finishItemNumber!=null}}" class="resultRemark">{{weekExcuteBulletinBoard.finishItemNumber}}</label>
+            </view>
+            <view class="weui-media-box__info__meta">未完成：
+            <label wx:if="{{weekExcuteBulletinBoard.unFinishItemNumber!=null}}" class="resultRemark">{{weekExcuteBulletinBoard.unFinishItemNumber}}</label>
+            </view> 
+          </view> 
+
+          <view class="weui-media-box__info"> 
+            <view class="weui-media-box__info__meta">
+              累计完成:
+              <label wx:if="{{weekExcuteBulletinBoard.cumulativeItemNumber!=null}}" class="resultRemark">{{weekExcuteBulletinBoard.cumulativeItemNumber}}</label>
+            </view>
+          </view>
+
+          <view class="weui-media-box__info"> 
+            <view class="weui-media-box__info__meta">
+              累计未完成:
+              <label wx:if="{{weekExcuteBulletinBoard.cumulativeFinishItemNumber!=null}}" class="resultRemark">{{weekExcuteBulletinBoard.cumulativeItemNumber-weekExcuteBulletinBoard.cumulativeFinishItemNumber}}</label>
+            </view>
+          </view>
+
+          <view class="weui-media-box__info"> 
+            <view class="weui-media-box__info__meta">
+              累计完成率最高:
+              <label wx:if="{{weekMaxExcuteRadioDept.cumulativeExcuteEEfficiency!=null}}" class="resultRemark">
+              {{weekMaxExcuteRadioDept.deptName}}({{weekMaxExcuteRadioDept.cumulativeExcuteEEfficiency*100}}%)</label>
+            </view>
+          </view>
+
+          <view class="weui-media-box__info"> 
+            <view class="weui-media-box__info__meta">
+              累计完成率最底:
+              <label wx:if="{{weekMinExcuteRadioDept.cumulativeExcuteEEfficiency!=null}}" class="resultRemark">
+              {{weekMinExcuteRadioDept.deptName}}({{weekMinExcuteRadioDept.cumulativeExcuteEEfficiency*100}}%)</label>
+            </view>
+          </view>
+
+        </view>
+    </view>            
+  </view>
+  <!--周计划统计信息  结束-->
+</view>

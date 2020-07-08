@@ -15,6 +15,29 @@
 
 <view class="page__bd" wx:if="{{hasLogin === true}}">
   <mp-cells title="" >
+    
+      <mp-cell bindtap="toExcuteprocess" wx:if="{{excuteDp}}">
+          <view slot="title" style="position: relative;margin-right: 10px;">
+              <image src="{{icon_acheck}}" class="img-icon"/>
+              <mp-badge wx:if="{{excuteDp.msgNum > 0}}" content="{{excuteDp.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
+          </view>
+          <view>执行进程</view>
+          <view wx:for-items="{{excuteDp.items}}" wx:key="itemValue" class="msgItem">
+            {{item.itemTitle}}
+          </view>
+      </mp-cell> 
+
+      <mp-cell bindtap="toNeedCheck" wx:if="{{checkDb}}">
+          <view slot="title" style="position: relative;margin-right: 10px;">
+              <image src="{{icon_acheck}}" class="img-icon"/>
+              <mp-badge wx:if="{{checkDb.msgNum > 0}}" content="{{checkDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
+          </view>
+          <view>执行检查</view>
+          <view wx:for-items="{{checkDb.items}}" wx:key="itemValue" class="msgItem">
+            {{item.itemTitle}}
+          </view>
+      </mp-cell> 
+
       <mp-cell bindtap="toPlanprocess">
         <view slot="title" style="position: relative;margin-right: 10px;">
             <image src="{{icon_pro}}" class="img-icon"/>
@@ -25,18 +48,7 @@
         <view wx:for-items="{{planDb.items}}" wx:key="itemValue" class="msgItem">
           {{item.itemTitle}}
         </view>                            
-      </mp-cell>              
-  
-      <mp-cell bindtap="toNeedCheck" wx:if="{{checkDb}}">
-          <view slot="title" style="position: relative;margin-right: 10px;">
-              <image src="{{icon_acheck}}" class="img-icon"/>
-              <mp-badge wx:if="{{checkDb.msgNum > 0}}" content="{{checkDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
-          </view>
-          <view>执行检查</view>
-          <view wx:for-items="{{checkDb.items}}" wx:key="itemValue" class="msgItem">
-            {{item.itemTitle}}
-          </view>
-      </mp-cell>    
+      </mp-cell>                 
 
       <mp-cell bindtap="toMeeting">
           <view slot="title" style="position: relative;margin-right: 10px;">
