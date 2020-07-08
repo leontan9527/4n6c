@@ -1,17 +1,16 @@
 <wxs src="../../../util/dateutil.wxs" module="df" />
 <wxs module="nf">
   var toFixed = function (value) {
-    if (value){
+    if(value==0){
+      return value;
+    }else if (value){
       return value.toFixed(2);
     } else {
       return null;
     }    
   }
-
   var ifNull = function (value) {
-    
-    return value? value : "";
-       
+    return value? value : "";   
   }
   module.exports = {
     toFixed :toFixed,

@@ -7,13 +7,19 @@
 .weui-media-box__info{color:#777;margin-top: 8px;font-size: 14px;}
 
 .plan_action{font-weight:400;font-size:16px;color:rgba(0,0,0,.9);}
-.plan_status{color: darkgreen;}
-.button-sp-area{
-  margin: 0 auto;
-  width: 60%;
-}
-
-.link_plan{color:#6196e6}
 .resultRemark{
   line-height:20px;
+}
+.flex-Container-item{
+  height:100%;
+  display:flex;
+  flex-direction:row;
+  justify-content:space-between;
+}
+
+.conItemImg{
+  margin-top: 1px; 
+  width: 55rpx; 
+  height: 55rpx; 
+  float: left;
 }

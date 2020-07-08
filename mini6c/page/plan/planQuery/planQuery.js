@@ -50,32 +50,64 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const self = this
-    var sessionId = app.globalData.sessionId
-    //初始化查询条件
-    wx.request({
-      url: config.domain + '/planCr/setInitQueryCondition',
-      data: {},
-      method: 'POST',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
-        'Cookie': 'JSESSIONID=' + sessionId
-      },
-      success(result) {
 
-          var startDate=result.data.startDate
-          var endDate=result.data.endDate
-          self.setData({
-            startDate:startDate,
-            endDate: endDate,
-            oldStartDate:startDate,
-            oldEndDate:endDate,
-          })
-      },
-      fail({ errMsg }) {
-        console.log('【plan/list fail】', errMsg)
+    const self = this
+    if(options.isExcute!=undefined && options.isExcute!=''){
+      if(options.planCycle!=undefined && options.planCycle!=''){
+        self.setData({
+          planCycle:options.planCycle,
+        })
       }
-    })
+      if(options.year!=undefined && options.year!=''){
+        self.setData({
+          year:options.year,
+        })
+      }
+      if(options.month!=undefined && options.month!=''){
+        self.setData({
+          month:options.month,
+        })
+      }
+      if(options.startDate!=undefined && options.startDate!=''){
+        self.setData({
+          startDate:options.startDate,
+          oldStartDate:options.startDate,
+        })
+      }
+      if(options.endDate!=undefined && options.endDate!=''){
+        self.setData({
+          endDate:options.endDate,
+          oldEndDate:options.endDate,
+        })
+      }
+    }else{
+      var sessionId = app.globalData.sessionId
+      //初始化查询条件
+      wx.request({
+        url: config.domain + '/planCr/setInitQueryCondition',
+        data: {},
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          'Cookie': 'JSESSIONID=' + sessionId
+        },
+        success(result) {
+  
+            var startDate=result.data.startDate
+            var endDate=result.data.endDate
+            self.setData({
+              startDate:startDate,
+              endDate: endDate,
+              oldStartDate:startDate,
+              oldEndDate:endDate,
+            })
+        },
+        fail({ errMsg }) {
+          console.log('【plan/list fail】', errMsg)
+        }
+      })
+    }
+    
     this.getPlanData(false)//获取查询数据
   },
 

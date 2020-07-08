@@ -12,7 +12,8 @@ Page({
       icon_check: '../images/check.png',
       icon_msg: '../images/msg.png',
       icon_pro: '../images/process.png',
-      icon_acheck: '../images/acheck.png'
+      icon_acheck: '../images/acheck.png',
+      icon_excute: '../images/excute.png',
     });
 
     var hasLogin = app.globalData.hasLogin
