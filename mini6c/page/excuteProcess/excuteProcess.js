@@ -77,6 +77,8 @@ Page({
             month:result.data.month,
             curYear:result.data.curYear,
             curMonth:result.data.curMonth,
+            startDate:result.data.startDate,
+            endDate:result.data.endDate,
           })
         },
 
@@ -94,20 +96,13 @@ Page({
   toMonthQueryFun: function (e) {
     var month=this.data.month
     var year=this.data.year
-    wx.navigateTo({ url: '../plan/planQuery/planQuery?planCycle=1'+'&year='+year+'&month='+month})
+    wx.navigateTo({ url: '../plan/planQuery/planQuery?planCycle=1'+'&year='+year+'&month='+month+'&isExcute=1'})
   },
 
   toWeekQueryFun: function (e) {
-    wx.navigateTo({ url: '../plan/planQuery/planQuery?planCycle=0'})
-  },
-  
-  
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+    var startDate=this.data.startDate
+    var endDate=this.data.endDate
+    wx.navigateTo({ url: '../plan/planQuery/planQuery?planCycle=0'+'&startDate='+startDate+'&endDate='+endDate+'&isExcute=1'})
   },
 
 })
