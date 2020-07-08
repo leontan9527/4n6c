@@ -18,7 +18,7 @@
     
       <mp-cell bindtap="toExcuteprocess" wx:if="{{excuteDp}}">
           <view slot="title" style="position: relative;margin-right: 10px;">
-              <image src="{{icon_acheck}}" class="img-icon"/>
+              <image src="{{icon_excute}}" class="img-icon"/>
               <mp-badge wx:if="{{excuteDp.msgNum > 0}}" content="{{excuteDp.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
           </view>
           <view>执行进程</view>
