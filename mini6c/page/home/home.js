@@ -57,11 +57,12 @@ Page({
           success(result) {
             //console.log('3.【home/message=】', result.data.data)
             self.setData({
-              planDb: result.data.data[0], 
-              docDb: result.data.data[1],
-              meetingDb: result.data.data[2],
-              adviserDb: result.data.data[3],
-              checkDb: result.data.data[4]
+              excuteDp: result.data.data[0],
+              checkDb: result.data.data[1],
+              planDb: result.data.data[2], 
+              meetingDb: result.data.data[3],
+              docDb: result.data.data[4],
+              adviserDb: result.data.data[5],
             })
           },
 
@@ -153,6 +154,10 @@ Page({
     wx.stopPullDownRefresh() //刷新完成后停止下拉刷新动效
   },
   
+  toExcuteprocess() {
+    wx.navigateTo({ url: '../excuteProcess/excuteProcess' })
+  },
+
   toPlanprocess() {
     wx.navigateTo({ url: '../plan/planprocess/planprocess' })
   },

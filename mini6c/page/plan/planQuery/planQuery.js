@@ -107,7 +107,7 @@ Page({
     因为做了分页处理，翻到下一页的时候需要把以前的数据连接起来，但是如果条件发生变化则需要清空以前的数据，即从第一页开始查询，为了达到目的，设置了两套变量来存放查询条件已old开头的变量用于存放老查询条件，目的时为了和最新的查询条件做比对，用于检查最新的查询条件是否发生了变化，发生了变化则清空以前所有查询数据，查询重第一页开始
     */
     var isContent=true
-    if(isRefresh==true || deptId!=oldDeptId || userId!=oldUserId || year != oldYear || month!=oldMonth 
+    if(isRefresh==true || deptId=='' || deptId!=oldDeptId || userId=='' || userId!=oldUserId || year != oldYear || month!=oldMonth 
       || planCycle!=oldPlanCycle || startDate!=oldStartDate || endDate!=oldEndDate){
         isContent=false;
         self.setData({  

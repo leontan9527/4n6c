@@ -15,16 +15,17 @@
           <view>   
 
             <view class="weui-media-box__desc plan_action" data-planid="{{plan.id}}" data-actailid="{{item.id}}" data-iseditplan="{{item.isEditPlan}}" bindtap="editAction">
-              {{item.action}}
-
+              {{item.action}}<image wx:if="{{item.isCommitAfterAdd == true && item.isBringInto != true}}" class='overTimePic' src='/page/images/overTime.png' ></image>
             </view>
-            <view class="weui-media-box__desc" data-planid="{{plan.id}}" data-actailid="{{item.id}}" data-iseditplan="{{item.isEditPlan}}" bindtap="editAction">成果要求：{{item.outcome}}</view>
+            <view class="weui-media-box__info" data-planid="{{plan.id}}" data-actailid="{{item.id}}" data-iseditplan="{{item.isEditPlan}}" bindtap="editAction">成果要求：
+             <label wx:if="{{item.outcome!=null}}" class="resultRemark">{{item.outcome}}</label>
+            </view>
 
             <view class="weui-media-box__info">
               <view wx:if="{{item.isBringInto == true && item.commitDate==null}}" class="weui-media-box__info__meta" >
                 <view class="weui-cell__bd">
                   <picker data-planid="{{plan.id}}" data-actailid="{{item.id}}" value="{{item.commitDate}}" data-field="date" mode="date" start="{{item.dateStart}}" end="{{item.dateEnd}}" bindchange="bindDateChange" >
-                    <view class="weui-input">完成时间<text class="text_edit">(点击填写)：</text>{{df.formatDate(item.commitDate)}}</view>
+                    <view class="weui-input">完成时间<text class="text_write">(点击填写)：</text>{{df.formatDate(item.commitDate)}}</view>
                   </picker>
                 </view>
               </view>
@@ -64,7 +65,11 @@
                   <view wx:if="{{item.status == null}}" class="text_write">（点击选择）</view> 
                 </picker>                
               </view>
+            </view>
 
+            <view class="weui-media-box__info">
+                未完成承诺:
+               <label wx:if="{{item.unFinishRemark!=null}}" class="resultRemark">{{item.unFinishRemark}}</label>
             </view>
 
             <view>
