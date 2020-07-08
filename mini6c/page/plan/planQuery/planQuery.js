@@ -50,7 +50,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
     const self = this
+    if(options.planCycle!=undefined && options.planCycle!=''){
+      self.setData({
+        planCycle:options.planCycle,
+      })
+    }
+    if(options.year!=undefined && options.year!=''){
+      self.setData({
+        year:options.year,
+      })
+    }
+    if(options.month!=undefined && options.month!=''){
+      self.setData({
+        month:options.month,
+      })
+    }
+    
     var sessionId = app.globalData.sessionId
     //初始化查询条件
     wx.request({
