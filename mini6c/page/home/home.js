@@ -14,6 +14,7 @@ Page({
       icon_pro: '../images/process.png',
       icon_acheck: '../images/acheck.png',
       icon_excute: '../images/excute.png',
+      icon_foucs: '../images/foucs.png',
     });
 
     var hasLogin = app.globalData.hasLogin
@@ -30,7 +31,16 @@ Page({
         userInfo   
       })
     }
+    this.getNewHomeData()
 
+  },
+
+  onShow: function(){ 
+    this.getNewHomeData()
+  },
+
+  getNewHomeData: function () {
+    
     //获取最新消息数据
     this.waitLogin().then((res) => {
       
@@ -60,10 +70,11 @@ Page({
             self.setData({
               excuteDp: result.data.data[0],
               checkDb: result.data.data[1],
-              planDb: result.data.data[2], 
-              meetingDb: result.data.data[3],
-              docDb: result.data.data[4],
-              adviserDb: result.data.data[5],
+              foucsDb: result.data.data[2],
+              planDb: result.data.data[3], 
+              meetingDb: result.data.data[4],
+              docDb: result.data.data[5],
+              adviserDb: result.data.data[6],
             })
           },
 
@@ -114,43 +125,7 @@ Page({
   onPullDownRefresh: function(event) {
     let that = this;    
     //获取最新消息数据
-    this.waitLogin().then((res) => {
-        
-      const self = this    
-      var sessionId = getApp().globalData.sessionId
-
-      console.info('2. Home page 开始请求数据,使用sessionId=' + sessionId)
-      if (sessionId) {
-        wx.request({
-          url: config.domain + '/home/message',
-          data: {
-            api: "message"
-          },
-          method: 'POST',
-          header: {
-            'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
-            'Cookie': 'JSESSIONID=' + sessionId
-          },
-          success(result) {
-            //console.log('3.【home/message=】', result.data.data)
-            self.setData({
-              planDb: result.data.data[0], 
-              docDb: result.data.data[1],
-              meetingDb: result.data.data[2],
-              adviserDb: result.data.data[3],
-              checkDb: result.data.data[4]
-            })
-          },
-
-          fail({ errMsg }) {
-            console.log('3.【home/message fail】', errMsg)          
-          }
-        })      
-      }
-
-    }, (error) => {
-      console.log('登录超时：' + error)
-    })
+    this.getNewHomeData()
     //获取首页数据结束
     wx.stopPullDownRefresh() //刷新完成后停止下拉刷新动效
   },
@@ -175,6 +150,9 @@ Page({
   },
   toNeedCheck() {
     wx.navigateTo({ url: '../needCheck/needCheck' })
+  },
+  toPlanFoucs() {
+    wx.navigateTo({ url: '../plan/planFoucs/planFoucs' })
   },
 
   toScan() {
