@@ -20,32 +20,18 @@ Page({
     this.setData({
       planId: options.id,
       planCycle: options.planCycle,
-      showWriteMask: false,
+      showFouceMask: false,
       showVoiceMask: false,
       startRecording: false,
       cancleRecording:false,
       recordAnimationNum:0,
       lastVoiceYPostion:0,
       audKey:'',  //当前选中的音频key
-      isSendAdviser:false,
-      isShowBottomVoice:false
     })
 
     //获取最新消息数据
     this.getNewPlanData()
 
-  },
-
-  showSendMessageFun:function(e){
-    if(this.data.isShowBottomVoice){
-      this.setData({
-        isShowBottomVoice: false,
-      })
-    } else{
-      this.setData({
-        isShowBottomVoice: true,
-      })
-    }
   },
   
   getNewPlanData: function () {
@@ -206,5 +192,77 @@ Page({
     var refrenceName = e.currentTarget.dataset.title
     wx.navigateTo({ url: '../planWriteResult/planWriteResult?refrenceId=' + this.data.planId +'&refrenceName='+refrenceName+'&refrenceType=3&refrenceStatus=-2'}) 
   },
-
+  closeFouce: function(e) {
+    this.setData({
+      showFouceMask:false,
+    })
+  },
+  showAddFoucs: function(e) {
+    var self=this
+    var status = e.currentTarget.dataset.status
+    //plan.status=0,也就是进行中的计划才可以添加关注
+    if(status!=0){
+      return 
+    }
+    var foucsActionId = e.currentTarget.dataset.actionid
+    var foucsAction = e.currentTarget.dataset.action
+    var showTop //通过下面方法得到长按行动计划的位置，弹出的添加关注界面，就显示在该位置
+    var query = wx.createSelectorQuery()
+    query.select('#action'+foucsActionId).boundingClientRect(function (res) {
+      //console.log(res);
+      self.setData({
+        showFouceMask:true,
+        foucsActionId: foucsActionId,
+        foucsAction:foucsAction,
+        showTop:res.top
+      })
+    }).exec();
+  },
+  //复制文字的方法
+  copyText: function (e) {
+    var self=this
+    wx.setClipboardData({
+      data: self.data.foucsAction,
+      success: function (res) {
+        wx.getClipboardData({
+          success: function (res) {
+            self.setData({
+              showFouceMask:false,
+            })
+          }
+        })
+      }
+    })
+  },
+  addPlanFouce: function(e) {
+    const self = this
+    var sessionId = app.globalData.sessionId
+    if (sessionId) {
+      wx.request({
+        url: config.domain + '/planCr/addPlanFouce',
+        data: {
+          foucsActionId: this.data.foucsActionId
+        },
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          'Cookie': 'JSESSIONID=' + sessionId
+        },
+        success(result) {
+          wx.showModal({  
+            title: '提示',  
+            content: '已成功添加到我关注的工作中',  
+            showCancel:false,
+            confirmText:'关闭',
+            success: function(res) {  
+                
+            }  
+          }) 
+        },
+        fail({ errMsg }) {
+          console.log('【plan/detailMonth fail】', errMsg)
+        }
+      })
+    }
+  },
 })

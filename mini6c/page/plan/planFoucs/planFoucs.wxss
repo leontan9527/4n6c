@@ -1,0 +1,56 @@
+@import '../../common/weui.wxss';
+
+.page__bd {
+  padding-bottom: 40px;
+}
+.weui-media-box__title{font-weight:400;font-size:15px;color:rgba(0,0,0,.9);}
+.weui-media-box__info{color:#777;margin-top: 8px;font-size: 14px;}
+.plan_action{font-weight:400;font-size:16px;color:rgba(0,0,0,.9);}
+
+.link_plan{color:#6196e6}
+
+.resultRemark{
+  line-height:20px;
+}
+.overTimePic{
+  width:16px;height:16px;margin-left: 5px; 
+}
+.rightCss11{
+  height: 50px; 
+  border-bottom:1px solid #EDECE8;  
+}
+.rightCss{
+  margin-top:13px;margin-right:5px;float:right; 
+}
+/*会议回执选项  开始*/
+.modal-mask {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.5;
+  overflow: hidden;
+  z-index: 9000;
+  color: #fff;
+}
+
+.modal-dialog {
+  width: 350rpx;
+  overflow: hidden;
+  position: fixed;
+  top: 50;
+  left: 27%;
+  z-index:9999;
+  background: #F5FFFA;
+  border-radius:10rpx;
+}
+
+.modal-title {
+  height: 40px;
+  display: inline-block;
+  margin-left: 34px;
+  margin-top: 13px;
+}
+/*会议回执选项  开始*/

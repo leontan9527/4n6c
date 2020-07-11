@@ -12,7 +12,7 @@
     toFixed :toFixed
   }
 </wxs>
-<!--         计划查询条件 结束            -->
+<!--         计划查询条件 开始            -->
 <!-- 部门 姓名 开始 结束 年 月 类别 查询条件栏 开始-->
 <view class="flex-Container">
   <view class="flex-Container-item" bindtap="toGetDeptListFun">
@@ -26,7 +26,7 @@
   </view>
 
   <view wx:if="{{planCycle==1}}" class="flex-Container-item" bindtap="toSetFileFun">
-    <picker data-type="1" mode="date" fields="month" bindchange="bindDateChange" >
+    <picker data-type="1" mode="date" fields="month" value="{{year}}-{{month}}" bindchange="bindDateChange" >
       <view class="flex-Container-item">
         <view class="conItem1">月度</view>
         <image class="conItemImg" src='/page/images/xiangxia.png' />
