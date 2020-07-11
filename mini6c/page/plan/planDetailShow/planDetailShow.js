@@ -201,7 +201,9 @@ Page({
     var self=this
     var status = e.currentTarget.dataset.status
     //plan.status=0,也就是进行中的计划才可以添加关注
- 
+    if(status!=0){
+      return 
+    }
     var foucsActionId = e.currentTarget.dataset.actionid
     var foucsAction = e.currentTarget.dataset.action
     var showTop //通过下面方法得到长按行动计划的位置，弹出的添加关注界面，就显示在该位置
