@@ -3,8 +3,8 @@
   <!--计划详情信息  开始-->
   <view>
     <!--actionDetails信息  开始-->
-    <view class="weui-panel weui-panel_access" wx:if="{{planActionList.length > 0}}">
-       <view class="rightCss11">
+    <view class="weui-panel weui-panel_access">
+       <view class="rightCss11" wx:if="{{planActionList.length > 0}}">
          <label bindtap='deletePlanFouce' data-all="true" class="rightCss link_plan">全部删除</label>
        </view>
       
@@ -47,6 +47,9 @@
               </view>
             </view>
           </block>
+          <view wx:if="{{planActionList==null}}" class="nofound" >
+            没有关注任何人的工作计划!
+          </view>
       </view>  
     </view>
     <!--actionDetails信息  结束-->
