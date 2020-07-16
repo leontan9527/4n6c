@@ -43,11 +43,11 @@
           <view class="weui-media-box__info"> 
             <view class="weui-media-box__info__meta">
               累计达标:
-              <label wx:if="{{targetMonthExcute.cumulativeFinishItemNumber!=null}}" class="resultRemark">{{targetMonthExcute.cumulativeItemNumber}}</label>
+              <label wx:if="{{targetMonthExcute.cumulativeFinishItemNumber!=null}}" class="resultRemark">{{targetMonthExcute.cumulativeFinishItemNumber}}</label>
             </view>
             <view class="weui-media-box__info__meta">
               累计未达标:
-              <label wx:if="{{targetMonthExcute.cumulativeFinishItemNumber!=null}}" class="resultRemark">{{targetMonthExcute.cumulativeItemNumber-targetMonthExcute.cumulativeFinishItemNumber}}</label>
+              <label wx:if="{{targetMonthExcute.cumulativeUnFinishItemNumber!=null}}" class="resultRemark">{{targetMonthExcute.cumulativeUnFinishItemNumber}}</label>
             </view>
           </view>
 
@@ -61,7 +61,7 @@
 
           <view class="weui-media-box__info"> 
             <view class="weui-media-box__info__meta">
-              累计达标率最底:
+              累计达标率最低:
               <label wx:if="{{targetMinExcuteRadioDept.cumulativeExcuteEEfficiency!=null}}" class="resultRemark">
                {{targetMinExcuteRadioDept.deptName}}({{nf.toFixed(targetMinExcuteRadioDept.cumulativeExcuteEEfficiency*100)}}%)</label>
             </view>
@@ -98,7 +98,7 @@
             </view>
             <view class="weui-media-box__info__meta">
               累计未完成:
-              <label wx:if="{{monthExcuteBulletinBoard.cumulativeItemNumber!=null}}" class="resultRemark">{{monthExcuteBulletinBoard.cumulativeItemNumber-monthExcuteBulletinBoard.cumulativeFinishItemNumber}}</label>
+              <label wx:if="{{monthExcuteBulletinBoard.cumulativeUnFinishItemNumber!=null}}" class="resultRemark">{{monthExcuteBulletinBoard.cumulativeUnFinishItemNumber}}</label>
             </view>
           </view>
 
@@ -112,7 +112,7 @@
 
           <view class="weui-media-box__info"> 
             <view class="weui-media-box__info__meta">
-              累计完成率最底:
+              累计完成率最低:
               <label wx:if="{{monthMinExcuteRadioDept.cumulativeExcuteEEfficiency!=null}}" class="resultRemark">
                {{monthMinExcuteRadioDept.deptName}}({{nf.toFixed(monthMinExcuteRadioDept.cumulativeExcuteEEfficiency*100)}}%)</label>
             </view>
@@ -147,11 +147,11 @@
           <view class="weui-media-box__info"> 
             <view class="weui-media-box__info__meta">
               累计完成:
-              <label wx:if="{{weekExcuteBulletinBoard.cumulativeItemNumber!=null}}" class="resultRemark">{{weekExcuteBulletinBoard.cumulativeFinishItemNumber}}</label>
+              <label wx:if="{{weekExcuteBulletinBoard.cumulativeFinishItemNumber!=null}}" class="resultRemark">{{weekExcuteBulletinBoard.cumulativeFinishItemNumber}}</label>
             </view>
             <view class="weui-media-box__info__meta">
               累计未完成:
-              <label wx:if="{{weekExcuteBulletinBoard.cumulativeFinishItemNumber!=null}}" class="resultRemark">{{weekExcuteBulletinBoard.cumulativeItemNumber-weekExcuteBulletinBoard.cumulativeFinishItemNumber}}</label>
+              <label wx:if="{{weekExcuteBulletinBoard.cumulativeUnFinishItemNumber!=null}}" class="resultRemark">{{weekExcuteBulletinBoard.cumulativeUnFinishItemNumber}}</label>
             </view>
           </view>
 
@@ -165,7 +165,7 @@
 
           <view class="weui-media-box__info"> 
             <view class="weui-media-box__info__meta">
-              累计完成率最底:
+              累计完成率最低:
               <label wx:if="{{weekMinExcuteRadioDept.cumulativeExcuteEEfficiency!=null}}" class="resultRemark">
               {{weekMinExcuteRadioDept.deptName}}({{nf.toFixed(weekMinExcuteRadioDept.cumulativeExcuteEEfficiency*100)}}%)</label>
             </view>
