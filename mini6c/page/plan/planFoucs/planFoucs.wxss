@@ -22,7 +22,7 @@
 .rightCss{
   margin-top:13px;margin-right:5px;float:right; 
 }
-/*会议回执选项  开始*/
+/*弹出层  开始*/
 .modal-mask {
   width: 100%;
   height: 100%;
@@ -53,4 +53,13 @@
   margin-left: 34px;
   margin-top: 13px;
 }
-/*会议回执选项  开始*/
+/*结束 */
+.nofound {
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+  width: 100%;
+  height: 100%;
+  margin-top:10px;
+  margin-bottom: 10px;
+}
