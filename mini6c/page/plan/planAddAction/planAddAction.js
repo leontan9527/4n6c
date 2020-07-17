@@ -161,14 +161,4 @@ Page({
 
   },
 
-  onUnload:function(){
-    /*
-    const self = this
-    var planId=self.data.planId
-    wx.switchTab({
-      url: '../planDetailWeek/planDetailWeek?id=' + planId
-    })
-    */
-  },
-
 });
