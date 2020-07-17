@@ -83,7 +83,24 @@ Page({
                       showCancel:false,
                       confirmText:'关闭',
                       success: function(res) { 
-                        wx.switchTab({ url: '../../home/home'}) 
+                        if(isDeleteAll=='true'){
+                          wx.switchTab({ url: '../../home/home'}) 
+                        }else{
+                          var planActionList=self.data.planActionList
+                          if(planActionList.length==1){
+                            wx.switchTab({ url: '../../home/home'}) 
+                          }else{
+                            var arr=[]
+                            for(let i=0;i<planActionList.length;i++){
+                              if (planActionList[i].id != self.data.foucsActionId){	
+                                arr.push(planActionList[i])
+                              } 
+                            }
+                            self.setData({
+                              planActionList: arr,
+                            })
+                          }
+                        }
                       }  
                     })
                   },
