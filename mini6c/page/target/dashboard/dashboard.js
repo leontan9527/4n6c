@@ -46,10 +46,12 @@ Page({
           'Cookie': 'JSESSIONID=' + sessionId
         },
         success(result) {
-          //console.log('【targetCr/domain=】', result.data.data.target)
+          //console.log('【targetCr/domain=】', result.data.data)
 
           var canReadCompany = result.data.data.canReadCompany
           var canReadDept = result.data.data.canReadDept
+
+          //console.info(canReadCompany);
           var targets = result.data.data.target
           var planScore = result.data.data.planScore
           var excuteWeek = result.data.data.excuteWeek
