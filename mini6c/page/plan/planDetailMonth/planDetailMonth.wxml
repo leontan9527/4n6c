@@ -79,7 +79,6 @@
             </view>                
           </view>
           <!-- 输入实际值  结束 -->
-
         </view>        
       </view>            
     </view>
@@ -144,25 +143,6 @@
           <view class="weui-media-box__title link_plan">+行动计划</view>   
       </view>
     </view>
-
-    <!--view class="message-top">
-
-        <view wx:if="{{plan.status == 0}}" class="weui-media-box__desc">
-          提示：行动举措每项提交结果后，点击提交结果； 提交结果后，不可修改
-        </view> 
-
-        <view wx:if="{{plan.status == 0  && unCommit>0}}">
-          <label class="unCommit link_plan">
-            余{{unCommit}}项，待提交结果
-          </label>
-        </view>
-
-        <view class="button-sp-area" wx:if="{{plan.isPassWeigth==true && unCommit==0}}">
-          <button class="mini-btn commitPlan" type="primary" size="mini" data-planid="{{plan.id}}" data-status="1" bindtap="commitPlan">
-            提交结果
-          </button>
-        </view>
-    </view-->
     
     <!--进程消息列表  开始-->
     <view class="weui-panel weui-panel_access" wx:if="{{planProgressList.length > 0}}">
@@ -171,7 +151,6 @@
         <label bindtap='writeProcessMessage' class="rightCss">
           <image class="showPic" src="/image/write.png"></image>
         </label>
-        <!--label  bindtap='toPlanProgressPage' data-id="{{pid}}"  class="weui-media-box__title link_plan moreItem">更多</label-->
       </view>
       <view class="weui-panel__bd">
 
