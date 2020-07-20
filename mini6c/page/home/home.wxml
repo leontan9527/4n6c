@@ -38,7 +38,7 @@
           </view>
       </mp-cell> 
 
-      <mp-cell bindtap="toNeedCheck">
+      <mp-cell bindtap="toPlanFoucs">
           <view slot="title" style="position: relative;margin-right: 10px;">
               <image src="{{icon_foucs}}" class="img-icon"/>
               <mp-badge wx:if="{{checkDb.msgNum > 0}}" content="{{foucsDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
