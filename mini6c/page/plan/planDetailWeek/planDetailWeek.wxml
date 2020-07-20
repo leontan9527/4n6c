@@ -9,9 +9,7 @@
       </view>
 
       <view class="weui-panel__bd">
-
         <view class="weui-media-box weui-media-box_text" wx:for-items="{{plan.actionDetails}}" wx:key="id" > 
-
           <view>   
 
             <view class="weui-media-box__desc plan_action" data-planid="{{plan.id}}" data-actailid="{{item.id}}" data-iseditplan="{{item.isEditPlan}}" bindtap="editAction">
