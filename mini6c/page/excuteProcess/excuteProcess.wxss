@@ -3,7 +3,7 @@
 .page__bd {
   padding-bottom: 40px;
 }
-.weui-media-box__title{font-weight:400;font-size:15px;color:rgba(0,0,0,.9);}
+.weui-media-box__title{font-weight:400;font-size:15px;color:rgba(121, 116, 116, 0.9);}
 .weui-media-box__info{color:#777;margin-top: 8px;font-size: 14px;}
 
 .plan_action{font-weight:400;font-size:16px;color:rgba(0,0,0,.9);}
@@ -19,7 +19,8 @@
 
 .conItemImg{
   margin-top: 1px; 
-  width: 55rpx; 
-  height: 55rpx; 
+  width: 50px; 
+  height: 10px; 
   float: left;
+  color:rgba(121, 116, 116, 0.9);
 }

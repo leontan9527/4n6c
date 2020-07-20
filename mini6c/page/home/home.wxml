@@ -16,7 +16,7 @@
 <view class="page__bd" wx:if="{{hasLogin === true}}">
   <mp-cells title="" >
     
-      <mp-cell bindtap="toExcuteprocess" wx:if="{{excuteDp}}">
+      <mp-cell bindtap="toExcuteprocess">
           <view slot="title" style="position: relative;margin-right: 10px;">
               <image src="{{icon_excute}}" class="img-icon"/>
               <mp-badge wx:if="{{excuteDp.msgNum > 0}}" content="{{excuteDp.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
@@ -27,7 +27,7 @@
           </view>
       </mp-cell> 
 
-      <mp-cell bindtap="toNeedCheck" wx:if="{{checkDb}}">
+      <mp-cell bindtap="toNeedCheck">
           <view slot="title" style="position: relative;margin-right: 10px;">
               <image src="{{icon_acheck}}" class="img-icon"/>
               <mp-badge wx:if="{{checkDb.msgNum > 0}}" content="{{checkDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
@@ -38,16 +38,16 @@
           </view>
       </mp-cell> 
 
-      <mp-cell bindtap="toPlanFoucs" wx:if="{{foucsDb}}">
+      <mp-cell bindtap="toNeedCheck">
           <view slot="title" style="position: relative;margin-right: 10px;">
               <image src="{{icon_foucs}}" class="img-icon"/>
-              <mp-badge wx:if="{{foucsDb.msgNum > 0}}" content="{{foucsDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
+              <mp-badge wx:if="{{checkDb.msgNum > 0}}" content="{{foucsDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
           </view>
           <view>我关注的工作</view>
           <view wx:for-items="{{foucsDb.items}}" wx:key="itemValue" class="msgItem">
             {{item.itemTitle}}
           </view>
-      </mp-cell> 
+      </mp-cell>  
 
       <mp-cell bindtap="toPlanprocess">
         <view slot="title" style="position: relative;margin-right: 10px;">

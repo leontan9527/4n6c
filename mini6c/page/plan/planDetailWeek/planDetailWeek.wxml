@@ -15,9 +15,11 @@
           <view>   
 
             <view class="weui-media-box__desc plan_action" data-planid="{{plan.id}}" data-actailid="{{item.id}}" data-iseditplan="{{item.isEditPlan}}" bindtap="editAction">
-              {{item.action}}<image wx:if="{{item.isCommitAfterAdd == true && item.isBringInto != true}}" class='overTimePic' src='/page/images/overTime.png' ></image>
+              {{item.action}}
+              <image wx:if="{{item.isCommitAfterAdd == true && item.isBringInto != true}}" class='overTimePic' src='/page/images/overTime.png' ></image>
+              <image wx:if="{{item.isEditPlan==true}}" class="overTimePic" src="/image/write.png"></image>
             </view>
-            <view class="weui-media-box__info" data-planid="{{plan.id}}" data-actailid="{{item.id}}" data-iseditplan="{{item.isEditPlan}}" bindtap="editAction">成果要求：
+            <view class="weui-media-box__info">成果要求：
              <label wx:if="{{item.outcome!=null}}" class="resultRemark">{{item.outcome}}</label>
             </view>
 
@@ -29,11 +31,11 @@
                   </picker>
                 </view>
               </view>
-              <view wx:if="{{item.isBringInto != true || (item.isBringInto == true && item.commitDate!=null)}}" class="weui-media-box__info__meta" data-planid="{{plan.id}}" data-actailid="{{item.id}}" data-iseditplan="{{item.isEditPlan}}" bindtap="editAction">
+              <view wx:if="{{item.isBringInto != true || (item.isBringInto == true && item.commitDate!=null)}}" class="weui-media-box__info__meta">
                 完成时间：{{df.formatDate  (item.commitDate)}}
               </view>
 
-              <view class="weui-media-box__info__meta" data-planid="{{plan.id}}" data-actailid="{{item.id}}" data-iseditplan="{{item.isEditPlan}}" bindtap="editAction">
+              <view class="weui-media-box__info__meta">
               检查人：{{item.inspectorName}}
               </view> 
             </view>  
@@ -90,44 +92,7 @@
           <view class="weui-media-box__title link_plan">+行动计划</view>   
       </view>
     </view>
-    <!--
-    <view class="weui-panel__bd" >
-      <view class="weui-media-box_text">  
-        
-          <view class="page-section-spacing">
-            <view class="flex-wrp cssplanadd">
-              <view class="flex-item-left weui-media-box__title link_plan" data-id="{{plan.id}}"  bindtap="addAction">  
-                +行动计划   
-              </view>
-              <view class="flex-item-right">
-                <button wx:if="{{(plan.status == -1 || plan.status == -2) && actionsLength>0}}"  type="primary"  size="mini" data-planid="{{plan.id}}" data-status="0" bindtap="commitPlan">
-                  提交计划
-                </button>
-              </view>
-            </view>
-          </view>
-
-          <view class="message-top">
-
-            <view wx:if="{{plan.status == 0}}" class="weui-media-box__desc">
-              提示：行动举措每项提交结果后，点击提交结果； 提交结果后，不可修改
-            </view> 
-
-            <view wx:if="{{plan.status == 0  && unCommit>0}}">
-              <label class="unCommit link_plan">
-                余{{unCommit}}项，待提交结果
-              </label>
-            </view>
-
-            <view class="button-sp-area" wx:if="{{plan.status == 0 && plan.isCommitPlanResult==true && unCommit==0}}">
-              <button class="mini-btn commitPlan" type="primary" size="mini" data-planid="{{plan.id}}" data-status="1" bindtap="commitPlan">
-                提交结果
-              </button>
-            </view>
-        </view> 
-      </view>
-    </view>
-    -->
+  
     <!--进程消息列表  开始-->
     <view class="weui-panel weui-panel_access" wx:if="{{planProgressList.length > 0}}">
       <view class="weui-panel__hd">

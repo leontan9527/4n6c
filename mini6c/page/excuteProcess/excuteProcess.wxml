@@ -21,10 +21,10 @@
   <view class="weui-panel weui-panel_access" >
 
      <view class="weui-panel__hd">
-        <view class="flex-Container-item" bindtap="toGetDeptListFun">
-          <image bindtap='toPostFun' data-flag="1" class="conItemImg" src='/page/images/xiangzuo.png' />
+        <view class="flex-Container-item" bindtap="toGetDeptListFun">   
+          <text bindtap='toPostFun' data-flag="1" class="conItemImg">前一月</text>
           <text class="conItem1">{{year}}年{{month}}月</text>
-          <image wx:if="{{month!=curMonth}}" bindtap='toPostFun' data-flag="2" class="conItemImg" src='/page/images/xiangyou.png' />
+          <text wx:if="{{month!=curMonth}}" bindtap='toPostFun' data-flag="2" class="conItemImg">后一月</text>
         </view>
       </view>
 
