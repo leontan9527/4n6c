@@ -15,21 +15,29 @@
 <!--         计划查询条件 开始            -->
 <!-- 部门 姓名 开始 结束 年 月 类别 查询条件栏 开始-->
 <view class="flex-Container">
+  <view class="flex-Container-item" bindtap="toSetFileFun">
+    <picker bindchange="toGetPlanCycleFun" value="{{planCycle}}" range="{{objectArray}}" range-key="name">
+      <view class="flex-Container-item">
+        <view class="conItem1">类别</view>
+        <image class="conItemImg" src='{{icon_xiangxia}}' />
+      </view>
+    </picker>
+  </view>
   <view class="flex-Container-item" bindtap="toGetDeptListFun">
-    <text class="conItem1">部门:</text>
-    <image class="conItemImg" src='/page/images/xiangxia.png' />
+    <text class="conItem1">部门</text>
+    <image class="conItemImg" src='{{icon_xiangxia}}' />
   </view>
 
   <view class="flex-Container-item" bindtap="toGetUserDeptListFun">
-    <text class="conItem1">姓名:</text>
-    <image class="conItemImg" src='/page/images/xiangxia.png' />
+    <text class="conItem1">姓名</text>
+    <image class="conItemImg" src='{{icon_xiangxia}}' />
   </view>
 
   <view wx:if="{{planCycle==1}}" class="flex-Container-item" bindtap="toSetFileFun">
     <picker data-type="1" mode="date" fields="month" value="{{year}}-{{month}}" bindchange="bindDateChange" >
       <view class="flex-Container-item">
         <view class="conItem1">月度</view>
-        <image class="conItemImg" src='/page/images/xiangxia.png' />
+        <image class="conItemImg" src='{{icon_xiangxia}}' />
       </view>
     </picker>
   </view>
@@ -38,7 +46,7 @@
     <picker data-type="2" mode="date" fields="year" bindchange="bindDateChange" >
       <view class="flex-Container-item">
         <view class="conItem1">年度</view>
-        <image class="conItemImg" src='/page/images/xiangxia.png' />
+        <image class="conItemImg" src='{{icon_xiangxia}}' />
       </view>
     </picker>
   </view>
@@ -47,7 +55,7 @@
     <picker data-type="3" mode="date" value="{{startDate}}" bindchange="bindDateChange" >
       <view class="flex-Container-item">
         <view class="conItem1">开始</view>
-        <image class="conItemImg" src='/page/images/xiangxia.png' />
+        <image class="conItemImg" src='{{icon_xiangxia}}' />
       </view>
     </picker>
   </view>
@@ -56,28 +64,20 @@
     <picker data-type="4" mode="date" value="{{endDate}}" bindchange="bindDateChange" >
       <view class="flex-Container-item">
         <view class="conItem1">结束</view>
-        <image class="conItemImg" src='/page/images/xiangxia.png' />
+        <image class="conItemImg" src='{{icon_xiangxia}}' />
       </view>
     </picker>
   </view>
 
-  <view class="flex-Container-item" bindtap="toSetFileFun">
-    <picker bindchange="toGetPlanCycleFun" value="{{planCycle}}" range="{{objectArray}}" range-key="name">
-      <view class="flex-Container-item">
-        <view class="conItem1">类别:</view>
-        <image class="conItemImg" src='/page/images/xiangxia.png' />
-      </view>
-    </picker>
-  </view>
 </view>
 <!-- 部门 姓名 开始 结束 年 月 类别 查询条件栏 结束-->
 
 <!-- 当点击部门时，显示部门列表 -->
 <view  wx:if="{{isShowDept}}"  catchtouchmove="true"> 
-  <view class = "modal-dialog" style="height: {{deptList.length*58<300?deptList.length*58:300}}px;" wx:if = "{{isShowDept}}" > 
+  <view class = "modal-dialog" style="height: {{deptList.length*58<350?deptList.length*58:350}}px;" wx:if = "{{isShowDept}}" > 
       <view class="conItemDept">
         <view class="weui-cells weui-cells_after-title">
-            <scroll-view scroll-y='true' style='height:{{deptList.length*58<300?deptList.length*58:300}}px;'>
+            <scroll-view scroll-y='true' style='height:{{deptList.length*58<350?deptList.length*58:350}}px;'>
               <label class="weui-cell weui-check__label" wx:for="{{deptList}}" data-id="{{item.id}}" bindtap="getDeptIdFun">
                 <view wx:if="{{item.id==deptId}}" class="weui-cell__bd" style="color:green">{{item.name}}</view>
                 <view class="weui-cell__bd" wx:else >{{item.name}}</view>
@@ -120,6 +120,8 @@
 <!--         计划查询条件 结束            -->
 
 <view class="split"></view>
+<view class="backview" wx:if="{{showBackView}}"> 
+</view>
 
 <!-- 计划查询内容  开始 -->          
 <view class="weui-panel__bd">
@@ -171,8 +173,16 @@
         </block>
     </view>
     <view class="nofound" wx:else>
-        没有找到记录,可尝试扩大查询范围继续查找!
+        
+      <view class="emptyShow">
+        <image class="image-center" src="../../../image/empty.png"></image>
+      </view>
+
+      <view class="check-his">            
+          <view class="his-text">没有找到记录,可尝试修改查询条件!</view>   
+      </view>
     </view>
+
 
 </view>
 <!-- 计划查询内容  结束 -->
