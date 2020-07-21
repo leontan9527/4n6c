@@ -57,6 +57,8 @@ Page({
           var excuteWeek = result.data.data.excuteWeek
           var excuteMonth = result.data.data.excuteMonth
           var excuteRate = result.data.data.excuteRate
+          console.info(excuteRate)
+
           var newestOrAvgSoce = result.data.data.newestOrAvgSoce
           var isOpened = false
 
@@ -116,7 +118,9 @@ Page({
             for (let i = 0, len = planScore.length; i < len; ++i) {
               var vt = planScore[i].score
               if (planScore[i].status == 1 || planScore[i].status == 9){
-                vt = (planScore[i].score ).toFixed(1)
+                if(planScore[i].score){
+                  vt = (planScore[i].score ).toFixed(1)
+                }
               } else {
                 vt = planScore[i].statusName
               }
