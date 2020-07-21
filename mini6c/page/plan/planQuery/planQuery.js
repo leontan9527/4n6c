@@ -213,8 +213,16 @@ Page({
     //获取最新用户数据
     const self = this
     var stype = e.currentTarget.dataset.stype
+    if(this.data.isShowDept==true){
+      self.setData({
+        isShowDept:false,
+      })
+    }else{
+      self.setData({
+        isShowDept:true,
+      })
+    }
     self.setData({
-      isShowDept:true,
       isShowUser:false,
     })
 
@@ -259,9 +267,17 @@ Page({
     //获取最新用户数据
     const self = this
     var stype = e.currentTarget.dataset.stype
+    if(this.data.isShowUser==true){
+      self.setData({
+        isShowUser:false,
+      })
+    }else{
+      self.setData({
+        isShowUser:true,
+      })
+    }
     self.setData({
       isShowDept:false,
-      isShowUser:true,
     })
 
     var sessionId = app.globalData.sessionId
