@@ -535,8 +535,7 @@ Page({
       that.getPlanData(false,true)//获取最新数据
     }  
   },
-  toHideBackView: function () {
-    console.info("sssss....")
+  toHideBackView: function () {   
     this.setData({      
       showBackView: false,
       isShowDept: false,
