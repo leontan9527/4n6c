@@ -120,6 +120,8 @@ Page({
               if (planScore[i].status == 1 || planScore[i].status == 9){
                 if(planScore[i].score){
                   vt = (planScore[i].score ).toFixed(1)
+                } else{
+                  vt = ''
                 }
               } else {
                 vt = planScore[i].statusName

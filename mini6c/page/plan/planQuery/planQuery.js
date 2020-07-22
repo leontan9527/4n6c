@@ -4,6 +4,8 @@ const app = getApp()
 Page({
 
   data: {
+    icon_xiangxia: '../../images/xiangxia.png',
+    showBackView:false,
     planCycle:0,
     deptId:'',
     userId:'',
@@ -117,6 +119,9 @@ Page({
   getPlanData: function (isRefresh,isReachBottom) {
 
     const self = this
+    self.setData({
+      showBackView: false
+    })
     var sessionId = app.globalData.sessionId
     if(self.data.deptId==null){
       self.data.deptId=''
@@ -223,7 +228,8 @@ Page({
       })
     }
     self.setData({
-      isShowUser:false,
+      isShowUser: false,
+      showBackView: true
     })
 
     var sessionId = app.globalData.sessionId
@@ -246,8 +252,8 @@ Page({
           }else{
             userLength=userLength*58
           }
-          if(userLength>300){
-            userLength=300
+          if(userLength>350){
+            userLength=350
           }
 
           self.setData({
@@ -277,7 +283,8 @@ Page({
       })
     }
     self.setData({
-      isShowDept:false,
+      isShowDept:false,      
+      showBackView: true
     })
 
     var sessionId = app.globalData.sessionId
@@ -303,8 +310,8 @@ Page({
           }else{
             userLength=userLength*58
           }
-          if(userLength>300){
-            userLength=300
+          if(userLength>350){
+            userLength=350
           }
 
           self.setData({
@@ -328,7 +335,8 @@ Page({
       deptId=''
     }
     self.setData({
-      selectDeptId:deptId,
+      selectDeptId: deptId,
+      showBackView: true
     })
     //获取最新用户数据
     var sessionId = app.globalData.sessionId
@@ -378,6 +386,7 @@ Page({
     this.setData({
       deptId:deptId,
       isShowDept:false,
+      showBackView: true
     })
     this.getPlanData(false,false)
   },
@@ -385,6 +394,7 @@ Page({
   getUserIdFun(e){
     this.setData({
       oldUserId:this.data.userId,
+      showBackView: true
     })
     var userId = e.currentTarget.dataset.id
     this.setData({
@@ -398,6 +408,7 @@ Page({
     this.setData({
       isShowDept:false,
       isShowUser:false,
+      showBackView:true
     })
   },
 
@@ -443,13 +454,16 @@ Page({
   },
 
   toGetPlanCycleFun: function (e) {
+    //console.info("类别："+e.detail.value);
+
     this.setData({
       oldPlanCycle: this.data.planCycle,
     })
     this.setData({
       planCycle: e.detail.value,
       isShowDept:false,
-      isShowUser:false,
+      isShowUser: false,
+      showBackView: true
     })
 
     this.getPlanData(false,false)
@@ -521,4 +535,11 @@ Page({
       that.getPlanData(false,true)//获取最新数据
     }  
   },
+  toHideBackView: function () {   
+    this.setData({      
+      showBackView: false,
+      isShowDept: false,
+      isShowUser: false
+    })
+  }
 })

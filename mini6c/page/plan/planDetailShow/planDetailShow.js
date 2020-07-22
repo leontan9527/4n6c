@@ -61,7 +61,7 @@ Page({
         },
         success(result) {
 
-          console.log(result.data.success)
+          //console.log(result.data.success)
           var planProgressList=result.data.planProgressList
           var plan=result.data.plan
           let kpis = plan.kpiDetails;
