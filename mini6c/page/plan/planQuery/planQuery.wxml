@@ -16,7 +16,7 @@
 <!-- 部门 姓名 开始 结束 年 月 类别 查询条件栏 开始-->
 <view class="flex-Container">
   <view class="flex-Container-item" bindtap="toSetFileFun">
-    <picker bindchange="toGetPlanCycleFun" value="{{planCycle}}" range="{{objectArray}}" range-key="name">
+    <picker bindchange="toGetPlanCycleFun" bindcancel="toHideBackView" value="{{planCycle}}" range="{{objectArray}}" range-key="name">
       <view class="flex-Container-item">
         <view class="conItem1">类别</view>
         <image class="conItemImg" src='{{icon_xiangxia}}' />
@@ -34,7 +34,7 @@
   </view>
 
   <view wx:if="{{planCycle==1}}" class="flex-Container-item" bindtap="toSetFileFun">
-    <picker data-type="1" mode="date" fields="month" value="{{year}}-{{month}}" bindchange="bindDateChange" >
+    <picker data-type="1" mode="date" fields="month" value="{{year}}-{{month}}" bindchange="bindDateChange" bindcancel="toHideBackView">
       <view class="flex-Container-item">
         <view class="conItem1">月度</view>
         <image class="conItemImg" src='{{icon_xiangxia}}' />
@@ -43,7 +43,7 @@
   </view>
 
   <view wx:if="{{planCycle==2}}" class="flex-Container-item" bindtap="toSetFileFun">
-    <picker data-type="2" mode="date" fields="year" bindchange="bindDateChange" >
+    <picker data-type="2" mode="date" fields="year" bindchange="bindDateChange" bindcancel="toHideBackView" >
       <view class="flex-Container-item">
         <view class="conItem1">年度</view>
         <image class="conItemImg" src='{{icon_xiangxia}}' />
@@ -52,7 +52,7 @@
   </view>
 
   <view wx:if="{{planCycle==0}}" class="flex-Container-item" bindtap="toSetFileFun">
-    <picker data-type="3" mode="date" value="{{startDate}}" bindchange="bindDateChange" >
+    <picker data-type="3" mode="date" value="{{startDate}}" bindchange="bindDateChange" bindcancel="toHideBackView">
       <view class="flex-Container-item">
         <view class="conItem1">开始</view>
         <image class="conItemImg" src='{{icon_xiangxia}}' />
@@ -61,7 +61,7 @@
   </view>
 
   <view wx:if="{{planCycle==0}}" class="flex-Container-item" bindtap="toSetFileFun">
-    <picker data-type="4" mode="date" value="{{endDate}}" bindchange="bindDateChange" >
+    <picker data-type="4" mode="date" value="{{endDate}}" bindchange="bindDateChange" bindcancel="toHideBackView">
       <view class="flex-Container-item">
         <view class="conItem1">结束</view>
         <image class="conItemImg" src='{{icon_xiangxia}}' />
@@ -120,7 +120,7 @@
 <!--         计划查询条件 结束            -->
 
 <view class="split"></view>
-<view class="backview" wx:if="{{showBackView}}"> 
+<view class="backview" wx:if="{{showBackView}}" bindtap="toHideBackView"> 
 </view>
 
 <!-- 计划查询内容  开始 -->          

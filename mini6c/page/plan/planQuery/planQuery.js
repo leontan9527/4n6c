@@ -454,6 +454,8 @@ Page({
   },
 
   toGetPlanCycleFun: function (e) {
+    //console.info("类别："+e.detail.value);
+
     this.setData({
       oldPlanCycle: this.data.planCycle,
     })
@@ -533,4 +535,12 @@ Page({
       that.getPlanData(false,true)//获取最新数据
     }  
   },
+  toHideBackView: function () {
+    console.info("sssss....")
+    this.setData({      
+      showBackView: false,
+      isShowDept: false,
+      isShowUser: false
+    })
+  }
 })
