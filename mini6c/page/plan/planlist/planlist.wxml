@@ -6,7 +6,7 @@
     }else if (value){
       return value.toFixed(2);
     } else {
-      return null;
+      return '';
     }    
   }
   var ifNull = function (value) {
