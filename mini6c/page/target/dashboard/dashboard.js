@@ -57,7 +57,7 @@ Page({
           var excuteWeek = result.data.data.excuteWeek
           var excuteMonth = result.data.data.excuteMonth
           var excuteRate = result.data.data.excuteRate
-          console.info(excuteRate)
+          //console.info(excuteRate)
 
           var newestOrAvgSoce = result.data.data.newestOrAvgSoce
           var isOpened = false

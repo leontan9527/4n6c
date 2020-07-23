@@ -1,10 +1,11 @@
 <!--index.wxml-->
 <wxs module="nf">
   var toFixed = function (value) {
+    
     if (value){
       return value.toFixed(2);
     } else {
-      return null;
+      return "0.0";
     }
     
   }
@@ -25,7 +26,7 @@
       <view class="table-td tleft">{{item.userName}} > </view>
       <view class="table-td">{{item.deptName}}</view>
       <view class="table-td">{{item.seq}}</view>
-      <view class="table-td">{{item.score ? nf.toFixed(item.score) : "0.00"}}</view>    
+      <view class="table-td">{{item.score == null ? "": nf.toFixed(item.score)}}</view>    
     </view>
     
   </block>
