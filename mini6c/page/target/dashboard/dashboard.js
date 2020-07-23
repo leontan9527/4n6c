@@ -118,10 +118,10 @@ Page({
             for (let i = 0, len = planScore.length; i < len; ++i) {
               var vt = planScore[i].score
               if (planScore[i].status == 1 || planScore[i].status == 9){
-                if(planScore[i].score){
+                if (planScore[i].score && planScore[i].score != 0){
                   vt = (planScore[i].score ).toFixed(1)
                 } else{
-                  vt = ''
+                  vt = '0.0'
                 }
               } else {
                 vt = planScore[i].statusName
