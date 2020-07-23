@@ -68,13 +68,14 @@ Page({
           success(result) {
             //console.log('3.【home/message=】', result.data.data)
             self.setData({
-              excuteDp: result.data.data[0],
-              checkDb: result.data.data[1],
-              foucsDb: result.data.data[2],
-              planDb: result.data.data[3], 
-              meetingDb: result.data.data[4],
-              docDb: result.data.data[5],
-              adviserDb: result.data.data[6],
+              excuteDp: result.data.excuteDp,
+              checkDb: result.data.checkDb,
+              foucsDb: result.data.foucsDb,
+              planDb: result.data.planDb, 
+              meetingDb: result.data.meetingDb,
+              docDb: result.data.docDb,
+              adviserDb: result.data.adviserDb,
+              systemType: result.data.systemType,
             })
           },
 

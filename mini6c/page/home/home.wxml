@@ -83,9 +83,7 @@
           </view>
       </mp-cell>              
   
-  
-  
-      <mp-cell bindtap="toAdviserMessage">
+      <mp-cell bindtap="toAdviserMessage" wx:if="{{systemType==6}}">
           <view slot="title" style="position: relative;margin-right: 10px;">
               <image src="{{icon_check}}" class="img-icon"/>
               <mp-badge wx:if="{{adviserDb.msgNum > 0}}" content="{{adviserDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
@@ -116,7 +114,6 @@
           <view>执行检查</view>
           <view class="msgItem">计划后的执行检查是保证计划结果正确的唯一保障, 需认真检查</view>
       </mp-cell>              
-  
   
       <mp-cell>
           <view slot="title" style="position: relative;margin-right: 10px;">
