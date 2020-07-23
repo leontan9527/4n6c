@@ -50,7 +50,7 @@
           <view class="kind-list-item-hd">
             <view class="kind-list-text">{{item.name}}（ 单位：{{item.unit}} ）</view>
           </view>         
-          <view class="kind-list-item-sb">来至：{{item.userName}}, {{item.title}}</view>          
+          <view class="kind-list-item-sb">来自：{{item.userName}}, {{item.title}}</view>          
 
           <view class="kind-list-item-bd kind-list-item-bd-show">
             <view class="navigator-box navigator-box-show">
@@ -121,7 +121,7 @@
           </view>         
           <view class="kind-list-item-sb">成果要求：{{item.outcome}}</view>
           <view class="kind-list-item-sb" wx:if="{{item.resultRemark.length > 0}}">结果说明：{{item.resultRemark}}</view>
-          <view class="kind-list-item-sb">来至：{{item.userName}}, {{item.title}}</view>          
+          <view class="kind-list-item-sb">来自：{{item.userName}}, {{item.title}}</view>          
 
           <view class="kind-list-item-bd kind-list-item-bd-show">
             <view class="navigator-box navigator-box-show">                           
