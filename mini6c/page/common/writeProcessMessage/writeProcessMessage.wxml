@@ -9,7 +9,7 @@
           <textarea bindinput="formInputChange" placeholder-class="place-holder" data-field="action" 
            class="textareaHeight1" bindinput='getBlurInputValue'></textarea>
         </view>
-        <view class="modal-checkbox" wx:if="{{toType!=4 && toType!=5}}">
+        <view class="modal-checkbox" wx:if="{{toType!=4 && toType!=5 && systemType==6}}">
           <checkbox-group bindchange="checkboxChange">
             <checkbox value="1"/>
           </checkbox-group>
@@ -27,7 +27,7 @@
   <!--语音消息界面  开始-->
   <view class='voice-mask' wx:if="{{showVoiceMask}}">
     <!--显示发送顾问老师checkbox  开始-->
-    <view class="flex-Container-SendAdviser" wx:if="{{toType!=4 && toType!=5}}">
+    <view class="flex-Container-SendAdviser" wx:if="{{toType!=4 && toType!=5 && systemType==6}}">
       <view class="sendAdviser">
         <view class="checkboxCss">
           <checkbox-group bindchange="checkboxChange">

@@ -38,6 +38,33 @@ Page({
       isShowBottomVoice:false
     })
 
+    //获取最新消息数据
+    const self = this
+    var sessionId = app.globalData.sessionId
+
+    if (sessionId) {
+      wx.request({
+        url: config.domain + '/home/findSystemType',
+        data: {
+          api: "list"
+        },
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          'Cookie': 'JSESSIONID=' + sessionId
+        },
+        success(result) {
+          self.setData({
+            systemType: result.data.systemType
+          })
+        },
+
+        fail({ errMsg }) {
+          console.log('【home/systemType fail】', errMsg)
+        }
+      })
+    }
+
   },
 
   
