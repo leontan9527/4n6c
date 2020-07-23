@@ -41,7 +41,7 @@
       <mp-cell bindtap="toPlanFoucs">
           <view slot="title" style="position: relative;margin-right: 10px;">
               <image src="{{icon_foucs}}" class="img-icon"/>
-              <mp-badge wx:if="{{checkDb.msgNum > 0}}" content="{{foucsDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
+              <mp-badge wx:if="{{foucsDb.msgNum > 0}}" content="{{foucsDb.msgNum}}" style="position: absolute;top: -.4em;right: -.4em;"/>
           </view>
           <view>我关注的工作</view>
           <view wx:for-items="{{foucsDb.items}}" wx:key="itemValue" class="msgItem">
