@@ -32,7 +32,9 @@
 
           <view class="weui-media-box__info">
             <view class="weui-media-box__info__meta" wx:if="{{item.isNoVote == false  && item.computationRules != 6 && item.computationRules != 7}}">实际值：{{item.actualValue}}</view>
-            <view class="weui-media-box__info__meta" wx:if="{{item.isNoVote == true}}">实际值：{{item.actualValueString}}</view>
+            <view class="weui-media-box__info__meta" wx:if="{{item.isNoVote == true}}">实际值：
+              <text wx:if="{{item.actualValueString !=null }}">{{item.actualValueString}}</text>
+            </view>
             <view class="weui-media-box__info__meta" wx:if="{{item.computationRules == 6}}">
               <view wx:if="{{item.storeCode == 'unfinishBuckleScore' }}">实际值： 未完成项次数：{{item.storeValue1}}，总项数：{{item.storeValue2}}</view>
                 <view wx:elif="{{item.storeCode == 'unexpandedScore' }}">实际值：当期无计划</view>
