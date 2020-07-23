@@ -38,7 +38,17 @@
           <view class="kind-list-text">{{title}} </view> 
           <view class="nav-textRight">{{score? "综合绩效："+nf.toFixed1(score) :''}}</view>           
         </view>
-      </view>  
+      </view>
+
+      <block wx:if="{{list.length == 0}}" >
+        <view class="emptyShow">
+          <image class="image-center" src="../../../image/empty.png"></image>
+        </view>  
+
+        <view class="check-his">            
+            <view class="his-text" >当前计划没有KPI</view>   
+        </view>
+      </block>  
 
       <block wx:for-items="{{list}}" wx:key="{{item.targetIndexId}}">
         <view class="kind-list-item">
