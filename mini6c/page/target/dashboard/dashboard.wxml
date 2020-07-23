@@ -45,9 +45,9 @@
           <view class="kind-list-item-bd {{item.open ? 'kind-list-item-bd-show' : ''}}">
             <view class="navigator-box {{item.open ? 'navigator-box-show' : ''}}">
               <block wx:for-items="{{item.pages}}" wx:for-item="page" wx:key="pid"> 
-                <view class="navigator">
+                <view class="navigator" bindtap="open" data-type="{{item.id}}" data-pid="{{page.pid}}">
                   <view class="navigator-text nav-name">{{page.zh}}</view> 
-                  <view class="navigator-text nav-textRight" mode="aspectFit" bindtap="open" data-type="{{item.id}}" data-pid="{{page.pid}}" >{{page.value}}</view>                  
+                  <view class="navigator-text nav-textRight" mode="aspectFit"  >{{page.value}}</view>                  
                   <view class="navigator-arrow"></view>
                 </view>
 
