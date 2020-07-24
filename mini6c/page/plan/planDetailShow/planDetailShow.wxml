@@ -64,7 +64,7 @@
       <view class="weui-panel__bd">
         <block wx:for-items="{{plan.actionDetails}}" wx:key="id" >
           <view class="weui-media-box weui-media-box_text" id="action{{item.id}}" bindlongpress="showAddFoucs" data-action="{{item.action}}" data-actionid="{{item.id}}" data-status="{{plan.status}}">          
-            <view class="weui-media-box__desc plan_action">
+            <view class="weui-media-box__info plan_action">
               {{item.action}}<image wx:if="{{item.isCommitAfterAdd == true && item.isBringInto != true}}" class='overTimePic' src='/page/images/overTime.png' ></image>
             </view>
             <view class="weui-media-box__info">成果要求：
