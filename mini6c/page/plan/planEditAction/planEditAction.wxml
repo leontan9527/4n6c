@@ -26,22 +26,18 @@
         <mp-cell title="" ext-class="">
             <input bindinput="formInputChange" data-field="unFinishRemark" value="{{formData.unFinishRemark}}" class="weui-input" />
         </mp-cell>
-        <mp-cell prop="date" title="计划完成" ext-class="">
+        <mp-cell prop="date" title="完成时间" ext-class="">
             <picker data-field="date" mode="date" value="{{formData.date}}" start="{{dateStart}}" end="{{dateEnd}}" bindchange="bindDateChange" >
                 <view class="weui-input">
                     {{formData.date}}
                 </view>
             </picker>
         </mp-cell>  
-
         <mp-cell ext-class="weui-cell_select weui-cell_select-after" bindtap="selectOneUser">
             <view slot="title" class="weui-label">检查人</view>            
             <view class="weui-select">{{formData.inspectorName}}</view>         
         </mp-cell>
-
-
-    </mp-cells>
-    
+    </mp-cells> 
 </mp-form>
 
 <view class="add-panel">
