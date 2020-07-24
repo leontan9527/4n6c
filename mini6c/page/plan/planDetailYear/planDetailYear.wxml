@@ -70,7 +70,7 @@
       <view class="weui-panel__hd">行动计划（{{plan.actionDetails.length}}）</view>
       <view class="weui-panel__bd">
         <view class="weui-media-box weui-media-box_text" wx:for-items="{{plan.actionDetails}}" wx:key="id" >                    
-          <view class="weui-media-box__desc plan_action">{{item.action}}</view>
+          <view class="weui-media-box__info plan_action">{{item.action}}</view>
           <view class="weui-media-box__desc">成果要求：
             <label wx:if="{{item.outcome!=null}}" class="resultRemark">{{item.outcome}}</label>
           </view>
