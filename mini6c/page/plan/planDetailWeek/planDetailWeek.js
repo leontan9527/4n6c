@@ -18,9 +18,13 @@ const app = getApp()
 Page({
 
   onLoad: function (options) {
-
+    let userName=''
+    if(options.userName!='' && options.userName!=undefined){
+      userName=options.userName
+    }
     this.setData({
       pid: options.id,
+      userName:userName,
       array: ['待提交结果', '完成', '未完成'],
       index: 0,
       unCommit:0,
@@ -62,8 +66,6 @@ Page({
           'Cookie': 'JSESSIONID=' + sessionId
         },
         success(result) {
-          //console.log('【plan/detailMonth=】', result.data.data)
-
           var planProgressList=result.data.planProgressList
           var plan=result.data.plan
           let kpis = plan.kpiDetails;
@@ -92,8 +94,7 @@ Page({
             planProgressList:planProgressList
           })
 
-          var title = plan.title
-
+          var title = self.data.userName+' '+plan.title
           wx.setNavigationBarTitle({
             title: title,
             success() {              
@@ -206,7 +207,6 @@ bindPickerChange(e) {
 
 addAction: function (e) {
     var id = e.currentTarget.dataset.id
-    console.log('【planAddAction/planAddAction】id=', id)
     wx.navigateTo({ url: '../planAddAction/planAddAction?id=' + id})
 },
 
@@ -217,6 +217,31 @@ editAction: function (e) {
       var detailId = e.currentTarget.dataset.actailid
       wx.navigateTo({ url: '../planEditAction/planEditAction?planId=' + planId +'&detailId='+detailId})
     }
+},
+
+deletePlan: function (e) {
+    var id = e.currentTarget.dataset.planid
+    const self = this
+    var sessionId = app.globalData.sessionId
+    wx.request({
+      url: config.domain + '/planCr/deletePlan',
+      data : {
+        id: id,
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        'Cookie': 'JSESSIONID=' + sessionId
+      },
+      success(result) {
+          if(result.data.success==true){
+            wx.switchTab({ url: '../planlist/planlist'}) 
+          }
+      },
+      fail({ errMsg }) {
+        //创建失败提示错误信息代码开始
+      }
+    })
 },
 
 commitPlan:function(e){  

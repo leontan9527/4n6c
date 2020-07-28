@@ -17,9 +17,14 @@ const app = getApp()
 Page({
 
   onLoad: function (options) {
+    let userName=''
+    if(options.userName!='' && options.userName!=undefined){
+      userName=options.userName
+    }
     this.setData({
       planId: options.id,
       planCycle: options.planCycle,
+      userName:userName,
       showFouceMask: false,
       showVoiceMask: false,
       startRecording: false,
@@ -80,7 +85,7 @@ Page({
             planProgressList:planProgressList
           })
 
-          var title = plan.title
+          var title = self.data.userName+' '+plan.title
 
           wx.setNavigationBarTitle({
             title: title,

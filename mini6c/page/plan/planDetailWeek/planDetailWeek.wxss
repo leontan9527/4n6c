@@ -108,11 +108,8 @@
 /*计划进程消息列表显示css  结束 */
 
 /*一些小样式  开始*/
-.rightCss{
-  margin-top:-4px;
-  position:absolute;
-  right:0px;
-}
+.rightCss1{margin-top:10px;margin-bottom:14px;margin-right:5px;float:right; }
+.rightCss{margin-top:-4px;position:absolute;right:0px;}
 .showPic{
   width:35px;
   height:35px;

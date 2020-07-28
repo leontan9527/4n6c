@@ -19,12 +19,19 @@ Page({
 
   onLoad: function (options) {
 
+    let userName=''
+    if(options.userName!='' && options.userName!=undefined){
+      userName=options.userName
+    }
+    
     this.setData({
       pid: options.id,
+      userName:userName,
       array: ['待提交结果', '完成', '未完成'],
       index: 0,
       unCommit:0,
       audKey:'',  //当前选中的音频key
+      userName:userName,
     })
 
     //获取最新消息数据
@@ -107,8 +114,7 @@ Page({
             planProgressList:planProgressList
           })
 
-          var title = plan.title
-
+          var title = self.data.userName+' '+plan.title
           wx.setNavigationBarTitle({
             title: title,
             success() {              

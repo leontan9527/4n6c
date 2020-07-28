@@ -249,7 +249,6 @@ Page({
           return;
       }
 
-      console.log('cancleRecording==='+this.data.cancleRecording)
       if (this.data.cancleRecording === false) {
         //判断tempFilePath是否真实有效
         if (tempFilePath.length !== 0) {
@@ -287,7 +286,7 @@ Page({
               },
               success:function(result){
 
-                var resultData = JSON.parse(result.data.replace(/\n/g,"\\n").replace(/\r/g,"\\r"))
+                var resultData = JSON.parse(result.data)
                 //语音文件上传成功后
                 if(resultData.success){
                   var toUrl=config.domain + '/planCr/addVoiceProcess'
@@ -368,7 +367,6 @@ Page({
           cancleRecording:true
         })
       }
-      //console.log('moveToCancle被调用======'+this.data.cancleRecording);
     }
 
     this.setData({
@@ -387,7 +385,6 @@ Page({
       that.setData({
         recordAnimationNum: i
       })
-      //console.log('recordAnimationSetInter被调用======'+that.data.recordAnimationNum);
     }, 600);
   },
 

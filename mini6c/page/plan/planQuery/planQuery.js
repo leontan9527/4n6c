@@ -483,16 +483,17 @@ Page({
       var id = e.currentTarget.dataset.id
       var planCycle = e.currentTarget.dataset.plancycle
       var isToEditPage = e.currentTarget.dataset.istoeditpage
+      var userName = e.currentTarget.dataset.username
       if(isToEditPage){
         if(planCycle==0){
-          wx.navigateTo({ url: '../planDetailWeek/planDetailWeek?id=' + id })
+          wx.navigateTo({ url: '../planDetailWeek/planDetailWeek?id=' + id +'&userName='+userName})
         }else if(planCycle==1){
-          wx.navigateTo({ url: '../planDetailMonth/planDetailMonth?id=' + id })
+          wx.navigateTo({ url: '../planDetailMonth/planDetailMonth?id=' + id+'&userName='+userName })
         }else{
-          wx.navigateTo({ url: '../planDetailYear/planDetailYear?id=' + id })
+          wx.navigateTo({ url: '../planDetailYear/planDetailYear?id=' + id+'&userName='+userName })
         }
       }else{  
-        wx.navigateTo({ url: '../planDetailShow/planDetailShow?id=' + id + '&planCycle='+planCycle })
+        wx.navigateTo({ url: '../planDetailShow/planDetailShow?id=' + id + '&planCycle='+planCycle +'&userName='+userName})
       }
     }
 
