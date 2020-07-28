@@ -3,6 +3,12 @@
 <view class="page__bd">
   <!--计划详情信息  开始-->
   <view>
+
+    <view class="weui-panel weui-panel_access" wx:if="{{plan.isShowDeleteButton== true}}">
+       <label data-planid="{{plan.id}}" bindtap='deletePlan' class="rightCss1 link_plan">
+          删除
+        </label> 
+    </view>
     <view class="weui-panel weui-panel_access" wx:if="{{plan.actionDetails.length > 0}}">
       <view class="weui-panel__hd">
         <label>行动计划（{{plan.actionDetails.length}})</label>

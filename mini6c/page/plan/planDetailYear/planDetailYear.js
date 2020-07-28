@@ -18,9 +18,13 @@ const app = getApp()
 Page({
 
   onLoad: function (options) {
-
+    let userName=''
+    if(options.userName!='' && options.userName!=undefined){
+      userName=options.userName
+    }
     this.setData({
       pid: options.id,
+      userName:userName,
       array: ['待提交结果', '完成', '未完成'],
       index: 0,
       unCommit:0,
@@ -36,7 +40,6 @@ Page({
     const self = this
     var sessionId = app.globalData.sessionId
 
-    //console.info('1. onLoad this.pid' + this.data.pid)
     if (sessionId) {
       wx.request({
         url: config.domain + '/planCr/detailYear',
@@ -94,8 +97,7 @@ Page({
             planProgressList:planProgressList
           })
 
-          var title = plan.title
-
+          var title = self.data.userName+' '+plan.title
           wx.setNavigationBarTitle({
             title: title,
             success() {              
@@ -114,7 +116,6 @@ Page({
 
   addAction: function (e) {
     var id = e.currentTarget.dataset.id
-    console.log('【planAddAction/planAddAction】id=', id)
     wx.navigateTo({ url: '../planAddAction/planAddAction?id=' + id })
   },
   
@@ -191,7 +192,6 @@ Page({
     var weight = e.currentTarget.dataset.weight
     var isPerformanceCptRule = e.currentTarget.dataset.isperformancecptrule
     var value=e.detail.value
-    console.log('targetIndexId:'+targetIndexId)
 
     const self = this
     var sessionId = app.globalData.sessionId
@@ -207,7 +207,6 @@ Page({
         'Cookie': 'JSESSIONID=' + sessionId
       },
       success(result) {
-        //console.log('find:'+result.data.success+'  year:'+year+'seq:'+seq)
         if(result.data.success==true){
 
           var isTrueWeight=true;
