@@ -92,3 +92,25 @@
 .kind-list-item-bd-show {
   height: auto;
 }
+
+.emptyShow{height: 200px;
+  padding: 10px;
+  background-color: #FFFFFF;
+  border-radius: 4rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+}
+.image-center{
+   width:128rpx;
+   height: 128rpx;
+}
+
+.check-his{
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+  padding:30px;  
+}
+
+.his-text{color:cadetblue;}
