@@ -47,7 +47,8 @@ Page({
   toPlanDetail: function(e){
     var planId = e.currentTarget.dataset.planid
     var planCycle = e.currentTarget.dataset.plancycle
-    wx.navigateTo({ url: '../planDetailShow/planDetailShow?id=' + planId + '&planCycle='+planCycle })
+    var userName=e.currentTarget.dataset.username
+    wx.navigateTo({ url: '../planDetailShow/planDetailShow?id=' + planId + '&planCycle='+planCycle+'&userName='+userName })
   },
   deletePlanFouce: function(e) {
 

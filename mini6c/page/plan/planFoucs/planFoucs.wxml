@@ -10,7 +10,7 @@
       
         <view class="weui-panel__bd">
           <block wx:for-items="{{planActionList}}" wx:key="id">
-            <view class="weui-media-box weui-media-box_text" data-planid="{{item.planId}}" data-plancycle="{{item.planCycle}}" bindtap="toPlanDetail" id="action{{item.id}}" bindlongpress="showAddFoucs" data-action="{{item.action}}" data-actionid="{{item.id}}">                    
+            <view class="weui-media-box weui-media-box_text" data-planid="{{item.planId}}" data-plancycle="{{item.planCycle}}" data-username="{{item.userName}}" bindtap="toPlanDetail" id="action{{item.id}}" bindlongpress="showAddFoucs" data-action="{{item.action}}" data-actionid="{{item.id}}">                    
               <view class="weui-media-box__desc plan_action">
                 {{item.action}}<image wx:if="{{item.isCommitAfterAdd == true && item.isBringInto != true}}" class='overTimePic' src='/page/images/overTime.png' ></image>
               </view>
