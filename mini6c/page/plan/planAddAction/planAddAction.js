@@ -134,7 +134,8 @@ Page({
             unFinishRemark: formData.unFinishRemark,
             commitDate: formData.date,
             inspectorId: self.data.userId,
-            inspectorName:self.data.userName
+            inspectorName:self.data.userName,
+            isEditPlan : true
           };
           plan.actionDetails.push(planDetail);
 
