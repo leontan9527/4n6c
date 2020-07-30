@@ -145,6 +145,7 @@ Page({
               plan.actionDetails[i].inspectorId =  self.data.userId;
               plan.actionDetails[i].inspectorName =  formData.inspectorName;
               plan.actionDetails[i].unFinishRemark =  formData.unFinishRemark;
+              plan.actionDetails[i].isEditPlan = true;
               break;
             } 		
           }
