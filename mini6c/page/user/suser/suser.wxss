@@ -3,3 +3,5 @@
 .radio {
   margin-right: 20rpx;
 }
+
+.split{height: 10px;}

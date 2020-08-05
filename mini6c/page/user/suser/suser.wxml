@@ -4,9 +4,37 @@
   <view class="page-body">    
 
     <view class="page-section">
-      <view class="page-section-title">选择人员</view>
-      <view class="weui-cells weui-cells_after-title">
+      <view class="weui-search-bar">
+        <view class="weui-search-bar__form">
+        <!-- 搜索框 -->
+            <view class="weui-search-bar__box">
+                <icon class="weui-icon-search_in-box" type="search" size="15"></icon>
+                <input type="text" class="weui-search-bar__input" bindinput='getBlurInputValue' placeholder="请输入姓名"/>
+            </view>
+        </view>
+        <!-- 搜索按钮,调用搜索查询方法 -->
+        <view class="weui-search-bar__cancel-btn" bindtap='searchUser'>搜索</view>
+    </view>
+
+      <view class="page-section-title" wx:if="{{lastUse.length > 0}}" >最近常用</view>
+      
+      <view class="weui-cells weui-cells_after-title" wx:if="{{lastUse.length > 0}}">
         <radio-group bindchange="radioChange">
+        
+          <label class="weui-cell weui-check__label" wx:for="{{lastUse}}" wx:key="{{item.value}}" data-id="{{item.value}}" data-name="{{item.name}}" bindtap="selectOneUser">
+
+            <view class="weui-cell__hd">
+              <radio value="{{item.value}}"/>
+            </view>
+            <view class="weui-cell__bd">{{item.name}}</view>
+          </label>         
+
+        </radio-group>
+      </view>
+      <view class="split" wx:if="{{lastUse.length > 0}}"></view> 
+      
+      <view class="weui-cells weui-cells_after-title">
+        <radio-group bindchange="radioChange">        
           <label class="weui-cell weui-check__label" wx:for="{{items}}" wx:key="{{item.value}}" data-id="{{item.value}}" data-name="{{item.name}}" bindtap="selectOneUser">
 
             <view class="weui-cell__hd">
@@ -14,8 +42,10 @@
             </view>
             <view class="weui-cell__bd">{{item.name}}</view>
           </label>
+
         </radio-group>
       </view>
+
     </view>
   </view>
 
