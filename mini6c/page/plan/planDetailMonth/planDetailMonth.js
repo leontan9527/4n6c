@@ -31,7 +31,6 @@ Page({
       index: 0,
       unCommit:0,
       audKey:'',  //当前选中的音频key
-      userName:userName,
     })
 
     //获取最新消息数据
