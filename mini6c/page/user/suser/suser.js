@@ -10,6 +10,7 @@ Page({
     */
     this.setData({     
       type:options.type,
+      serarchName:"",
       refrenceId: options.refrenceId,
       refrenceCode:options.refrenceCode
     })
@@ -51,17 +52,36 @@ Page({
             //本地存储
             wx.setStorageSync('GLB_ORGUsers', us) 
             //console.log('【从数据库中读取最新的userCr/items=】', us)
-
           } else {
             //获取本地存储的数据            
             us = wx.getStorageSync('GLB_ORGUsers')
-
             //console.log('【从本地缓存中读取最新的userCr/items=】', us)
-
           }
 
+          //将最新常用的置顶
+          var lastUseUser = wx.getStorageSync('GLB_LastUseUser')
+          if (!lastUseUser) {
+            lastUseUser = []
+          }
+                               
+          //最多置顶5个
+          var max = 5    
+
+          if (lastUseUser.length > max){            
+            lastUseUser = lastUseUser.slice(0, max);
+          }
+
+          //console.info(lastUseUser)
+          //console.info("+++++++++++++++++++++")
+          //lastUseUser = lastUseUser.concat(us)  
+          //console.info(lastUseUser)
+
+
+          //置顶结束
+
           self.setData({
-            items: us
+            items: us,
+            lastUse: lastUseUser
           })
           
         },
@@ -72,11 +92,59 @@ Page({
       })
     }
 
+  }, 
+  getBlurInputValue: function (e) {
+
+    var value = e.detail.value    
+    this.setData({
+      serarchName: value
+    })
+  },
+  searchUser: function () {    
+    //获取查询最新用户数据
+    const self = this
+    var sessionId = app.globalData.sessionId
+    var queryStr = self.data.serarchName
+
+    if (sessionId) {
+      wx.request({
+        url: config.domain + '/userCr/findUserByName',
+        data: {
+          queryStr: queryStr
+        },
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          'Cookie': 'JSESSIONID=' + sessionId
+        },
+        success(result) {
+          
+          var us = []
+          
+          var users = result.data.data
+          for (let i = 0; i < users.length; i++) {
+            var item = { value: users[i].id, name: users[i].name }
+            us.push(item)
+          }      
+
+          self.setData({
+            items: us,
+            lastUse: []
+          })
+
+        },
+
+        fail({ errMsg }) {
+          console.log('【userCr/findUserByName fail】', errMsg)
+        }
+      })
+    }
   },
 
   
   data: {
-    items: []
+    items: [],
+    lastUse:[]
   },
 
   radioChange(e) {
@@ -95,6 +163,48 @@ Page({
 
     var id = e.currentTarget.dataset.id
     var name = e.currentTarget.dataset.name
+
+    //记录用户常用的用户==============================================    
+    var compare = function (obj1, obj2) {
+      var val1 = obj1.times;
+      var val2 = obj2.times;
+      if (val1 > val2) {
+        return -1;
+      } else if (val1 < val2) {
+        return 1;
+      } else {
+        return 0;
+      }
+    }
+        
+    var lastUseUser = wx.getStorageSync('GLB_LastUseUser')
+    //wx.removeStorageSync('GLB_LastUseUser')
+    if (!lastUseUser){
+      lastUseUser = []
+    }
+
+    var findIndex = -1   
+    for (let i = 0; i < lastUseUser.length; i++) {
+      if (id == lastUseUser[i].value){
+        findIndex = i
+        break          
+      }        
+    }
+
+    var dateNow = new Date()
+    var ltime = dateNow.getTime()  
+
+    if (findIndex >= 0) {
+      lastUseUser[findIndex].times = ltime
+    } else {
+      var item = { value: id, name: name, times: ltime }
+      lastUseUser.push(item)
+    } 
+    //对数字进行排序，供下次打开使用：  
+    //本地存储
+    wx.setStorageSync('GLB_LastUseUser', lastUseUser.sort(compare))   
+    console.info(lastUseUser)  
+    //记录完成=======================================================
     
     //如果是会议回执调用人员选取器，则需要调用会议回执后台接口
     if(this.data.type==1){
