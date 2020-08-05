@@ -138,10 +138,6 @@ Page({
     var planCycle = e.currentTarget.dataset.plancycle
     var isToEditPage = e.currentTarget.dataset.istoeditpage
     var userName = e.currentTarget.dataset.username
-
-
-    
-
     if(isToEditPage){
       if(planCycle==0){
         wx.navigateTo({ url: '../planDetailWeek/planDetailWeek?id=' + id +'&userName='+userName})
