@@ -66,7 +66,8 @@ Page({
           wx.request({
             url: config.domain + '/userController/wxLogin',
             data: {
-              openid: getApp().globalData.openid
+              openid: getApp().globalData.openid,
+              wxVersion: "2.0"
             },
             method: 'POST',
             header: {
@@ -76,7 +77,9 @@ Page({
               //获取新的sessionId,并保存下来
               getApp().globalData.sessionId = result.data.data
               wx.setStorageSync('sessionId', result.data.data)
-              getApp().globalData.bindingUser = result.data.obj
+              
+              getApp().globalData.bindingUser = result.data.obj.name
+              getApp().globalData.bindingUserId = result.data.obj.id
 
               //绑定成功，默认登录了，不需要用户再重新登录，改善用户体验
               getApp().globalData.hasLogin = true
