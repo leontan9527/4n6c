@@ -96,7 +96,7 @@ Page({
   }, 
   getBlurInputValue: function (e) {
 
-    var value = e.detail.value    
+    var value = e.detail.value      
     this.setData({
       serarchName: value
     })
@@ -123,10 +123,19 @@ Page({
           var us = []
           
           var users = result.data.data
-          for (let i = 0; i < users.length; i++) {
-            var item = { value: users[i].id, name: users[i].name }
-            us.push(item)
-          }      
+          if(users){
+            for (let i = 0; i < users.length; i++) {
+              var item = { value: users[i].id, name: users[i].name }
+              us.push(item)
+            } 
+          } else {
+            wx.showToast({
+              title: '没有符合条件的数据',
+              icon: 'none',
+              mask: false,
+              duration: 2000
+            })
+          }
 
           self.setData({
             items: us,
