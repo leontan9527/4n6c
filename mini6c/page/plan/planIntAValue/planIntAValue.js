@@ -106,7 +106,7 @@ Page({
       storeValue2=''
     }else if(storeCode=='finishMultiple'){
       
-      actualValue=reasonableValue;
+      actualValue=100;
       storeValue1=''
       storeValue2=''
     }
