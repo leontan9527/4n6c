@@ -213,6 +213,8 @@ Page({
           }else{
             toUrl=config.domain + '/check/checkKpiActualValue'
           }
+          
+          console.log(toUrl)
 
           wx.request({
             url: toUrl,
@@ -221,7 +223,7 @@ Page({
               isNoVote: true,
               isMonthRules: self.data.isMonthRules,
               actualValueString: actualValueString,
-              actualValueJson:JSON.stringify(noVotes),
+              actualValueJson:JSON.stringify(selectNoVotes),
               score:score
             },
             method: 'POST',

@@ -15,7 +15,7 @@
             <view class="weui-media-box__info__meta setWidth">单位：{{item.unit}}</view>                
             <view class="weui-media-box__info__meta setWidth">
               权重：
-              <text wx:if="{{item.isNoVote == true}}">不占权重</text>
+              <text wx:if="{{item.isNoVote == true || item.computationRules == 6}}">不占权重</text>
               <text wx:else>{{item.weight}}%</text>
             </view>
           </view>
