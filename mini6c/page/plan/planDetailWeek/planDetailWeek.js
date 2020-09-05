@@ -257,7 +257,7 @@ commitPlan:function(e){
         isHasCommitDate=false
         break
       } 
-      if (commitstatus==1 && plan.actionDetails[i].resultRemark == null || plan.actionDetails[i].resultRemark == ''){	
+      if (commitstatus==1 && (plan.actionDetails[i].resultRemark == null || plan.actionDetails[i].resultRemark == '')){	
         isHasResultRemark=false
         break
       } 
