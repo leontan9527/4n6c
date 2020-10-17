@@ -102,7 +102,7 @@
 
                 <view class="navigator">
                   <view class="navigator-text nav-name">检查</view> 
-                  <view class="nav-opRight" wx:if="{{item.checkStatus == 0}}">
+                  <view class="nav-opRight" wx:if="{{item.checkStatus == 0 && item.planStatus==1}}">
                      <!-- 常规类指标修改 -->
                     <button class="mini-btn" type="default" size="mini" wx:if="{{item.isNoVote == false && item.planCycle==1 && item.computationRules != 6 && item.computationRules != 7 }}" data-kpiid="{{item.id}}" data-plancycle="{{item.planCycle}}"  data-kpiname="{{item.name}}" data-useractualvalue="{{nf.ifNull(item.actualValue)}}" bindtap="checkKpiValueDialog">修改</button>
                     <!-- 电网类指标修改 -->
@@ -113,6 +113,10 @@
                     <button class="mini-btn" type="default" size="mini" wx:if="{{item.planCycle==1 && item.computationRules == 7 }}" data-kpiid="{{item.id}}" data-plancycle="{{item.planCycle}}"  data-kpiname="{{item.name}}" data-kpiid="{{item.id}}" data-plancycle="{{item.planCycle}}"  data-kpiname="{{item.name}}" data-targetindexid="{{item.targetIndexId}}"  data-unit="{{item.unit}}" data-reasonablevalue="{{item.reasonableValue}}" bindtap="toPlanIntBValue">修改</button>
 
                     <button class="mini-btn pLeft" type="primary" size="mini" bindtap="checkKpi" data-id="{{item.id}}">确认</button>
+                  </view>
+
+                  <view class="nav-opRight" wx:if="{{item.planStatus<1}}">
+                    进行中
                   </view>
 
                   <view class="nav-textRight" wx:if="{{item.checkStatus == 1}}">已检查</view>
@@ -154,7 +158,7 @@
 
                 <view class="navigator">
                   <view class="navigator-text nav-name">检查</view> 
-                  <view class="nav-opRight withEdit" wx:if="{{item.checkStatus == 0}}">
+                  <view class="nav-opRight withEdit" wx:if="{{item.checkStatus == 0  && item.planStatus==1}}">
                     <!-- 有几种修改实际值得方式，需要调用不同的接口 -->
                     
                     <picker bindchange="bindPickerChange" range="{{array}}" data-action="{{item.action}}" data-actionid="{{item.id}}">
@@ -164,6 +168,10 @@
                     <button class="mini-btn pLeft" type="primary" size="mini" bindtap="checkAction" data-id="{{item.id}}">确认</button>
                   </view>
 
+                  <view class="nav-opRight" wx:if="{{item.planStatus<1}}">
+                    进行中
+                  </view>
+                  
                   <view class="nav-textRight" wx:if="{{item.checkStatus == 1}}">已检查</view>
 
                 </view>                
