@@ -37,20 +37,32 @@ Page({
 
           var title = "当前待检查项"
           var num = 0
-
+          var checkNum=0;
           if (kpiPage && kpiPage.length > 0) {
             num = num + kpiPage.length
           }
-
+          for(var i=0;i<kpiPage.length;i++){
+            if(kpiPage[i].planStatus==1){
+              checkNum++
+            }
+          }
+          
           if (actionPage && actionPage.length > 0) {
             num = num + actionPage.length
+          }
+
+          for(var i=0;i<actionPage.length;i++){
+            if(actionPage[i].planStatus==1){
+              checkNum++
+            }
           }
 
           self.setData({
             kpiPage: kpiPage,
             actionPage: actionPage,
             num: num,
-            title:title + " ( " + num + " )"
+            checkNum: checkNum,
+            title:'总项数:' + num +'  待检测项数:' + checkNum
           })
 
         },
@@ -84,7 +96,7 @@ Page({
         success(result) {         
           var kpiPage = self.data.kpiPage
           var num = self.data.num - 1
-
+          var checkNum = self.data.checkNum - 1
           for (var i = 0; i < kpiPage.length; i++) {
             if (kpiPage[i].id == kpiId) {
               kpiPage[i].checkStatus = 1
@@ -96,7 +108,8 @@ Page({
           self.setData({
             kpiPage: kpiPage,
             num : num,
-            title: title + " ( " + num + " )"
+            checkNum: checkNum,
+            title:'总项数:' + num+'  待检测项数:' + checkNum
           })
 
         },
@@ -130,6 +143,7 @@ Page({
         success(result) {
           var actionPage = self.data.actionPage
           var num = self.data.num - 1
+          var checkNum = self.data.checkNum - 1
 
           for (var i = 0; i < actionPage.length; i++) {
             if (actionPage[i].id == actionId) {
@@ -142,7 +156,8 @@ Page({
           self.setData({
             actionPage: actionPage,
             num: num,
-            title: title + " ( " + num + " )"
+            checkNum: checkNum,
+            title:'总项数:' + num +'  待检测项数:' + checkNum
           })
 
         },
@@ -164,7 +179,7 @@ Page({
 
     let kpiIds = [];
     for (let i = 0; i < kpiPage.length; i++) {
-      if (kpiPage[i].checkStatus != 1) {
+      if (kpiPage[i].checkStatus != 1 && kpiPage[i].planStatus==1) {
         kpiIds.push(kpiPage[i].id);        
       }
     }
@@ -172,7 +187,7 @@ Page({
 
     let actionIds = [];
     for (let i = 0; i < actionPage.length; i++) {
-      if (actionPage[i].checkStatus != 1) {
+      if (actionPage[i].checkStatus != 1 && actionPage[i].planStatus==1) {
         actionIds.push(actionPage[i].id);        
       }
     }
