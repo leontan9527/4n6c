@@ -1,3 +1,22 @@
+.swiper-tab{
+  width: 100%;
+  text-align: center;
+  line-height: 80rpx;}
+.swiper-tab-list{  font-size: 35rpx;
+  display: inline-block;
+  width: 33.33%;
+  color: #777777;
+}
+.on{ color: #6196e6;
+  border-bottom: 3rpx solid #6196e6;}
+
+.swiper-box{ display: block; height: 100%; width: 100%; overflow: hidden; }
+.swiper-box view{
+  text-align: center;
+}
+
+
+
 
 .nav-textRight{color: #888888;text-align: right; padding-right: 15px;}
 .nav-opRight{padding-right: 10px;}
