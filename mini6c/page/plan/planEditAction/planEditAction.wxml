@@ -6,9 +6,9 @@
 <mp-form id="form" rules="{{rules}}" models="{{formData}}">
     <mp-cells title="工作事项">
         <mp-cell has-header="{{false}}" has-footer="{{false}}" prop="action" title="" ext-class="">
-            <textarea wx:if="{{isBringInto}}" disabled bindinput="formInputChange" class="weui-textarea" data-field="action"  style="height: 3.3em" value="{{formData.action}}">               
+            <textarea wx:if="{{isBringInto}}" disabled bindinput="formInputChange" maxlength="200" class="weui-textarea" data-field="action"  style="height: 3.3em" value="{{formData.action}}">               
             </textarea>
-            <textarea wx:else bindinput="formInputChange" class="weui-textarea" data-field="action"  style="height: 3.3em" value="{{formData.action}}">               
+            <textarea wx:else bindinput="formInputChange" class="weui-textarea" maxlength="200" data-field="action"  style="height: 3.3em" value="{{formData.action}}">               
             </textarea>
             <view class="weui-textarea-counter">字限200</view>
         </mp-cell>
@@ -16,7 +16,7 @@
 
     <mp-cells title="成果要求">
         <mp-cell has-header="{{false}}" has-footer="{{false}}" prop="outcome" title="" ext-class="">
-            <textarea bindinput="formInputChange" class="weui-textarea" data-field="outcome"  style="height: 3.3em" value="{{formData.outcome}}">               
+            <textarea bindinput="formInputChange" class="weui-textarea" maxlength="200" data-field="outcome"  style="height: 3.3em" value="{{formData.outcome}}">               
             </textarea>
             <view class="weui-textarea-counter">字限200</view>
         </mp-cell>
@@ -24,7 +24,7 @@
 
     <mp-cells title="未完成承诺">
         <mp-cell has-header="{{false}}" has-footer="{{false}}" prop="unFinishRemark" title="" ext-class="">
-            <textarea bindinput="formInputChange" class="weui-textarea" data-field="unFinishRemark"  style="height: 3.3em" value="{{formData.unFinishRemark}}">               
+            <textarea bindinput="formInputChange" class="weui-textarea" maxlength="200" data-field="unFinishRemark"  style="height: 3.3em" value="{{formData.unFinishRemark}}">               
             </textarea>
             <view class="weui-textarea-counter">字限200</view>
         </mp-cell>
