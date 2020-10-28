@@ -82,7 +82,8 @@ App({
       wx.request({
         url: config.domain + '/userController/wxLogin',
         data: {
-          openid: this.globalData.openid
+          openid: this.globalData.openid,
+          wxVersion: "2.0"
         },
         method: 'POST',
         header: {
@@ -98,8 +99,10 @@ App({
             getApp().globalData.sessionId = result.data.data
             wx.setStorageSync('sessionId', result.data.data)
             
-            getApp().globalData.bindingUser = result.data.obj
+            getApp().globalData.bindingUser = result.data.obj.name
+            getApp().globalData.bindingUserId = result.data.obj.id
             
+            //console.log('【getApp().globalData.bindingUserId = 】', result.data.obj.id)
 
           } else {
             //console.log('App 5.userController wxLogin= 失败，没有绑定】')

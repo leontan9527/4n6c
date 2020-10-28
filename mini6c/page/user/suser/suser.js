@@ -25,6 +25,7 @@ Page({
     //获取最新用户数据
     const self = this
     var sessionId = app.globalData.sessionId
+    var currentUserId = app.globalData.bindingUserId
     
     if (sessionId) {
       wx.request({
@@ -59,7 +60,7 @@ Page({
           }
 
           //将最新常用的置顶
-          var lastUseUser = wx.getStorageSync('GLB_LastUseUser')
+          var lastUseUser = wx.getStorageSync('GLB_LastUseUser_' + currentUserId)
           if (!lastUseUser) {
             lastUseUser = []
           }
@@ -95,7 +96,7 @@ Page({
   }, 
   getBlurInputValue: function (e) {
 
-    var value = e.detail.value    
+    var value = e.detail.value      
     this.setData({
       serarchName: value
     })
@@ -122,10 +123,19 @@ Page({
           var us = []
           
           var users = result.data.data
-          for (let i = 0; i < users.length; i++) {
-            var item = { value: users[i].id, name: users[i].name }
-            us.push(item)
-          }      
+          if(users){
+            for (let i = 0; i < users.length; i++) {
+              var item = { value: users[i].id, name: users[i].name }
+              us.push(item)
+            } 
+          } else {
+            wx.showToast({
+              title: '没有符合条件的数据',
+              icon: 'none',
+              mask: false,
+              duration: 2000
+            })
+          }
 
           self.setData({
             items: us,
@@ -163,6 +173,7 @@ Page({
 
     var id = e.currentTarget.dataset.id
     var name = e.currentTarget.dataset.name
+    var currentUserId = app.globalData.bindingUserId
 
     //记录用户常用的用户==============================================    
     var compare = function (obj1, obj2) {
@@ -177,8 +188,8 @@ Page({
       }
     }
         
-    var lastUseUser = wx.getStorageSync('GLB_LastUseUser')
-    //wx.removeStorageSync('GLB_LastUseUser')
+    var lastUseUser = wx.getStorageSync('GLB_LastUseUser_' + currentUserId)
+    //wx.removeStorageSync('GLB_LastUseUser_' + currentUserId)
     if (!lastUseUser){
       lastUseUser = []
     }
@@ -202,8 +213,8 @@ Page({
     } 
     //对数字进行排序，供下次打开使用：  
     //本地存储
-    wx.setStorageSync('GLB_LastUseUser', lastUseUser.sort(compare))   
-    console.info(lastUseUser)  
+    wx.setStorageSync('GLB_LastUseUser_' + currentUserId, lastUseUser.sort(compare))   
+    //console.info(lastUseUser)  
     //记录完成=======================================================
     
     //如果是会议回执调用人员选取器，则需要调用会议回执后台接口

@@ -18,9 +18,26 @@
     ifNull :ifNull
   }
 </wxs>
-
-<view class="table-header">累计达成率：{{target.totalConversionRate? nf.toFixed(target.totalConversionRate * 100):''}}%</view>
+<view class="page">
+  <view class="page__bd">
+    <mp-cells ext-class="my-cells" title="">
+        <mp-cell value="本期目标值：" footer="{{target.thisReasonableValue? nf.toFixed(target.thisReasonableValue):'0'}}{{target.unit}}"></mp-cell>
+        <mp-cell value="本期实际值：" footer="{{target.thisActualValue? nf.toFixed(target.thisActualValue):'0'}}{{target.unit}}"></mp-cell>
+        <mp-cell value="本期偏差值：" footer="{{target.thisDeviationValue? nf.toFixed(target.thisDeviationValue):'0'}}{{target.unit}}"></mp-cell>
+        <mp-cell value="本期达成率：" footer="{{target.thisConversionRate? nf.toFixed(target.thisConversionRate * 100):'0'}}%"></mp-cell>
+        <mp-cell value="累计目标值：" footer="{{target.totalReasonableValue? nf.toFixed(target.totalReasonableValue):'0'}}{{target.unit}}"></mp-cell>
+        <mp-cell value="累计实际值：" footer="{{target.totalActualValue? nf.toFixed(target.totalActualValue):'0'}}{{target.unit}}"></mp-cell>
+        <mp-cell value="累计偏差值：" footer="{{target.totalDeviationValue? nf.toFixed(target.totalDeviationValue):'0'}}{{target.unit}}"></mp-cell>
+        <mp-cell value="累计达成率：" footer="{{target.totalConversionRate? nf.toFixed(target.totalConversionRate * 100):'0'}}%"></mp-cell>
+        <!--mp-cell>
+            <view>累计达成率：</view>
+            <view slot="footer">{{target.totalConversionRate? nf.toFixed(target.totalConversionRate * 100):''}}%</view>
+        </mp-cell-->            
+    </mp-cells>
+  </view>
+</view>
 <view class="hsplit"></view>
+
 <view class="move-container">
   <ec-canvas id="mychart-dom-move-bar" canvas-id="mychart-move-bar" ec="{{ ec }}"></ec-canvas>  
 </view>

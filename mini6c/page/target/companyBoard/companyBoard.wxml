@@ -1,0 +1,47 @@
+<wxs module="nf">
+  var toFixed = function (value) {
+    if(value==0){
+      return value;
+    }else if (value){
+      return value.toFixed(2);
+    } else {
+      return '';
+    }    
+  }
+  var ifNull = function (value) {
+    return value? value : "";   
+  }
+  module.exports = {
+    toFixed :toFixed,
+    ifNull :ifNull
+  }
+</wxs>
+
+<view class="page__bd">
+  
+  <mp-cells title="公司目标" >    
+      <mp-cell wx:for="{{targetList}}" bindtap="open" data-type="2" data-pid="{{item.decomposeDetailId}}">
+        <view class="page-section-title">
+          <text class="targetName">{{item.targetName}}({{item.unit}})</text>
+          <text class="page-section-right">{{targetMonth}}月</text>
+        </view>
+        <view class="page-section-spacing22">
+          <view class="flex-wrp" style="flex-direction:row;">
+            <view class="flex-item">
+              <view class="target-value">{{item.thisActualValue? nf.toFixed(item.thisActualValue) : 0}}</view>
+              <view class="target-text">本月实际值</view>
+            </view>
+            <view class="flex-item">
+              <view class="target-value">{{item.totalActualValue? nf.toFixed(item.totalActualValue) : 0}}</view>
+              <view class="target-text">年度累计</view>
+            </view>
+            <view class="flex-item">
+              <view class="target-value">{{item.totalConversionRate? nf.toFixed(item.totalConversionRate*100) : 0}}%</view>
+              <view class="target-text">累计达成率</view>
+            </view>
+          </view>
+        </view>
+      </mp-cell>
+
+  </mp-cells>               
+</view>

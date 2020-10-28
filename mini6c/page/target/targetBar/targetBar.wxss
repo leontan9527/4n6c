@@ -1,4 +1,6 @@
-.table-header{padding:10px 15px;}
+.page{background-color: #fff;}
+
+
 .hsplit{height: 8px; background-color:#fff; }
 .move-container {
   width: 100%;
@@ -66,3 +68,4 @@ ec-canvas {
 }
 
 .tleft{text-align: left; padding-left: 10px;}
+

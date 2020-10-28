@@ -64,3 +64,36 @@
   height: 60%;
 }
 .img-icon{width: 40px; height: 40px; display: block}
+
+.flex-wrp{
+  margin-top: 30rpx;
+  display:flex;
+}
+.flex-item{    
+  font-size: 26rpx;
+  flex: 1;  
+}
+
+.target-value {  
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  font-size: 38rpx;   
+  font-weight: 400; 
+  text-align: center;
+  padding-top:25rpx;
+}
+
+.target-text {  
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  font-size: 26rpx;  
+  color: #999999;
+  text-align: center;
+  padding-top:25rpx;
+}
+
+.page-section-spacing{padding-top:10rpx;padding:0;}
+.page-section-title{padding: 0;}
+.page-section-right{float:right; padding-right:0px;}

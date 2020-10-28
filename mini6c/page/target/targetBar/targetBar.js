@@ -136,6 +136,9 @@ Page({
         success(result) {
           //console.log('【targetCr/targetBar=】', result.data.data.targetBar)
           var targetBar = result.data.data.targetBar
+          var year = result.data.data.year
+          var month = result.data.data.month
+
           var tarDatas = []
           var actDatas = []
           
@@ -151,12 +154,10 @@ Page({
 
             option.series[0].data = tarDatas;
             option.series[1].data = actDatas;
-
             
-
           } 
 
-          var title = targetBar.targetName
+          var title = targetBar.targetName + "（"+year +"年" + month +"月）"
 
           wx.setNavigationBarTitle({
             title: title,
@@ -168,7 +169,9 @@ Page({
 
 
           self.setData({
-            target: targetBar           
+            target: targetBar, 
+            year: year,
+            month: month          
           })
 
 

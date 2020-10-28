@@ -1,6 +1,8 @@
 {
   "usingComponents": {
-    "ec-canvas": "../../common/ec-canvas/ec-canvas"
+    "ec-canvas": "../../common/ec-canvas/ec-canvas",
+    "mp-cells": "../common/cells/cells",
+    "mp-cell": "../common/cell/cell"
   },
   "navigationBarTitleText": "指标看板"
 }

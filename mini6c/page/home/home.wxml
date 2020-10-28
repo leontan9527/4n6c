@@ -1,3 +1,22 @@
+<wxs src="../../util/dateutil.wxs" module="df" />
+<wxs module="nf">
+  var toFixed = function (value) {
+    if(value==0){
+      return value;
+    }else if (value){
+      return value.toFixed(2);
+    } else {
+      return '';
+    }    
+  }
+  var ifNull = function (value) {
+    return value? value : "";   
+  }
+  module.exports = {
+    toFixed :toFixed,
+    ifNull :ifNull
+  }
+</wxs>
 
 <view class="header-container">
     <image class='header-bg' src = '{{image_hd}}'></image>
@@ -16,6 +35,16 @@
 <view class="page__bd" wx:if="{{hasLogin === true}}">
   <mp-cells title="" >
     
+    <mp-cell bindtap="toCompanyBoard" wx:if="{{companyBoardMsg}}">
+        <view slot="title" style="position: relative;margin-right: 10px;">
+            <image src="{{icon_dashboard}}" class="img-icon"/>            
+        </view>
+        <view>经营看板</view>
+        <view class="msgItem">
+          {{companyBoardMsg}}
+        </view>
+    </mp-cell>
+
       <mp-cell bindtap="toExcuteprocess">
           <view slot="title" style="position: relative;margin-right: 10px;">
               <image src="{{icon_excute}}" class="img-icon"/>
@@ -93,7 +122,7 @@
             {{item.itemTitle}}
           </view>
       </mp-cell>              
-  </mp-cells>            
+  </mp-cells>                
 </view>
 
 <view class="page__bd" wx:if="{{hasLogin === false}}">

@@ -15,6 +15,7 @@ Page({
       icon_acheck: '../images/acheck.png',
       icon_excute: '../images/excute.png',
       icon_foucs: '../images/foucs.png',
+      icon_dashboard: '../images/dashboard.png'
     });
 
     var hasLogin = app.globalData.hasLogin
@@ -76,13 +77,15 @@ Page({
               docDb: result.data.docDb,
               adviserDb: result.data.adviserDb,
               systemType: result.data.systemType,
+              companyBoardMsg: result.data.companyBoardMsg
             })
           },
 
           fail({ errMsg }) {
             console.log('3.【home/message fail】', errMsg)          
           }
-        })      
+        })        
+              
       }
 
     }, (error) => {
@@ -162,6 +165,9 @@ Page({
     } else {
       wx.navigateTo({ url: '../user/login/login' })
     }
+  },
+  toCompanyBoard(){
+    wx.navigateTo({ url: '../target/companyBoard/companyBoard' })
   }
   
 })
