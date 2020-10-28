@@ -212,22 +212,29 @@ Page({
     var kpiPage = self.data.kpiPage
     var actionPage = self.data.actionPage
 
+    let kpiIds = []
+    let skpiIds=''
+    if (kpiPage && kpiPage.length > 0) {
 
-    let kpiIds = [];
-    for (let i = 0; i < kpiPage.length; i++) {
-      if (kpiPage[i].checkStatus != 1 && kpiPage[i].planStatus==1) {
-        kpiIds.push(kpiPage[i].id);        
+      for (let i = 0; i < kpiPage.length; i++) {
+        if (kpiPage[i].checkStatus != 1 && kpiPage[i].planStatus==1) {
+          kpiIds.push(kpiPage[i].id);        
+        }
       }
+      skpiIds = kpiIds.join(',');
     }
-    let skpiIds = kpiIds.join(',');
 
-    let actionIds = [];
-    for (let i = 0; i < actionPage.length; i++) {
-      if (actionPage[i].checkStatus != 1 && actionPage[i].planStatus==1) {
-        actionIds.push(actionPage[i].id);        
+    let actionIds = []
+    let sactionIds=''
+    if (actionPage && actionPage.length > 0) {
+
+      for (let i = 0; i < actionPage.length; i++) {
+        if (actionPage[i].checkStatus != 1 && actionPage[i].planStatus==1) {
+          actionIds.push(actionPage[i].id);        
+        }
       }
+      sactionIds = actionIds.join(',');
     }
-    let sactionIds = actionIds.join(',');
 
     if (kpiIds.length == 0 && actionIds.length == 0) {
       wx.showToast({
@@ -264,9 +271,11 @@ Page({
                     var num = 0
                     var title = "当前待检查项"
 
-                    for (let i = 0; i < kpiPage.length; i++) {
-                      if (kpiPage[i].checkStatus != 1) {                
-                        kpiPage[i].checkStatus = 1;
+                    if (kpiPage && kpiPage.length > 0) {
+                      for (let i = 0; i < kpiPage.length; i++) {
+                        if (kpiPage[i].checkStatus != 1) {                
+                          kpiPage[i].checkStatus = 1;
+                        }
                       }
                     }
                     
@@ -275,7 +284,6 @@ Page({
                         actionPage[i].checkStatus = 1;
                       }
                     }
-
 
                     self.setData({
                       kpiPage: kpiPage,
@@ -319,8 +327,9 @@ Page({
 
   },
   goHis: function () {    
+    console.log('options.planCycle======'+this.data.currentTab) 
     wx.navigateTo({
-      url: 'checkHis/checkHis'
+      url: 'checkHis/checkHis?planCycle='+this.data.currentTab
     });
   },
 
