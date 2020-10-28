@@ -39,7 +39,7 @@
         <view slot="title" style="position: relative;margin-right: 10px;">
             <image src="{{icon_dashboard}}" class="img-icon"/>            
         </view>
-        <view>绩效看板</view>
+        <view>经营看板</view>
         <view class="msgItem">
           {{companyBoardMsg}}
         </view>
