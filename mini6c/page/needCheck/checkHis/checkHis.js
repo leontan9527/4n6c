@@ -9,24 +9,43 @@ Page({
     actionPage: [],
     num: 0,
     theDate:'',
-    theDateStr : ''
+    theDateStr : '',
+    planCycle:0,
+    year:'',
+    seq:''
   },
 
-  onLoad: function (options) {    
-    this.getData(new Date())
+  onLoad: function (options) { 
+    var planCycle=options.planCycle
+    var cycle
+    if(planCycle==0){
+      cycle='周'
+    }else if(planCycle==1){
+      cycle='月'
+    }else if(planCycle==2){
+      cycle='年'
+    }else{
+      cycle='周'
+    }
+    this.setData({
+      cycle: cycle,
+      planCycle:planCycle
+    })
+    this.getData()
   },
-  getData(theDate){
+  getData(){
     //获取最新消息数据
     const self = this
     var sessionId = app.globalData.sessionId
-    //console.info("theDate = " + theDate)
 
     if (sessionId) {
 
       wx.request({
         url: config.domain + '/check/checkHis',
         data: {
-          theDate: theDate
+          year:self.data.year,
+          seq:self.data.seq,
+          planCycle:self.data.planCycle,
         },
         method: 'POST',
         header: {
@@ -38,7 +57,7 @@ Page({
           var kpiPage = result.data.data.kpiPage
           var actionPage = result.data.data.actionPage
           var title = result.data.data.yearMonth          
-
+          console.log('result.data.data.year==='+result.data.data.year)
           var num = 0
 
           if (kpiPage && kpiPage.length > 0) {
@@ -50,12 +69,12 @@ Page({
           }
           
           self.setData({
-            theDate:theDate,
-            theDateStr: self.DateFormat(theDate),
             kpiPage: kpiPage,
             actionPage: actionPage,
             num: num,
-            title: title
+            title: title,
+            year:result.data.data.year,
+            seq:result.data.data.seq
           })
 
         },
@@ -67,36 +86,26 @@ Page({
     }
   },
   preMonth:function(){
-    var theDate = this.data.theDate
-    var year = theDate.getFullYear()
-    var month = theDate.getMonth()
-
-    theDate = new Date(year, month, 1)
-    theDate.setMonth(theDate.getMonth() - 1);    
-
-    this.getData(theDate)
+    var seq=this.data.seq-1
+    var year
+    if(seq==0){
+      year=this.data.year-1
+    }else{
+      year=this.data.year
+    }
+    this.setData({
+      year:year,
+      seq: seq
+    })
+    this.getData()
 
   },
   nextMonth: function () {
-    var theDate = this.data.theDate
-    var year = theDate.getFullYear()
-    var month = theDate.getMonth()
-
-    theDate = new Date(year, month, 1)
-    theDate.setMonth(theDate.getMonth() + 1);
-
-    this.getData(theDate)
+    var seq=this.data.seq+1;   
+    this.setData({
+      seq: seq
+    })
+    this.getData()
   },
-
-  bindDateChange: function (e) {
-   //console.log('【e.detail.value】', e.detail.value)
-    var theDate = new Date(e.detail.value + "-01")
-    //console.log('【e.detail.value 2】', theDate.toLocaleString()) 
-    this.getData(theDate)
-  },
-  
-  DateFormat(theDate){
-    return theDate.getFullYear() + "年" + (theDate.getMonth() + 1) + "月"
-  }
 
 })

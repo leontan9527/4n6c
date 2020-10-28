@@ -9,7 +9,8 @@ Page({
     actionPage:[],
     num:0,
     array: ['完成', '未完成'],
-    checkItemstatus:0
+    checkItemstatus:0,
+    currentTab:0
   },
 
   onLoad: function (options) {
@@ -17,62 +18,97 @@ Page({
     //获取最新消息数据
     const self = this
     var sessionId = app.globalData.sessionId
-
-    if (sessionId) {
-      
-      wx.request({
-        url: config.domain + '/check/wxNeedCheck',
-        data: {          
-        },
-        method: 'POST',
-        header: {
-          'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
-          'Cookie': 'JSESSIONID=' + sessionId
-        },
-        success(result) {
-          //console.log('【targetCr/planTargetDetail=】', result.data.data.kpiPage)
-
-          var kpiPage = result.data.data.kpiPage          
-          var actionPage = result.data.data.actionPage
-
-          var title = "当前待检查项"
-          var num = 0
-          var checkNum=0;
-          if (kpiPage && kpiPage.length > 0) {
-            num = num + kpiPage.length
+   /**
+    * 获取当前设备的宽高
+   */
+    wx.getSystemInfo( {
+          success: function( res ) {
+            self.setData( {
+                  winWidth: res.windowWidth,
+                  winHeight: res.windowHeight
+              });
           }
+    });
+
+    if (sessionId) {   
+      self.getCheckPlanData(sessionId,0)
+    }
+
+  },
+
+  //  tab切换逻辑
+  swichNav: function( e ) {
+
+    var that = this;
+    var sessionId = app.globalData.sessionId
+    if( this.data.currentTab != e.target.dataset.current ) {
+
+        that.setData( {
+            currentTab: e.target.dataset.current
+        })
+        this.getCheckPlanData(sessionId,this.data.currentTab)
+    }
+  },
+
+  bindChange: function( e ) {
+      var that = this;
+      that.setData( { currentTab: e.detail.current });
+  },
+
+  getCheckPlanData: function (sessionId,planCycle) {
+
+    const self = this
+    wx.request({
+      url: config.domain + '/check/wxNeedCheck',
+      data: {   
+        planCycle:planCycle       
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        'Cookie': 'JSESSIONID=' + sessionId
+      },
+      success(result) {
+        //console.log('【targetCr/planTargetDetail=】', result.data.data.kpiPage)
+
+        var kpiPage = result.data.data.kpiPage          
+        var actionPage = result.data.data.actionPage
+
+        var title = "当前待检查项"
+        var num = 0
+        var checkNum=0;
+        if (kpiPage && kpiPage.length > 0) {
+          num = num + kpiPage.length
           for(var i=0;i<kpiPage.length;i++){
             if(kpiPage[i].planStatus==1){
               checkNum++
             }
           }
-          
-          if (actionPage && actionPage.length > 0) {
-            num = num + actionPage.length
-          }
-
+        }
+        
+        if (actionPage && actionPage.length > 0) {
+          num = num + actionPage.length
           for(var i=0;i<actionPage.length;i++){
             if(actionPage[i].planStatus==1){
               checkNum++
             }
           }
-
-          self.setData({
-            kpiPage: kpiPage,
-            actionPage: actionPage,
-            num: num,
-            checkNum: checkNum,
-            title:'总项数:' + num +'  待检测项数:' + checkNum
-          })
-
-        },
-
-        fail({ errMsg }) {
-          console.log('【plan/detailMonth fail】', errMsg)
         }
-      })
-    }
 
+        self.setData({
+          kpiPage: kpiPage,
+          actionPage: actionPage,
+          num: num,
+          checkNum: checkNum,
+          title:'总项数:' + num +'  待检测项数:' + checkNum
+        })
+
+      },
+
+      fail({ errMsg }) {
+        console.log('【plan/detailMonth fail】', errMsg)
+      }
+    })
   },
 
   checkKpi: function (e) {
@@ -176,22 +212,29 @@ Page({
     var kpiPage = self.data.kpiPage
     var actionPage = self.data.actionPage
 
+    let kpiIds = []
+    let skpiIds=''
+    if (kpiPage && kpiPage.length > 0) {
 
-    let kpiIds = [];
-    for (let i = 0; i < kpiPage.length; i++) {
-      if (kpiPage[i].checkStatus != 1 && kpiPage[i].planStatus==1) {
-        kpiIds.push(kpiPage[i].id);        
+      for (let i = 0; i < kpiPage.length; i++) {
+        if (kpiPage[i].checkStatus != 1 && kpiPage[i].planStatus==1) {
+          kpiIds.push(kpiPage[i].id);        
+        }
       }
+      skpiIds = kpiIds.join(',');
     }
-    let skpiIds = kpiIds.join(',');
 
-    let actionIds = [];
-    for (let i = 0; i < actionPage.length; i++) {
-      if (actionPage[i].checkStatus != 1 && actionPage[i].planStatus==1) {
-        actionIds.push(actionPage[i].id);        
+    let actionIds = []
+    let sactionIds=''
+    if (actionPage && actionPage.length > 0) {
+
+      for (let i = 0; i < actionPage.length; i++) {
+        if (actionPage[i].checkStatus != 1 && actionPage[i].planStatus==1) {
+          actionIds.push(actionPage[i].id);        
+        }
       }
+      sactionIds = actionIds.join(',');
     }
-    let sactionIds = actionIds.join(',');
 
     if (kpiIds.length == 0 && actionIds.length == 0) {
       wx.showToast({
@@ -228,9 +271,11 @@ Page({
                     var num = 0
                     var title = "当前待检查项"
 
-                    for (let i = 0; i < kpiPage.length; i++) {
-                      if (kpiPage[i].checkStatus != 1) {                
-                        kpiPage[i].checkStatus = 1;
+                    if (kpiPage && kpiPage.length > 0) {
+                      for (let i = 0; i < kpiPage.length; i++) {
+                        if (kpiPage[i].checkStatus != 1) {                
+                          kpiPage[i].checkStatus = 1;
+                        }
                       }
                     }
                     
@@ -239,7 +284,6 @@ Page({
                         actionPage[i].checkStatus = 1;
                       }
                     }
-
 
                     self.setData({
                       kpiPage: kpiPage,
@@ -283,8 +327,9 @@ Page({
 
   },
   goHis: function () {    
+    console.log('options.planCycle======'+this.data.currentTab) 
     wx.navigateTo({
-      url: 'checkHis/checkHis'
+      url: 'checkHis/checkHis?planCycle='+this.data.currentTab
     });
   },
 
