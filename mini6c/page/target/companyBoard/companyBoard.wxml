@@ -33,7 +33,7 @@
             </view>
             <view class="flex-item">
               <view class="target-value">{{item.totalActualValue? nf.toFixed(item.totalActualValue) : 0}}</view>
-              <view class="target-text">年度累计</view>
+              <view class="target-text">累计实际值</view>
             </view>
             <view class="flex-item">
               <view class="target-value">{{item.totalConversionRate? nf.toFixed(item.totalConversionRate*100) : 0}}%</view>

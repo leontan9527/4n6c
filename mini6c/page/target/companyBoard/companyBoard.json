@@ -2,8 +2,8 @@
   "navigationBarTextStyle": "white",
   "navigationBarTitleText": "经营看板",
   "usingComponents": {
-    "mp-cells": "../common/cells/cells",
-    "mp-cell": "../common/cell/cell"
+    "mp-cells": "../../common/cells/cells",
+    "mp-cell": "../../common/cell/cell"
   },
   "navigationBarBackgroundColor": "#6196e6",
   "backgroundColor": "#6196e6"
