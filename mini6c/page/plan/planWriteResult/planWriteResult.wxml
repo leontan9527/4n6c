@@ -6,7 +6,7 @@
     </view> 
 
     <view class="modal-input">      
-      <textarea placeholder-class="place-holder" data-field="action" placeholder="{{placeholderName}}"
+      <textarea placeholder-class="place-holder" data-field="action" maxlength="200" placeholder="{{placeholderName}}"
           class="textRemark" bindinput='getBlurResultValue' value="{{resultRemark}}"></textarea>
     </view>
 
