@@ -1,5 +1,7 @@
 @import 'weui.wxss';
 @import '../common/weui.wxss';
+
+.hsplit{height: 1px; background-color:#eee;margin-left:20px; }
 /* 头部 */
 .header-container {
   display: flex;
