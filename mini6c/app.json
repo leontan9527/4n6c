@@ -39,7 +39,8 @@
     "page/meeting/meetingMinutes/meetingMinutes",
     "page/needCheck/needCheck",
     "page/needCheck/checkHis/checkHis",
-    "page/user/phone-login/phone-login"
+    "page/user/phone-login/phone-login",
+    "page/target/companyBoard/companyBoard"
   ],
   "window": {
     "navigationBarTextStyle": "white",

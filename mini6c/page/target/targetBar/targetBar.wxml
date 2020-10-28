@@ -21,6 +21,14 @@
 
 <view class="table-header">累计达成率：{{target.totalConversionRate? nf.toFixed(target.totalConversionRate * 100):''}}%</view>
 <view class="hsplit"></view>
+
+<view class="page-section-title">
+  <text class="targetName">累计达成率：</text>
+  <text class="textRight">{{target.totalConversionRate? nf.toFixed(target.totalConversionRate * 100):''}}%</text>
+</view>
+
+<view class="hsplit"></view>
+
 <view class="move-container">
   <ec-canvas id="mychart-dom-move-bar" canvas-id="mychart-move-bar" ec="{{ ec }}"></ec-canvas>  
 </view>

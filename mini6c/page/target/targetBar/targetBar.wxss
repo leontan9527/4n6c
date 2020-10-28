@@ -66,3 +66,10 @@ ec-canvas {
 }
 
 .tleft{text-align: left; padding-left: 10px;}
+
+.targetName{
+  font-size: 32rpx;  
+  color: #444;
+  font-weight: 500; 
+}
+.textRight{float:right; padding-right:15px;color: #444;}
