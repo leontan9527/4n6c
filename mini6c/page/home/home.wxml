@@ -44,7 +44,7 @@
           {{companyBoardMsg}}
         </view>
     </mp-cell>
-
+    <view class="hsplit" wx:if="{{companyBoardMsg}}"></view>
       <mp-cell bindtap="toExcuteprocess">
           <view slot="title" style="position: relative;margin-right: 10px;">
               <image src="{{icon_excute}}" class="img-icon"/>
