@@ -162,7 +162,7 @@
             </view>
 
             <view class="containerItem">
-              <view wx:if="{{item.type==0}}" class="planProgressContent">{{item.updateUser}}：{{item.content}} （ {{df.formatDate(item.createTime,2)}} ）</view>df
+              <view wx:if="{{item.type==0}}" class="planProgressContent">{{item.updateUser}}：{{item.content}} （ {{df.formatDate(item.createTime,2)}} ）</view>
               <view wx:if="{{item.type==1}}" class="planProgressContent">
                 {{item.updateUser}}（ {{df.formatDate(item.createTime,2)}} ）
                 <view class='output-audio'>
